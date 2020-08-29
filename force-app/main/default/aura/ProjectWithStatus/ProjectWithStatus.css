@@ -1,0 +1,30 @@
+.THIS .slds-button_icon-bare{
+    display: none;
+}
+
+.THIS .Red {
+    width: 35px;
+	color: #c23934;
+	background-color: #c23934 !important;
+    border: 3px solid #fff !important;
+    border-radius: 50%;
+    display: block;
+}
+
+.THIS .Green {
+    width: 35px;
+	color: #04844b;
+	background-color: #04844b !important;
+    border: 3px solid #fff !important;
+    border-radius: 50%;
+    display: block;
+}
+
+.THIS .Yellow {
+    width: 35px;
+	color: #fff03f;
+	background-color: #fff03f !important;
+    border: 3px solid #fff !important;
+    border-radius: 50%;
+    display: block;
+}

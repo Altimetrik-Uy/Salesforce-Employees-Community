@@ -1,0 +1,89 @@
+<aura:component controller="EmployeeStatusController" implements="flexipage:availableForAllPageTypes" access="global" >
+    
+    <aura:attribute name="selectedId" type="String" />
+    <aura:attribute name="projectError" type="Boolean" default="false" />
+    <aura:attribute name="projectErrorComment" type="String" default="" />
+    <aura:attribute name="statusMap" type="Map"/>
+    <aura:attribute name="status" type="String" />
+    <aura:attribute name="comments" type="String" />
+    <aura:attribute name="redReason" type="String" />
+    <aura:attribute name="certificationStatusMap" type="Map"/>
+    <aura:attribute name="certificationStatus" type="String" />
+    <aura:attribute name="certificationComments" type="String" />
+    
+    <aura:registerEvent name="projectStatusEvent" type="c:ProjectStatusEvent"/>
+    
+    <aura:attribute name="employeeStatus"
+                    type="Employee_Status__c"
+                    default="{'sobjectType':'Employee_Status__c', 
+                             'Employee': '',
+                             'Status__c': '',
+                             'Comments__c': '',
+                             'Red_Reason__c ': '',
+                             'Certification_Status__c': '',
+                             'Certification_Comments__c': ''}"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <lightning:card title="New Employee Status"
+                    iconName="action:add_relationship"
+                    class="slds-p-around_medium">
+        
+        <div>
+            <div class="container-fluid">
+                <div class="form-group">
+                    <lightning:messages />
+                    
+                    <c:lookupField required="true"
+                                   showError="{!v.projectError}"
+                                   errorMessage="{!v.projectErrorComment}"
+                                   objectAPIName="Contact" 
+                                   label="Employee"
+                                   returnFields="['Name']" 
+                                   queryFields="['Name']"
+                                   selectedId="{!v.selectedId}" />
+                    
+                    <lightning:radioGroup aura:id="inputField"
+                                          required="true"
+                                          name="statusRadioGroup"
+                                          label="Status"
+                                          options="{!v.statusMap}"
+                                          value="{!v.status}"
+                                          type="button"/>
+                    
+                    <lightning:textarea aura:id="inputField"
+                                        required="true"
+                                        name="comments"
+                                        label="Comments"
+                                        value="{!v.comments}" />
+                    
+                    <lightning:textarea aura:id="inputField"
+                                        required="false"
+                                        name="redReason"
+                                        label="Red Reason"
+                                        value="{!v.redReason}" />
+                    
+                    <lightning:radioGroup aura:id="inputField"
+                                          required="true"
+                                          name="certificationRadioGroup"
+                                          label="Certification Status"
+                                          options="{!v.certificationStatusMap}"
+                                          value="{!v.certificationStatus}"
+                                          type="button"/>
+
+                    <lightning:textarea aura:id="inputField"
+                                        required="true"
+                                        name="certComments"
+                                        label="Certification Comments"
+                                        value="{!v.certificationComments}" />
+                    
+                    <lightning:button class="slds-m-top_small"
+                                      variant="brand"
+                                      type="submit"
+                                      onclick="{!c.handleEmployeeStatus}"
+                                      label="Create Employee Status" />
+                </div>
+            </div>
+        </div>
+    </lightning:card>
+</aura:component>

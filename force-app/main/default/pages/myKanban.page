@@ -1,0 +1,951 @@
+<apex:page sidebar="false" controller="myKanbanController" action="{!init}" >
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <title>myKanBan</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </head>
+        <body>
+            <apex:slds />
+            
+            <div class="slds-scope">
+                <div class="slds-grid">
+                    
+                    <div id="messageKanBan1" style="display: none;">
+                        <apex:outputPanel id="messageKanBan" layout="block">
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(errorMessage))}" >
+                                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_{!errorType}" role="alert">
+                                    <span class="slds-assistive-text">{!errorType}</span>
+                                    <h2>{!errorMessage}</h2>
+                                </div>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                        <div class="slds-notify__close" style="float: right; margin: -30px 10px 0 -20px;">
+                            <button class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close" onClick="closeMessage();">
+                                <svg class="slds-icon" aria-hidden="true">
+                                    <use xlink:href="{!URLFOR( $Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+                                </svg>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <apex:outputPanel layout="block" id="mainKanBan">
+                        
+                        <ul id="wrapperKanBan" style="display:flex; margin: 0; padding: 0; overflow: auto;">
+                            <apex:repeat value="{!myKanbanItems}" var="item">
+                                <li class="wrapperKanBan_li" style="height: 50px !important;">
+                                    <div class="kanban_header" id="{!IF(ISBLANK(item.opty.id),item.opty.Name,item.opty.id)}">
+                                        <div class="wrapperKanBan_title"> 
+                                            <apex:outputPanel layout="block" styleClass="bench_tile" title="Available resources" rendered="{!OR(item.opty.Name = 'Bench', item.opty.Name = 'Future Bench')}">
+                                                &nbsp;
+                                            </apex:outputPanel>
+                                            <apex:outputPanel layout="block" styleClass="prospecting_tile" title="Prospecting Project" rendered="{!item.opty.StageName = 'Prospecting'}">
+                                                &nbsp;
+                                            </apex:outputPanel>
+                                            <apex:outputPanel layout="block" styleClass="current_tile" title="Current Project" rendered="{!!OR(item.opty.Name = 'Bench', item.opty.Name = 'Future Bench', item.opty.StageName = 'Prospecting')}">
+                                                &nbsp;
+                                            </apex:outputPanel>                                            
+                                            <a href="/{!item.opty.Id}" target="_BLANK">{!item.opty.Name} </a>
+                                        </div>
+                                        <apex:outputPanel layout="block" rendered="{!item.opty.StageName = 'Prospecting'}">
+                                            <button class="slds-button slds-button_icon slds-button__icon_small slds-float_right" title="Close"
+                                                    onClick="removeProject('{!item.opty.id}');">
+                                                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                                                    <use xlink:href="{!URLFOR( $Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+                                                </svg>
+                                                <span class="slds-assistive-text">Close</span>
+                                            </button>   
+                                        </apex:outputPanel>
+                                    </div>
+                                </li>
+                            </apex:repeat>
+                        </ul>
+                        <ul id="wrapperKanBan" style="display:flex; margin: 0; padding: 0; overflow: auto;">
+                            <apex:repeat value="{!myKanbanItems}" var="item">
+                                <li class="wrapperKanBan_li">
+                                    <div data-draggable="target" id="{!IF(ISBLANK(item.opty.id),item.opty.Name,item.opty.id)}">
+                                       
+                                        <apex:variable value="{!0}" var="i"/>
+                                        <apex:repeat value="{!item.contacts}" var="employee">
+                                            <div data-draggable="item" class="empCard" id="{!employee.id}">
+                                                {!employee.Name}
+                                                <apex:outputPanel layout="block" rendered="{!item.opty.StageName = 'Prospecting'}">
+                                                    <button class="slds-button slds-button_icon slds-button__icon_small" title="Close"
+                                                            onClick="removeEmployee('{!item.assignments[i].Id}');" style="position: absolute; top: 3px; right: 3px;">
+                                                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                                                            <use xlink:href="{!URLFOR( $Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+                                                        </svg>
+                                                        <span class="slds-assistive-text">Close</span>
+                                                    </button>    
+                                                </apex:outputPanel>
+                                                <apex:outputPanel styleClass="tooltiptext" rendered="{!item.assignments.size>0}" layout="block">
+                                                    <a href="/{!item.assignments[i].Id}" target="_BLANK" title="Go to Employee Assignment">
+                                                        <small>
+                                                            <apex:outputText value="{0, date, 'Start: 'dd'/'MM'/'yyyy}">
+                                                                <apex:param value="{!item.assignments[i].Start_Date__c}" /> 
+                                                            </apex:outputText>   
+                                                        </small>
+                                                        <br />
+                                                        <small>
+                                                            <apex:outputText value="{0, date, 'End: 'dd'/'MM'/'yyyy}">
+                                                                <apex:param value="{!item.assignments[i].End_Date__c}" /> 
+                                                            </apex:outputText>
+                                                        </small>
+                                                    </a>
+                                                </apex:outputPanel>
+                                                <div class="empImage">
+                                                    <a href="/{!employee.Id}" target="_BLANK" title="Go to Employee">
+                                                        <apex:outputText value="{!employee.Image__c}" escape="false"/>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <apex:variable var="i" value="{!i + 1}"/>
+                                        </apex:repeat>
+                                    </div>              
+                                </li>
+                            </apex:repeat>
+                        </ul>  
+                        
+                    </apex:outputPanel>
+                    
+                    <input type="hidden" id="outputMap" value="" />
+                    
+                    <apex:outputPanel layout="block" styleClass="floatButtonKanBan" rendered="{!createPermission}">
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col">
+                                <div class="slds-select_container">
+                                    <select class="slds-select" id="MyKanbanFilter"
+                                            onChange="document.location.href= '/apex/myKanban?filter='+this.options[this.selectedIndex].value">
+                                        <option value="all">View All</option>
+                                        <option value="prospecting">Prospecting</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="slds-col">
+                                <button value="Save All" onClick="openModal('addProject');" class="slds-button slds-button_neutral">
+                                    <span class="slds-text-pressed">
+                                        <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                                            <use xlink:href="{!URLFOR( $Asset.SLDS, '/assets/icons/action-sprite/svg/symbols.svg#new')}"></use>
+                                        </svg>Project 
+                                    </span>                                
+                                </button>
+                            </div>
+                            <div class="slds-col">
+                                <button onClick="openModal('addEmployee');" class="slds-button slds-button_neutral">
+                                    <span class="slds-text-pressed">
+                                        <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                                            <use xlink:href="{!URLFOR( $Asset.SLDS, '/assets/icons/action-sprite/svg/symbols.svg#new')}"></use>
+                                        </svg>Employee Placeholder
+                                    </span>                                
+                                </button>
+                            </div>
+                            <div class="slds-col">
+                                <button onClick="openModal('saveAll');" class="slds-button slds-button_brand">
+                                    <span class="slds-text-pressed">
+                                        <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                                            <use xlink:href="{!URLFOR( $Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#save')}"></use>
+                                        </svg>Save All
+                                    </span>                                
+                                </button>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    
+                    <apex:form >
+                        <apex:actionFunction action="{!removeEmployeeAssignment}" name="removeEmployeeFunctionJs"
+                                             reRender="messageKanBan" oncomplete="closeModal(); openMessage();" >
+                            <apex:param name="saveAllJSON" assignTo="{!saveAllJSON}" value="" />
+                        </apex:actionFunction>
+                        <apex:actionFunction action="{!removeProject}" name="removeProjectFunctionJs"
+                                             reRender="messageKanBan" oncomplete="closeModal(); openMessage();" >
+                            <apex:param name="saveAllJSON" assignTo="{!saveAllJSON}" value="" />
+                        </apex:actionFunction>
+                        <apex:actionFunction action="{!saveAll}" name="saveAllFunctionJs" status="saveAllStatus"
+                                             reRender="messageKanBan" oncomplete="closeModal(); openMessage();" >
+                            <apex:param name="saveAllJSON" assignTo="{!saveAllJSON}" value="" />
+                        </apex:actionFunction>
+                        <apex:actionFunction action="{!addEmployee}" name="addEmployeeFunctionJs" status="addEmployeeStatus"
+                                             reRender="messageKanBan" oncomplete="closeModal(); openMessage();" >
+                            <apex:param name="saveAllJSON" assignTo="{!saveAllJSON}" value="" />
+                        </apex:actionFunction>
+                        <apex:actionFunction action="{!addProject}" name="addProjectFunctionJs" status="addProjectStatus"
+                                             reRender="messageKanBan" oncomplete="closeModal(); openMessage();" >
+                            <apex:param name="saveAllJSON" assignTo="{!saveAllJSON}" value="" />
+                        </apex:actionFunction>
+                        
+                    </apex:form>
+                    
+                    <div id="modalKanBan" style="display: none;">                
+                        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+                            <div class="slds-modal__container">
+                                <header class="slds-modal__header">
+                                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onClick="closeModal();">
+                                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                                            <use xlink:href="{!URLFOR( $Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+                                        </svg>
+                                        <span class="slds-assistive-text">Close</span>
+                                    </button>
+                                    <h2 id="modalKanBanTitle" class="slds-modal__title slds-hyphenate"></h2>
+                                </header>
+                                <div class="slds-modal__content slds-p-around_medium">
+                                    <div class="slds-form" id="modalKanBanBody"> </div>
+                                    <div class="slds-form" id="addProject" style="display: none;">
+                                        <div class="slds-grid">
+                                            <div class="slds-col slds-size_6-of-12">
+                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                    <label class="slds-form-element__label">Name</label>
+                                                    <div class="slds-form-element__control">
+                                                        <input id="ProjectName" class="slds-input" type="text" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_6-of-12">
+                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                    <label class="slds-form-element__label">Close Date</label>
+                                                    <div class="slds-form-element__control">
+                                                        <input id="ProjectCloseDate" class="slds-input" type="date" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form" id="addEmployee" style="display: none;">
+                                        <div class="slds-grid">
+                                            <div class="slds-col slds-size_6-of-12">
+                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                    <label class="slds-form-element__label">First Name</label>
+                                                    <div class="slds-form-element__control">
+                                                        <input id="EmployeeFirstName" class="slds-input" type="text" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_6-of-12">
+                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                    <label class="slds-form-element__label">Last Name</label>
+                                                    <div class="slds-form-element__control">
+                                                        <input id="EmployeeLastName" class="slds-input" type="text" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer class="slds-modal__footer">
+                                    <button type="button" class="slds-button slds-button_neutral" onClick="closeModal();">Cancel</button>
+                                    <button type="button" class="slds-button slds-button_brand" id="modalButton">
+                                        <apex:actionStatus startText="Requesting..." id="addEmployeeStatus">
+                                            <apex:facet name="stop">Accept</apex:facet>
+                                        </apex:actionStatus>                            
+                                    </button> 
+                                </footer>
+                            </div>
+                        </section>
+                        <div class="slds-backdrop slds-backdrop_open"></div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .floatButtonKanBan{
+                    position: fixed;
+                    bottom: 0;
+                    right: 0;
+                    margin: 0;
+                    background-color: #fff;
+                    padding: 1%;
+                }
+                #messageKanBan1{
+                    position: fixed;
+                    left: 40%;
+                    z-index: 1000;
+                    width: 30%;
+                }
+                .empImage img{
+                    width: 120px;
+                    cursor: pointer;
+                }
+                #wrapperKanBan{
+                    overflow: hidden;
+                    display: block;
+                    margin: 0;
+                    padding: 0;
+                }
+                .wrapperKanBan_li {
+                    display:inline;
+                    border:none;
+                    float: left;
+                    list-style-type: none;
+                    margin: 0;
+                    text-align: center;
+                }
+                .wrapperKanBan_title{
+                    min-height: 2.5em;
+                    font-weight: bold;
+                    text-align: center;
+                	float: left;
+    				width: 90%;
+                }
+                .bench_tile{
+                	background-color: red;
+                	float: left
+                }
+                .prospecting_tile{
+                	background-color: yellow;
+                	float: left;
+                }
+                .current_tile{
+                	background-color: green;
+                	float: left;
+                }
+         		.kanban_header{
+                	width: 145px !important; 
+                    float:left;
+                    list-style-type:none;
+                    overflow-y:auto;
+                    margin: 0 1em 0 0;
+                    padding: 0.5em 0.5em 0 0.5em;
+                    background-color: #f9f6f6;
+                    border-radius:0.2em;
+                }
+                /* draggable targets */
+                [data-draggable="target"]{
+                    width: 145px !important; 
+                    float:left;
+                    list-style-type:none;
+                    overflow-y:auto;
+                    margin: 0 1em 1.5em 0;
+                    padding: 0.5em 0.5em 0.5em 0.5em;
+                    background-color: #f9f6f6;
+                    border-radius:0.2em;
+                }
+                
+                /* drop target state */
+                [data-draggable="target"][aria-dropeffect="move"] {
+                    border-color: #68b;
+                    background: #fff;
+                    opacity: 0.5;
+                }
+                
+                /* drop target focus and dragover state */
+                [data-draggable="target"][aria-dropeffect="move"]:focus,
+                [data-draggable="target"][aria-dropeffect="move"].dragover  {
+                    outline:none;
+                    background-color: #68b;
+                    opacity: 1;
+                }
+                
+                /* draggable items */
+                [data-draggable="item"] {
+                    min-width: 130px; 
+                    min-height: 100px !important; 
+                    display:block;
+                    overflow: hidden;
+                    list-style-type:none;
+                    margin: 0.5em 0 0;
+                    padding: 0.2em 0.2em;
+                    border: 1px solid #ccc;
+                    border-radius:0.2em;
+                    background-color: #f9f6f6;
+                    line-height: 1.3em;
+                    cursor: move;
+                }
+                
+                /* items focus state */
+                [data-draggable="item"]:focus {
+                    outline:none;
+                    box-shadow:0 0 0 1px #68b;
+                }
+                
+                /* items grabbed state */
+                [data-draggable="item"][aria-grabbed="true"]{
+                    background-color: #68b;
+                    color:#fff;
+                }
+                
+                /* tooltip */
+                .empCard {
+                    position: relative;
+                    display: inline-block;
+                    border-bottom: 1px dotted black;
+                }
+                
+                .empCard .tooltiptext {
+                    display: none;
+                    width: 120px;
+                    background-color: #555;
+                    color: #fff;
+                    text-align: center;
+                    padding: 5px 0;
+                    position: absolute;
+                    z-index: 1;
+                    bottom: 0;
+                    left: 50%;
+                    margin-left: -60px;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                	cursor: pointer;
+                }
+                .tooltiptext a, .tooltiptext a:link, .tooltiptext a:visited {
+                    color: #fff;
+                }
+                .empCard .tooltiptext::after {
+                    content: "";
+                    position: absolute;
+                    top: 100%;
+                    left: 50%;
+                    margin-left: -5px;
+                    border-width: 5px;
+                    border-style: solid;
+                    border-color: #555 transparent transparent transparent;
+                }
+                
+                .empCard:hover .tooltiptext {
+                    display: block;
+                    opacity: 1;
+                }
+            </style>
+    
+            <script>
+            var outputMap = '';
+            document.getElementById('MyKanbanFilter').value = '{!filter}';
+            startAll();
+            
+            function openMessage(){
+                document.getElementById('messageKanBan1').style.display = 'block';
+            }
+            function closeMessage(){
+                document.getElementById('messageKanBan1').style.display = 'none';
+            }
+            function validateAddProject(){
+                var obj = {};
+                obj['Name'] = document.getElementById('ProjectName').value;
+                obj['CloseDate'] = document.getElementById('ProjectCloseDate').value;
+                addProjectFunctionJs(JSON.stringify(obj));
+            }
+            function validateAddEmployee(){
+                var obj = {};
+                obj['FirstName'] = document.getElementById('EmployeeFirstName').value;
+                obj['LastName'] = document.getElementById('EmployeeLastName').value;
+                addEmployeeFunctionJs(JSON.stringify(obj));
+            }
+            function saveThis( id_contact, id_project ){
+                var outputMap = document.getElementById('outputMap').value;
+                if( outputMap == '' ) outputMap = '{}';
+                var obj = JSON.parse( outputMap );    
+                if( id_project != document.getElementById('wrapperKanBan').childNodes[1].childNodes[1].id // Project not Bench
+                  & id_project != document.getElementById('wrapperKanBan').childNodes[3].childNodes[1].id // Project not Future Bench
+                ){
+                    obj[id_contact] = {};
+                    obj[id_contact]['project'] = id_project;
+                    obj[id_contact]['start_date'] = obj[id_contact]['end_date'] = new Date().toISOString().split('T')[0];
+                }else{
+                    delete obj[id_contact];
+                }
+                document.getElementById('outputMap').value = JSON.stringify(obj);
+            }
+            function removeEmployee( id_assignment ){
+                openModal( 'removeProject' );
+                document.getElementById('modalButton').onclick = function() {
+                    removeEmployeeFunctionJs( id_assignment );
+                }
+            }
+            function removeProject( id_project ){
+                openModal( 'removeProject' );
+                document.getElementById('modalButton').onclick = function() {
+                    removeProjectFunctionJs( id_project );
+                }
+			}
+            function openModal( id_modal ){
+                closeMessage();
+                document.getElementById('modalKanBanBody').innerHTML = '';
+                document.getElementById('modalButton').onclick = '';
+                document.getElementById('modalKanBanBody').style.display = 
+                    document.getElementById('addProject').style.display = 
+                    document.getElementById('addEmployee').style.display = 'none';
+                if( id_modal == 'removeEmployee' ){
+                    document.getElementById('modalKanBanTitle').innerHTML = 'Remove Employee Assignment';
+                    document.getElementById('modalKanBanBody').innerHTML = 'Are you sure you want to delete this Employee Assignment?'
+                    document.getElementById('modalKanBanBody').style.display = 'block';
+                }else if( id_modal == 'removeProject' ){
+                    document.getElementById('modalKanBanTitle').innerHTML = 'Remove Prospecting Project';
+                    document.getElementById('modalKanBanBody').innerHTML = 'Are you sure you want to delete this Project and Employee Assignments?'
+                    document.getElementById('modalKanBanBody').style.display = 'block';
+                }else if( id_modal == 'addProject' ){
+                    document.getElementById('modalKanBanTitle').innerHTML = 'New Project';
+                    document.getElementById('modalButton').onclick = validateAddProject;
+                    document.getElementById('addProject').style.display = 'block';
+                }else if( id_modal == 'addEmployee' ){
+                    document.getElementById('modalKanBanTitle').innerHTML = 'New Employee Placeholder';
+                    document.getElementById('modalButton').onclick = validateAddEmployee;
+                    document.getElementById('addEmployee').style.display = 'block';
+                }else{
+                    document.getElementById('modalKanBanTitle').innerHTML = 'Requested Changes';
+                    document.getElementById('modalKanBanBody').style.display = 'block';
+                    var outputMap = document.getElementById('outputMap').value;
+                    if( outputMap != '' & outputMap != '{}' ){
+                        document.getElementById('modalButton').onclick = saveAll;
+                        var today = new Date().toISOString().split('T')[0];
+                        var obj = JSON.parse( outputMap );
+                        for( var key in obj ){
+                            if( document.getElementById(obj[key]['project']) ){
+                                var auxStr = '';
+                                if( document.getElementById(key).textContent.includes('Start') > 0 ){
+                                    auxStr = document.getElementById(key).textContent.substr(0, document.getElementById(key).textContent.indexOf('Start'));
+                                }else{
+                                    auxStr = document.getElementById(key).textContent;
+                                }          
+                                auxStr+= ' => '+document.getElementById(obj[key]['project']).getElementsByClassName('wrapperKanBan_title')[0].innerHTML;
+                                document.getElementById('modalKanBanBody').innerHTML+= 
+                                '<div class="slds-grid">'
+                                    +'<div class="slds-col slds-size_6-of-12 slds-text-heading_medium">' + auxStr +'</div>'
+                                    +'<div class="slds-col slds-size_3-of-12">'
+                                        +'<div class="slds-form-element slds-form-element_horizontal">'
+                                            +'<label class="slds-form-element__label">Start Date</label>'
+                                            +'<div class="slds-form-element__control">'
+                                                +'<input onchange="saveData(\''+key+'\', \'start_date\', this.value);" value="'+obj[key]['start_date']+'" type="date" min="'+today+'" class="slds-input" aria-required="true" required />'
+                                            +'</div>'
+                                        +'</div>'
+                                    +'</div>'
+                                    +'<div class="slds-col slds-size_3-of-12">'
+                                        +'<div class="slds-form-element slds-form-element_horizontal">'
+                                            +'<label class="slds-form-element__label">End Date</label>'
+                                            +'<div class="slds-form-element__control">'
+                                                +'<input onchange="saveData(\''+key+'\', \'end_date\', this.value);" value="'+obj[key]['end_date']+'" type="date" min="'+today+'" class="slds-input" aria-required="true" required />'
+                                            +'</div>'
+                                        +'</div>'
+                                    +'</div>'
+                                +'</div>';                    
+                            }
+                        }            
+                    }else{
+                        document.getElementById('modalKanBanBody').innerHTML = 'Nothing to save';
+                    }
+                }
+                document.getElementById('modalKanBan').style.display = 'block';
+            }
+            function saveData( id_contact, field_name, field_value ){
+                var obj = JSON.parse( document.getElementById('outputMap').value );
+                for( var key in obj ){
+                    if( key == id_contact ) obj[key][field_name] = field_value;
+                }
+                document.getElementById('outputMap').value = JSON.stringify(obj);
+            }
+            function closeModal(){
+                document.getElementById('modalKanBan').style.display = 'none';
+            }
+            function saveAll(){
+                if( document.getElementById('outputMap').value != '' ){
+                    console.log( 'outputMap', document.getElementById('outputMap').value);
+                    saveAllFunctionJs( document.getElementById('outputMap').value );
+                }
+            }
+            function startAll(){
+                
+                 //exclude older browsers by the features we need them to support
+                 //and legacy opera explicitly so we don't waste time on a dead browser
+                 if ( !document.querySelectorAll || !('draggable' in document.createElement('span')) || window.opera ) { 
+                     return; 
+                 }
+                 //get the collection of draggable targets and add their draggable attribute
+                 for(var 
+                     targets = document.querySelectorAll('[data-draggable="target"]'), 
+                     len = targets.length, 
+                     i = 0; i < len; i ++){
+                     targets[i].setAttribute('aria-dropeffect', 'none');
+                     targets[i].setAttribute('style', 'height:'+window.innerHeight+'px');
+                 }
+                 // width lightning hack
+                 //document.getElementById('wrapperKanBan').setAttribute('style', 'min-width:'+(125*i)+'px !important');
+        
+                 //get the collection of draggable items and add their draggable attributes
+                 for(var 
+                     items = document.querySelectorAll('[data-draggable="item"]'), 
+                     len = items.length, 
+                     i = 0; i < len; i ++){
+                     items[i].setAttribute('draggable', 'true');
+                     items[i].setAttribute('aria-grabbed', 'false');
+                     items[i].setAttribute('tabindex', '0');
+                 }
+                 //dictionary for storing the selections data 
+                 //comprising an array of the currently selected items 
+                 //a reference to the selected items' owning container
+                 //and a refernce to the current drop target container
+                 var selections = {
+                     items      : [],
+                     owner      : null,
+                     droptarget : null
+                 };
+                 //function for selecting an item
+                 function addSelection(item){
+                     //if the owner reference is still null, set it to this item's parent
+                     //so that further selection is only allowed within the same container
+                     if(!selections.owner){
+                         selections.owner = item.parentNode;
+                     }
+                     //or if that's already happened then compare it with this item's parent
+                     //and if they're not the same container, return to prevent selection
+                     else if(selections.owner != item.parentNode){
+                         return;
+                     }
+                     //set this item's grabbed state
+                     item.setAttribute('aria-grabbed', 'true');
+                     //add it to the items array
+                     selections.items.push(item);
+                 }
+                 //function for unselecting an item
+                 function removeSelection(item){
+                     //reset this item's grabbed state
+                     item.setAttribute('aria-grabbed', 'false');
+                     //then find and remove this item from the existing items array
+                     for(var len = selections.items.length, i = 0; i < len; i ++){
+                         if(selections.items[i] == item) {
+                             selections.items.splice(i, 1);
+                             break;
+                         }
+                     }
+                 }
+                 //function for resetting all selections
+                 function clearSelections() {
+                     //if we have any selected items
+                     if(selections.items.length){
+                         //reset the owner reference
+                         selections.owner = null;
+                         //reset the grabbed state on every selected item
+                         for(var len = selections.items.length, i = 0; i < len; i ++){
+                             selections.items[i].setAttribute('aria-grabbed', 'false');
+                         }
+                         //then reset the items array        
+                         selections.items = [];
+                     }
+                 }
+                 //shorctut function for testing whether a selection modifier is pressed
+                 function hasModifier(e){
+                     return (e.ctrlKey || e.metaKey || e.shiftKey);
+                 }
+                 //function for applying dropeffect to the target containers
+                 function addDropeffects() {
+                     //apply aria-dropeffect and tabindex to all targets apart from the owner
+                     for(var len = targets.length, i = 0; i < len; i ++){
+                         if ( targets[i] != selections.owner && targets[i].getAttribute('aria-dropeffect') == 'none' ) {
+                             targets[i].setAttribute('aria-dropeffect', 'move');
+                             targets[i].setAttribute('tabindex', '0');
+                         }
+                     }
+                     //remove aria-grabbed and tabindex from all items inside those containers
+                     for(var len = items.length, i = 0; i < len; i ++) {
+                         if ( items[i].parentNode != selections.owner &&  items[i].getAttribute('aria-grabbed') ) {
+                             items[i].removeAttribute('aria-grabbed');
+                             items[i].removeAttribute('tabindex');
+                         }
+                     }        
+                 }
+                 //function for removing dropeffect from the target containers
+                 function clearDropeffects(){
+                     //if we have any selected items
+                     if(selections.items.length){
+                         //reset aria-dropeffect and remove tabindex from all targets
+                         for(var len = targets.length, i = 0; i < len; i ++){
+                             if(targets[i].getAttribute('aria-dropeffect') != 'none'){
+                                 targets[i].setAttribute('aria-dropeffect', 'none');
+                                 targets[i].removeAttribute('tabindex');
+                             }
+                         }
+                         //restore aria-grabbed and tabindex to all selectable items 
+                         //without changing the grabbed value of any existing selected items
+                         for(var len = items.length, i = 0; i < len; i ++){
+                             if(!items[i].getAttribute('aria-grabbed')){
+                                 items[i].setAttribute('aria-grabbed', 'false');
+                                 items[i].setAttribute('tabindex', '0');
+                             }
+                             else if(items[i].getAttribute('aria-grabbed') == 'true'){
+                                 items[i].setAttribute('tabindex', '0');
+                             }
+                         }        
+                     }
+                 }
+                 //shortcut function for identifying an event element's target container
+                 function getContainer(element){
+                     do{
+                         if(element.nodeType == 1 && element.getAttribute('aria-dropeffect')){
+                             return element;
+                         }
+                     } while(element = element.parentNode);
+                     return null;
+                 }
+                 //mousedown event to implement single selection
+                 document.addEventListener('mousedown', function(e){
+                     //if the element is a draggable item
+                     if(e.target.getAttribute('draggable')){
+                         //clear dropeffect from the target containers
+                         clearDropeffects();
+                         //if the multiple selection modifier is not pressed 
+                         //and the item's grabbed state is currently false
+                         if( !hasModifier(e) &&  e.target.getAttribute('aria-grabbed') == 'false' ) {
+                             //clear all existing selections
+                             clearSelections();
+                             //then add this new selection
+                             addSelection(e.target);
+                         }
+                     }
+                     //else [if the element is anything else]
+                     //and the selection modifier is not pressed 
+                     else if(!hasModifier(e)) {
+                         //clear dropeffect from the target containers
+                         clearDropeffects();
+                         
+                         //clear all existing selections
+                         clearSelections();
+                     }
+                     //else [if the element is anything else and the modifier is pressed]
+                         else{
+                             //clear dropeffect from the target containers
+                             clearDropeffects();
+                         }
+                 }, false);
+                 
+                 //mouseup event to implement multiple selection
+                 document.addEventListener('mouseup', function(e){
+                     //if the element is a draggable item 
+                     //and the multipler selection modifier is pressed
+                     if(e.target.getAttribute('draggable') && hasModifier(e)) {
+                         //if the item's grabbed state is currently true
+                         if(e.target.getAttribute('aria-grabbed') == 'true') {
+                             //unselect this item
+                             removeSelection(e.target);
+                             
+                             //if that was the only selected item
+                             //then reset the owner container reference
+                             if(!selections.items.length) {
+                                 selections.owner = null;
+                             }
+                         }
+                         //else [if the item's grabbed state is false]
+                         else{
+                             //add this additional selection
+                             addSelection(e.target);
+                         }
+                     }
+                 }, false);
+                 //dragstart event to initiate mouse dragging
+                 document.addEventListener('dragstart', function(e){
+                     //if the element's parent is not the owner, then block this event
+                     if(selections.owner != e.target.parentNode){
+                         e.preventDefault();
+                         return;
+                     }
+                     //[else] if the multiple selection modifier is pressed 
+                     //and the item's grabbed state is currently false
+                     if ( hasModifier(e)  &&  e.target.getAttribute('aria-grabbed') == 'false' ){
+                         //add this additional selection
+                         addSelection(e.target);
+                     }
+                     //we don't need the transfer data, but we have to define something
+                     //otherwise the drop action won't work at all in firefox
+                     //most browsers support the proper mime-type syntax, eg. "text/plain"
+                     //but we have to use this incorrect syntax for the benefit of IE10+
+                     e.dataTransfer.setData('text', '');
+                     
+                     //apply dropeffect to the target containers
+                     addDropeffects();
+                     
+                 }, false);
+                 //keydown event to implement selection and abort
+                 document.addEventListener('keydown', function(e){
+                     //if the element is a grabbable item 
+                     if(e.target.getAttribute('aria-grabbed')){
+                         //Space is the selection or unselection keystroke
+                         if(e.keyCode == 32){
+                             //if the multiple selection modifier is pressed 
+                             if(hasModifier(e)){
+                                 //if the item's grabbed state is currently true
+                                 if(e.target.getAttribute('aria-grabbed') == 'true'){
+                                     //if this is the only selected item, clear dropeffect 
+                                     //from the target containers, which we must do first
+                                     //in case subsequent unselection sets owner to null
+                                     if(selections.items.length == 1){
+                                         clearDropeffects();
+                                     }
+                                     //unselect this item
+                                     removeSelection(e.target);
+                                     
+                                     //if we have any selections
+                                     //apply dropeffect to the target containers, 
+                                     //in case earlier selections were made by mouse
+                                     if(selections.items.length){
+                                         addDropeffects();
+                                     }
+                                     //if that was the only selected item
+                                     //then reset the owner container reference
+                                     if(!selections.items.length){
+                                         selections.owner = null;
+                                     }
+                                 }
+                                 //else [if its grabbed state is currently false]
+                                 else{
+                                     //add this additional selection
+                                     addSelection(e.target);
+                                     //apply dropeffect to the target containers    
+                                     addDropeffects();
+                                 }
+                             }
+                             //else [if the multiple selection modifier is not pressed]
+                             //and the item's grabbed state is currently false
+                             else if(e.target.getAttribute('aria-grabbed') == 'false'){
+                                 //clear dropeffect from the target containers
+                                 clearDropeffects();
+                                 //clear all existing selections
+                                 clearSelections();
+                                 //add this new selection
+                                 addSelection(e.target);
+                                 //apply dropeffect to the target containers
+                                 addDropeffects();
+                             }
+                             //else [if modifier is not pressed and grabbed is already true]
+                                 else{
+                                     //apply dropeffect to the target containers    
+                                     addDropeffects();
+                                 }
+                             //then prevent default to avoid any conflict with native actions
+                             e.preventDefault();
+                         }
+                         //Modifier + M is the end-of-selection keystroke
+                         if(e.keyCode == 77 && hasModifier(e)){
+                             //if we have any selected items
+                             if(selections.items.length){
+                                 //apply dropeffect to the target containers    
+                                 //in case earlier selections were made by mouse
+                                 addDropeffects();
+                                 
+                                 //if the owner container is the last one, focus the first one
+                                 if(selections.owner == targets[targets.length - 1]){
+                                     targets[0].focus();
+                                 }
+                                 //else [if it's not the last one], find and focus the next one
+                                 else{
+                                     for(var len = targets.length, i = 0; i < len; i ++){
+                                         if(selections.owner == targets[i]){
+                                             targets[i + 1].focus();
+                                             break;
+                                         }
+                                     }
+                                 }
+                             }                
+                             //then prevent default to avoid any conflict with native actions
+                             e.preventDefault();
+                         }
+                     }
+                     //Escape is the abort keystroke (for any target element)
+                     if(e.keyCode == 27){
+                         //if we have any selected items
+                         if(selections.items.length){
+                             //clear dropeffect from the target containers
+                             clearDropeffects();
+                             //then set focus back on the last item that was selected, which is 
+                             //necessary because we've removed tabindex from the current focus
+                             selections.items[selections.items.length - 1].focus();
+                             //clear all existing selections
+                             clearSelections();
+                             //but don't prevent default so that native actions can still occur
+                         }
+                     }
+                     
+                 }, false);
+                 //related variable is needed to maintain a reference to the 
+                 //dragleave's relatedTarget, since it doesn't have e.relatedTarget
+                 var related = null;
+                 
+                 //dragenter event to set that variable
+                 document.addEventListener('dragenter', function(e) {
+                     related = e.target;
+                 }, false);
+                 //dragleave event to maintain target highlighting using that variable
+                 document.addEventListener('dragleave', function(e){
+                     //get a drop target reference from the relatedTarget
+                     var droptarget = getContainer(related);
+                     //if the target is the owner then it's not a valid drop target
+                     if(droptarget == selections.owner){
+                         droptarget = null;
+                     }
+                     //if the drop target is different from the last stored reference
+                     //(or we have one of those references but not the other one)
+                     if(droptarget != selections.droptarget) {
+                         //if we have a saved reference, clear its existing dragover class
+                         if(selections.droptarget){
+                             selections.droptarget.className = 
+                                 selections.droptarget.className.replace(/ dragover/g, '');
+                         }
+                         //apply the dragover class to the new drop target reference
+                         if(droptarget){
+                             droptarget.className += ' dragover';
+                         }
+                         //then save that reference for next time
+                         selections.droptarget = droptarget;
+                     }
+                 }, false);    
+                 //dragover event to allow the drag by preventing its default
+                 document.addEventListener('dragover', function(e){
+                     //if we have any selected items, allow them to be dragged
+                     if(selections.items.length)
+                     {
+                         e.preventDefault();
+                     }
+                     
+                 }, false);
+                 //dragend event to implement items being validly dropped into targets,
+                 //or invalidly dropped elsewhere, and to clean-up the interface either way
+                 document.addEventListener('dragend', function(e) {
+                     //if we have a valid drop target reference
+                     //(which implies that we have some selected items)
+                     if(selections.droptarget){
+                         //append the selected items to the end of the target container
+                         for(var len = selections.items.length, i = 0; i < len; i ++){
+        saveThis( selections.items[i].id,selections.droptarget.id )
+                             selections.droptarget.appendChild(selections.items[i]);
+                         }
+                         //prevent default to allow the action            
+                         e.preventDefault();
+                     }
+                     //if we have any selected items
+                     if(selections.items.length){
+                         //clear dropeffect from the target containers
+                         clearDropeffects();
+                         //if we have a valid drop target reference
+                         if(selections.droptarget){
+                             //reset the selections array
+                             clearSelections();
+                             //reset the target's dragover class
+                             selections.droptarget.className = 
+                                 selections.droptarget.className.replace(/ dragover/g, '');
+                             //reset the target reference
+                             selections.droptarget = null;
+                         }
+                     }
+                 }, false);
+                 //keydown event to implement items being dropped into targets
+                 document.addEventListener('keydown', function(e) {
+                     //if the element is a drop target container
+                     if(e.target.getAttribute('aria-dropeffect')) {
+                         //Enter or Modifier + M is the drop keystroke
+                         if(e.keyCode == 13 || (e.keyCode == 77 && hasModifier(e))) {
+                             //append the selected items to the end of the target container
+                             for(var len = selections.items.length, i = 0; i < len; i ++) {
+                                 e.target.appendChild(selections.items[i]);
+                             }
+                             //clear dropeffect from the target containers
+                             clearDropeffects();
+                             //then set focus back on the last item that was selected, which is 
+                             //necessary because we've removed tabindex from the current focus
+                             selections.items[selections.items.length - 1].focus();
+                             //reset the selections array
+                             clearSelections();
+                             //prevent default to to avoid any conflict with native actions
+                             e.preventDefault();
+                         }
+                     }
+                 }, false);
+             }
+            </script>
+        </body>
+    </html>
+</apex:page>

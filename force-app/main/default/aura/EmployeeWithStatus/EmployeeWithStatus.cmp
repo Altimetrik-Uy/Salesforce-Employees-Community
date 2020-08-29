@@ -1,0 +1,44 @@
+<aura:component controller="EmployeeController" implements="flexipage:availableForAllPageTypes,force:appHostable" access="global" >
+    
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+
+    <aura:attribute name="overlayPanel" type="Aura.Component[]" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="c:EmployeeStatusEvent" action="{!c.doInit}"/>
+    
+    <aura:attribute name="sortBy" type="String"/>
+    <aura:attribute name="sortDirection" type="String"/>    
+    
+    <lightning:card title="Current Employees"
+                    iconName="custom:custom67"
+                    class="slds-p-around_medium">
+        
+        <aura:set attribute="actions">
+            <lightning:button label="Add Status"
+                              onclick="{!c.handleShowModal}"/>
+        </aura:set>
+        
+        <aura:if isTrue="{!v.data.length > 0}">
+            <lightning:datatable data="{!v.data}"
+                                 columns="{!v.columns}"
+                                 keyField="Id"
+                                 class="slds-no-row-hover"
+                                 hideCheckboxColumn="true"
+                                 sortedBy="{!v.sortBy}"
+                                 sortedDirection="{!v.sortDirection}"
+                                 onsort="{!c.handleSort}"
+                                 onrowaction="{! c.handleRowAction }"/>
+            <aura:set attribute="else">
+                <div class="slds-align_absolute-center">
+                    <p>
+                        There are no Employees
+                    </p>
+                </div>
+            </aura:set>
+        </aura:if>
+    </lightning:card>
+    
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+</aura:component>

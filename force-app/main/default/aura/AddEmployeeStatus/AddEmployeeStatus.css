@@ -1,0 +1,33 @@
+.THIS .slds-form-element__legend {
+    font-weight: normal
+}
+
+.THIS .slds-radio_button-group{
+    border: none;
+    width: 100%;
+}
+
+.THIS .slds-radio_button-group span{
+    width: 33%;
+}
+
+.THIS .slds-radio_button-group span:nth-child(1) label {
+    width: 100%;
+    color: #04844b;
+    background-color: #04844b;
+    text-align: center;
+}
+
+.THIS .slds-radio_button-group span:nth-child(2) label {
+    width: 100%;
+    color: #fff03f;
+    background-color: #fff03f;
+    text-align: center;
+}
+
+.THIS .slds-radio_button-group span:nth-child(3) label {
+    width: 100%;
+    color: #c23934;
+    background-color: #c23934;
+    text-align: center;
+}

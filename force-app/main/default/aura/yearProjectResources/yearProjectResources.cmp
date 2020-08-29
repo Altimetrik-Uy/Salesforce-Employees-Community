@@ -1,0 +1,158 @@
+<aura:component implements="flexipage:availableForAllPageTypes" controller="yearProgress" access="global" >
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="removeFinishedProjects" type="Boolean" default="true"/>
+    <aura:attribute name="forecastedProjects" type="Boolean" default="false"/>
+    <aura:attribute name="dataMap" type="Map"/>
+    <aura:attribute name="dataMapByProject" type="Map"/>
+    <aura:attribute name="dataMapByProjectFuture" type="Map"/>
+    <aura:attribute name="accounts" type="List"/>
+    <aura:attribute name="selectedAccounts" type="String[]" default="[]" />
+    <aura:attribute name="currentDate" type="String"/>
+    <aura:attribute name="ready" type="Boolean" default="false"/>
+    <aura:attribute name="auxName" type="String" />
+    <div class="slds" style="max-width:900px;">
+        <br/>
+
+    <div class="slds-box" style="background-color:white; margin-top: -20px; margin-bottom:5px;">
+        <div class="slds-form-element">
+  <div class="slds-form-element__control">
+    <div class="slds-combobox_container">
+      <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open" aria-expanded="true" aria-haspopup="dialog" role="combobox">
+         
+          <section aria-describedby="dialog-body-id-28" aria-label="Language Options" class="slds-popover slds-popover_full-width" id="popover-unique-id-06" role="dialog">
+          <div class="slds-popover__body slds-popover__body_small" id="dialog-body-id-28">
+            <fieldset class="slds-form-element">
+              <legend class="slds-form-element__legend slds-form-element__label">Select Accounts</legend>
+              	 <aura:iteration items="{!v.accounts}" indexVar="key" var="item" >
+                        <div class="slds-form-element__control">
+                        <div class="slds-checkbox">
+                          <div class="slds-form-element__control">
+                            <lightning:input label="{!item}" type="checkbox" aura:id="accounts" value="{!item}" checked="true"  onclick="{!c.byAccounts}" className="Accounts"/>
+                          </div>
+                        </div>
+                      </div>
+                </aura:iteration>
+            </fieldset>
+          </div>
+        </section>
+        <section aria-describedby="dialog-body-id-28" aria-label="Language Options" class="slds-popover slds-popover_full-width" id="popover-unique-id-06" role="dialog">
+        	<div class="slds-popover__body slds-popover__body_small" id="dialog-body-id-28">
+            <fieldset class="slds-form-element">
+                <div class="slds-form-element">
+                  <div class="slds-form-element__control">
+                      <lightning:input label="Remove finished Projects" type="checkbox" aura:id="activeProjects" value="" checked="true"  onclick="{!c.activeProjects}"/>
+                  </div>
+                </div>
+                <div class="slds-form-element">
+                  <div class="slds-form-element__control">
+                    <lightning:input label="Forecasted Only" type="checkbox" aura:id="forcastedOnly" value="" checked="false"  onclick="{!c.forecastedProjects}"/>
+                  </div>
+                </div>
+                </fieldset>
+            </div>
+        </section>
+          
+      </div>
+    </div>
+  </div>
+</div> 
+        
+		    
+    </div>   
+    <aura:if isTrue="{!v.ready}">  
+    <table style="max-width:900px;" class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+  	<thead>
+    <tr class="slds-line-height_reset">
+       	<th class="slds-cell-wrap" scope="col ">
+                <div class="slds-truncate" title="Project Name">Project Name</div>
+            </th>
+        <aura:iteration items="{!v.dataMap}" indexVar="key" var="item" >
+			<aura:if isTrue="{!v.currentDate == item.value}">
+                <th colspan="2" style="background-color: #00800026 !important;" scope="col" >
+                <!--background-color: #00800026;-->
+                <div class="slds-truncate" title="{!item.value}">{!item.value}</div>
+            	</th>
+            <aura:set attribute="else">
+                <th colspan="2" class="" scope="col" >
+                <!--background-color: #00800026;-->
+                <div class="slds-truncate" title="{!item.value}">{!item.value}</div>
+            	</th>
+            </aura:set>
+                
+            </aura:if>
+            
+        </aura:iteration >
+    </tr>
+  </thead>
+  <tbody>
+       
+       <aura:iteration items="{!v.dataMapByProject}" indexVar="key" var="item" >
+    		<tr class="slds-hint-parent">
+                
+     			<aura:iteration items="{!item.label}" indexVar="key1" var="item1" >
+      			  <aura:if isTrue="{!key1 == 0}">
+                      <td data-label="{!item.value}" style="max-width: 230px;" class="slds-cell-wrap">
+                        <div class="slds-truncate" title="{!item.value}">{!item.value}</div>
+                      </td>
+                  </aura:if>
+                  <aura:if isTrue="{!item1.label==0 &amp;&amp; item1.futureLabel==0}"> 
+                  		<td style="background-color: black;" data-label="{!item1.label}">
+                           <div class="slds-truncate" title="{!item1.label}">{!item1.label}</div>
+                        </td>
+                        <td style="background-color: black;" data-label="{!item1.futureLabel}">
+                             <div class="slds-truncate" title="{!item1.futureLabel}">{!item1.futureLabel}</div>
+                        </td>
+                  <aura:set attribute="else">
+                      <aura:if isTrue="{!v.currentDate == item1.value}"> 
+                            <td style="background-color: #00800026;" data-label="{!item1.label}">
+                                <div class="slds-truncate" title="{!item1.label}">{!item1.label}</div>
+                            </td>
+                            <td style="background-color: #00800026;" data-label="{!item1.futureLabel}">
+                                <div class="slds-truncate" title="{!item1.futureLabel}">{!item1.futureLabel}</div>
+                            </td>
+                      <aura:set attribute="else">
+                        <td data-label="{!item1.label}">
+                            <div class="slds-truncate" title="{!item1.label}">{!item1.label}</div>
+                        </td>
+                        <td data-label="{!item1.futureLabel}">
+                            <div class="slds-truncate" title="{!item1.futureLabel}">{!item1.futureLabel}</div>
+                        </td>
+                      </aura:set>
+                  	</aura:if>
+                  </aura:set>
+                  </aura:if>
+                </aura:iteration>
+      			
+    </tr>
+      </aura:iteration>
+  </tbody>
+  <thead>
+      <tr class="slds-line-height_reset">
+       	<th class="" scope="col">
+                <div class="slds-truncate" title="Total">Total</div>
+            </th>
+        <aura:iteration items="{!v.dataMap}" indexVar="key" var="item" >  
+        <aura:if isTrue="{!v.currentDate == item.value}">
+            <th  style="background-color: #00800026 !important;" scope="col">
+                <div class="slds-truncate" title="{!item.label[0].label}">{!item.label[0].label}</div>
+            </th>
+            <th style="background-color: #00800026 !important;" class="" scope="col">
+                <div class="slds-truncate" title="{!item.label[0].futureLabel}">{!item.label[0].futureLabel}</div>
+            </th>
+        <aura:set attribute="else">
+            <th class="" scope="col">
+                <div class="slds-truncate" title="{!item.label[0].label}">{!item.label[0].label}</div>
+            </th>
+            <th class="" scope="col">
+                <div class="slds-truncate" title="{!item.label[0].futureLabel}">{!item.label[0].futureLabel}</div>
+            </th>
+        </aura:set>
+        </aura:if>
+			
+        </aura:iteration >
+    </tr>
+  </thead>
+</table>
+    </aura:if>  
+</div>
+</aura:component>

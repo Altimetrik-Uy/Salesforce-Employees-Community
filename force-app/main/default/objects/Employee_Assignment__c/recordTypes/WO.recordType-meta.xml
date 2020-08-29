@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WO</fullName>
+    <active>true</active>
+    <label>WO</label>
+    <picklistValues>
+        <picklist>Area__c</picklist>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Role__c</picklist>
+        <values>
+            <fullName>Android Developer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Android Tech Leader</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Angular Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Apex Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Automation Specialist Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aux Admin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Capabilities Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cleaner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Design Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Designer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Developer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Frontend Delivery Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Frontend Developer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Frontend Team Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Frontend Tech Leader</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HR Analyst</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HR Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Head Technology Center</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interaction Design Leader</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interaction Designer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lightning Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Playground Coach Leader</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Polymer Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA Analyst</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA Automation Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA Mobile Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA Mobile Specialist Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA Salesforce Specialist Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA Senior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA Technology Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>React Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Receptionist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce Delivery Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce Developer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce Platform Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce Team Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce Technical Architect Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Senior Frontend Developer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Software Developer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sys Admin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Visual Designer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>iOS Engineer</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>
