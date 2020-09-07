@@ -26,11 +26,16 @@
     </types>
     <types>
         <members>*</members>
+        <members>Account</members>
+        <members>Contact</members>
+        <members>Lead</members>
+        <members>Opportunity</members>
+        <members>Campaign</members>
         <name>CustomObject</name>
     </types>
     <types>
         <members>*</members>
-        <name>CustomTab</name>
+        <name>CustomField</name>
     </types>
     <types>
         <members>*</members>
@@ -46,19 +51,30 @@
     </types>
     <types>
         <members>*</members>
-        <name>CustomTab</name>
-    </types>
-    <types>
-        <members>*</members>
         <name>ApexTrigger</name>
     </types>
     <types>
         <members>*</members>
-        <name>Layout</name>
+        <name>RecordType</name>
     </types>
     <types>
         <members>*</members>
-        <name>RecordType</name>
+        <name>GlobalValueSet</name>
+    </types>
+    <types>
+        <members>LeadSource</members>
+        <members>OpportunityStage</members>
+        <members>OpportunityType</members>
+        <name>StandardValueSet</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>QuickAction</name>
+    </types>
+    <types>
+        <members>Employee_Record_Page</members>
+        <members>Project_Record_Page</members>
+        <name>FlexiPage</name>
     </types>
     <version>49.0</version>
 </Package>

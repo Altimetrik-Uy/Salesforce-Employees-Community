@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Android Developer</fullName>
+        <default>false</default>
+        <label>Android Developer</label>
+    </customValue>
+    <customValue>
+        <fullName>Android Tech Leader</fullName>
+        <default>false</default>
+        <label>Android Tech Leader</label>
+    </customValue>
+    <customValue>
+        <fullName>Angular Specialist</fullName>
+        <default>false</default>
+        <label>Angular Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Apex Specialist</fullName>
+        <default>false</default>
+        <label>Apex Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Automation Specialist Lead</fullName>
+        <default>false</default>
+        <label>Automation Specialist Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>Aux Admin</fullName>
+        <default>false</default>
+        <label>Aux Admin</label>
+    </customValue>
+    <customValue>
+        <fullName>Capabilities Manager</fullName>
+        <default>false</default>
+        <label>Capabilities Manager</label>
+    </customValue>
+    <customValue>
+        <fullName>Cleaner</fullName>
+        <default>false</default>
+        <label>Cleaner</label>
+    </customValue>
+    <customValue>
+        <fullName>Designer</fullName>
+        <default>false</default>
+        <label>Designer</label>
+    </customValue>
+    <customValue>
+        <fullName>Design Manager</fullName>
+        <default>false</default>
+        <label>Design Manager</label>
+    </customValue>
+    <customValue>
+        <fullName>Developer</fullName>
+        <default>false</default>
+        <label>Developer</label>
+    </customValue>
+    <customValue>
+        <fullName>Financial Manager</fullName>
+        <default>false</default>
+        <label>Financial Manager</label>
+    </customValue>
+    <customValue>
+        <fullName>Frontend Delivery Manager</fullName>
+        <default>false</default>
+        <label>Frontend Delivery Manager</label>
+    </customValue>
+    <customValue>
+        <fullName>Frontend Developer</fullName>
+        <default>false</default>
+        <label>Frontend Developer</label>
+    </customValue>
+    <customValue>
+        <fullName>Frontend Team Lead</fullName>
+        <default>false</default>
+        <label>Frontend Team Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>Frontend Tech Leader</fullName>
+        <default>false</default>
+        <label>Frontend Tech Leader</label>
+    </customValue>
+    <customValue>
+        <fullName>Head Technology Center</fullName>
+        <default>false</default>
+        <label>Head Technology Center</label>
+    </customValue>
+    <customValue>
+        <fullName>HR Analyst</fullName>
+        <default>false</default>
+        <label>HR Analyst</label>
+    </customValue>
+    <customValue>
+        <fullName>HR Manager</fullName>
+        <default>false</default>
+        <label>HR Manager</label>
+    </customValue>
+    <customValue>
+        <fullName>Interaction Designer</fullName>
+        <default>false</default>
+        <label>Interaction Designer</label>
+    </customValue>
+    <customValue>
+        <fullName>Interaction Design Leader</fullName>
+        <default>false</default>
+        <label>Interaction Design Leader</label>
+    </customValue>
+    <customValue>
+        <fullName>iOS Engineer</fullName>
+        <default>false</default>
+        <label>iOS Engineer</label>
+    </customValue>
+    <customValue>
+        <fullName>Lightning Specialist</fullName>
+        <default>false</default>
+        <label>Lightning Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Playground Coach Leader</fullName>
+        <default>false</default>
+        <label>Playground Coach Leader</label>
+    </customValue>
+    <customValue>
+        <fullName>Polymer Specialist</fullName>
+        <default>false</default>
+        <label>Polymer Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>QA</fullName>
+        <default>false</default>
+        <label>QA</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Analyst</fullName>
+        <default>false</default>
+        <label>QA Analyst</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Automation Specialist</fullName>
+        <default>false</default>
+        <label>QA Automation Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Lead</fullName>
+        <default>false</default>
+        <label>QA Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Manager</fullName>
+        <default>false</default>
+        <label>QA Manager</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Mobile Specialist</fullName>
+        <default>false</default>
+        <label>QA Mobile Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Mobile Specialist Lead</fullName>
+        <default>false</default>
+        <label>QA Mobile Specialist Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Salesforce Specialist Lead</fullName>
+        <default>false</default>
+        <label>QA Salesforce Specialist Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Senior</fullName>
+        <default>false</default>
+        <label>QA Senior</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Technology Specialist</fullName>
+        <default>false</default>
+        <label>QA Technology Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>React Specialist</fullName>
+        <default>false</default>
+        <label>React Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Receptionist</fullName>
+        <default>false</default>
+        <label>Receptionist</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Delivery Manager</fullName>
+        <default>false</default>
+        <label>Salesforce Delivery Manager</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Developer</fullName>
+        <default>false</default>
+        <label>Salesforce Developer</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Manager</fullName>
+        <default>false</default>
+        <label>Salesforce Manager</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Platform Specialist</fullName>
+        <default>false</default>
+        <label>Salesforce Platform Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Team Lead</fullName>
+        <default>false</default>
+        <label>Salesforce Team Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Technical Architect Lead</fullName>
+        <default>false</default>
+        <label>Salesforce Technical Architect Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>Senior Frontend Developer</fullName>
+        <default>false</default>
+        <label>Senior Frontend Developer</label>
+    </customValue>
+    <customValue>
+        <fullName>Software Developer</fullName>
+        <default>false</default>
+        <label>Software Developer</label>
+    </customValue>
+    <customValue>
+        <fullName>Sys Admin</fullName>
+        <default>false</default>
+        <label>Sys Admin</label>
+    </customValue>
+    <customValue>
+        <fullName>Visual Designer</fullName>
+        <default>false</default>
+        <label>Visual Designer</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <masterLabel>Role</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>
