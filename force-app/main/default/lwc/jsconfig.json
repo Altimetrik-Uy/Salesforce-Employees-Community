@@ -2,7 +2,26 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "baseUrl": ".",
-        "paths": {}
+        "paths": {
+            "c/employeeCareerPathSubtab": [
+                "employeeCareerPathSubtab/employeeCareerPathSubtab.js"
+            ],
+            "c/employeeOverallSubtab": [
+                "employeeOverallSubtab/employeeOverallSubtab.js"
+            ],
+            "c/employeePerformanceEvaluationsSubtab": [
+                "employeePerformanceEvaluationsSubtab/employeePerformanceEvaluationsSubtab.js"
+            ],
+            "c/employeeProjectsSubtab": [
+                "employeeProjectsSubtab/employeeProjectsSubtab.js"
+            ],
+            "c/employeeStatusSubtab": [
+                "employeeStatusSubtab/employeeStatusSubtab.js"
+            ],
+            "c/employeeTab": [
+                "employeeTab/employeeTab.js"
+            ]
+        }
     },
     "include": [
         "**/*",
