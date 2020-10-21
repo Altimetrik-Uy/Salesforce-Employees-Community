@@ -20,6 +20,9 @@
             ],
             "c/employeeTab": [
                 "employeeTab/employeeTab.js"
+            ],
+            "c/mainTabset": [
+                "mainTabset/mainTabset.js"
             ]
         }
     },

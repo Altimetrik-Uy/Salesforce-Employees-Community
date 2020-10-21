@@ -1,3 +1,5 @@
 .sfdx/
+.sfdx/*
 force-app/main/default/sites/Altimetrik_Community.site-meta.xml
-
+.vscode/
+.vscode/*

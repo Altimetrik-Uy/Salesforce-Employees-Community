@@ -1,0 +1,39 @@
+.border {
+    border-right: 1px solid #D4D4D4;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.buttonCustom {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    white-space: nowrap;
+}
+
+.margin {
+    margin-top: -3px !important;
+}
+
+.imageContainer {
+    text-align: center;
+}
+
+.dataContainer {
+    height: 50%;
+    margin-top: 10px;
+}
+
+.employedata {
+    color: gray;
+}
+
+.font18 {
+    font-size: 18px;
+}
+
+.font21 {
+    font-size: 21px;
+}
