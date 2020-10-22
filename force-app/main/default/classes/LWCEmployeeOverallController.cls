@@ -22,4 +22,17 @@ public class LWCEmployeeOverallController{
             return new  List<Project_Status__c>();
         }
     }
+    
+    @AuraEnabled (cacheable=true)
+    public static String getStatusImageName(String uId){
+         String imageName = '';
+        try{
+            String contactId = [SELECT Contact.Id FROM User WHERE Id =:uId LIMIT 1].Contact.Id;
+            Employee_Status__c eStatus = [SELECT Id, Status__c, Employee__c, Employee__r.LastName FROM Employee_Status__c WHERE Employee__r.Id =: contactId ORDER BY CreatedDate DESC LIMIT 1].get(0);
+            imageName = eStatus.Status__c;
+        }catch(Exception ex){
+            imageName = 'Black';
+        }
+        return imageName;
+    }
 }
