@@ -42,7 +42,7 @@ export default class EmployeeOverallSubtab extends LightningElement {
                 preparedAssets.push(preparedAsset);
             });
             this.projectStatusImageName = preparedAssets;
-            window.console.log(JSON.stringify(this.assets))
+            window.console.log(JSON.stringify(this.assets));
         } else if (error) {
             this.error = error;
         }
