@@ -97,6 +97,10 @@
         <name>Portal</name>
     </types>
     <types>
+        <members>*</members>
+        <name>StaticResource</name>
+    </types>
+    <types>
         <members>Communities_Shared_Document_Folder</members>
         <members>Communities_Shared_Document_Folder/logoTest_png</members>
         <name>Document</name>

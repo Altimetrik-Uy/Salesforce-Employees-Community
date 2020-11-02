@@ -21,10 +21,9 @@
     <masterLabel>Altimetrik Community</masterLabel>
     <referrerPolicyOriginWhenCrossOrigin>true</referrerPolicyOriginWhenCrossOrigin>
     <requireHttps>true</requireHttps>
-    <requireInsecurePortalAccess>false</requireInsecurePortalAccess>
     <selfRegPage>CommunitiesSelfReg</selfRegPage>
-    <siteAdmin>strellesdev1@communityorg.com</siteAdmin>
-    <siteGuestRecordDefaultOwner>strellesdev1@communityorg.com</siteGuestRecordDefaultOwner>
+    <siteAdmin>ramiro-sec@altimetrik.com</siteAdmin>
+    <siteGuestRecordDefaultOwner>ramiro-sec@altimetrik.com</siteGuestRecordDefaultOwner>
     <siteType>ChatterNetwork</siteType>
-    <subdomain>altimetrik-community-developer-edition</subdomain>
+    <subdomain>sec-ramiro-developer-edition</subdomain>
 </CustomSite>
