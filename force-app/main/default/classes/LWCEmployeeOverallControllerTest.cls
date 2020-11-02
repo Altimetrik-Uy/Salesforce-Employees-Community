@@ -113,5 +113,31 @@ public class LWCEmployeeOverallControllerTest {
             //Run LWCEmployeeOverallController
             System.assertEquals(LWCEmployeeOverallController.getProjectStatusImageName(usr.Id), proS,'One or more Status do not match');
         }  
-    }      
+    }    
+    public static Employee_Status__c createEmployeeStatus(Id contactId, String status, String certificationStatus){
+        Employee_Status__c eStatus = new Employee_Status__c();
+        eStatus.Employee__c = contactId;
+        eStatus.Status__c = status;
+        eStatus.Certification_Status__c = certificationStatus;
+        insert eStatus;
+        return eStatus;
+    }
+    @isTest
+    public static  void getStatusImageName() {
+        //System Admin
+        User admin = createAdminUser();
+        System.runAs(admin) {
+            //Account
+            Account acc = createAccount();
+            //Contact
+            Contact con = createContact(acc.Id);
+            //User
+            User usr = createUser(con.Id);
+            //Employee Status
+            Employee_Status__c eS1 = createEmployeeStatus(con.Id,'Green', 'Red');
+            Employee_Status__c eS2 = createEmployeeStatus(con.Id,'Red', 'Red');
+            //Run LWCEmployeeOverallController
+            System.assertEquals(LWCEmployeeOverallController.getStatusImageName(usr.Id), 'Red','Image is not Red');
+        }
+    }
 }

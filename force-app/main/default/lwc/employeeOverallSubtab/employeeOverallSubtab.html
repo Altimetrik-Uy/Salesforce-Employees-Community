@@ -3,7 +3,12 @@
         <div class="slds-grid slds-wrap">
             <div class="slds-size_1-of-3">
                 <div class="slds-text-align_center slds-m-around_x-small">
-                 <!--Employee Status Traffic Light-->
+                    <template if:true={imageStatus}>
+                        <template for:each={imageStatus} for:item="currentStatus">
+                            <img key={currentStatus.Id} src={currentStatus.AssetImageSrc} alt={currentStatus.AssetImageAlt}/>
+                            <p key={currentStatus.Id}  class="slds-p-top_small">Employee Status</p>
+                        </template>
+                    </template>
                 </div>
             </div>
             <div class="slds-size_2-of-3">
