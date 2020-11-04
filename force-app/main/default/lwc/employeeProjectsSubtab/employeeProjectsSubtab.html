@@ -1,3 +1,29 @@
-<template>
-        <h1>Proj</h1>
+<template>  
+    <lightning-card>
+        <div>
+            <ul class="slds-has-dividers_around-space">
+                <template for:each={projectStatusImageName} for:item="currentProjectStatus">
+                    <li key={currentProjectStatus.Id} class="slds-item project-box">
+                        <article class="slds-tile slds-tile_board">
+                            <template if:false={currentProjectStatus.ProjectEndDate}>
+                                <h3 key={currentProjectStatus.Id} class="slds-tile__title slds-truncate">Current Project - {currentProjectStatus.ProjectName}</h3>
+                                <div class="slds-tile__detail">
+                                    <p>Joined - <lightning-formatted-date-time  value='{currentProjectStatus.ProjectJoinDate}'></lightning-formatted-date-time></p>
+                                    <p>Project Information -  {currentProjectStatus.ProjectInformation}</p>
+                                </div>
+                            </template>
+                            <template if:true={currentProjectStatus.ProjectEndDate}>
+                                <h3 key={currentProjectStatus.Id} class="slds-tile__title slds-truncate"> Project -  {currentProjectStatus.ProjectName}</h3>
+                                <div class="slds-tile__detail">
+                                    <p>Joined - <lightning-formatted-date-time  value='{currentProjectStatus.ProjectJoinDate}'></lightning-formatted-date-time></p>
+                                    <p>End Date - <lightning-formatted-date-time  value='{currentProjectStatus.ProjectEndDate}'></lightning-formatted-date-time></p>
+                                    <p>Project Information -  {currentProjectStatus.ProjectInformation}</p>
+                                </div>
+                            </template>
+                        </article>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </lightning-card>
 </template>
