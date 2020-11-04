@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Possible_Next_Role__c</fullName>
+    <externalId>false</externalId>
+    <label>Possible Next Role</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Role__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Salesforce Apex Specialist</fullName>
+                <default>false</default>
+                <label>Salesforce Apex Specialist</label>
+            </value>
+            <value>
+                <fullName>Salesforce Architect Chief</fullName>
+                <default>false</default>
+                <label>Salesforce Architect Chief</label>
+            </value>
+            <value>
+                <fullName>Salesforce Certified Architect</fullName>
+                <default>false</default>
+                <label>Salesforce Certified Architect</label>
+            </value>
+            <value>
+                <fullName>Salesforce Delivery Manager</fullName>
+                <default>false</default>
+                <label>Salesforce Delivery Manager</label>
+            </value>
+            <value>
+                <fullName>Salesforce Developer</fullName>
+                <default>false</default>
+                <label>Salesforce Developer</label>
+            </value>
+            <value>
+                <fullName>Salesforce Lightning Specialist</fullName>
+                <default>false</default>
+                <label>Salesforce Lightning Specialist</label>
+            </value>
+            <value>
+                <fullName>Salesforce Manager</fullName>
+                <default>false</default>
+                <label>Salesforce Manager</label>
+            </value>
+            <value>
+                <fullName>Salesforce Platform Specialist</fullName>
+                <default>false</default>
+                <label>Salesforce Platform Specialist</label>
+            </value>
+            <value>
+                <fullName>Salesforce Senior Apex Specialist</fullName>
+                <default>false</default>
+                <label>Salesforce Senior Apex Specialist</label>
+            </value>
+            <value>
+                <fullName>Salesforce Senior Lightning Specialist</fullName>
+                <default>false</default>
+                <label>Salesforce Senior Lightning Specialist</label>
+            </value>
+            <value>
+                <fullName>Salesforce Senior Platform Specialist</fullName>
+                <default>false</default>
+                <label>Salesforce Senior Platform Specialist</label>
+            </value>
+            <value>
+                <fullName>Salesforce Team Lead</fullName>
+                <default>false</default>
+                <label>Salesforce Team Lead</label>
+            </value>
+            <value>
+                <fullName>Salesforce Technical Architect Lead</fullName>
+                <default>false</default>
+                <label>Salesforce Technical Architect Lead</label>
+            </value>
+            <value>
+                <fullName>Salesforce Trainee</fullName>
+                <default>false</default>
+                <label>Salesforce Trainee</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Senior Platform Specialist</controllingFieldValue>
+            <controllingFieldValue>Salesforce Senior Lightning Specialist</controllingFieldValue>
+            <valueName>Salesforce Team Lead</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Senior Platform Specialist</controllingFieldValue>
+            <controllingFieldValue>Salesforce Senior Apex Specialist</controllingFieldValue>
+            <valueName>Salesforce Technical Architect Lead</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Team Lead</controllingFieldValue>
+            <valueName>Salesforce Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Technical Architect Lead</controllingFieldValue>
+            <valueName>Salesforce Certified Architect</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Trainee</controllingFieldValue>
+            <valueName>Salesforce Developer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Apex Specialist</controllingFieldValue>
+            <controllingFieldValue>Salesforce Lightning Specialist</controllingFieldValue>
+            <valueName>Salesforce Platform Specialist</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Apex Specialist</controllingFieldValue>
+            <valueName>Salesforce Senior Apex Specialist</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Certified Architect</controllingFieldValue>
+            <valueName>Salesforce Architect Chief</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Developer</controllingFieldValue>
+            <valueName>Salesforce Apex Specialist</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Developer</controllingFieldValue>
+            <valueName>Salesforce Lightning Specialist</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Lightning Specialist</controllingFieldValue>
+            <valueName>Salesforce Senior Lightning Specialist</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Manager</controllingFieldValue>
+            <valueName>Salesforce Delivery Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce Platform Specialist</controllingFieldValue>
+            <controllingFieldValue>Salesforce Senior Apex Specialist</controllingFieldValue>
+            <controllingFieldValue>Salesforce Senior Lightning Specialist</controllingFieldValue>
+            <valueName>Salesforce Senior Platform Specialist</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>
