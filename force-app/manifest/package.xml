@@ -54,6 +54,14 @@
         <name>ApexTrigger</name>
     </types>
     <types>
+        <members>Community Employee Profile</members>
+        <name>Profile</name>
+    </types>
+    <types>
+        <members>Community_Employee_Permission_Set</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
         <members>*</members>
         <name>RecordType</name>
     </types>
