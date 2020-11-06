@@ -1,0 +1,2 @@
+Step 1 - You need to install the Trail Advisor App
+Step 2 - After to install the Trail Advisor App, You need to verify if the role field in contact and user info object have all salesforce roles of the career path
