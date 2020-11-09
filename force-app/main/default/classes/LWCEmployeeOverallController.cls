@@ -4,12 +4,11 @@ public class LWCEmployeeOverallController{
         try{   
         //Obtain the ContactId of the logged in user
            String contactId = [SELECT Contact.Id FROM User WHERE Id = :uId LIMIT 1].Contact.Id;
-           Integer count = 1;
            if(contactId != null){
                 List<Project_Status__c> proSRet = new List<Project_Status__c>();
                 //Get Opprotunities from Employee_Assignment__c
                 List<Id> projectsId = new List<Id>();
-                for(Employee_Assignment__c currentEA : [SELECT Project__r.Id FROM Employee_Assignment__c WHERE Employee__r.Id = :contactId AND Project__r.End_Date__c = null ORDER BY CreatedDate DESC]){
+                for(Employee_Assignment__c currentEA : [SELECT Project__r.Id FROM Employee_Assignment__c WHERE Employee__r.Id = :contactId AND Active__c = true ORDER BY CreatedDate DESC]){
                     projectsId.add(currentEA.Project__r.Id);
                 }
                 //Obtain the status and opportunities of Project_Status__c
