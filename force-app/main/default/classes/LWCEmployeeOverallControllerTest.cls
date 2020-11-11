@@ -54,6 +54,6 @@ public class LWCEmployeeOverallControllerTest {
         Test.startTest();
             String roleDesc = LWCEmployeeOverallController.getRoleDescription('Developer');
         Test.stopTest();
-        System.assertNotEquals('', roleDesc);
+        System.assertNotEquals(null, roleDesc);
     }
 }   
