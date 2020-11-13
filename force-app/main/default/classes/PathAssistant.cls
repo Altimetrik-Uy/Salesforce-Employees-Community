@@ -3,21 +3,35 @@ public with sharing class PathAssistant {
     public static List<wrpColumns> getPath(){
         string strCurrentRole = '';
         Map<string,List<wrpRoles>> mapPositionXCareer = new Map<string,List<wrpRoles>>();
+        List<Salesforce_Career_Path_Settings__mdt> lstCareerPathSettings = new List<Salesforce_Career_Path_Settings__mdt>();
         List<wrpColumns> lstWrpColumns = new List<wrpColumns>();
 
         List<Contact> lstContact = [SELECT Id, Name, Role__c 
                                     FROM Contact 
                                     WHERE Email =: UserInfo.getUserEmail()];
 
-        List<Salesforce_Career_Path_Settings__mdt> lstCareerPathSettings = [SELECT Id, MasterLabel, Position__c
-                                                                            FROM Salesforce_Career_Path_Settings__mdt
-                                                                            ORDER BY Position__c];
+        if(!Test.isRunningTest()) {
+             lstCareerPathSettings = [SELECT Id, MasterLabel, Position__c
+                                        FROM Salesforce_Career_Path_Settings__mdt
+                                        ORDER BY Position__c];
+        }
+        else {
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath1 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath1.MasterLabel = 'Trainee';
+            mdtCareerPath1.Position__c = 11;
+            lstCareerPathSettings.add(mdtCareerPath1);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath2 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath2.MasterLabel = 'Developer';
+            mdtCareerPath2.Position__c = 12;
+            lstCareerPathSettings.add(mdtCareerPath2);
+        }
         
         if (lstContact != null) {
             strCurrentRole = lstContact[0].Role__c;
         }
 
-        if (lstCareerPathSettings != null) {
+        if (!lstCareerPathSettings.isEmpty()) {
             wrpRoles objWrpRole;
             List<wrpRoles> lstCareerTmp;
             for (Salesforce_Career_Path_Settings__mdt objCareerPath : lstCareerPathSettings) {

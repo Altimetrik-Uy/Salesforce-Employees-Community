@@ -1,6 +1,7 @@
 @isTest
 public with sharing class PathAssistantTest {
     @testSetup static void setupData() {
+        // Profile p = [Select id from Profile where Name = 'Community Employee Profile' limit 1];
         Profile p = [Select id from Profile where Name = 'System Administrator' limit 1];
 
         User user = new User(Alias = 'user', Email='test@test.com', 
@@ -11,7 +12,7 @@ public with sharing class PathAssistantTest {
     }
 
     static testMethod void dataCareerPathComponent() {
-        User usrRM = [SELECT ID, Name FROM USER WHERE ALIAS = 'user'];
+        User usrRunAs = [SELECT ID, Name FROM USER WHERE ALIAS = 'user'];
         Account objAccount = new Account();
         objAccount.Name = 'Account Test';
         insert objAccount;
@@ -23,18 +24,12 @@ public with sharing class PathAssistantTest {
         objContact.Role__c = 'Salesforce Trainee';
         objcontact.Email = 'test@test.com';
         insert objContact;
-
-        Salesforce_Career_Path_Settings__mdt mdtCareerPath1 = new Salesforce_Career_Path_Settings__mdt();
-        mdtCareerPath1.MasterLabel = 'Trainee';
-        mdtCareerPath1.Position__c = 11;
-
-        Salesforce_Career_Path_Settings__mdt mdtCareerPath2 = new Salesforce_Career_Path_Settings__mdt();
-        mdtCareerPath2.MasterLabel = 'Developer';
-        mdtCareerPath2.Position__c = 12;
         
         Test.startTest();
-        System.RunAs(usrRM){
-            PathAssistant.getPath();
+        System.RunAs(usrRunAs){
+            List<PathAssistant.wrpColumns> lstWrpcolumns = PathAssistant.getPath();
+            System.assertEquals(lstWrpcolumns[0].strColumn, '1');
+            System.assertEquals(lstWrpcolumns[0].lstWrpRoles.size(), 2);
         }
         Test.stopTest();
     }

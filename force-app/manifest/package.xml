@@ -20,7 +20,6 @@
     </types>
     <types>
         <members>*</members>
-        <members>pathAssistant</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>
