@@ -4,6 +4,8 @@
         <members>*</members>
         <members>PathAssistant</members>
 		<members>PathAssistantTest</members>
+        <members>SalesforcePathByRole</members>
+		<members>SalesforcePathByRoleTest</members>
         <name>ApexClass</name>
     </types>
     <types>
