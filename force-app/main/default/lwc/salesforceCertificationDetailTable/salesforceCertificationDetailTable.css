@@ -1,0 +1,31 @@
+*{
+    height:auto;
+}
+
+body{
+    height:auto !important;
+}
+
+div table:nth-child(2){
+    margin: 44px;
+}
+
+div table:nth-child(3){
+    position: relative;
+}
+
+div table:nth-child(4){
+    position: relative;
+}
+
+.slds-icon-action-approval{
+    background-color: #178b55 !important;
+}
+
+.backgrd{
+    background: #ecebea !important;
+}
+
+.text-bold{
+    font-weight: bold !important;
+}

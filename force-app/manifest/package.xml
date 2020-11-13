@@ -2,6 +2,8 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>*</members>
+        <members>SalesforcePathByRole</members>
+		<members>SalesforcePathByRoleTest</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -39,6 +41,7 @@
     </types>
     <types>
         <members>*</members>
+        <members>GenericErrorMessage_lbl</members>
         <name>CustomLabel</name>
     </types>
     <types>
