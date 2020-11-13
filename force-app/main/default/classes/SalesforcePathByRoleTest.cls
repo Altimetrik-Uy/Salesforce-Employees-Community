@@ -1,6 +1,17 @@
 @isTest
 public with sharing class SalesforcePathByRoleTest {
+    @testSetup static void setupData() {
+        Profile p = [Select id from Profile where Name = 'Community Employee Profile' limit 1];
+
+        User user = new User(Alias = 'user', Email='test@test.com', 
+                               EmailEncodingKey='UTF-8', LastName='USR RM', LanguageLocaleKey='en_US', 
+                               LocaleSidKey='en_US', ProfileId = p.Id, 
+                               TimeZoneSidKey='America/Los_Angeles', UserName='usr@test.com.aaa');
+        insert user;        
+    }
+
     static testMethod void dataCertificationsTableComponent() {
+        User usrRunAs = [SELECT ID, Name FROM USER WHERE ALIAS = 'user'];
         Account objAccount = new Account();
         objAccount.Name = 'Account Test';
         insert objAccount;
@@ -12,20 +23,9 @@ public with sharing class SalesforcePathByRoleTest {
         objContact.Role__c = 'Salesforce Trainee';
         objcontact.Email = 'test@test.com';
         insert objContact;
-
-        Profile p = [Select id from Profile where Name = 'Community Employee Profile' limit 1];
-
-        User usrRunAs = new User(Alias = 'user', Email='test@test.com', 
-                               EmailEncodingKey='UTF-8', LastName='USR RM', LanguageLocaleKey='en_US', 
-                               LocaleSidKey='en_US', ProfileId = p.Id, 
-                               contactId = objContact.Id,
-                               TimeZoneSidKey='America/Los_Angeles', UserName='usr@test.com.aaa');
-        insert usrRunAs;  
         
-        ta_User_Info__c objUserInfo = new ta_User_Info__c (Name = 'AnyName', 
-        Role__c = 'Developer', 
-        Email__c = 'test1@test.com');
-        insert objUserInfo;
+        List<ta_User_Info__c> lstUserInfo = [SELECT Name, Role__c, Email__c FROM ta_User_Info__c WHERE Email__c = 'test@test.com'];
+        ta_User_Info__c objUserInfo = lstUserInfo[0];
 
         ta_Certification__c  objCertification = new ta_Certification__c();
         objCertification.Name = 'Administrator';
@@ -53,7 +53,7 @@ public with sharing class SalesforcePathByRoleTest {
         Salesforce_Career_Path__c objSfCareerPath3 = new Salesforce_Career_Path__c();
         objSfCareerPath3.Certification__c = objCertification.Id;
         objSfCareerPath3.Role__c = 'Salesforce Developer';
-        objSfCareerPath3.Possible_Next_Role__c = 'Salesforce Apex Specialist';
+        objSfCareerPath3.Possible_Next_Role__c = 'Salesforce  Apex Specialist';
         objSfCareerPath3.Required__c = true;
         insert objSfCareerPath3;
 
