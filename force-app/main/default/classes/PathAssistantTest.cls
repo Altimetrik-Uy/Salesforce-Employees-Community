@@ -2,12 +2,12 @@
 public with sharing class PathAssistantTest {
     @testSetup static void setupData() {
         // Profile p = [Select id from Profile where Name = 'Community Employee Profile' limit 1];
-        Profile p = [Select id from Profile where Name = 'System Administrator' limit 1];
+        Profile p = [Select id from Profile where Name = 'Community Employee Profile' limit 1];
 
         User user = new User(Alias = 'user', Email='test@test.com', 
                                EmailEncodingKey='UTF-8', LastName='USR RM', LanguageLocaleKey='en_US', 
                                LocaleSidKey='en_US', ProfileId = p.Id, 
-                               TimeZoneSidKey='America/Los_Angeles', UserName='usrRM@bradescobatch.com.aaa');
+                               TimeZoneSidKey='America/Los_Angeles', UserName='usr@test.com.aaa');
         insert user;        
     }
 
