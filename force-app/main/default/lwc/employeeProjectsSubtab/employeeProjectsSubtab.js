@@ -9,8 +9,8 @@ export default class EmployeeProjectsSubtab extends LightningElement {
         { fieldName: 'ProjectName'},
         { fieldName: 'ProjectJoinDate'},
         { fieldName: 'ProjectEndDate'},
+        { fieldName: 'ProjectCurrent'},
         { fieldName: 'ProjectInformation'}
-        
     ];
     
     @wire(getEmployeeProjects,{empId: '$employeeid'}) wiredEmployeeCurrentProjects({error,data}){
@@ -22,9 +22,12 @@ export default class EmployeeProjectsSubtab extends LightningElement {
                 let preparedAsset = {};
                 preparedAsset.Id = id++;
                 preparedAsset.ProjectName = asset.Project__r.Name;
-                preparedAsset.ProjectJoinDate = asset.CreatedDate;
-                preparedAsset.ProjectEndDate = asset.Project__r.End_Date__c;
-                preparedAsset.ProjectInformation = 'Comming Soon (will be in the second phase)';
+                preparedAsset.ProjectJoinDate = asset.Start_Date__c;
+                preparedAsset.ProjectEndDate = asset.End_Date__c;
+                preparedAsset.ProjectInformation = asset.Project__r.Description;
+                if(asset.Active__c == true){
+                    preparedAsset.ProjectCurrent = asset.Active__c;
+                }
                 preparedAssets.push(preparedAsset);
             });
             this.projectStatusImageName = preparedAssets;
