@@ -1,6 +1,6 @@
 public with sharing class PathAssistant {
-    @AuraEnabled(cacheable=true)
-    public static List<wrpColumns> getPath(String empId){
+    @AuraEnabled
+    public static List<wrpColumns> getPath(){
         string strCurrentRole = '';
         Map<string,List<wrpRoles>> mapPositionXCareer = new Map<string,List<wrpRoles>>();
         List<Salesforce_Career_Path_Settings__mdt> lstCareerPathSettings = new List<Salesforce_Career_Path_Settings__mdt>();
@@ -8,7 +8,8 @@ public with sharing class PathAssistant {
 
         List<Contact> lstContact = [SELECT Id, Name, Role__c 
                                     FROM Contact 
-                                    WHERE Id =: empId];
+                                    WHERE Email =: UserInfo.getUserEmail()];
+
         if(!Test.isRunningTest()) {
              lstCareerPathSettings = [SELECT Id, MasterLabel, Position__c
                                         FROM Salesforce_Career_Path_Settings__mdt
