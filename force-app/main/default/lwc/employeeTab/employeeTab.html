@@ -1,0 +1,48 @@
+<template>
+    <div>
+        
+        <div class="slds-grid slds-wrap border">
+            <div class="slds-col slds-size_2-of-12 imgCont">
+                <lightning-formatted-rich-text class="imageContainer" value={imgMarkup}></lightning-formatted-rich-text>
+            </div>
+
+            <div class="slds-col slds-size_10-of-12">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font21">
+                        <b>Name:</b>&nbsp;&nbsp;<i class="employedata">{employeeName}</i>
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font18">
+                        <b>Role:</b>&nbsp;&nbsp;<i class="employedata">{employeeRole}</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <lightning-tabset variant="vertical">
+            
+            <lightning-tab label="Overall">
+                <c-employee-overall-subtab employeeid={employeeid}></c-employee-overall-subtab>
+            </lightning-tab>
+
+            <lightning-tab label="Career Path">
+                <c-employee-career-path-subtab employeeid={employeeid}></c-employee-career-path-subtab>
+            </lightning-tab>
+
+            <lightning-tab label="Status">
+                <c-employee-status-subtab employeeid={employeeid}></c-employee-status-subtab>
+            </lightning-tab>
+
+            <lightning-tab label="Projects">
+                <c-employee-projects-subtab employeeid={employeeid}></c-employee-projects-subtab>
+            </lightning-tab>
+
+            <lightning-tab label="Performance Evaluations">
+                <c-employee-performance-evaluations-subtab employeeid={employeeid}></c-employee-performance-evaluations-subtab>
+            </lightning-tab>
+
+        </lightning-tabset>
+
+    </div>
+</template>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-     <types>
+    <types>
         <members>*</members>
         <name>ApexClass</name>
     </types>
@@ -54,6 +54,14 @@
         <name>ApexTrigger</name>
     </types>
     <types>
+        <members>Community Employee Profile</members>
+        <name>Profile</name>
+    </types>
+    <types>
+        <members>Community_Employee_Permission_Set</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
         <members>*</members>
         <name>RecordType</name>
     </types>
@@ -97,9 +105,20 @@
         <name>Portal</name>
     </types>
     <types>
+        <members>*</members>
+        <name>StaticResource</name>
+    </types>
+    <types>
         <members>Communities_Shared_Document_Folder</members>
         <members>Communities_Shared_Document_Folder/logoTest_png</members>
         <name>Document</name>
+    </types>
+    <types>
+        <members>TrafficLightBlack</members>
+        <members>TrafficLightGreen</members>
+        <members>TrafficLightRed</members>
+        <members>TrafficLightYellow</members>
+        <name>StaticResource</name>
     </types>
     <version>49.0</version>
 </Package>
