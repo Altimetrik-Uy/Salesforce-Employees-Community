@@ -1,3 +1,47 @@
-<template>
-        <h1>Proj</h1>
+<template>  
+    <lightning-card>
+        <div>
+            <ul class="slds-has-dividers_around-space">
+                <template for:each={projectStatusImageName} for:item="currentProjectStatus">      
+                    <li key={currentProjectStatus.Id} class="slds-item project-box">
+                        <article class="slds-tile slds-tile_board">
+                        <blockquote>
+                            <div class="slds-size_3-of-4">
+                                <div class="slds-media">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-avatar slds-avatar_small">
+                                            <lightning-icon icon-name="standard:case" alternative-text="Project" title="Project" size="small" class="icon-color"> </lightning-icon>
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <h1 key={currentProjectStatus.Id} class="slds-m-top_xx-small">{currentProjectStatus.ProjectName}</h1>
+                                    </div>
+                                    <div class="slds-media__figure">
+                                        <span class="slds-avatar slds-avatar_small">
+                                            <lightning-icon icon-name="standard:date_time" alternative-text="Joined" title="Joined" size="small"> </lightning-icon>
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <div class="slds-m-top_xx-small">
+                                            <template if:true={currentProjectStatus.ProjectCurrent}>
+                                            <p><lightning-formatted-date-time value='{currentProjectStatus.ProjectJoinDate}' year="numeric" month="numeric" day="numeric" time-zone="UTC"></lightning-formatted-date-time></p>
+                                            </template>
+                                            <template if:false={currentProjectStatus.ProjectCurrent}>
+                                                <p><lightning-formatted-date-time value='{currentProjectStatus.ProjectJoinDate}' year="numeric" month="numeric" day="numeric" time-zone="UTC"></lightning-formatted-date-time> - 
+                                                    <lightning-formatted-date-time value='{currentProjectStatus.ProjectEndDate}' year="numeric" month="numeric" day="numeric" time-zone="UTC"></lightning-formatted-date-time></p>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>   
+                        </blockquote>  
+                            <blockquote class="doc">
+                                <span>{currentProjectStatus.ProjectInformation}</span>
+                            </blockquote>
+                        </article>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </lightning-card>
 </template>
