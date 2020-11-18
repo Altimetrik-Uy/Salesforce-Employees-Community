@@ -29,7 +29,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Apex Specialist</fullName>
+            <fullName>Salesforce Apex Specialist</fullName>
             <default>false</default>
         </values>
         <values>
@@ -101,7 +101,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Lightning Specialist</fullName>
+            <fullName>Salesforce Lightning Specialist</fullName>
             <default>false</default>
         </values>
         <values>
@@ -185,7 +185,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Salesforce Technical Architect Lead</fullName>
+            <fullName>Salesforce Technical Architect</fullName>
             <default>false</default>
         </values>
         <values>

@@ -16,11 +16,6 @@
         <label>Angular Specialist</label>
     </customValue>
     <customValue>
-        <fullName>Salesforce Apex Specialist</fullName>
-        <default>false</default>
-        <label>Salesforce Apex Specialist</label>
-    </customValue>
-    <customValue>
         <fullName>Automation Specialist Lead</fullName>
         <default>false</default>
         <label>Automation Specialist Lead</label>
@@ -196,11 +191,6 @@
         <label>Salesforce Apex Specialist</label>
     </customValue>
     <customValue>
-        <fullName>Salesforce Lightning Specialist</fullName>
-        <default>false</default>
-        <label>Salesforce Lightning Specialist</label>
-    </customValue>
-    <customValue>
         <fullName>Salesforce Platform Specialist</fullName>
         <default>false</default>
         <label>Salesforce Platform Specialist</label>
@@ -219,11 +209,6 @@
         <fullName>Salesforce Manager</fullName>
         <default>false</default>
         <label>Salesforce Manager</label>
-    </customValue>
-    <customValue>
-        <fullName>Salesforce Platform Specialist</fullName>
-        <default>false</default>
-        <label>Salesforce Platform Specialist</label>
     </customValue>
     <customValue>
         <fullName>Salesforce Team Lead</fullName>
