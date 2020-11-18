@@ -16,9 +16,9 @@
         <label>Angular Specialist</label>
     </customValue>
     <customValue>
-        <fullName>Apex Specialist</fullName>
+        <fullName>Salesforce Apex Specialist</fullName>
         <default>false</default>
-        <label>Apex Specialist</label>
+        <label>Salesforce Apex Specialist</label>
     </customValue>
     <customValue>
         <fullName>Automation Specialist Lead</fullName>
@@ -111,9 +111,9 @@
         <label>iOS Engineer</label>
     </customValue>
     <customValue>
-        <fullName>Lightning Specialist</fullName>
+        <fullName>Salesforce Lightning Specialist</fullName>
         <default>false</default>
-        <label>Lightning Specialist</label>
+        <label>Salesforce Lightning Specialist</label>
     </customValue>
     <customValue>
         <fullName>Playground Coach Leader</fullName>
@@ -186,6 +186,26 @@
         <label>Receptionist</label>
     </customValue>
     <customValue>
+        <fullName>Salesforce Trainee</fullName>
+        <default>false</default>
+        <label>Salesforce Trainee</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Apex Specialist</fullName>
+        <default>false</default>
+        <label>Salesforce Apex Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Lightning Specialist</fullName>
+        <default>false</default>
+        <label>Salesforce Lightning Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Platform Specialist</fullName>
+        <default>false</default>
+        <label>Salesforce Platform Specialist</label>
+    </customValue>
+    <customValue>
         <fullName>Salesforce Delivery Manager</fullName>
         <default>false</default>
         <label>Salesforce Delivery Manager</label>
@@ -211,9 +231,19 @@
         <label>Salesforce Team Lead</label>
     </customValue>
     <customValue>
-        <fullName>Salesforce Technical Architect Lead</fullName>
+        <fullName>Salesforce Technical Architect</fullName>
         <default>false</default>
-        <label>Salesforce Technical Architect Lead</label>
+        <label>Salesforce Technical Architect</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Certified Architect</fullName>
+        <default>false</default>
+        <label>Salesforce Certified Architect</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Architect Chief</fullName>
+        <default>false</default>
+        <label>Salesforce Architect Chief</label>
     </customValue>
     <customValue>
         <fullName>Senior Frontend Developer</fullName>
