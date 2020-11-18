@@ -10,7 +10,26 @@
                 </button>
               </h3>
             </div>
-            <div class={cssClass}>{roleDescription}</div>
+            <div class={cssClass}>
+                <div if:true={roleInfo}>
+                  <p><strong>Description:</strong>&nbsp;{roleInfo.Role_Description__c}</p>
+                  </br>
+                  <p><strong>Functional Knowledge:</strong>&nbsp;{roleInfo.Role_Functionalknowledge__c}</p>
+                  </br>
+                  <p><strong>Technical Knowledge:</strong>&nbsp;{roleInfo.Role_Technicalknowledge__c}</p>
+                  </br>
+                  <p><strong>Prerequisites:</strong>&nbsp;{roleInfo.Role_Prerequisites__c}</p>
+                  </br>
+                  <p><strong>Mentoring Required:</strong>&nbsp;{roleInfo.Role_MentoringRequiered__c}</p>
+                  </br>
+                  <p><strong>Communication:</strong>&nbsp;{roleInfo.Role_Communication__c}</p>
+                  </br>
+                  <p><strong>Soft Skills:</strong>&nbsp;{roleInfo.Role_Softskills__c}</p>
+                </div>
+                <div if:false={roleInfo}>
+                    No role information available
+                </div>
+            </div>
           </section>
         </li>
     </ul>

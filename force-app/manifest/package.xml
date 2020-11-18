@@ -20,7 +20,6 @@
     </types>
     <types>
 		<members>Salesforce_Career_Path__c-Salesforce Career Path Layout</members>
-        <members>Role_Description__mdt-Role Description Layout</members>
 		<name>Layout</name>
 	</types>
     <types>

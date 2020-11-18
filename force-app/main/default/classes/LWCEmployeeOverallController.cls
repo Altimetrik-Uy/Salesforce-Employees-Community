@@ -83,11 +83,19 @@ public class LWCEmployeeOverallController{
     }
 
     @AuraEnabled
-    public static String getRoleDescription(String roleName){
-        String roleDesc = '';
-        List<Role_Description__mdt> lstroleDesc = [SELECT Label, Description__c FROM Role_Description__mdt WHERE IsInactive__c != true AND Label = :roleName ];
+    public static Salesforce_Career_Path__c getRoleInformation(String roleName){
+        Salesforce_Career_Path__c roleDesc;
+        List<Salesforce_Career_Path__c> lstroleDesc = [SELECT 
+                                    Role_Description__c,
+                                    Role_Functionalknowledge__c,
+                                    Role_Technicalknowledge__c,
+                                    Role_MentoringRequiered__c,
+                                    Role_Communication__c,
+                                    Role_Prerequisites__c,
+                                    Role_Softskills__c  
+                                FROM Salesforce_Career_Path__c WHERE  Role__c = :roleName ];
         if (!lstroleDesc.isEmpty()) {
-            roleDesc = lstroleDesc[0].Description__c;
+            roleDesc = lstroleDesc[0];
         }
         return roleDesc;
     }
