@@ -71,9 +71,9 @@
                 <label>Salesforce Team Lead</label>
             </value>
             <value>
-                <fullName>Salesforce Technical Architect Lead</fullName>
+                <fullName>Salesforce Technical Architect</fullName>
                 <default>false</default>
-                <label>Salesforce Technical Architect Lead</label>
+                <label>Salesforce Technical Architect</label>
             </value>
             <value>
                 <fullName>Salesforce Trainee</fullName>
@@ -89,14 +89,14 @@
         <valueSettings>
             <controllingFieldValue>Salesforce Senior Platform Specialist</controllingFieldValue>
             <controllingFieldValue>Salesforce Senior Apex Specialist</controllingFieldValue>
-            <valueName>Salesforce Technical Architect Lead</valueName>
+            <valueName>Salesforce Technical Architect</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Salesforce Team Lead</controllingFieldValue>
             <valueName>Salesforce Manager</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Salesforce Technical Architect Lead</controllingFieldValue>
+            <controllingFieldValue>Salesforce Technical Architect</controllingFieldValue>
             <valueName>Salesforce Certified Architect</valueName>
         </valueSettings>
         <valueSettings>

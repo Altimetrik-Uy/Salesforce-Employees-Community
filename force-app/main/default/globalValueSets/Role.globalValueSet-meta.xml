@@ -106,11 +106,6 @@
         <label>iOS Engineer</label>
     </customValue>
     <customValue>
-        <fullName>Salesforce Lightning Specialist</fullName>
-        <default>false</default>
-        <label>Salesforce Lightning Specialist</label>
-    </customValue>
-    <customValue>
         <fullName>Playground Coach Leader</fullName>
         <default>false</default>
         <label>Playground Coach Leader</label>
@@ -186,9 +181,19 @@
         <label>Salesforce Trainee</label>
     </customValue>
     <customValue>
+        <fullName>Salesforce Developer</fullName>
+        <default>false</default>
+        <label>Salesforce Developer</label>
+    </customValue>
+    <customValue>
         <fullName>Salesforce Apex Specialist</fullName>
         <default>false</default>
         <label>Salesforce Apex Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Senior Apex Specialist</fullName>
+        <default>false</default>
+        <label>Salesforce Senior Apex Specialist</label>
     </customValue>
     <customValue>
         <fullName>Salesforce Platform Specialist</fullName>
@@ -196,14 +201,24 @@
         <label>Salesforce Platform Specialist</label>
     </customValue>
     <customValue>
-        <fullName>Salesforce Delivery Manager</fullName>
+        <fullName>Salesforce Senior Platform Specialist</fullName>
         <default>false</default>
-        <label>Salesforce Delivery Manager</label>
+        <label>Salesforce Senior Platform Specialist</label>
     </customValue>
     <customValue>
-        <fullName>Salesforce Developer</fullName>
+        <fullName>Salesforce Lightning Specialist</fullName>
         <default>false</default>
-        <label>Salesforce Developer</label>
+        <label>Salesforce Lightning Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Senior Lightning Specialist</fullName>
+        <default>false</default>
+        <label>Salesforce Senior Lightning Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Team Lead</fullName>
+        <default>false</default>
+        <label>Salesforce Team Lead</label>
     </customValue>
     <customValue>
         <fullName>Salesforce Manager</fullName>
@@ -211,9 +226,9 @@
         <label>Salesforce Manager</label>
     </customValue>
     <customValue>
-        <fullName>Salesforce Team Lead</fullName>
+        <fullName>Salesforce Delivery Manager</fullName>
         <default>false</default>
-        <label>Salesforce Team Lead</label>
+        <label>Salesforce Delivery Manager</label>
     </customValue>
     <customValue>
         <fullName>Salesforce Technical Architect</fullName>

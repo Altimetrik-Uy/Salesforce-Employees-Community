@@ -11,10 +11,10 @@ Run the following script in an anonymus window:
 ```
 List<String> certificationNames = new List<String>{'App Builder', 'Platform Dev 1', 'Platform Dev 2', 'JavaScript Dev 1', 'Administrator', 'Sharing and Visibility', 'Data Architecture and Management', 'Development Lifecycle and Deployment', 'Identity and Access Management', 'Integration Architecture', 'Heroku Architecture Designer', 'Scrum Master', 'Architect System', 'Architect Application', 'Architect Technical'};
 
-List<Certification__c> certifications = new List<Certification__c>();
-Map<String, Certification__c> certNameMap = new Map<String, Certification__c>();
+List<ta_Certification__c> certifications = new List<ta_Certification__c>();
+Map<String, ta_Certification__c> certNameMap = new Map<String, ta_Certification__c>();
 for (String certifName : certificationNames) {
-       Certification__c cert = new Certification();
+       ta_Certification__c cert = new ta_Certification__c();
        cert.Name = certifName;
        certifications.add(cert);
        certNameMap.put(certifName, cert);
