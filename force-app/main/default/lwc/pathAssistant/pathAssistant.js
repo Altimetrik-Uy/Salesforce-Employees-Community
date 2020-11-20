@@ -7,18 +7,16 @@ import {
 } from './utils';
 
 export default class PathAssistant extends LightningElement {
-
+   
+    @api employeeid;
+    @track error;
     @track organizedPath;
-
     // show/hide a loading spinner
     @track spinner = false;
-
     // error message, when set will render the error panel
     @track errorMsg;
-
     // available picklist values for current record (based on record type)
     @track possibleSteps;
-
     // step selected by the user
     @track selectedStepValue;
 
@@ -28,9 +26,9 @@ export default class PathAssistant extends LightningElement {
         super();
     }
 
-    connectedCallback(){
-        getPath()
-        .then(data=>{
+    @wire(getPath,{empId: '$employeeid'}) getPath({error,data}){
+        if(data){
+            console.log("Entro - data - " + data);
             if (data) {
                 let arrPossibleSteps = [];
                 let index = 0; 
@@ -48,10 +46,7 @@ export default class PathAssistant extends LightningElement {
             } else {
                 this.errorMsg = `Impossible to load`;
             }
-        })
-        .catch(error=>{
-            console.log('error =>'+error);
-        })
+        }
     }
 
     // true when all required data is loaded
