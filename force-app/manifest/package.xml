@@ -17,6 +17,11 @@
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
+		<members>Salesforce_Career_Path__c-Salesforce Career Path Layout</members>
+        <members>Role_Description__mdt-Role Description Layout</members>
+		<name>Layout</name>
+	</types>
+    <types>
         <members>*</members>
         <name>LightningComponentBundle</name>
     </types>
@@ -31,6 +36,8 @@
         <members>Lead</members>
         <members>Opportunity</members>
         <members>Campaign</members>
+        <members>Salesforce_Career_Path__c</members>
+        <members>Role_Description__mdt</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -41,6 +48,10 @@
         <members>*</members>
         <name>CustomLabel</name>
     </types>
+    <types>
+		<members>Salesforce_Career_Path__c</members>
+		<name>CustomTab</name>
+	</types>
     <types>
         <members>*</members>
         <name>HomePageComponent</name>
@@ -84,6 +95,11 @@
         <members>Project_Record_Page</members>
         <name>FlexiPage</name>
     </types>
+    <types>
+        <members>Update_User_Info_Record</members>
+		<members>User_Info_Object_Manage</members>
+		<name>Flow</name>
+	</types>
     <types>
         <members>*</members>
         <name>Network</name>
