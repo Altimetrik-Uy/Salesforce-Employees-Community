@@ -3,28 +3,27 @@ import getSalesforcePath from '@salesforce/apex/SalesforcePathByRole.getSalesfor
 import genericErrorMessage_lbl from '@salesforce/label/c.GenericErrorMessage_lbl';
 
 export default class SalesforceCertificationDetailTable extends LightningElement {
-    @track roles = undefined;
+    roles;
 
     // error message, when set will render the error panel
-    @track errorMsg;
+    errorMsg;
 
     connectedCallback(){
         getSalesforcePath()
-        .then(response=>{
+        .then(response => {
             if(response){
                 this.roles = response;
             }else{
 
             }
         })
-        .catch(error=>{
-            console.log('Error -->'+error);
-            this.errorMsg = error;
+        .catch(error => {
+            console.log('Error -->', error);
+            this.errorMsg = error.body.message;
         })
     }
 
     get genericErrorMessage() {
-        // note: you can store this in a custom label if you need
         return genericErrorMessage_lbl;
     }
 }
