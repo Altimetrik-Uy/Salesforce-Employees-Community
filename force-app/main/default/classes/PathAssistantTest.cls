@@ -7,7 +7,6 @@ public with sharing class PathAssistantTest {
             Account acc = TestDataFactory.createAccount();
             Contact con = TestDataFactory.createContact(acc.Id);
             con.Role__c = 'Salesforce Trainee';
-        	con.Email = 'test@test.com';
             update con;
             User usr = TestDataFactory.createUser(con.Id);
             Test.startTest();

@@ -10,6 +10,7 @@ export default class PathAssistant extends LightningElement {
    
     @api employeeid;
     @track error;
+    @track isPreRole = true;
     @track organizedPath;
     // show/hide a loading spinner
     @track spinner = false;
@@ -28,7 +29,6 @@ export default class PathAssistant extends LightningElement {
 
     @wire(getPath,{empId: '$employeeid'}) getPath({error,data}){
         if(data){
-            console.log("Entro - data - " + data);
             if (data) {
                 let arrPossibleSteps = [];
                 let index = 0; 
@@ -65,4 +65,8 @@ export default class PathAssistant extends LightningElement {
         return 'An unexpected error occurred. Please contact your System Administrator.';
     }
 
+    get changeIsPreRole(){
+        this.isPreRole = false;
+        return true;
+    }
 }
