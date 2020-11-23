@@ -111,6 +111,10 @@
         <members>*</members>
         <name>NetworkBranding</name>
     </types>
+	<types>
+		<members>*</members>
+		<name>ContentAsset</name>
+	</types>
     <types>
         <members>*</members>
         <name>CustomSite</name>
@@ -139,5 +143,5 @@
         <members>TrafficLightYellow</members>
         <name>StaticResource</name>
     </types>
-    <version>49.0</version>
+    <version>50.0</version>
 </Package>
