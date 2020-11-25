@@ -42,38 +42,40 @@ public class LWCEmployeeStatusController {
     }
  
     @AuraEnabled
-    public static void sendMessage(String managerId, String userName){
-        feedMessage(managerId, userName);
-        //feedPost();
+    public static Boolean sendMessage(String managerId, String userName){
+       return feedMessage(managerId, userName);
     }
 
-    public static void feedMessage(String managerId, String userName){
-        String postText = 'The Employee '  + userName + ' request a status update';
-         // Define the FeedItemInput object to pass to postFeedElement
-         ConnectApi.FeedItemInput feedItemInput = new ConnectApi.FeedItemInput();
-         ConnectApi.MessageBodyInput messageBodyInput = new ConnectApi.MessageBodyInput();
-         ConnectApi.TextSegmentInput textSegmentInput = new ConnectApi.TextSegmentInput();
-         ConnectApi.MentionSegmentInput mentionSegmentInput = new ConnectApi.MentionSegmentInput();
-         textSegmentInput.text = postText;
-         //The MessageBodyInput object holds the text in the post
-         messageBodyInput.messageSegments = new List<ConnectApi.MessageSegmentInput>();
-         messageBodyInput.messageSegments.add(textSegmentInput);
-         feedItemInput.body = messageBodyInput;
-         // The FeedElementCapabilitiesInput object holds the capabilities of the feed item.
-         // For this feed item, we define a direct message capability to hold the member(s) and the subject.
-         List<String> memberIds = new List<String>();
-         memberIds.add(managerId);
-         ConnectApi.DirectMessageCapabilityInput dmInput = new ConnectApi.DirectMessageCapabilityInput();
-         dmInput.subject = 'Thank you!';
-         dmInput.membersToAdd = memberIds;
-         ConnectApi.FeedElementCapabilitiesInput feedElementCapabilitiesInput = new ConnectApi.FeedElementCapabilitiesInput();
-         feedElementCapabilitiesInput.directMessage = dmInput;
-         feedItemInput.capabilities = feedElementCapabilitiesInput;
-         // Post the feed item. 
-         ConnectApi.FeedElement feedElement = ConnectApi.ChatterFeeds.postFeedElement(Network.getNetworkId(), feedItemInput); 
-    
+    public static Boolean feedMessage(String managerId, String userName){
+        try {
+            String postText = 'The Employee '  + userName + ' request a status update';
+            // Define the FeedItemInput object to pass to postFeedElement
+            ConnectApi.FeedItemInput feedItemInput = new ConnectApi.FeedItemInput();
+            ConnectApi.MessageBodyInput messageBodyInput = new ConnectApi.MessageBodyInput();
+            ConnectApi.TextSegmentInput textSegmentInput = new ConnectApi.TextSegmentInput();
+            ConnectApi.MentionSegmentInput mentionSegmentInput = new ConnectApi.MentionSegmentInput();
+            textSegmentInput.text = postText;
+            //The MessageBodyInput object holds the text in the post
+            messageBodyInput.messageSegments = new List<ConnectApi.MessageSegmentInput>();
+            messageBodyInput.messageSegments.add(textSegmentInput);
+            feedItemInput.body = messageBodyInput;
+            // The FeedElementCapabilitiesInput object holds the capabilities of the feed item.
+            // For this feed item, we define a direct message capability to hold the member(s) and the subject.
+            List<String> memberIds = new List<String>();
+            memberIds.add(managerId);
+            ConnectApi.DirectMessageCapabilityInput dmInput = new ConnectApi.DirectMessageCapabilityInput();
+            dmInput.subject = 'Thank you!';
+            dmInput.membersToAdd = memberIds;
+            ConnectApi.FeedElementCapabilitiesInput feedElementCapabilitiesInput = new ConnectApi.FeedElementCapabilitiesInput();
+            feedElementCapabilitiesInput.directMessage = dmInput;
+            feedItemInput.capabilities = feedElementCapabilitiesInput;
+            // Post the feed item. 
+            ConnectApi.FeedElement feedElement = ConnectApi.ChatterFeeds.postFeedElement(Network.getNetworkId(), feedItemInput); 
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-
+    }
 }
 
 
