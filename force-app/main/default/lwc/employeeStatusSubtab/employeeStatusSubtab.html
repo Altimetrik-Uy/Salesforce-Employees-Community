@@ -18,7 +18,9 @@
                         </div>
                         <div class="slds-col slds-size_4-of-12">
                             <div class="slds-m-top_large button-box">
-                                <button class="slds-button slds-button_outline-brand">Add Status</button>
+                                <template if:true={isActive.data}>
+                                    <lightning-button variant="brand-outline" label="Add Status" title="Add Status" onclick={onClickSendMessage} class="slds-m-left_x-small"></lightning-button>
+                                </template>
                             </div>
                         </div>
                     </div>

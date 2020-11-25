@@ -5,7 +5,7 @@ public class LWCEmployeeStatusController {
         List<Employee_Assignment__c> eAList = new List<Employee_Assignment__c>();
         //Get projects only once
         Id auxId;
-        for (Employee_Assignment__c current_eA : [SELECT Project__r.Id, Project__r.Name FROM Employee_Assignment__c WHERE Employee__r.Id = :empId ORDER BY Project__r.Name ]){
+        for (Employee_Assignment__c current_eA : [SELECT Project__r.Id, Project__r.Name FROM Employee_Assignment__c WHERE Employee__r.Id = :empId ORDER BY Project__r.Name]){
             if(eAList.isEmpty()){
                 eAList.add(current_eA);
             }else{
@@ -22,4 +22,61 @@ public class LWCEmployeeStatusController {
         return [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId];
     }
 
+    @AuraEnabled(cacheable=true)
+    public static String getManager(String projId){
+        return [SELECT CreatedBy.Id FROM Employee_Status__c WHERE Project__r.Id =: projId LIMIT 1].CreatedBy.Id;
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static string getUser(String empId){
+        return [SELECT Contact.Name FROM User WHERE Contact.Id =: empId LIMIT 1].Contact.Name;
+    }
+
+     @AuraEnabled(cacheable=true)
+    public static Boolean getProjectActiveStauts(String empId, Id projId){
+            try {
+                return [SELECT Active__c FROM Employee_Assignment__c WHERE Employee__r.Id = :empId AND Project__r.Id =: projId ORDER BY Active__c DESC LIMIT 1].Active__c;
+            } catch (Exception e) {
+                return false;
+           }  
+    }
+ 
+    @AuraEnabled
+    public static void sendMessage(String managerId, String userName){
+        feedMessage(managerId, userName);
+        //feedPost();
+    }
+
+    public static void feedMessage(String managerId, String userName){
+        String postText = 'The Employee '  + userName + ' request a status update';
+         // Define the FeedItemInput object to pass to postFeedElement
+         ConnectApi.FeedItemInput feedItemInput = new ConnectApi.FeedItemInput();
+         ConnectApi.MessageBodyInput messageBodyInput = new ConnectApi.MessageBodyInput();
+         ConnectApi.TextSegmentInput textSegmentInput = new ConnectApi.TextSegmentInput();
+         ConnectApi.MentionSegmentInput mentionSegmentInput = new ConnectApi.MentionSegmentInput();
+         textSegmentInput.text = postText;
+         //The MessageBodyInput object holds the text in the post
+         messageBodyInput.messageSegments = new List<ConnectApi.MessageSegmentInput>();
+         messageBodyInput.messageSegments.add(textSegmentInput);
+         feedItemInput.body = messageBodyInput;
+         // The FeedElementCapabilitiesInput object holds the capabilities of the feed item.
+         // For this feed item, we define a direct message capability to hold the member(s) and the subject.
+         List<String> memberIds = new List<String>();
+         memberIds.add(managerId);
+         ConnectApi.DirectMessageCapabilityInput dmInput = new ConnectApi.DirectMessageCapabilityInput();
+         dmInput.subject = 'Thank you!';
+         dmInput.membersToAdd = memberIds;
+         ConnectApi.FeedElementCapabilitiesInput feedElementCapabilitiesInput = new ConnectApi.FeedElementCapabilitiesInput();
+         feedElementCapabilitiesInput.directMessage = dmInput;
+         feedItemInput.capabilities = feedElementCapabilitiesInput;
+         // Post the feed item. 
+         ConnectApi.FeedElement feedElement = ConnectApi.ChatterFeeds.postFeedElement(Network.getNetworkId(), feedItemInput); 
+    
+        }
+
 }
+
+
+
+    
+    
