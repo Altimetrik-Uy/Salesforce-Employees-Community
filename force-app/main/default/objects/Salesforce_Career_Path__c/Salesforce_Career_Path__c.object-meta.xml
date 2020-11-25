@@ -149,18 +149,19 @@
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>false</enableReports>
-    <enableSearch>false</enableSearch>
+    <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>ControlledByParent</externalSharingModel>
-    <label>Survey Question</label>
+    <externalSharingModel>Private</externalSharingModel>
+    <gender>Feminine</gender>
+    <label>Salesforce Career Path</label>
     <nameField>
-        <displayFormat>SQ-{0000}</displayFormat>
-        <label>Survey Template Name</label>
+        <displayFormat>SCP-{0000}</displayFormat>
+        <label>Salesforce Career Path Name</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Survey Questions</pluralLabel>
+    <pluralLabel>Salesforce Career Path</pluralLabel>
     <searchLayouts/>
-    <sharingModel>ControlledByParent</sharingModel>
+    <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

@@ -153,7 +153,6 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ControlledByParent</externalSharingModel>
-    <gender>Masculine</gender>
     <label>Employee Status</label>
     <nameField>
         <displayFormat>ES-{0000}</displayFormat>

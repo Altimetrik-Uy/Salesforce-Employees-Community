@@ -1,0 +1,17 @@
+<template>
+    <ul class="slds-accordion">
+        <li class="slds-accordion__list-item">
+          <section class="slds-accordion__section slds-is-open">
+            <div class="slds-accordion__summary accordionbk slds-var-p-left_small">
+              <h3 class="slds-accordion__summary-heading">
+                <button class="slds-button slds-accordion__summary-action roledetailheader" title="Role Description" onclick={handleClick} >
+                    <lightning-icon icon-name={iconName} alternative-text="Role" title="Image" size="x-small"></lightning-icon>
+                    <span class="slds-var-p-left_small slds-accordion__summary-content">Role Description</span>
+                </button>
+              </h3>
+            </div>
+            <div class={cssClass}>{roleDescription}</div>
+          </section>
+        </li>
+    </ul>
+</template>

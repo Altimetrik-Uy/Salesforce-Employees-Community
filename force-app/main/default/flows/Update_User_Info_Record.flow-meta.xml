@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <decisions>
+        <name>If_User_Info_Found</name>
+        <label>User Info Found</label>
+        <locationX>182</locationX>
+        <locationY>278</locationY>
+        <defaultConnector>
+            <targetReference>Create_User_Info_Record</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_UserInfoFound</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_UserInfo</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_UserInfoRecord</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <formulas>
+        <name>Get_UserInfoRole_From_ContactRole</name>
+        <dataType>String</dataType>
+        <expression>CASE({!Input_UserRole}, 
+&apos;Salesforce Trainee&apos;, &apos;Developer&apos;,
+&apos;Salesforce Developer&apos;, &apos;Developer&apos;,
+&apos;Salesforce Apex Specialist&apos;, &apos;Developer&apos;,
+&apos;Salesforce Lightning Specialist&apos;, &apos;Developer&apos;,
+&apos;Salesforce Platform Specialist&apos;, &apos;Developer&apos;,
+&apos;Salesforce Senior Apex Specialist&apos;, &apos;Developer&apos;,
+&apos;Salesforce Senior Lightning Specialist&apos;, &apos;Developer&apos;,
+&apos;Salesforce Senior Platform Specialist&apos;, &apos;Developer&apos;,
+&apos;Salesforce Team Lead&apos;, &apos;Team Lead&apos;,
+&apos;Salesforce Technical Architect&apos;, &apos;Team Lead&apos;,
+&apos;Salesforce Certified Architect&apos;, &apos;Team Lead&apos;,
+&apos;Salesforce Architect Chief&apos;, &apos;Team Lead&apos;,
+&apos;Salesforce Manager&apos;, &apos;Manager&apos;,
+&apos;Salesforce Delivery Manager&apos;, &apos;Manager&apos;,
+&apos;QA&apos;
+)</expression>
+    </formulas>
+    <interviewLabel>Update User Info Record {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update User Info Record</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Create User Info Record using Contact info</description>
+        <name>Create_User_Info_Record</name>
+        <label>Create User Info Record</label>
+        <locationX>314</locationX>
+        <locationY>398</locationY>
+        <inputAssignments>
+            <field>Email__c</field>
+            <value>
+                <elementReference>Input_ContactEmail</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>Input_ContactName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Role__c</field>
+            <value>
+                <elementReference>Get_UserInfoRole_From_ContactRole</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ta_User_Info__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_UserInfo</name>
+        <label>Get User Info</label>
+        <locationX>182</locationX>
+        <locationY>158</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>If_User_Info_Found</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Email__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Input_ContactEmail</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ta_User_Info__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_UserInfoRecord</name>
+        <label>Update User Info Record</label>
+        <locationX>50</locationX>
+        <locationY>398</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_UserInfo.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Role__c</field>
+            <value>
+                <elementReference>Get_UserInfoRole_From_ContactRole</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ta_User_Info__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_UserInfo</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>Input_ContactEmail</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Input_ContactName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Input_UserRole</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>
