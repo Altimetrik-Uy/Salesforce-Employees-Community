@@ -29,3 +29,38 @@ div table:nth-child(4){
 .text-bold{
     font-weight: bold !important;
 }
+
+.rolessection {
+    padding:10px; 
+    text-align:center;
+}
+
+.generalcard {
+    background:white; 
+    height: auto;
+}
+
+.currentrole {
+    visibility: hidden;
+    width:45%; 
+    display:inline-table;
+    border: 1px solid #999;
+}
+
+.roletable{
+    width:45%; 
+    display:inline-table;
+}
+
+.textcenter {
+    text-align: center;
+}
+
+.textbold {
+    font-weight:bold;
+}
+
+.requiredstar {
+    color:red;
+    font-size: 19px;
+}

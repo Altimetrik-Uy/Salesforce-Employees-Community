@@ -1,7 +1,6 @@
 @isTest
 public with sharing class SalesforcePathByRoleTest {
     static testMethod void dataCertificationsTableComponent() {
-        //User usrRunAs = [SELECT ID, Name FROM USER WHERE ALIAS = 'user'];
         Account objAccount = new Account();
         objAccount.Name = 'Account Test';
         insert objAccount;
@@ -54,7 +53,7 @@ public with sharing class SalesforcePathByRoleTest {
         Salesforce_Career_Path__c objSfCareerPath3 = new Salesforce_Career_Path__c();
         objSfCareerPath3.Certification__c = objCertification.Id;
         objSfCareerPath3.Role__c = 'Salesforce Developer';
-        objSfCareerPath3.Possible_Next_Role__c = 'Salesforce  Apex Specialist';
+        objSfCareerPath3.Possible_Next_Role__c = 'Salesforce Apex Specialist';
         objSfCareerPath3.Required__c = true;
         insert objSfCareerPath3;
 
