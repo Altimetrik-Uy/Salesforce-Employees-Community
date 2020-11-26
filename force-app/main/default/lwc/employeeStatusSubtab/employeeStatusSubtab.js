@@ -5,6 +5,7 @@ import sendMessage from '@salesforce/apex/LWCEmployeeStatusController.sendMessag
 import getManager from '@salesforce/apex/LWCEmployeeStatusController.getManager';
 import getUser from '@salesforce/apex/LWCEmployeeStatusController.getUser';
 import getProjectActiveStauts from '@salesforce/apex/LWCEmployeeStatusController.getProjectActiveStauts';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import { refreshApex } from '@salesforce/apex';
 let i = 0;
@@ -87,6 +88,23 @@ export default class EmployeeStatusSubtab extends LightningElement {
     
     @wire(getProjectActiveStauts,{empId:'$employeeid', projId:'$comboBoxValue'}) isActive;
     onClickSendMessage(){
-        sendMessage({managerId:this.managerId, userName: this.userName});
+        sendMessage({managerId:this.managerId, userName: this.userName})
+        .then (s=>{
+            if(s){
+                const event = new ShowToastEvent({
+                    title: 'Success!',
+                    message: 'Message has been sended.',
+                    variant: 'success',
+                });
+                this.dispatchEvent(event);
+            }else{
+                const event = new ShowToastEvent({
+                    title: 'Fail!',
+                    message: 'Message has not been sended.',
+                    variant: 'error',
+                });
+                this.dispatchEvent(event);
+            }
+        })
     }
 }
