@@ -19,7 +19,7 @@ public class LWCEmployeeStatusController {
     }
     @AuraEnabled(cacheable=true)
     public static List<Employee_Status__c> getEmployeeStatuses(Id projId){
-        return [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId];
+        return [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC];
     }
 
     @AuraEnabled(cacheable=true)
