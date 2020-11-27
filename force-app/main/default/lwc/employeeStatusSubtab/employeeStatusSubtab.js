@@ -93,14 +93,14 @@ export default class EmployeeStatusSubtab extends LightningElement {
             if(s){
                 const event = new ShowToastEvent({
                     title: 'Success!',
-                    message: 'Message has been sended.',
+                    message: 'Message has been sent.',
                     variant: 'success',
                 });
                 this.dispatchEvent(event);
             }else{
                 const event = new ShowToastEvent({
                     title: 'Fail!',
-                    message: 'Message has not been sended.',
+                    message: 'Message has not been sent.',
                     variant: 'error',
                 });
                 this.dispatchEvent(event);
