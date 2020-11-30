@@ -59,30 +59,34 @@ blockquote.doc {
 }
 
 .Green{
-    height: 34px;
-    width: 34px;
+    height: 36px;
+    width: 36px;
     border-radius: 50%;
     display: inline-block;
     background-image: linear-gradient(#627361, #44CB7E);
     border:2px solid white;   
+    border-radius :50%; 
+
 }
 
 .Red{
-    height: 34px;
-    width: 34px;
+    height: 36px;
+    width: 36px;
     border-radius: 50%;
     display: inline-block;
     background-image: linear-gradient(#9D331A, #D64E48);
     border:2px solid white;   
+    border-radius :50%; 
 }
 
 .Yellow{
-    height: 34px;
-    width: 34px;
+    height: 36px;
+    width: 36px;
     border-radius: 50%;
     display: inline-block;
     background-image: linear-gradient(#FFB26C, #F3D050);
-    border:2px solid white; 
+    border:2px solid white;   
+    border-radius :50%; 
 }
 
 h1 {
