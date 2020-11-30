@@ -23,6 +23,7 @@ public class TestDataFactory {
         Contact con = new Contact();
         con.FirstName='Test';
         con.LastName='Test';
+        con.Email = 'Test@test.com';
         con.AccountId = accountId;
         insert con;
         return con;

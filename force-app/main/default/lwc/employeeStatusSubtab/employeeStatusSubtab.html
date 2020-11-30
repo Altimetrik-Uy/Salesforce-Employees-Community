@@ -1,3 +1,79 @@
 <template>
-        <h1>Status</h1>
+    <lightning-card >
+        <div class="top-box">
+            <div class="slds-grid slds-grid_vertical">
+                <div class="slds-col">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_8-of-12">
+                            <div class="">
+                                <template if:false={comboBoxValue}>
+                                    <div class=" slds-scrollable top-box">
+                                        <lightning-combobox  dropdown-alignment="auto" name="projects" label="Project" placeholder="Choose Project" value={comboBoxValue} onchange={handleChange} options={projectOptions}></lightning-combobox>    
+                                    </div>
+                                </template>
+                                <template if:true={comboBoxValue}>
+                                    <lightning-combobox dropdown-alignment="auto" name="projects" label="Project" placeholder="Choose Project" value={comboBoxValue} onchange={handleChange} options={projectOptions}></lightning-combobox>    
+                                </template>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_4-of-12">
+                            <div class="slds-m-top_large button-box">
+                                <template if:true={isActive.data}>
+                                    <lightning-button variant="brand-outline" label="Add Status" title="Add Status" onclick={onClickSendMessage} class="slds-m-left_x-small"></lightning-button>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-m-top_large">
+                    <ul class="slds-has-dividers_around-space">
+                        <template for:each={projectStatuses} for:item="currentProjectStatus">               
+                            <li key={currentProjectStatus.Id}>   
+                                <div class="slds-wrap container-box">
+                                    <div class="slds-item slds-size_1-of-12 project-box status-box dimension-box light-container">
+                                            <div class="light-box">
+                                                <span class={currentProjectStatus.Status}></span>
+                                            </div>          
+                                    </div>
+                                    <div class="slds-item project-box slds-size_11-of-12 dimension-box">
+                                        <article class="slds-tile slds-tile_board ">
+                                            <blockquote>
+                                                <div class="slds-size_3-of-4">
+                                                    <div class="slds-media">
+                                                        <div class="slds-media__figure">
+                                                            <span class="slds-avatar slds-avatar_small">
+                                                                <lightning-icon icon-name="standard:user" alternative-text="Manager" title="Manager" size="small" class="icon-color-manager"> </lightning-icon>
+                                                            </span>
+                                                        </div>
+                                                        <div class="slds-media__body">
+                                                            <div class="slds-m-top_xxx-small">
+                                                                <h1 key={currentProjectStatus.Id} class="slds-text-heading_small">{currentProjectStatus.ManagerName}</h1>
+                                                            </div>
+                                                        </div>
+                                                        <div class="slds-media__figure">
+                                                            <span class="slds-avatar slds-avatar_small">
+                                                                <lightning-icon icon-name="standard:date_time" alternative-text="Joined" title="Joined" size="small"> </lightning-icon>
+                                                            </span>
+                                                        </div>
+                                                        <div class="slds-media__body">
+                                                            <div class="slds-m-top_xx-small">
+                                                                <p><lightning-formatted-date-time value='{currentProjectStatus.StatusDate}' year="numeric" month="numeric" day="numeric" time-zone="UTC"></lightning-formatted-date-time></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>   
+                                            </blockquote>  
+                                            <blockquote class="doc">
+                                                <span>{currentProjectStatus.StatusComments}</span>
+                                            </blockquote>
+                                        </article>
+                                    </div>   
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
 </template>
