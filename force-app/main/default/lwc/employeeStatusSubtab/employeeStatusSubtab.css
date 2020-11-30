@@ -63,7 +63,10 @@ blockquote.doc {
     width: 34px;
     border-radius: 50%;
     display: inline-block;
-    background-image: radial-gradient(#627361, #44CB7E);
+    background-image: linear-gradient(#627361, #44CB7E);
+    border:2px solid white;   
+    -moz-border-radius:75px;
+    -webkit-border-radius: 75px;
 }
 
 .Red{
@@ -71,7 +74,10 @@ blockquote.doc {
     width: 34px;
     border-radius: 50%;
     display: inline-block;
-    background-image: radial-gradient(#9D331A, #D64E48);
+    background-image: linear-gradient(#9D331A, #D64E48);
+    border:2px solid white;   
+    -moz-border-radius:75px;
+    -webkit-border-radius: 75px;
 }
 
 .Yellow{
@@ -79,7 +85,10 @@ blockquote.doc {
     width: 34px;
     border-radius: 50%;
     display: inline-block;
-    background-image: radial-gradient(#FFB26C, #F3D050); 
+    background-image: linear-gradient(#FFB26C, #F3D050);
+    border:2px solid white;   
+    -moz-border-radius:75px;
+    -webkit-border-radius: 75px; 
 }
 
 h1 {
