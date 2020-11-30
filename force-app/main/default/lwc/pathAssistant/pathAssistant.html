@@ -34,8 +34,7 @@
                                         tabindex="-1"
                                         data-value={step.strRole}
                                         onclick={handleStepSelected}
-                                        onnotification={handleNotification}
-                                        if:true={changeIsPreRole}>
+                                        onnotification={handleNotification}>
                                         <span  class="slds-path__stage" >
                                             <lightning-icon  icon-name="utility:check" size="xx-small" variant="inverse"></lightning-icon>
                                         </span>
@@ -46,7 +45,7 @@
                             <!--is not current Role-->
                             <template if:false={step.blnCurrentRole}>
                                 <!--when the role arrow goes before the current-->
-                                <template if:true={isPreRole}>
+                                <template if:true={step.blnIsPreRole}>
                                     <li key={step.strRole}  class='slds-path__item slds-is-won' role="presentation">
                                         <a aria-selected="false" 
                                         class="slds-path__link" 
@@ -64,7 +63,7 @@
                                     </li>
                                 </template>
                                 <!--when the role arrow goes after the current-->
-                                <template if:false={isPreRole}>
+                                <template if:false={step.blnIsPreRole}>
                                     <li key={step.strRole} class='slds-path__item slds-is-incomplete' role="presentation">
                                         <a aria-selected="false" 
                                         class="slds-path__link" 
