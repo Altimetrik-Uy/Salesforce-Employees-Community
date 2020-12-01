@@ -23,6 +23,7 @@ public class TestDataFactory {
         Contact con = new Contact();
         con.FirstName='Test';
         con.LastName='Test';
+        con.Email = 'Test@test.com';
         con.AccountId = accountId;
         insert con;
         return con;
@@ -63,10 +64,12 @@ public class TestDataFactory {
         return opp;
     }
 
-    public static Employee_Assignment__c createEmployeeAssigment(Id contactId, Id opportunityId){
+    public static Employee_Assignment__c createEmployeeAssigment(Id contactId, Id opportunityId, Date startDate, Date endDate){
         Employee_Assignment__c eAssignment = new Employee_Assignment__c();
         eAssignment.Employee__c = contactId;
         eAssignment.Project__c = opportunityId;
+        eAssignment.Start_Date__c = startDate;
+        eAssignment.End_Date__c = endDate;
         insert eAssignment;
         return eAssignment;
     }
@@ -81,24 +84,24 @@ public class TestDataFactory {
         return pStatus;
     }
 
-    public static Id createDataForTestProjectStatusImageName(String name, Id accountId, Id conntactId, String status){
+    public static Id createDataForTestProjectStatusImageName(String name, Id accountId, Id conntactId, String status, Date startDate, Date endDate){
     	//Opportunity
         Opportunity opp = createOpportunity(name, accountId);
         //Employee Assignment
-        Employee_Assignment__c eAssignment5 = createEmployeeAssigment(conntactId, opp.Id);
+        Employee_Assignment__c eAssignment = createEmployeeAssigment(conntactId, opp.Id, startDate, endDate);
         //If status is null do not create Project Status
         if(status != ''){
             //Project Status
-            Project_Status__c pStatus5 = createProjectStatus(opp.Id, status); 
+            Project_Status__c pStatus = createProjectStatus(opp.Id, status); 
         }
        	return opp.Id;
     }
 
-    public static Id createDataForTestProjectsTab(String name, Id accountId, Id conntactId){
+    public static Id createDataForTestProjectsTab(String name, Id accountId, Id conntactId, Date startDate, Date endDate){
     	//Opportunity
         Opportunity opp = createOpportunity(name, accountId);
         //Employee Assignment
-        Employee_Assignment__c eAssignment = createEmployeeAssigment(conntactId, opp.Id);
+        Employee_Assignment__c eAssignment = createEmployeeAssigment(conntactId, opp.Id, startDate, endDate);
         return eAssignment.Id;
     }
 

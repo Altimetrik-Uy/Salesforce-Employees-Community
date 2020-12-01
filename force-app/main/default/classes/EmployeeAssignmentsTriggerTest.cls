@@ -19,7 +19,8 @@ public class EmployeeAssignmentsTriggerTest {
         
         Contact testContact = new Contact(
         	FirstName = 'Schubert',
-        	LastName = 'Tonarelli',
+            LastName = 'Tonarelli',
+            Email = 'st@test.com',
         	AccountId = testAccount.Id
         );
         insert testContact;

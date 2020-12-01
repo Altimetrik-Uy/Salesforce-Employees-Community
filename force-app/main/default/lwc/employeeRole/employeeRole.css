@@ -1,0 +1,8 @@
+.accordionbk{
+    background-color: var(--lwc-brandDisabled);
+}
+
+.roledetailheader{
+    color: var(--lwc-colorTextPlaceholder);
+    text-decoration: none;
+}
