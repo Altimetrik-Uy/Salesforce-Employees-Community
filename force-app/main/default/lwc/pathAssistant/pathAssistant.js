@@ -10,7 +10,6 @@ export default class PathAssistant extends LightningElement {
    
     @api employeeid;
     @track error;
-    @track isPreRole = true;
     @track organizedPath;
     // show/hide a loading spinner
     @track spinner = false;
@@ -63,10 +62,5 @@ export default class PathAssistant extends LightningElement {
     get genericErrorMessage() {
         // note: you can store this in a custom label if you need
         return 'An unexpected error occurred. Please contact your System Administrator.';
-    }
-
-    get changeIsPreRole(){
-        this.isPreRole = false;
-        return true;
     }
 }
