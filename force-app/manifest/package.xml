@@ -2,6 +2,8 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>*</members>
+        <members>PathAssistant</members>
+		<members>PathAssistantTest</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -38,14 +40,17 @@
         <members>Campaign</members>
         <members>Salesforce_Career_Path__c</members>
         <members>Role_Description__mdt</members>
+        <members>Salesforce_Career_Path_Settings__mdt</members>
         <name>CustomObject</name>
     </types>
     <types>
         <members>*</members>
+        <members>Salesforce_Career_Path_Settings__mdt.Position__c</members>
         <name>CustomField</name>
     </types>
     <types>
         <members>*</members>
+        <members>GenericErrorMessage_lbl</members>
         <name>CustomLabel</name>
     </types>
     <types>
