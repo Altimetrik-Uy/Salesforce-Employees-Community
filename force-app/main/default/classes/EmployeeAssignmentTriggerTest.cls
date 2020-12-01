@@ -132,7 +132,7 @@ public with sharing class EmployeeAssignmentTriggerTest {
     private static List<Contact> createEmployees(Integer amount, Id accountId, Boolean doInsert) {
         List<Contact> employees = new List<Contact>();
         for (Integer i = 0; i < amount; i++) {
-            employees.add(new Contact(LastName = '[TEST] Employee ' + i, AccountId = accountId));
+            employees.add(new Contact(LastName = '[TEST] Employee ' + i, AccountId = accountId, Email =  i + '@test.com'));
         }
 
         if (doInsert) {
@@ -167,7 +167,7 @@ public with sharing class EmployeeAssignmentTriggerTest {
     }
 
     private static Profile getPortalProfile() {
-        return [SELECT Id FROM Profile WHERE Name = 'Partner Community Login Cloned' LIMIT 1];
+        return [SELECT Id FROM Profile WHERE Name = 'Partner Community Login User' LIMIT 1];
     }
 
     private static List<Contact> getEmployees() {

@@ -253,7 +253,8 @@ public class EmployeeStatusControllerTest {
             employees.add(
                 new Contact(
                     LastName = '[TEST] Employee ' + i,
-                    AccountId = accountId
+                    AccountId = accountId,
+                    Email = i + '@test.com'
                 )
             );
         }
