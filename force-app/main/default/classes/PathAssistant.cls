@@ -133,7 +133,7 @@ public with sharing class PathAssistant {
             preRoles.add('Salesforce Senior Lightning Specialist');
             preRoles.add('Salesforce Senior Apex Specialist');
             preRoles.add('Salesforce Senior Platform Specialist');
-            preRoles.add('Salesforce Tech Architect');
+            preRoles.add('Salesforce Technical Architect');
         } else if(currentRole.equals('Salesforce Delivery Manager')){
             preRoles.add('Salesforce Trainee');
             preRoles.add('Salesforce Developer');
@@ -154,7 +154,7 @@ public with sharing class PathAssistant {
             preRoles.add('Salesforce Senior Lightning Specialist');
             preRoles.add('Salesforce Senior Apex Specialist');
             preRoles.add('Salesforce Senior Platform Specialist');
-            preRoles.add('Salesforce Tech Architect');
+            preRoles.add('Salesforce Technical Architect');
             preRoles.add('Salesforce Certified Architect');  
         }
         return preRoles;
