@@ -1,36 +1,32 @@
 <template>
-    <ul class="slds-accordion">
-        <li class="slds-accordion__list-item">
-          <section class="slds-accordion__section slds-is-open">
-            <div class="slds-accordion__summary accordionbk slds-var-p-left_small">
-              <h3 class="slds-accordion__summary-heading">
-                <button class="slds-button slds-accordion__summary-action roledetailheader" title="Role Description" onclick={handleClick} >
-                    <lightning-icon icon-name={iconName} alternative-text="Role" title="Image" size="x-small"></lightning-icon>
-                    <span class="slds-var-p-left_small slds-accordion__summary-content">Role Description</span>
-                </button>
-              </h3>
-            </div>
-            <div class={cssClass}>
-                <div if:true={roleInfo}>
-                  <p><strong>Description:</strong>&nbsp;{roleInfo.Role_Description__c}</p>
-                  </br>
-                  <p><strong>Functional Knowledge:</strong>&nbsp;{roleInfo.Role_Functionalknowledge__c}</p>
-                  </br>
-                  <p><strong>Technical Knowledge:</strong>&nbsp;{roleInfo.Role_Technicalknowledge__c}</p>
-                  </br>
-                  <p><strong>Prerequisites:</strong>&nbsp;{roleInfo.Role_Prerequisites__c}</p>
-                  </br>
-                  <p><strong>Mentoring Required:</strong>&nbsp;{roleInfo.Role_MentoringRequiered__c}</p>
-                  </br>
-                  <p><strong>Communication:</strong>&nbsp;{roleInfo.Role_Communication__c}</p>
-                  </br>
-                  <p><strong>Soft Skills:</strong>&nbsp;{roleInfo.Role_Softskills__c}</p>
-                </div>
-                <div if:false={roleInfo}>
-                    No role information available
-                </div>
-            </div>
-          </section>
-        </li>
-    </ul>
+    <div class="slds-size_12-of-12">
+        <ul class="slds-accordion">
+            <li class="slds-accordion__list-item">
+                <section class="slds-accordion__section slds-is-open ">
+                    <div class="slds-accordion__summary accordionbk slds-var-p-left_small accordion-color">
+                        <h3 class="slds-accordion__summary-heading">
+                                <button class="slds-button slds-accordion__summary-action roledetailheader" title="Role Description" onclick={handleClick} >
+                                <lightning-icon icon-name={iconName} alternative-text="Role" title="Image" size="x-small" class='accordion-icon'></lightning-icon>
+                                <span class="slds-var-p-left_small slds-accordion__summary-content accordion-font">Role Description</span>
+                            </button>
+                        </h3>
+                    </div>
+                    <div class={cssClass}>
+                        <div if:true={roleInfo} class="accordion-text">
+                            <p><strong>Description:</strong>{roleInfo.Role_Description__c}</p>
+                            <p><strong>Functional Knowledge:</strong>{roleInfo.Role_Functionalknowledge__c}</p>
+                            <p><strong>Technical Knowledge:</strong>{roleInfo.Role_Technicalknowledge__c}</p>
+                            <p><strong>Prerequisites:</strong>{roleInfo.Role_Prerequisites__c}</p>
+                            <p><strong>Mentoring Required:</strong>{roleInfo.Role_MentoringRequiered__c}</p>
+                            <p><strong>Communication:</strong>{roleInfo.Role_Communication__c}</p>
+                            <p><strong>Soft Skills:</strong>{roleInfo.Role_Softskills__c}</p>
+                        </div>
+                        <div if:false={roleInfo}>
+                            <p>No role information available</p>
+                        </div>
+                    </div>
+                </section>
+            </li>
+        </ul>
+    </div>
 </template>

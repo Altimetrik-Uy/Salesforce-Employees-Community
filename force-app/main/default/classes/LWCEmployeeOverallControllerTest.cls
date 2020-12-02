@@ -48,21 +48,4 @@ public class LWCEmployeeOverallControllerTest {
             System.assertEquals(LWCEmployeeOverallController.getStatusImageName(usr.Id), 'Red','Image is not Red');
         }
     }
-
-    @isTest
-    public static  void testGetRoleDescription() {
-        Salesforce_Career_Path__c role = new Salesforce_Career_Path__c (
-            Role__c = 'Developer',
-            Role_Description__c = ' Any Description',
-            Role_Functionalknowledge__c = 'Any functional knowledge',
-            Role_Technicalknowledge__c = 'Any Technical knowledge'
-        );
-        insert role;
-        
-        Salesforce_Career_Path__c roleDesc;
-        Test.startTest();
-            roleDesc = LWCEmployeeOverallController.getRoleInformation('Developer');
-        Test.stopTest();
-        System.assertNotEquals(null, roleDesc);
-    }
 }   
