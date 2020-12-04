@@ -11,7 +11,7 @@
 			User usr = TestDataFactory.createUser(con.Id);
             Test.startTest();
             System.runAs(usr){
-                System.assertEquals(LWCEmployeeRoleController.getRoleInformation(con.Id).Role_Softskills__c, 'Comunicación escrita y oral, con equipo', 'The softskill do not match');
+            System.assertEquals(LWCEmployeeRoleController.getRoleInformation(con.Id).Soft_skills__c, 'Comunicación escrita y oral, con equipo', 'The softskill do not match');
             }
             Test.stopTest();
         }

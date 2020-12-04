@@ -13,13 +13,12 @@
                     </div>
                     <div class={cssClass}>
                         <div if:true={roleInfo} class="accordion-text">
-                            <p><strong>Description:</strong>{roleInfo.Role_Description__c}</p>
-                            <p><strong>Functional Knowledge:</strong>{roleInfo.Role_Functionalknowledge__c}</p>
-                            <p><strong>Technical Knowledge:</strong>{roleInfo.Role_Technicalknowledge__c}</p>
-                            <p><strong>Prerequisites:</strong>{roleInfo.Role_Prerequisites__c}</p>
-                            <p><strong>Mentoring Required:</strong>{roleInfo.Role_MentoringRequiered__c}</p>
-                            <p><strong>Communication:</strong>{roleInfo.Role_Communication__c}</p>
-                            <p><strong>Soft Skills:</strong>{roleInfo.Role_Softskills__c}</p>
+                            <p><strong>Actitud Required follow-up Mentoring:</strong>{roleInfo.Actitud_Required_follow_up_Mentoring__c}</p>
+                            <p><strong>Functional knowledge:</strong>{roleInfo.Functional_knowledge__c}</p>
+                            <p><strong>Technical knowledge:</strong>{roleInfo.Technical_knowledge__c}</p>
+                            <p><strong>Soft skills:</strong>{roleInfo.Soft_skills__c}</p>
+                            <p><strong>Language:</strong>{roleInfo.Language__c}</p>
+                            <p><strong>Communication:</strong>{roleInfo.Communication__c}</p>  
                         </div>
                         <div if:false={roleInfo}>
                             <p>No role information available</p>
