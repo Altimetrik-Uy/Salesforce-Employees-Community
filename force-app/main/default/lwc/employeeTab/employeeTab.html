@@ -9,40 +9,84 @@
             <div class="slds-col slds-size_10-of-12">
                 <div class="slds-grid slds-wrap">
                     <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font21">
-                        <b>Name:</b>&nbsp;&nbsp;<i class="employedata">{employeeName}</i>
+                        <lightning-icon icon-name="utility:user" alternative-text="User" title="User" size="x-small"></lightning-icon>
+                        &nbsp;&nbsp;
+                        <b class="employeeName" >{employeeName}</b>
                     </div>
                 </div>
                 <div class="slds-grid slds-wrap">
                     <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font18">
-                        <b>Role:</b>&nbsp;&nbsp;<i class="employedata">{employeeRole}</i>
+                        <lightning-icon icon-name="utility:company" alternative-text="Company" title="Company" size="x-small"></lightning-icon>
+                        &nbsp;&nbsp;
+                        <small class="employedata">{employeeRole}</small>
                     </div>
                 </div>
+                <div class="slds-grid slds-wrap">
+                    <!--<div class="slds-size_2-of-3">
+                            <div class="slds-text-align_left slds-m-around_x-small">-->
+                            <template if:true={imageStatus}>
+                                <template for:each={imageStatus} for:item="currentStatus">
+                                    <span key={currentStatus.Id} class="slds-badge">
+                                        <span class="slds-badge__icon slds-badge__icon_left slds-badge__icon_inverse">
+                                            <svg version="1.1" class="slds-icon slds-icon_xx-small" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="7" cy="7" r="7" fill={currentStatus.AssetImageSrc}></circle>            
+                                            </svg>                 
+                                        </span>Status
+                                        
+                                    </span>
+                                </template>
+                            </template>
+                        <!--</div>
+                    </div>
+                    <div class="slds-size_2-of-3">
+                        <div class="slds-text-align_center slds-m-around_x-small">-->
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <template if:true={projectStatusImageName}>
+                                <div class="slds-grid slds-gutters">
+                                    <template for:each={projectStatusImageName} for:item="currentProjectStatus">
+                                        <span key={currentProjectStatus.Id} class="slds-badge">
+                                            <span class="slds-badge__icon slds-badge__icon_left slds-badge__icon_inverse">
+                                                <svg version="1.1" class="slds-icon slds-icon_xx-small" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="7" cy="7" r="7" fill={currentProjectStatus.ProjectImageSrc}></circle>            
+                                                </svg>                 
+                                            </span>{currentProjectStatus.ProjectName}
+                                        </span>
+                                    </template>
+                                </div>
+                            </template>
+                        <!--</div>
+                    </div>-->
             </div>
         </div>
-
-        <lightning-tabset variant="vertical">
+        
             
-            <lightning-tab label="Overall">
-                <c-employee-overall-subtab employeeid={employeeid}></c-employee-overall-subtab>
+        </div>
+        
+        <lightning-tabset variant="vertical" active-tab-value={selectedTab}>
+            
+            <lightning-tab class="iconColor" label="Overall" icon-name="standard:channel_program_levels" value="overall">
+                <c-employee-overall-subtab employeeid={employeeid} onestatus={handleEmployeeStatus} onpstatus={handleProjectStatus} ongotocpath={handleGoToCPath}></c-employee-overall-subtab>
             </lightning-tab>
 
-            <lightning-tab label="Career Path">
+            <lightning-tab label="Career Path" icon-name="standard:case" value="cpath">
                 <c-employee-career-path-subtab employeeid={employeeid}></c-employee-career-path-subtab>
             </lightning-tab>
 
-            <lightning-tab label="Status">
+            <lightning-tab label="Status" icon-name="standard:outcome" value="status">
                 <c-employee-status-subtab employeeid={employeeid}></c-employee-status-subtab>
             </lightning-tab>
 
-            <lightning-tab label="Projects">
+            <lightning-tab label="Projects" icon-name="standard:store_group" value="projects">
                 <c-employee-projects-subtab employeeid={employeeid}></c-employee-projects-subtab>
             </lightning-tab>
 
-            <lightning-tab label="Performance Evaluations">
+            <lightning-tab label="Performance Evaluations" icon-name="standard:work_order_item" value="pevaluation">
                 <c-employee-performance-evaluations-subtab employeeid={employeeid}></c-employee-performance-evaluations-subtab>
             </lightning-tab>
 
         </lightning-tabset>
 
+        
+        
     </div>
 </template>

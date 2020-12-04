@@ -1,0 +1,17 @@
+<template>
+        <template if:true={wrapper}>
+            <div class="slds-m-around_medium">
+                <lightning-layout horizontal-align="spread" multiple-rows="true">
+                    <template for:each={wrapper} for:item="w">
+                        <lightning-layout-item key={w.role} padding="around-small" size="6">
+                            <c-role-requirements-chart roles-wrapper={w} onclick={goToPath}></c-role-requirements-chart> 
+                        </lightning-layout-item>                                                    
+                    </template>
+                </lightning-layout>
+            </div>
+        </template>
+        <template if:true={error}>
+            {error}
+        </template>
+        
+</template>

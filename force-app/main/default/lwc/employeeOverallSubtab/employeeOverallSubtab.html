@@ -1,12 +1,20 @@
 <template>
     <lightning-card>
-        <div class="slds-grid slds-wrap">
+        <!--<div class="slds-grid slds-wrap">
             <div class="slds-size_1-of-3">
-                <div class="slds-text-align_center slds-m-around_x-small">
+                //<div class="slds-text-align_center slds-m-around_x-small">
+                    <div class="slds-text-align_left slds-m-around_x-small">
                     <template if:true={imageStatus}>
                         <template for:each={imageStatus} for:item="currentStatus">
-                            <img key={currentStatus.Id} src={currentStatus.AssetImageSrc} alt={currentStatus.AssetImageAlt}/>
+                            //<img key={currentStatus.Id} src={currentStatus.AssetImageSrc} alt={currentStatus.AssetImageAlt}/>
                             <p key={currentStatus.Id}  class="slds-p-top_small">Employee Status</p>
+                            <span key={currentStatus.Id} class="slds-badge slds-badge_lightest">
+                                <span class="slds-badge__icon slds-badge__icon_left slds-badge__icon_inverse">
+                                    <svg version="1.1" class="slds-icon slds-icon_xx-small" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="7" cy="7" r="7" fill={currentStatus.AssetImageSrc}></circle>            
+                                    </svg>                 
+                                </span>Employee Name
+                            </span>
                         </template>
                     </template>
                 </div>
@@ -16,15 +24,38 @@
                     <template if:true={projectStatusImageName}>
                         <div class="slds-grid slds-gutters">
                             <template for:each={projectStatusImageName} for:item="currentProjectStatus">
-                                <div key={currentProjectStatus.Id} class="slds-col"  >
+                                //<div key={currentProjectStatus.Id} class="slds-col"  >
                                     <img key={currentProjectStatus.Id} src={currentProjectStatus.ProjectImageSrc} alt={currentProjectStatus.ProjectImageAlt}/>
                                     <p key={currentProjectStatus.Id}  class="slds-p-top_small">Project: {currentProjectStatus.ProjectName}</p>
                                 </div>
+                                <span key={currentProjectStatus.Id} class="slds-badge slds-badge_inverse">
+                                    <span class="slds-badge__icon slds-badge__icon_left slds-badge__icon_inverse">
+                                        <svg version="1.1" class="slds-icon slds-icon_xx-small" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="7" cy="7" r="7" fill={currentProjectStatus.ProjectImageSrc}></circle>            
+                                        </svg>                 
+                                    </span>{currentProjectStatus.ProjectName}
+                                </span>
                             </template>
                         </div>
                     </template>
                 </div>
             </div>
-        </div>
+            
+        </div> -->      
+
+        <c-role-certifications user-id={userId} ongotocpath={handleGoToCPath}>
+
+        </c-role-certifications>
+
+        <!--<lightning-layout multiple-rows="true">
+            <lightning-layout-item padding="around-small" size="6">
+                <c-role-requirements-chart ></c-role-requirements-chart> 
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small" size="6">
+                <c-role-requirements-chart ></c-role-requirements-chart>
+            </lightning-layout-item>             
+        </lightning-layout>
+    -->
+       
     </lightning-card>
 </template>

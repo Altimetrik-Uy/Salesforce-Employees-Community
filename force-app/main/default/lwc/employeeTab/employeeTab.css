@@ -30,6 +30,17 @@
     color: gray;
 }
 
+.employeeName {
+    font-size: 21px;
+    position: top;
+}
+
+:host {
+    --sds-c-icon-color-background: #FF9A3C;
+}
+lightning-icon{
+    background-color:white;
+}
 .font18 {
     font-size: 18px;
 }
