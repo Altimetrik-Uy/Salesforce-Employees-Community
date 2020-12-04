@@ -81,14 +81,4 @@ public class LWCEmployeeOverallController{
         }
         return imageName;
     }
-
-    @AuraEnabled
-    public static String getRoleDescription(String roleName){
-        String roleDesc = '';
-        List<Role_Description__mdt> lstroleDesc = [SELECT Label, Description__c FROM Role_Description__mdt WHERE IsInactive__c != true AND Label = :roleName ];
-        if (!lstroleDesc.isEmpty()) {
-            roleDesc = lstroleDesc[0].Description__c;
-        }
-        return roleDesc;
-    }
 }

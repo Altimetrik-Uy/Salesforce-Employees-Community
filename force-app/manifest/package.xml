@@ -20,7 +20,6 @@
     </types>
     <types>
 		<members>Salesforce_Career_Path__c-Salesforce Career Path Layout</members>
-        <members>Role_Description__mdt-Role Description Layout</members>
 		<name>Layout</name>
 	</types>
     <types>
@@ -39,11 +38,10 @@
         <members>Opportunity</members>
         <members>Campaign</members>
         <members>Salesforce_Career_Path__c</members>
-        <members>Role_Description__mdt</members>
         <members>Salesforce_Career_Path_Settings__mdt</members>
         <name>CustomObject</name>
     </types>
-    <types>
+   <types>
         <members>*</members>
         <members>Salesforce_Career_Path_Settings__mdt.Position__c</members>
         <name>CustomField</name>

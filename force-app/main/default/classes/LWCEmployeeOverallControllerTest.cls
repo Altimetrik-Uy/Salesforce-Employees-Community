@@ -48,12 +48,4 @@ public class LWCEmployeeOverallControllerTest {
             System.assertEquals(LWCEmployeeOverallController.getStatusImageName(usr.Id), 'Red','Image is not Red');
         }
     }
-
-    @isTest
-    public static  void testGetRoleDescription() {
-        Test.startTest();
-            String roleDesc = LWCEmployeeOverallController.getRoleDescription('Developer');
-        Test.stopTest();
-        System.assertNotEquals(null, roleDesc);
-    }
 }   
