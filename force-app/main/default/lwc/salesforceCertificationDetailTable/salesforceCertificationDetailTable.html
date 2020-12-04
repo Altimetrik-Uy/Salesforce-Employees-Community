@@ -39,7 +39,6 @@
                             <div class="slds-truncate text-bold textcenter" title="Close Date"><p>Status</p></div>
                         </th>
                     </tr>
-                    <!-- A partir de aca se llenan las tablas -->
                     <!-- Certicaions current role-->
                     <template for:each={role.lstWrpCertifications} for:item="certification">
                         <tr key={certification.strIdPathRecord} class="slds-hint-parent border-row">
@@ -52,14 +51,14 @@
                                 <template if:true={certification.blnAchieved}>
                                     <td data-label="Opportunity Name" scope="row" class="textcenter">
                                         <div class="slds-truncate" title="Cloudhub">
-                                            <lightning-icon icon-name="action:approval" alternative-text="Approved" title="Approved" size="x-small" class="cert-approved-icon"></lightning-icon>
+                                            <a><lightning-icon icon-name="action:approval" alternative-text="Completed" title="Completed" size="x-small" class="cert-approved-icon"></lightning-icon></a>
                                         </div>
                                     </td>
                                 </template>
                                 <template  if:false={certification.blnAchieved}>
                                     <td data-label="Opportunity Name" scope="row" class="textcenter">
-                                        <div class="slds-truncate" title="Cloudhub">
-                                            <lightning-icon icon-name="action:close" alternative-text="close" title="close" size="x-small" class="cert-required-icon"></lightning-icon>
+                                        <div class="slds-truncate" title="Cloudhub">           
+                                            <a><lightning-icon icon-name="action:close" alternative-text="Required" title="Required" size="x-small" class="cert-required-icon"></lightning-icon></a>                  
                                         </div>
                                     </td>
                                 </template>
@@ -75,7 +74,7 @@
                                 <template if:true={certification.blnAchieved}>
                                     <td data-label="Opportunity Name" scope="row" class="textcenter">
                                         <div class="slds-truncate" title="Cloudhub">
-                                            <lightning-icon icon-name="action:approval" alternative-text="Approved" title="Approved" size="x-small" class="cert-approved-icon"></lightning-icon>
+                                            <a><lightning-icon icon-name="action:approval" alternative-text="Completed" title="Completed" size="x-small" class="cert-approved-icon"></lightning-icon></a>
                                         </div>
                                     </td>
                                 </template>
@@ -83,7 +82,7 @@
                                 <template  if:false={certification.blnAchieved}>
                                     <td data-label="Opportunity Name" scope="row" class="textcenter">
                                         <div class="slds-truncate" title="Cloudhub">
-                                            <lightning-icon icon-name="action:close" alternative-text="close" title="close" size="x-small" class="cert-no-required-icon"></lightning-icon>
+                                        <a><lightning-icon icon-name="action:close" alternative-text="Suggested" title="Suggested" size="x-small" class="cert-no-required-icon"></lightning-icon></a>
                                         </div>
                                     </td>
                                 </template>
