@@ -30,6 +30,8 @@ public with sharing class PathAssistant {
             strCurrentRole = lstContact[0].Role__c;
         }
 
+        Set<String> preRoles = calculatePreRole(strCurrentRole);
+
         if (!lstCareerPathSettings.isEmpty()) {
             wrpRoles objWrpRole;
             List<wrpRoles> lstCareerTmp;
@@ -40,6 +42,8 @@ public with sharing class PathAssistant {
                     objWrpRole.strRole = objCareerPath.MasterLabel;
                     if(strRoleSalesforce == strCurrentRole){
                         objWrpRole.blnCurrentRole = true;
+                    }else{
+                        objWrpRole.blnIsPreRole = preRoles.contains(strRoleSalesforce);
                     }
                 if (mapPositionXCareer.containsKey(strColumn)){
                     lstCareerTmp = mapPositionXCareer.get(strColumn);
@@ -67,10 +71,92 @@ public with sharing class PathAssistant {
     public class wrpRoles {
         @AuraEnabled public Boolean blnCurrentRole = false;
         @AuraEnabled public string strRole;
+        @AuraEnabled public Boolean blnIsPreRole = false;
     }
 
     public class wrpColumns {
         @AuraEnabled public String strColumn;
         @AuraEnabled public List<wrpRoles> lstWrpRoles = new List<wrpRoles>();
+    }
+
+    private static Set<String> calculatePreRole (String currentRole){
+        Set<String> preRoles = new Set<String>();
+        if(currentRole.equals('Salesforce Developer')){
+            preRoles.add('Salesforce Trainee');
+        } else if(currentRole.equals('Salesforce Lightning Specialist') || currentRole.equals('Salesforce Apex Specialist')){
+            preRoles.add('Salesforce Trainee');
+            preRoles.add('Salesforce Developer');
+        } else if(currentRole.equals('Salesforce Platform Specialist')){
+            preRoles.add('Salesforce Trainee');
+            preRoles.add('Salesforce Developer');
+            preRoles.add('Salesforce Lightning Specialist');
+            preRoles.add('Salesforce Apex Specialist');
+        } else if(currentRole.equals('Salesforce Senior Lightning Specialist')){
+            preRoles.add('Salesforce Trainee');
+            preRoles.add('Salesforce Developer');
+            preRoles.add('Salesforce Lightning Specialist');
+        } else if(currentRole.equals('Salesforce Senior Apex Specialist')){
+            preRoles.add('Salesforce Trainee');
+            preRoles.add('Salesforce Developer');
+            preRoles.add('Salesforce Apex Specialist');
+        }  else if(currentRole.equals('Salesforce Senior Platform Specialist')){
+            preRoles.add('Salesforce Trainee');
+            preRoles.add('Salesforce Developer');
+            preRoles.add('Salesforce Lightning Specialist');
+            preRoles.add('Salesforce Apex Specialist');
+            preRoles.add('Salesforce Platform Specialist');
+        } else if(currentRole.equals('Salesforce Team Lead')|| currentRole.equals('Salesforce Technical Architect')){
+            preRoles.add('Salesforce Trainee');
+            preRoles.add('Salesforce Developer');
+            preRoles.add('Salesforce Lightning Specialist');
+            preRoles.add('Salesforce Apex Specialist');
+            preRoles.add('Salesforce Platform Specialist');
+            preRoles.add('Salesforce Senior Lightning Specialist');
+            preRoles.add('Salesforce Senior Apex Specialist');
+            preRoles.add('Salesforce Senior Platform Specialist');
+        } else if(currentRole.equals('Salesforce Manager')){
+            preRoles.add('Salesforce Trainee');
+            preRoles.add('Salesforce Developer');
+            preRoles.add('Salesforce Lightning Specialist');
+            preRoles.add('Salesforce Apex Specialist');
+            preRoles.add('Salesforce Platform Specialist');
+            preRoles.add('Salesforce Senior Lightning Specialist');
+            preRoles.add('Salesforce Senior Apex Specialist');
+            preRoles.add('Salesforce Senior Platform Specialist');
+            preRoles.add('Salesforce Team Lead');
+        } else if(currentRole.equals('Salesforce Certified Architect')){
+            preRoles.add('Salesforce Trainee');
+            preRoles.add('Salesforce Developer');
+            preRoles.add('Salesforce Lightning Specialist');
+            preRoles.add('Salesforce Apex Specialist');
+            preRoles.add('Salesforce Platform Specialist');
+            preRoles.add('Salesforce Senior Lightning Specialist');
+            preRoles.add('Salesforce Senior Apex Specialist');
+            preRoles.add('Salesforce Senior Platform Specialist');
+            preRoles.add('Salesforce Technical Architect');
+        } else if(currentRole.equals('Salesforce Delivery Manager')){
+            preRoles.add('Salesforce Trainee');
+            preRoles.add('Salesforce Developer');
+            preRoles.add('Salesforce Lightning Specialist');
+            preRoles.add('Salesforce Apex Specialist');
+            preRoles.add('Salesforce Platform Specialist');
+            preRoles.add('Salesforce Senior Lightning Specialist');
+            preRoles.add('Salesforce Senior Apex Specialist');
+            preRoles.add('Salesforce Senior Platform Specialist');
+            preRoles.add('Salesforce Team Lead');
+            preRoles.add('Salesforce Manager');
+        } else if(currentRole.equals('Salesforce Architect Chief')){
+            preRoles.add('Salesforce Trainee');
+            preRoles.add('Salesforce Developer');
+            preRoles.add('Salesforce Lightning Specialist');
+            preRoles.add('Salesforce Apex Specialist');
+            preRoles.add('Salesforce Platform Specialist');
+            preRoles.add('Salesforce Senior Lightning Specialist');
+            preRoles.add('Salesforce Senior Apex Specialist');
+            preRoles.add('Salesforce Senior Platform Specialist');
+            preRoles.add('Salesforce Technical Architect');
+            preRoles.add('Salesforce Certified Architect');  
+        }
+        return preRoles;
     }
 }
