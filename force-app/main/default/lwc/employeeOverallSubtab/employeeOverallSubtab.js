@@ -1,9 +1,5 @@
 import {LightningElement, api, wire, track} from 'lwc';
 import strUserId from '@salesforce/user/Id';
-//import TrafficLightGreen from '@salesforce/resourceUrl/TrafficLightGreen';
-//import TrafficLightRed from '@salesforce/resourceUrl/TrafficLightRed';
-//import TrafficLightYellow from '@salesforce/resourceUrl/TrafficLightYellow';
-//import TrafficLightBalck from '@salesforce/resourceUrl/TrafficLightBlack';
 import getProjectStatusImageName from '@salesforce/apex/LWCEmployeeOverallController.getProjectStatusImageName';
 import getStatusImageName from '@salesforce/apex/LWCEmployeeOverallController.getStatusImageName';
 
@@ -34,7 +30,6 @@ export default class EmployeeOverallSubtab extends LightningElement {
             let preparedAssets = [];
             let preparedAsset = {};
             preparedAsset.Id = id;
-            //TrafficLight = TrafficLightRed;
             preparedAsset.AssetImageAlt = data;
                 switch(data){
                     case 'Red':
@@ -54,11 +49,9 @@ export default class EmployeeOverallSubtab extends LightningElement {
             preparedAsset.AssetImageSrc = TrafficLight;
             preparedAssets.push(preparedAsset);
             this.imageStatus = preparedAssets;
-            console.log('EmployeeOverallSubtab.this.imageStatus '+this.imageStatus);
             const employeeStatusEvent = new CustomEvent('estatus', {
                 detail: preparedAssets
             });
-            console.log('EmployeeOverallSubtab.employeeStatusEvent ' +employeeStatusEvent);
             this.dispatchEvent(employeeStatusEvent);
         } else if (error) {
             this.error = error;
@@ -68,7 +61,6 @@ export default class EmployeeOverallSubtab extends LightningElement {
     @wire(getProjectStatusImageName,{uId: '$userId'}) wiredProjectStatusImageName({error,data}){
         if (data) {
             this.projectStatusImageName = data;
-            console.log('EmployeeOverallSubtab.this.projectStatusImageName '+this.projectStatusImageName);
             let preparedAssets = [];
             let TrafficLight;
             let id = 0;
@@ -95,7 +87,6 @@ export default class EmployeeOverallSubtab extends LightningElement {
             const projectStatusEvent = new CustomEvent('pstatus', {
                 detail: preparedAssets
             });
-            console.log('EmployeeOverallSubtab.projectStatusEvent ' +projectStatusEvent);
             this.dispatchEvent(projectStatusEvent);
             window.console.log(JSON.stringify(this.assets));
         } else if (error) {

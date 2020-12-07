@@ -32,10 +32,7 @@ export default class Radialcharts extends LightningElement {
     }
     
     loadchart(){
-      console.log('loadchart ' );
-      
           this.isFirstTime = false;
-          console.log('Radialcharts.rolesWrapper ' +this.rolesWrapper);
           var role;
           var porcentaje = 0;
           if(this.rolesWrapper){
@@ -48,8 +45,6 @@ export default class Radialcharts extends LightningElement {
               porcentaje = Math.trunc(this.rolesWrapper.porcentaje);                        
               role = this.rolesWrapper.role;                        
             }
-            console.log('Radialcharts.role ' +role);
-            console.log('Radialcharts.porcentaje ' +porcentaje);
           }         
           
           var options = {
@@ -78,14 +73,10 @@ export default class Radialcharts extends LightningElement {
           labels: [role],
           };
           const ctx = this.template.querySelector('div.chart');
-          console.log('loadchart options',options );
           this.chartt = new ApexCharts(ctx, options);
           this.chartt.render();
-          console.log('loadchart render' );
           this.chartt= ApexCharts.exec(role, 'updateSeries', [
             porcentaje
          ], true);
-        
     }
-    
 }

@@ -22,7 +22,6 @@ export default class EmployeeTab extends LightningElement {
     @wire(getRecord, { recordId: '$employeeid', fields: [NAME_FIELD, ROLE_FIELD, IMAGE_FIELD] })
     loadContactInfo({ error, data }) {
         if (error) {
-            console.error(error);
         } else {
             this.employeeName = getFieldValue(data, NAME_FIELD);
             this.employeeRole = getFieldValue(data, ROLE_FIELD);
@@ -33,7 +32,7 @@ export default class EmployeeTab extends LightningElement {
             if (!src) {
                 src = assets + '/img/noimage.jpg';
             }
-            this.imgMarkup = "<p style=\"margin-top: 0px; border-left: 1px solid #D4D4D4;\"><img style=\"width: 100px; border-radius: 10px;\" src=\"" + src + "\" alt=\"" + this.employeeName + "\"></img></p>";
+            this.imgMarkup = "<p style=\"margin-top: 0px; \"><img style=\"width: 150px; height: 150px; border-radius: 50%;\" src=\"" + src + "\" alt=\"" + this.employeeName + "\"></img></p>";
         }
     }
 
@@ -46,18 +45,15 @@ export default class EmployeeTab extends LightningElement {
     }
 
     handleEmployeeStatus(event) {
-        console.log('EmployeeTab.employeeEvent ' + event.detail);
         this.imageStatus = event.detail;
     }
 
     handleProjectStatus(event) {
-        console.log('EmployeeTab.projectEvent ' + event.detail);
         this.projectStatusImageName = event.detail;
     }
 
     goToCPath() {
         this.selectedTab = this.template.querySelector('lightning-tab').value;
-        console.log('selectedTabValue ' +this.selectedTab);
         var currentTab = this.selectedTab;
         if (currentTab != 'cpath') {
             this.selectedTab = 'cpath';
@@ -68,7 +64,6 @@ export default class EmployeeTab extends LightningElement {
     handleGoToCPath(){
         
         this.selectedTab = this.template.querySelector('lightning-tab').value;
-        console.log('EmployeeTab.selectedTabValue ' +this.selectedTab);
         var currentTab = this.selectedTab;
         if (currentTab != 'cpath') {
             this.selectedTab = 'cpath';

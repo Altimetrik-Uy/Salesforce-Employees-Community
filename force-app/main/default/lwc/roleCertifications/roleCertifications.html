@@ -1,6 +1,7 @@
 <template>
+    <template if:true={display}>
         <template if:true={wrapper}>
-            <div class="slds-m-around_medium">
+            <div class="slds-m-around_medium main">
                 <lightning-layout horizontal-align="spread" multiple-rows="true">
                     <template for:each={wrapper} for:item="w">
                         <lightning-layout-item key={w.role} padding="around-small" size="6">
@@ -13,5 +14,5 @@
         <template if:true={error}>
             {error}
         </template>
-        
+    </template>
 </template>
