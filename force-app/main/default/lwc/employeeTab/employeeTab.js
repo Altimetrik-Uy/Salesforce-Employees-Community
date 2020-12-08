@@ -32,7 +32,7 @@ export default class EmployeeTab extends LightningElement {
             if (!src) {
                 src = assets + '/img/noimage.jpg';
             }
-            this.imgMarkup = "<p style=\"margin-top: 0px; \"><img style=\"width: 150px; height: 150px; border-radius: 50%;\" src=\"" + src + "\" alt=\"" + this.employeeName + "\"></img></p>";
+            this.imgMarkup = "<p style=\"margin-top: 0px; \"><img class=\"image-style;\" src=\"" + src + "\" alt=\"" + this.employeeName + "\"></img></p>";
         }
     }
 
@@ -71,13 +71,5 @@ export default class EmployeeTab extends LightningElement {
         this.template.querySelector('lightning-tabset').activeTabValue = this.selectedTab;
     }
 
-
-    renderedCallback() {
-        const style = document.createElement('style');
-        style.innerText = `slds-is-active {
-        background-color: #54C2B2;
-        }`;
-        this.template.querySelector('lightning-tab').appendChild(style);
-    }
 
 }
