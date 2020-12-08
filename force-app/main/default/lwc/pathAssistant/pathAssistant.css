@@ -83,6 +83,37 @@ ul div:nth-child(7){
 
 .main{
     background-color: #FCFCFC;
-    width:'auto';height:'auto';
     margin-left: 1%;
+    width:100%;
+    height: auto;
 }
+
+@media only screen and (max-width: 1250px) {
+    .test {
+        transform: scale(0.88);
+        margin-left: -49px !important;
+    }
+}
+
+  @media only screen and (max-width: 1160px) {
+    .test {
+        transform: scale(0.7);
+        margin-left: -61px !important;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .test {
+        transform: scale(0.6);
+        margin-left: -189px !important;
+    
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .test {
+        transform: scale(0.434);
+        margin-left: -273px !important;
+    }
+
+  }
