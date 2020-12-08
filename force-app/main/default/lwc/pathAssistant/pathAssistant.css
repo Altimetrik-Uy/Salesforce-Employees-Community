@@ -95,16 +95,23 @@ ul div:nth-child(7){
     }
 }
 
-  @media only screen and (max-width: 1160px) {
+@media only screen and (max-width: 1152px) {
+    .test {
+        transform: scale(0.8);
+        margin-left: -85px !important;
+    }
+  }
+
+@media only screen and (max-width: 1024px) {
     .test {
         transform: scale(0.7);
-        margin-left: -61px !important;
+        margin-left: -148px !important;
     }
   }
 
   @media only screen and (max-width: 900px) {
     .test {
-        transform: scale(0.6);
+        transform: scale(0.55);
         margin-left: -189px !important;
     
     }
