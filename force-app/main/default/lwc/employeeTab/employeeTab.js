@@ -71,4 +71,13 @@ export default class EmployeeTab extends LightningElement {
         this.template.querySelector('lightning-tabset').activeTabValue = this.selectedTab;
     }
 
+
+    renderedCallback() {
+        const style = document.createElement('style');
+        style.innerText = `slds-is-active {
+        background-color: #54C2B2;
+        }`;
+        this.template.querySelector('lightning-tab').appendChild(style);
+    }
+
 }

@@ -1,7 +1,8 @@
 <template>
+    <lightning-card>
     <!-- error alert  -->
     <div if:true={errorMsg}
-       class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error"
+       class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error main"
        role="alert">
        <span class="slds-assistive-text">error</span>
        <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small"
@@ -17,9 +18,12 @@
     </div>
     <!--Error alert fin -->
     <!-- Path -->
-    <article if:false={errorMsg} class="slds-card">
-       <div class="slds-card__body slds-card__body_inner">
-          <lightning-spinner variant="brand" size="small" if:true={hasToShowSpinner}> </lightning-spinner>
+    <article if:false={errorMsg} >
+         <div class="slds-card__body slds-card__body_inner main"> 
+         <!--   <div style="background-color: bisque;">-->
+            <div class="test">
+          <lightning-spinner variant="brand" size="small" if:true={hasToShowSpinner}></lightning-spinner>
+        
             <ul if:true={isLoaded} class="slds-path__nav" role="listbox" aria-orientation="horizontal" key={organizedPath.lstWrpRoles}>
                 <template for:each={organizedPath} for:item="column">
                     <div class="slds-col" key={organizedPath.lstWrpRoles} style="padding-right: 22px;"> 
@@ -84,7 +88,9 @@
                     </div>
                 </template>
             </ul>
+        </div>
        </div>
     </article>
     <!-- Path -->
+</lightning-card>
  </template>

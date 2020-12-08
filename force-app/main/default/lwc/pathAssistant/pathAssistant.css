@@ -80,3 +80,18 @@ ul div:nth-child(7){
 .is-pre-role-text{
     color:white;
 }
+
+.main{
+    background-color: #FCFCFC;
+    display: flex;
+    width: 900px;
+}
+
+.test{
+    background-color: black;
+    flex-shrink: 1;
+}
+
+.main div{
+    flex-basis: 120px;
+}

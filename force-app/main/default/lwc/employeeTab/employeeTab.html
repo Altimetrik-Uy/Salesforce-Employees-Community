@@ -4,17 +4,17 @@
             <div class="slds-col slds-size_2-of-12 imgCont">
                 <lightning-formatted-rich-text class="imageContainer" value={imgMarkup}></lightning-formatted-rich-text>
             </div>
-            <div class="slds-col slds-size_10-of-12">
+            <div class="slds-col slds-size_10-of-12 employee-data">
                 <div class="slds-grid slds-wrap">
                     <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font21">
-                        <lightning-icon icon-name="utility:user" alternative-text="User" title="User" size="x-small"></lightning-icon>
+                        <lightning-icon icon-name="utility:user" alternative-text="User" title="User" size="x-small" class="employee-icon-color"></lightning-icon>
                         &nbsp;&nbsp;
                         <b class="employeeName" >{employeeName}</b>
                     </div>
                 </div>
                 <div class="slds-grid slds-wrap">
                     <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font18">
-                        <lightning-icon icon-name="utility:company" alternative-text="Company" title="Company" size="x-small"></lightning-icon>
+                        <lightning-icon icon-name="utility:company" alternative-text="Company" title="Company" size="x-small" class="employee-icon-color"></lightning-icon>
                         &nbsp;&nbsp;
                         <small class="employedata">{employeeRole}</small>
                     </div>
@@ -23,26 +23,22 @@
                             <template if:true={imageStatus}>
                                 <template for:each={imageStatus} for:item="currentStatus">
                                     <span key={currentStatus.Id} class="slds-badge">
-                                        <span class="slds-badge__icon slds-badge__icon_left slds-badge__icon_inverse">
-                                            <svg version="1.1" class="slds-icon slds-icon_xx-small" xmlns="http://www.w3.org/2000/svg">
-                                                <circle cx="7" cy="7" r="7" fill={currentStatus.AssetImageSrc}></circle>            
-                                            </svg>                 
-                                        </span>Status
-                                        
+                                        <div class="light-box">
+                                            <span class={currentStatus.AssetImageSrc}></span>
+                                        </div>
+                                        Status
                                     </span>
                                 </template>
                             </template>
-
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <template if:true={projectStatusImageName}>
                                 <div class="slds-grid slds-gutters">
                                     <template for:each={projectStatusImageName} for:item="currentProjectStatus">
                                         <span key={currentProjectStatus.Id} class="slds-badge">
-                                            <span class="slds-badge__icon slds-badge__icon_left slds-badge__icon_inverse">
-                                                <svg version="1.1" class="slds-icon slds-icon_xx-small" xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="7" cy="7" r="7" fill={currentProjectStatus.ProjectImageSrc}></circle>            
-                                                </svg>                 
-                                            </span>{currentProjectStatus.ProjectName}
+                                            <div class="light-box">
+                                                <span class={currentProjectStatus.ProjectImageSrc}></span>
+                                            </div>
+                                            {currentProjectStatus.ProjectName}
                                         </span>
                                     </template>
                                 </div>
@@ -51,25 +47,25 @@
                     </div>
                 </div>
             <div>
-            <lightning-tabset variant="vertical" active-tab-value={selectedTab}>
-                
-                <lightning-tab class="iconColor" label="Overall" icon-name="standard:channel_program_levels" value="overall">
+            <lightning-tabset variant="vertical" active-tab-value={selectedTab} class="test">
+    
+                <lightning-tab class="tab-icon.color tab-color" label="Overall" icon-name="standard:channel_program_levels" value="overall">
                     <c-employee-overall-subtab employeeid={employeeid} onestatus={handleEmployeeStatus} onpstatus={handleProjectStatus} ongotocpath={handleGoToCPath}></c-employee-overall-subtab>
                 </lightning-tab>
 
-                <lightning-tab label="Career Path" icon-name="standard:case" value="cpath">
+                <lightning-tab label="Career Path" icon-name="standard:case" value="cpath" class="tab-color">
                     <c-employee-career-path-subtab employeeid={employeeid}></c-employee-career-path-subtab>
                 </lightning-tab>
 
-                <lightning-tab label="Status" icon-name="standard:outcome" value="status">
+                <lightning-tab label="Status" icon-name="standard:outcome" value="status" class="tab-color">
                     <c-employee-status-subtab employeeid={employeeid}></c-employee-status-subtab>
                 </lightning-tab>
 
-                <lightning-tab label="Projects" icon-name="standard:store_group" value="projects">
+                <lightning-tab label="Projects" icon-name="standard:store_group" value="projects" class="tab-color">
                     <c-employee-projects-subtab employeeid={employeeid}></c-employee-projects-subtab>
                 </lightning-tab>
 
-                <lightning-tab label="Performance Evaluations" icon-name="standard:work_order_item" value="pevaluation">
+                <lightning-tab label="Performance Evaluations" icon-name="standard:work_order_item" value="pevaluation" class="tab-color">
                     <c-employee-performance-evaluations-subtab employeeid={employeeid}></c-employee-performance-evaluations-subtab>
                 </lightning-tab>
 

@@ -33,13 +33,6 @@
     position: top;
 }
 
-:host {
-    --sds-c-icon-color-background: #FF9A3C;
-}
-
-lightning-icon{
-    background-color:white;
-}
 .font18 {
     font-size: 18px;
 }
@@ -52,3 +45,79 @@ lightning-icon{
     border-style:none;
     background-color: #FCFCFC;
 }
+
+.tab-color{
+    background-color: #FCFCFC;
+}
+
+.border{
+    border-style:none;
+    border-width:0px;
+}
+
+.employee-icon-color{
+    background-color: #FCFCFC;
+}
+
+.Green{
+    height: 19px;
+    width: 19px;
+    border-radius: 50%;
+    display: inline-block;
+    background-image: linear-gradient(#627361, #44CB7E);
+    border:2px solid white;   
+    border-radius :50%; 
+
+}
+
+.Red{
+    height: 19px;
+    width: 19px;
+    border-radius: 50%;
+    display: inline-block;
+    background-image: linear-gradient(#9D331A, #D64E48);
+    border:2px solid white;   
+    border-radius :50%; 
+}
+
+.Yellow{
+
+    height: 19px;
+    width: 19px;
+    border-radius: 50%;
+    display: inline-block;
+    background-image: linear-gradient(#FFB26C, #F3D050);
+    border:2px solid white;   
+    border-radius :50%; 
+}
+
+.light-box{
+    margin-top: 3px;
+    margin-right: 5px;
+}
+
+.slds-badge{
+    background-color: #F3F2F2;
+    border-color: #DDDBDA;
+}
+
+.employee-data{
+    margin-top: 2%;
+}
+
+.tab-icon.color{
+    background-color: #FF9A3C;
+}
+
+.slds-vertical-tabs__nav-item .slds-is-active{
+    background-color: blue !important;
+    }
+/* slds-vertical-tabs__nav-item slds-is-active */
+
+/* :host {
+    --sds-c-icon-color-background: #FF9A3C;
+} */
+
+/* lightning-icon{
+    background-color:white;
+} */
