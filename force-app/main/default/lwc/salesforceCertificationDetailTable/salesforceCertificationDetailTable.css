@@ -31,11 +31,6 @@ div table:nth-child(4){
     text-align:center;
 }
 
-.generalcard {
-    background:white; 
-    height: auto;
-}
-
 .currentrole {
     visibility: hidden;
     width:45%; 
