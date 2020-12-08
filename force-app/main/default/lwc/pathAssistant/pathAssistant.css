@@ -88,9 +88,9 @@ ul div:nth-child(7){
     height: auto;
 }
 
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 1920px) {
     .test {
-        transform: scale(0.88);
+        transform: scale(0.90);
         margin-left: -49px !important;
     }
 }
