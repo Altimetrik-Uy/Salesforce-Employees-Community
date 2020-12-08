@@ -83,15 +83,6 @@ ul div:nth-child(7){
 
 .main{
     background-color: #FCFCFC;
-    display: flex;
-    width: 900px;
-}
-
-.test{
-    background-color: black;
-    flex-shrink: 1;
-}
-
-.main div{
-    flex-basis: 120px;
+    width:'auto';height:'auto';
+    margin-left: 1%;
 }
