@@ -8,7 +8,7 @@
             <h2>{genericErrorMessage}</h2>
             <p>&nbsp;&nbsp; ({errorMsg})</p>
         </div>
-        <div class="rolessection" if:true={roles}>
+        <div class="rolessection main" if:true={roles}>
             <template for:each={roles} for:item="role">
                 <template if:true={role.blnExtraTable}>
                     <table class="slds-table slds-table_cell-buffer slds-table_bordered currentrole" key={role.blnCurrentRole}></table>
