@@ -20,6 +20,11 @@
     color: #706E6B;
 }
 
+.btnSave{
+    place-content: center; 
+    display: flex;
+}
+
 .descriptionText{
     font: "Salesforce Sans";
     font-size: 12px;
@@ -28,4 +33,6 @@
 
 .helpText{
     color: #16325C;
+    font-size: 10px;
+    font-weight: 400;
 }
