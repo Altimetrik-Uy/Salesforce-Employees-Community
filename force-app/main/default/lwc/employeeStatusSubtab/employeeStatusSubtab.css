@@ -100,3 +100,13 @@ h1 {
 .color-box{
     background-color: white;
 }
+
+.left-box-size{
+   width: 92px; 
+    min-width: 92px;
+
+}
+
+.right-box-size{
+   width:1550px;
+}
