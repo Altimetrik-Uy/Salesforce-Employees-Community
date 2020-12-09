@@ -1,10 +1,10 @@
 <template>
     <div class="main">
         <div class="slds-grid slds-wrap">
-            <div class="slds-col slds-size_2-of-12 image-containter">
+            <div class="slds-col slds-size_4-of-12 image-containter">
                 <lightning-formatted-rich-text value={imgMarkup}></lightning-formatted-rich-text>
             </div>
-            <div class="slds-col slds-size_10-of-12 employee-data">
+            <div class="slds-col slds-size_8-of-12 employee-data">
                 <div class="slds-grid slds-wrap">
                     <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font21">
                         <lightning-icon icon-name="utility:user" alternative-text="User" title="User" size="x-small" class="employee-icon-color"></lightning-icon>
@@ -46,6 +46,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             <div>
             <lightning-tabset variant="vertical" active-tab-value={selectedTab} class="test">
     
@@ -70,6 +71,6 @@
                 </lightning-tab>
 
             </lightning-tabset>
-        </div>
+  <!--       </div> -->
     </div>
 </template>
