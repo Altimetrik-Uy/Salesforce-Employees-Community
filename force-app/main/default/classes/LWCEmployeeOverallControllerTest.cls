@@ -60,7 +60,7 @@ public class LWCEmployeeOverallControllerTest {
         //User Info
         ta_User_Info__c newUserInfo = TestDataFactory.createUserInfo('testTrailId');
         Test.startTest();
-            String trailId = LWCEmployeeOverallController.getTrailBlazerId(newUser.Id);
+            String trailId = LWCEmployeeOverallController.getTrailBlazerId((String)newUser.Id);
         Test.stopTest();
         System.assertEquals('testTrailId', trailId);
     }
@@ -76,7 +76,7 @@ public class LWCEmployeeOverallControllerTest {
         //User Info
         ta_User_Info__c newUserInfo = TestDataFactory.createUserInfo('');
         Test.startTest();
-            String trailId = LWCEmployeeOverallController.getTrailBlazerId(newUser.Id);
+            String trailId = LWCEmployeeOverallController.getTrailBlazerId((String)newUser.Id);
         Test.stopTest();
         System.assertEquals(null, trailId);
     }
