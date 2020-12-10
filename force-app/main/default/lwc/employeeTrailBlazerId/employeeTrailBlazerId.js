@@ -39,7 +39,7 @@ export default class EmployeeTrailBlazerId extends LightningElement {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Success',
-                        message: 'Trailblazer Id updated',
+                        message: 'Trailblazer Id  was updated. Data will be updated in 40 minutes aprox',
                         variant: 'success'
                     })
                 );
