@@ -10,6 +10,7 @@ export default class PathAssistant extends LightningElement {
    
     @api employeeid;
     @track error;
+    @track isPreRole = true;
     @track organizedPath;
     // show/hide a loading spinner
     @track spinner = false;
