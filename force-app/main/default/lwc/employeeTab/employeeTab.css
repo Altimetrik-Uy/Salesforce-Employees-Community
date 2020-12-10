@@ -104,18 +104,9 @@
     background-color: #FF9A3C;
 }
 
-.slds-vertical-tabs__nav-item .slds-is-active{
-    background-color: blue !important;
-    }
-/* slds-vertical-tabs__nav-item slds-is-active */
-
-/* :host {
+.my-icon {
     --sds-c-icon-color-background: #FF9A3C;
-} */
-
-/* lightning-icon{
-    background-color:white;
-} */
+}
 
 .image-containter{
     width: 150px;

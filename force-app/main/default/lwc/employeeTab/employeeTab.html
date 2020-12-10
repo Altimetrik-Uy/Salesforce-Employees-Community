@@ -19,58 +19,82 @@
                         <small class="employedata">{employeeRole}</small>
                     </div>
                 </div>
-                    <div class="slds-grid slds-wrap">
-                            <template if:true={imageStatus}>
-                                <template for:each={imageStatus} for:item="currentStatus">
-                                    <span key={currentStatus.Id} class="slds-badge">
-                                        <div class="light-box">
-                                            <span class={currentStatus.AssetImageSrc}></span>
-                                        </div>
-                                        Status
-                                    </span>
-                                </template>
-                            </template>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <template if:true={projectStatusImageName}>
-                                <div class="slds-grid slds-gutters">
-                                    <template for:each={projectStatusImageName} for:item="currentProjectStatus">
-                                        <span key={currentProjectStatus.Id} class="slds-badge">
-                                            <div class="light-box">
-                                                <span class={currentProjectStatus.ProjectImageSrc}></span>
-                                            </div>
-                                            {currentProjectStatus.ProjectName}
-                                        </span>
-                                    </template>
+                <div class="slds-grid slds-wrap">
+                    <template if:true={imageStatus}>
+                        <template for:each={imageStatus} for:item="currentStatus">
+                            <span key={currentStatus.Id} class="slds-badge">
+                                <div class="light-box">
+                                    <span class={currentStatus.AssetImageSrc}></span>
                                 </div>
+                                Status
+                            </span>
+                        </template>
+                    </template>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <template if:true={projectStatusImageName}>
+                        <div class="slds-grid slds-gutters">
+                            <template for:each={projectStatusImageName} for:item="currentProjectStatus">
+                                <span key={currentProjectStatus.Id} class="slds-badge">
+                                    <div class="light-box">
+                                        <span class={currentProjectStatus.ProjectImageSrc}></span>
+                                    </div>
+                                    {currentProjectStatus.ProjectName}
+                                </span>
                             </template>
                         </div>
-                    </div>
+                    </template>
                 </div>
             </div>
-            <div>
-            <lightning-tabset variant="vertical" active-tab-value={selectedTab} class="test">
-    
-                <lightning-tab class="tab-icon.color tab-color" label="Overall" icon-name="standard:channel_program_levels" value="overall">
-                    <c-employee-overall-subtab employeeid={employeeid} onestatus={handleEmployeeStatus} onpstatus={handleProjectStatus} ongotocpath={handleGoToCPath}></c-employee-overall-subtab>
-                </lightning-tab>
-
-                <lightning-tab label="Career Path" icon-name="standard:case" value="cpath" class="tab-color">
-                    <c-employee-career-path-subtab employeeid={employeeid}></c-employee-career-path-subtab>
-                </lightning-tab>
-
-                <lightning-tab label="Status" icon-name="standard:outcome" value="status" class="tab-color">
-                    <c-employee-status-subtab employeeid={employeeid}></c-employee-status-subtab>
-                </lightning-tab>
-
-                <lightning-tab label="Projects" icon-name="standard:store_group" value="projects" class="tab-color">
-                    <c-employee-projects-subtab employeeid={employeeid}></c-employee-projects-subtab>
-                </lightning-tab>
-
-                <lightning-tab label="Performance Evaluations" icon-name="standard:work_order_item" value="pevaluation" class="tab-color">
-                    <c-employee-performance-evaluations-subtab employeeid={employeeid}></c-employee-performance-evaluations-subtab>
-                </lightning-tab>
-
-            </lightning-tabset>
-  <!--       </div> -->
+        </div>
+    </div>
+    <!-- Left Tabs  -->
+    <div class="slds-vertical-tabs">
+        <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
+            <li class={overallTab} title="Overall" role="presentation">
+                <a class="slds-vertical-tabs__link" id="linkoverall" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="0" aria-selected="true" aria-controls="slds-vertical-tabs-0">
+                    <lightning-icon class="my-icon slds-vertical-tabs__left-icon" icon-name="standard:channel_program_levels" size="small" alternative-text="Overall" title="Overall"></lightning-icon>
+                    <span title="Overall">Overall</span>
+                </a>
+            </li>
+            <li class={careerTab} title="Career Path" role="presentation">
+                <a class="slds-vertical-tabs__link"  id="linkcareerpath" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-1">
+                    <lightning-icon class="my-icon slds-vertical-tabs__left-icon" icon-name="standard:case" size="small" alternative-text="Career Path" title="Career Path"></lightning-icon>
+                    <span title="Career Path">Career Path</span>
+                </a>                            
+            </li>
+            <li class={statusTab} title="Status" role="presentation">
+                <a class="slds-vertical-tabs__link" id="linkstatus" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-2">
+                    <lightning-icon class="my-icon slds-vertical-tabs__left-icon" icon-name="standard:outcome" size="small" alternative-text="Status" title="Status"></lightning-icon>
+                    <span  title="Status">Status</span>
+                </a>                            
+            </li>
+            <li class={projectsTab} title="Projects" role="presentation">
+                <a class="slds-vertical-tabs__link" id="linkprojects" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-3">
+                    <lightning-icon class="my-icon slds-vertical-tabs__left-icon" icon-name="standard:store_group" size="small" alternative-text="Projects" title="Projects"></lightning-icon>
+                    <span title="Projects">Projects</span>
+                </a>                            
+            </li>
+            <li class={performanceTab} title="Performance Evaluations" role="presentation">
+                <a class="slds-vertical-tabs__link" id="linkperformance" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-4">
+                    <lightning-icon class="my-icon slds-vertical-tabs__left-icon" icon-name="standard:store_group" size="small" alternative-text="Performance Evaluations" title="Performance Evaluations"></lightning-icon>
+                    <span title="Performance Evaluations">Performance Evaluations</span>
+                </a>                            
+            </li>
+        </ul>
+        <div class={overallCont} data-id="overall_cont" role="tabpanel" aria-labelledby="slds-vertical-tabs-0__nav">
+            <c-employee-overall-subtab employeeid={employeeid} onestatus={handleEmployeeStatus} onpstatus={handleProjectStatus} ongotocpath={handleGoToCPath}></c-employee-overall-subtab>
+        </div>
+        <div class={careerCont} data-id="career_path_cont" role="tabpanel" aria-labelledby="slds-vertical-tabs-1__nav">
+            <c-employee-career-path-subtab employeeid={employeeid}></c-employee-career-path-subtab>
+        </div>
+        <div class={statusCont} id="status1" role="tabpanel" aria-labelledby="slds-vertical-tabs-2__nav">
+            <c-employee-status-subtab employeeid={employeeid}></c-employee-status-subtab>
+        </div>
+        <div class={projectsCont} id="projects" role="tabpanel" aria-labelledby="slds-vertical-tabs-3__nav">
+            <c-employee-projects-subtab employeeid={employeeid}></c-employee-projects-subtab>
+        </div>
+        <div class={performanceCont} id="performance_evaluations" role="tabpanel" aria-labelledby="slds-vertical-tabs-4__nav">
+            <c-employee-performance-evaluations-subtab employeeid={employeeid}></c-employee-performance-evaluations-subtab>
+        </div>
     </div>
 </template>
