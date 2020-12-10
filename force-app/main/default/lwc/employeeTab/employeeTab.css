@@ -107,6 +107,32 @@
 .my-icon {
     --sds-c-icon-color-background: #FF9A3C;
 }
+.slds-is-active .slds-vertical-tabs__link{
+    background-color: #FFFFFF !important;
+}
+.slds-vertical-tabs__nav-item.slds-is-active{
+    border: var(--lwc-borderWidthThin,1px) solid rgb(0 0 0 / 0%) !important;
+}
+.slds-vertical-tabs__link{
+    background-color: #F3F2F2;
+}
+.slds-vertical-tabs{
+    border: var(--lwc-borderWidthThin,1px) solid solid rgb(0 0 0 / 0%);
+}
+.slds-vertical-tabs__nav {
+    border-right: var(--lwc-borderWidthThin,1px) solid rgb(0 0 0 / 0%);
+}
+.slds-vertical-tabs__nav-item {
+    border: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,#D4D4D4)
+}
+
+.slds-vertical-tabs__nav-item:last-child {
+    margin-bottom: 0px;
+}
+.slds-vertical-tabs__link span{
+    font-size: 13px;
+    color: #3E3E3C
+}
 
 .image-containter{
     width: 150px;
