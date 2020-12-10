@@ -21,12 +21,10 @@ export default class EmployeeOverallSubtab extends LightningElement {
     ];
 
     @wire(getStatusImageName,{uId: '$userId'}) wiredImage({error,data}){
-        console.log('EmployeeOverallSubtab.userId '+this.userId);
         let TrafficLight;
         let id = 0;
         if (data) {
             this.imageStatus = data;
-            console.log('EmployeeOverallSubtab.this.imageStatus '+this.imageStatus);
             let preparedAssets = [];
             let preparedAsset = {};
             preparedAsset.Id = id;
@@ -88,7 +86,6 @@ export default class EmployeeOverallSubtab extends LightningElement {
                 detail: preparedAssets
             });
             this.dispatchEvent(projectStatusEvent);
-            window.console.log(JSON.stringify(this.assets));
         } else if (error) {
             this.error = error;
         }

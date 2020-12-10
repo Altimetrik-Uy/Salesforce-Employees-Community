@@ -4,9 +4,18 @@
             <div class="slds-m-around_medium main">
                 <lightning-layout horizontal-align="spread" multiple-rows="true">
                     <template for:each={wrapper} for:item="w">
-                        <lightning-layout-item key={w.role} padding="around-small" size="6">
-                            <c-role-requirements-chart roles-wrapper={w} onclick={goToPath}></c-role-requirements-chart> 
-                        </lightning-layout-item>                                                    
+                        <template key={w.role} if:true={w.hasRequired}>
+                            <lightning-layout-item key={w.role} padding="around-small" size="6" >
+                                <c-role-requirements-chart roles-wrapper={w} onclick={goToPath}></c-role-requirements-chart> 
+                            </lightning-layout-item>         
+                        </template>
+                        <template key={w.role} if:false={w.hasRequired}>
+                            <div  key={w.role} class="slds-col slds-size_6-of-12">
+                                <div class="no-cert-required-text">         
+                                    <p class="hover-text" onclick={goToPath}><template if:true={w.isCurrent}>Current role</template><template if:false={w.isCurrent}>Next role</template> {w.role} does not have any required certifications. In order to see suggested certifications for this role, visit Career Path subtab.</p>
+                                </div>
+                            </div>
+                        </template>
                     </template>
                 </lightning-layout>
             </div>

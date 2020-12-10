@@ -1,7 +1,6 @@
 import { LightningElement,api, track } from 'lwc';
 import { loadScript,loadStyle} from 'lightning/platformResourceLoader';
 import apexchjs from '@salesforce/resourceUrl/apexcharts';
-import TrafficLightBlack from '@salesforce/resourceUrl/TrafficLightBlack';
 export default class Radialcharts extends LightningElement {
     @track loadintialize = false;
     librariesLoaded =false;

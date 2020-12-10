@@ -113,7 +113,8 @@ public without sharing class RoleCertificationsController{
 								System.debug('roleCertificationsCrt.porcentaje ' + porcentaje);
 
 								certificacionWrapper.role = (String)ar.get('Role__c');
-								certificacionWrapper.porcentaje = porcentaje;
+                                certificacionWrapper.porcentaje = porcentaje;
+                                certificacionWrapper.hasRequired = true;
 								if ((String)ar.get('Role__c') == currentRole){
 									certificacionWrapper.isCurrent = true;
 									certificacionesWrapperList.add(certificacionWrapper);
@@ -124,37 +125,55 @@ public without sharing class RoleCertificationsController{
 							}
 							certificacionesWrapperList.addAll(wrapperList);
 							
-						} else{
-							rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
-							certificacionWrapper.role = 'Contact does not have any certifications.';
-							certificacionWrapper.porcentaje = 0;
-                            certificacionesWrapperList.add(certificacionWrapper);
-                          
+					} else{
+                            for (String role : totalRolesList){
+                                rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
+                                List<Salesforce_Career_Path__c> noRequiredList = [SELECT Id, Name, Role__c, Required__c
+                                FROM Salesforce_Career_Path__c
+                                WHERE Role__c =: role AND Required__c = True];
+                                if(noRequiredList.isEmpty()){
+                                    certificacionWrapper.hasRequired = false;
+                                }else{
+                                    certificacionWrapper.hasRequired = true;
+                                }
+                                if (currentRole == role) {
+                                    certificacionWrapper.isCurrent = true;
+                                }else{
+                                    certificacionWrapper.isCurrent = false;
+                                }
+                                certificacionWrapper.role = role;
+                                certificacionWrapper.porcentaje = 0;
+                                certificacionesWrapperList.add(certificacionWrapper);
+                            }
 						}
 					} else{
 						for (String role : totalRolesList){
-							rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
+                            rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
+                            certificacionWrapper.hasRequired = true;
 							certificacionWrapper.role = role;
 							certificacionWrapper.porcentaje = 0;
 							certificacionesWrapperList.add(certificacionWrapper);
 						}
 					}
 				} else{
-					rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
+                    rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
+                    certificacionWrapper.hasRequired = true;
 					certificacionWrapper.role = 'There are no Salesforce Career Path Records.';
 					certificacionWrapper.porcentaje = carreerPathList.size();
                     certificacionesWrapperList.add(certificacionWrapper);
                     
 				}
 			} else{
-				rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
+                rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
+                certificacionWrapper.hasRequired = true;
 				certificacionWrapper.role = 'Verify that the Email or Role fields have valid information.';
 				certificacionWrapper.porcentaje = contactList.size();
                 certificacionesWrapperList.add(certificacionWrapper);
                 
 			}
 		} else{
-			rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
+            rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
+            certificacionWrapper.hasRequired = true;
 			certificacionWrapper.role = 'No user record is associated with this contact.';
 			certificacionWrapper.porcentaje = userList.size();
             certificacionesWrapperList.add(certificacionWrapper);
@@ -176,6 +195,9 @@ public without sharing class RoleCertificationsController{
 		public boolean isCurrent{ get; set; }
 
 		@AuraEnabled
-		public boolean trailblazerId{ get; set; }
+        public boolean trailblazerId{ get; set; }
+        
+        @AuraEnabled
+        public boolean hasRequired{ get; set; }
 	}
 }
