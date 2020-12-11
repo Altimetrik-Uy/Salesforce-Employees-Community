@@ -16,16 +16,12 @@ export default class EmployeeTrailBlazerId extends LightningElement {
     }
     @wire(getTrailBlazerId, {uId: '$userId'})
     wiredTrailblazer({ error, data }) {
-        console.log('data: ' + data);
         if (data) {
-            console.log('in data');
             this.trailBlazerId = data;
             this.toggleSpinner(false);
         } else if (error) {
-            console.log('in error');
             this.trailBlazerId = undefined;
         }else {
-            console.log('in else');
             if (data !== undefined)
                 this.toggleSpinner(false);
         }
