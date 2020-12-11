@@ -1,3 +1,17 @@
-.slds-tabs_default{
-    border-left: 1px solid #D4D4D4;
+
+.slds-tabs--default__nav{
+   background-color: #FCFCFC !important;
+
+}
+
+ .slds-is-active .slds-default-tabs__link{
+    background-color: #FFFFFF !important;
+}
+
+.slds-default-tabs__nav-item:last-child {
+    margin-bottom: 0px;
+}
+.slds-default-tabs__link span{
+    font-size: 13px;
+    color: #3E3E3C
 }
