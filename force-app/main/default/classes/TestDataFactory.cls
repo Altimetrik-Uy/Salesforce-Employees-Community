@@ -54,6 +54,16 @@ public class TestDataFactory {
         return usr;
     }
 
+    public static ta_User_Info__c createUserInfo(string trailBlazerId){
+        ta_User_Info__c userInfo = new ta_User_Info__c();
+        userInfo.Name='Test';
+        userInfo.Email__c = 'Test@test.com';
+        userInfo.Role__c = 'Developer';
+        userInfo.TrailBlazerId__c = trailBlazerId;
+        insert userInfo;
+        return userInfo;
+    }
+
     public static Opportunity createOpportunity(String name, Id accountId){
         Opportunity opp = new Opportunity();
         opp.Name = name;

@@ -1,0 +1,38 @@
+.trailblazerMenu{
+    background-color: #F3F2F2;
+    border-radius: 12px;
+    padding: 4rem;
+    padding-left: 6rem;
+}
+.slds-spinner_container{
+    background-color: #ffffff;
+}
+ 
+.typeLink{
+    color:#005FB2;
+    font-size: 12px;
+    font: "Salesforce Sans";
+}
+
+.input{
+    font-size: 13px;
+    font: "Salesforce Sans";
+    color: #706E6B;
+}
+
+.btnSave{
+    place-content: center; 
+    display: flex;
+}
+
+.descriptionText{
+    font: "Salesforce Sans";
+    font-size: 12px;
+    color: #3E3E3C;
+}
+
+.helpText{
+    color: #16325C;
+    font-size: 10px;
+    font-weight: 400;
+}
