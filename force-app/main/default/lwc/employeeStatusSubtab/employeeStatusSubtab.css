@@ -55,7 +55,7 @@ blockquote.doc {
 }
 
 .icon-color-manager{
-    background-color: #65CAE4;
+    background-color: #65CAE4 !important;
 }
 
 .Green{
@@ -91,4 +91,22 @@ blockquote.doc {
 
 h1 {
     font-weight: bold;
+}
+
+.main{
+   background-color: #FCFCFC;
+}
+
+.color-box{
+    background-color: white;
+}
+
+.left-box-size{
+   width: 92px; 
+    min-width: 92px;
+
+}
+
+.right-box-size{
+   width:1550px;
 }

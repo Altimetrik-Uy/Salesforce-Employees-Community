@@ -50,10 +50,51 @@ public class LWCEmployeeOverallControllerTest {
     }
 
     @isTest
-    public static  void testGetRoleDescription() {
+    public static void testGetTrailBlazerId(){
+        //Account
+        Account acc = TestDataFactory.createAccount();
+        //Contact
+        Contact con = TestDataFactory.createContact(acc.Id);
+        //User
+        User newUser = TestDataFactory.createUser(con.Id);
+        //User Info
+        ta_User_Info__c newUserInfo = TestDataFactory.createUserInfo('testTrailId');
         Test.startTest();
-            String roleDesc = LWCEmployeeOverallController.getRoleDescription('Developer');
+            String trailId = LWCEmployeeOverallController.getTrailBlazerId((String)newUser.Id);
         Test.stopTest();
-        System.assertNotEquals(null, roleDesc);
+        System.assertEquals('testTrailId', trailId);
+    }
+
+    @isTest
+    public static void testGetTrailBlazerIdNull(){
+        //Account
+        Account acc = TestDataFactory.createAccount();
+        //Contact
+        Contact con = TestDataFactory.createContact(acc.Id);
+        //User
+        User newUser = TestDataFactory.createUser(con.Id);
+        //User Info
+        ta_User_Info__c newUserInfo = TestDataFactory.createUserInfo('');
+        Test.startTest();
+            String trailId = LWCEmployeeOverallController.getTrailBlazerId((String)newUser.Id);
+        Test.stopTest();
+        System.assertEquals(null, trailId);
+    }
+
+    @isTest
+    public static void testInsertTrailBlazerId(){
+        //Account
+        Account acc = TestDataFactory.createAccount();
+        //Contact
+        Contact con = TestDataFactory.createContact(acc.Id);
+        //User
+        User newUser = TestDataFactory.createUser(con.Id);
+        //User Info
+        ta_User_Info__c newUserInfo = TestDataFactory.createUserInfo('testTrailId');
+        Test.startTest();
+            LWCEmployeeOverallController.insertTrailBlazerId(newUser.Id, 'newTestTrailId');
+        Test.stopTest();
+        String trailId = LWCEmployeeOverallController.getTrailBlazerId(newUser.Id);
+        System.assertEquals('newTestTrailId', trailId);
     }
 }   

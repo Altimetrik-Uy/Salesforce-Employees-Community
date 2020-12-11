@@ -1,31 +1,33 @@
 import {LightningElement, api, wire} from 'lwc';
-import getRoleDescription from '@salesforce/apex/LWCEmployeeOverallController.getRoleDescription';
+import getRoleInformation from '@salesforce/apex/LWCEmployeeRoleController.getRoleInformation';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 const ROLE_FIELD = 'Contact.Role__c';
 
 
 export default class EmployeeCareerPathSubtab extends LightningElement {
     @api employeeid;
-    roleDescription = '';
     roleName = '';
     isCollapsed = false;
+    roleInfo;
 
     @wire(getRecord, {recordId: '$employeeid', fields: [ROLE_FIELD]})
     loadContactInfo({error, data}) {
         if (error) {
-            console.error(error);
+            console.log(error);
         }else if (data) {
             this.roleName = getFieldValue(data, ROLE_FIELD);
-            this.getDescription();
+            this.getRoleInfo();
         }
     }
 
-    getDescription()
+    getRoleInfo()
     {
         if (this.roleName !== '') {
-            getRoleDescription({roleName : this.roleName})
-            .then(roleDesc => {
-                this.roleDescription = roleDesc;
+            getRoleInformation({empId : this.employeeid})
+            .then(role => {
+                if (role) {
+                    this.roleInfo = role
+                }
             })
             .catch(error => {
                 console.log (error);

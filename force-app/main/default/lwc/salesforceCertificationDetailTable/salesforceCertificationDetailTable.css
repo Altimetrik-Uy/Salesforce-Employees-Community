@@ -1,0 +1,85 @@
+*{
+    height:auto;
+}
+
+body{
+    height:auto !important;
+}
+
+div table:nth-child(2){
+    margin: 44px;
+}
+
+div table:nth-child(3){
+    position: relative;
+}
+
+div table:nth-child(4){
+    position: relative;
+}
+
+.backgrd{
+    background: #ecebea !important;
+}
+
+.text-bold{
+    font-weight: bold !important;
+}
+
+.rolessection {
+    padding:10px; 
+    text-align:center;
+}
+
+.currentrole {
+    visibility: hidden;
+    width:45%; 
+    display:inline-table;
+    border: 1px solid #F3F2F2;
+}
+
+.roletable{
+    width:45%; 
+    display:inline-table;
+    margin-bottom: 44px;
+}
+
+.textcenter {
+    text-align: center;
+}
+
+.textbold {
+    font-weight:bold;
+}
+
+.requiredstar {
+    color:red;
+    font-size: 19px;
+}
+
+.cert-no-required-icon{
+    background-color: #F3D050;
+}
+
+.cert-required-icon{
+    background-color: #D64E48;
+}
+
+.cert-approved-icon{
+    background-color: #44CB7E;
+
+}
+
+.title-role{
+    text-align: center;
+    color: #0070D2;
+    font-weight:bold;
+}
+
+.border-row{
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.main{
+    background-color: #FCFCFC;
+}

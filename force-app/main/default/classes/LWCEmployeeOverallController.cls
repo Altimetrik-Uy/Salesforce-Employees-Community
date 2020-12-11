@@ -71,7 +71,7 @@ public class LWCEmployeeOverallController{
 
     @AuraEnabled (cacheable=true)
     public static String getStatusImageName(String uId){
-         String imageName = '';
+        String imageName = '';
         try{
             String contactId = [SELECT Contact.Id FROM User WHERE Id =:uId LIMIT 1].Contact.Id;
             Employee_Status__c eStatus = [SELECT Id, Status__c, Employee__c, Employee__r.LastName FROM Employee_Status__c WHERE Employee__r.Id =: contactId ORDER BY CreatedDate DESC LIMIT 1].get(0);
@@ -82,13 +82,27 @@ public class LWCEmployeeOverallController{
         return imageName;
     }
 
-    @AuraEnabled
-    public static String getRoleDescription(String roleName){
-        String roleDesc = '';
-        List<Role_Description__mdt> lstroleDesc = [SELECT Label, Description__c FROM Role_Description__mdt WHERE IsInactive__c != true AND Label = :roleName ];
-        if (!lstroleDesc.isEmpty()) {
-            roleDesc = lstroleDesc[0].Description__c;
+    @AuraEnabled (cacheable=true)
+    public static String getTrailBlazerId(String uId){
+        String trailBlazerId = '';
+        try{   
+            //Obtain the ContactId of the logged in user
+            String contactId = [SELECT Contact.Id FROM User WHERE Id = :uId LIMIT 1].Contact.Id;
+            Contact userEmail = [SELECT Email FROM Contact WHERE Id = :contactId];
+            ta_User_Info__c infoTrailBlazerId = [SELECT Email__c, TrailBlazerId__c FROM ta_User_Info__c WHERE Email__c = :userEmail.Email];
+            trailBlazerId = infoTrailBlazerId.TrailBlazerId__c;
+        }catch(Exception ex){
+            trailBlazerId = '';
         }
-        return roleDesc;
+        return trailBlazerId;
+    }
+
+    @AuraEnabled
+    public static void insertTrailBlazerId(String uId, String newTrailBlazerId){
+        String contactId = [SELECT Contact.Id FROM User WHERE Id = :uId LIMIT 1].Contact.Id;
+        Contact userEmail = [SELECT Email FROM Contact WHERE Id = :contactId];
+        ta_User_Info__c idUserInfo = [SELECT Id FROM ta_User_Info__c WHERE Email__c = :userEmail.Email];
+        idUserInfo.TrailBlazerId__c = newTrailBlazerId;
+        update(idUserInfo);
     }
 }

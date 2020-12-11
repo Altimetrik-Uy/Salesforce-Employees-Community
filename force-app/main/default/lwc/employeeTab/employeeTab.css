@@ -1,6 +1,3 @@
-.border {
-    border-right: 1px solid #D4D4D4;
-}
 
 .bold {
     font-weight: bold;
@@ -17,10 +14,6 @@
     margin-top: -3px !important;
 }
 
-.imageContainer {
-    text-align: center;
-}
-
 .dataContainer {
     height: 50%;
     margin-top: 10px;
@@ -30,10 +23,141 @@
     color: gray;
 }
 
+.employeeName {
+    font-size: 21px;
+    position: top;
+}
+
 .font18 {
     font-size: 18px;
 }
 
 .font21 {
     font-size: 21px;
+}
+
+.main{
+    border-style:none;
+    background-color: #FCFCFC;
+}
+
+.tab-color{
+    background-color: #FCFCFC;
+}
+
+.border{
+    border-style:none;
+    border-width:0px;
+}
+
+.employee-icon-color{
+    background-color: #FCFCFC;
+}
+
+.Green{
+    height: 19px;
+    width: 19px;
+    border-radius: 50%;
+    display: inline-block;
+    background-image: linear-gradient(#627361, #44CB7E);
+    border:2px solid white;   
+    border-radius :50%; 
+
+}
+
+.Red{
+    height: 19px;
+    width: 19px;
+    border-radius: 50%;
+    display: inline-block;
+    background-image: linear-gradient(#9D331A, #D64E48);
+    border:2px solid white;   
+    border-radius :50%; 
+}
+
+.Yellow{
+
+    height: 19px;
+    width: 19px;
+    border-radius: 50%;
+    display: inline-block;
+    background-image: linear-gradient(#FFB26C, #F3D050);
+    border:2px solid white;   
+    border-radius :50%; 
+}
+
+.light-box{
+    margin-top: 3px;
+    margin-right: 5px;
+}
+
+.slds-badge{
+    background-color: #F3F2F2;
+    border-color: #DDDBDA;
+}
+
+.employee-data{
+    margin-top: 4%;
+}
+
+.tab-icon.color{
+    background-color: #FF9A3C;
+}
+
+.my-icon {
+    --sds-c-icon-color-background: #FF9A3C;
+}
+
+.slds-vertical-tabs,
+.slds-vertical-tabs__content{
+    background-color: #FCFCFC;
+}
+
+.slds-is-active .slds-vertical-tabs__link{
+    background-color: #FFFFFF !important;
+}
+
+.slds-vertical-tabs__nav-item.slds-is-active{
+    border: var(--lwc-borderWidthThin,1px) solid rgb(0 0 0 / 0%) !important;
+}
+
+.slds-vertical-tabs__link{
+    background-color: #F3F2F2;
+}
+
+.slds-vertical-tabs{
+    border: var(--lwc-borderWidthThin,1px) solid solid rgb(0 0 0 / 0%);
+}
+
+.slds-vertical-tabs__nav {
+    border-right: var(--lwc-borderWidthThin,1px) solid rgb(0 0 0 / 0%);
+}
+
+.slds-vertical-tabs__nav-item {
+    border: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,#D4D4D4)
+}
+
+.slds-vertical-tabs__nav-item:last-child {
+    margin-bottom: 0px;
+}
+
+.slds-vertical-tabs__link span{
+    font-size: 13px;
+    color: #3E3E3C
+}
+
+.image-containter{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 2%;
+}
+
+.image-style{
+    display: inline;
+    margin: 0 auto;
+    margin-left: -25%;
+    height: 100%;
+    width: auto;
 }
