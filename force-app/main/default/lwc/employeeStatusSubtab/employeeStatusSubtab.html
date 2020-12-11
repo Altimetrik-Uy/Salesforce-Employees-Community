@@ -1,6 +1,5 @@
 <template>
-    <lightning-card >
-        <div class="top-box">
+        <div class="top-box main">
             <div class="slds-grid slds-grid_vertical">
                 <div class="slds-col">
                     <div class="slds-grid slds-wrap">
@@ -30,12 +29,12 @@
                         <template for:each={projectStatuses} for:item="currentProjectStatus">               
                             <li key={currentProjectStatus.Id}>   
                                 <div class="slds-wrap container-box">
-                                    <div class="slds-item slds-size_1-of-12 project-box status-box dimension-box light-container">
+                                    <div class="slds-item slds-size_1-of-12 project-box status-box dimension-box light-container left-box-size" >
                                             <div class="light-box">
                                                 <span class={currentProjectStatus.Status}></span>
                                             </div>          
                                     </div>
-                                    <div class="slds-item project-box slds-size_11-of-12 dimension-box">
+                                    <div class="slds-item project-box slds-size_11-of-12 dimension-box color-box right-box-size">
                                         <article class="slds-tile slds-tile_board ">
                                             <blockquote>
                                                 <div class="slds-size_3-of-4">
@@ -75,5 +74,4 @@
                 </div>
             </div>
         </div>
-    </lightning-card>
 </template>

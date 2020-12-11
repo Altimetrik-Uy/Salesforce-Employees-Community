@@ -80,3 +80,47 @@ ul div:nth-child(7){
 .is-pre-role-text{
     color:white;
 }
+
+.main{
+    background-color: #FCFCFC;
+    margin-left: 1%;
+    width:100%;
+    height: auto;
+}
+
+@media only screen and (max-width: 1920px) {
+    .test {
+        transform: scale(0.90);
+        margin-left: -49px !important;
+    }
+}
+
+@media only screen and (max-width: 1152px) {
+    .test {
+        transform: scale(0.8);
+        margin-left: -85px !important;
+    }
+  }
+
+@media only screen and (max-width: 1024px) {
+    .test {
+        transform: scale(0.7);
+        margin-left: -148px !important;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .test {
+        transform: scale(0.55);
+        margin-left: -189px !important;
+    
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .test {
+        transform: scale(0.434);
+        margin-left: -273px !important;
+    }
+
+  }
