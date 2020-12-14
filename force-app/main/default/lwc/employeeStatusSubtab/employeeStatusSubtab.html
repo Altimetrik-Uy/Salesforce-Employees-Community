@@ -18,7 +18,10 @@
                         <div class="slds-col slds-size_4-of-12">
                             <div class="slds-m-top_large button-box">
                                 <template if:true={isActive.data}>
-                                    <lightning-button variant="brand-outline" label="Add Status" title="Add Status" onclick={onClickSendMessage} class="slds-m-left_x-small"></lightning-button>
+                                    <div class="button-box-text">
+                                    <lightning-button variant="brand-outline" label="Add Status" onclick={onClickSendMessage} class="slds-m-left_x-small tooltip"></lightning-button>
+                                        <span class="button-box-text-help">Click for notifying your manager that you want a meeting for status update</span>
+                                    </div>
                                 </template>
                             </div>
                         </div>
