@@ -2,7 +2,7 @@
     background-color: #ededed;
     border-radius: 15px;
     min-height: 200px;
-    max-width: 1245px;
+    max-width: 910px;
 }
 
 .no-cert-required-text{
@@ -17,6 +17,6 @@
 
 .chart-box{
     min-width:50px;
-    min-height: 190px;
+    min-height: 250px;
     max-width: 300px;
 }

@@ -38,7 +38,7 @@ export default class Radialcharts extends LightningElement {
           if(this.rolesWrapper){
             if(this.rolesWrapper.isCurrent){
               porcentaje = Math.trunc(this.rolesWrapper.porcentaje);                        
-              role = [this.rolesWrapper.role,'Current Role'];
+              role = [this.rolesWrapper.role];
               
             }
             else{
@@ -51,7 +51,7 @@ export default class Radialcharts extends LightningElement {
             series: [porcentaje],
             chart: {
             id: role,
-            height: 175,
+            height: 180,
             type: 'radialBar',
           },
           plotOptions: {
@@ -59,8 +59,8 @@ export default class Radialcharts extends LightningElement {
               dataLabels: {
                 name: {
                   fontSize: '15px',
-                offsetY: 80,
-                color: '#1589EE',
+                  offsetY: 85,
+                  color: '#1589EE',
                 },
                 value: {
                   offsetY: -12,

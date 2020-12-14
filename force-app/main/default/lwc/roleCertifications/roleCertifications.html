@@ -1,7 +1,7 @@
 <template>
     <template if:true={display}>
         <template if:true={wrapper}>
-                <div class="slds-grid slds-wrap main">
+                <div class="slds-grid slds-wrap slds-grid_align-center main">
                     <template for:each={wrapper} for:item="w">
                         <div key={w.role} class="slds-col chart-box">
                         <template if:true={w.hasRequired}>
