@@ -36,10 +36,13 @@ export default class EmployeeTab extends LightningElement {
     selectedTab;
     sTArray = [];
     
-    
     openTab(event) {
         var targetId = event.currentTarget.id;
         //Career path tab
+        this.changeTab(targetId);
+    }
+
+    changeTab(targetId){
         if (targetId.includes('linkcareerpath')) {
             //tab section
             this.overallTab = this.tabClassInactive;
@@ -121,9 +124,7 @@ export default class EmployeeTab extends LightningElement {
                             this.performanceCont = this.contentClassShow;
                         }    
     }
-
-
-
+    
     @wire(getRecord, { recordId: '$employeeid', fields: [NAME_FIELD, ROLE_FIELD, IMAGE_FIELD] })
     loadContactInfo({ error, data }) {
         if (error) {
@@ -157,24 +158,7 @@ export default class EmployeeTab extends LightningElement {
         this.projectStatusImageName = event.detail;
     }
 
-    goToCPath() {
-        this.selectedTab = this.template.querySelector('lightning-tab').value;
-        var currentTab = this.selectedTab;
-        if (currentTab != 'cpath') {
-            this.selectedTab = 'cpath';
-        } 
-        this.template.querySelector('lightning-tabset').activeTabValue = this.selectedTab;
-    }
-
     handleGoToCPath(){
-        
-        this.selectedTab = this.template.querySelector('lightning-tab').value;
-        var currentTab = this.selectedTab;
-        if (currentTab != 'cpath') {
-            this.selectedTab = 'cpath';
-        } 
-        this.template.querySelector('lightning-tabset').activeTabValue = this.selectedTab;
+        this.changeTab('linkcareerpath');
     }
-
-
 }
