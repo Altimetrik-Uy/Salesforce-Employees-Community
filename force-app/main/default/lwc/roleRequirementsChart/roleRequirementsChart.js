@@ -51,23 +51,27 @@ export default class Radialcharts extends LightningElement {
             series: [porcentaje],
             chart: {
             id: role,
-            height: 350,
+            height: 175,
             type: 'radialBar',
           },
           plotOptions: {
             radialBar: {
               dataLabels: {
                 name: {
-                  fontSize: '16px',
+                  fontSize: '15px',
+                offsetY: 80,
+                color: '#1589EE',
                 },
                 value: {
-                  offsetY: 30,
+                  offsetY: -12,
                   fontSize: '16px',
+                  color: '#1589EE',
+                  fontWeight: 'bold',
                 }
               },
               hollow: {
-                size: '70%',
-              }
+                size: '60%',
+              },
             },
           },
           labels: [role],
