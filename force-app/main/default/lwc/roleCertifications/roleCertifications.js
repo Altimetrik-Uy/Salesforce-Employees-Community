@@ -1,8 +1,9 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api, wire, track } from 'lwc';
 import getPorcentaje from '@salesforce/apex/RoleCertificationsController.getPercentages';
 import IsFlsUpdatable from '@salesforce/schema/UserEntityAccess.IsFlsUpdatable';
+import { NavigationMixin } from 'lightning/navigation';
 
-export default class RoleCertifications extends LightningElement {
+export default class RoleCertifications extends NavigationMixin(LightningElement) {
     @api userId;
     wrapper;
     error;
@@ -27,7 +28,7 @@ export default class RoleCertifications extends LightningElement {
     goToPath(event){
         const goToPath1 = new CustomEvent(
             'gotocpath', {
-            detail: event.target.value
+            detail: event.target.value    
         });
         this.dispatchEvent(goToPath1);
     }
