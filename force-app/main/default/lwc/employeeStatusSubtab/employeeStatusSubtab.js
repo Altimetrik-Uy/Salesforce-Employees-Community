@@ -17,6 +17,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
     @track comboBoxValue = '';
     @track managerId = '';
     @track userName = '';
+    @track allSelected = false;
 
     @wire(getEmployeeProjects,{empId: '$employeeid'}) wiredProjects({error,data}){
         if(data){
@@ -42,6 +43,11 @@ export default class EmployeeStatusSubtab extends LightningElement {
    
     handleChange(event) {
         this.comboBoxValue = event.detail.value;
+        if(this.comboBoxValue == '000000000000000000'){
+            this.allSelected = true;
+        }else{
+            this.allSelected = false;
+        }
        //here we "call" getEmployeeStatuses
        refreshApex(this.projectStatuses);
     }
@@ -54,7 +60,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
         { fieldName: 'ProjectName'}
         ]; 
 
-    @wire(getEmployeeStatuses,{projId: '$comboBoxValue', empId: '$employeeid'}) getEmployeeStatuses({error,data}){
+    @wire(getEmployeeStatuses,{projId: '$comboBoxValue', empId: '$employeeid',allSelected: '$allSelected'}) getEmployeeStatuses({error,data}){
         if (data) {
             this.projectStatuses = data;
             let preparedAssets = [];

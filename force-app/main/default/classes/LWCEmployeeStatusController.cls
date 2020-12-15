@@ -17,14 +17,15 @@ public class LWCEmployeeStatusController {
         }
         return eAList;
     }
+
     @AuraEnabled(cacheable=true)
-    public static List<Employee_Status__c> getEmployeeStatuses(Id projId, String empId){
+    public static List<Employee_Status__c> getEmployeeStatuses(Id projId, String empId, Boolean allSelected){
         List<Employee_Status__c> projList = new List<Employee_Status__c>();
-        projList = [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC]; 
-        if(projList.isEmpty() && projId == '000000000000000000'){
-            projList = getAllEmployeeStatuses(empId);
+        if(allSelected) {
+            return projList = getAllEmployeeStatuses(empId);
+        }else{
+            return  projList = [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC]; 
         }
-        return projList;
     }
 
     public static List<Employee_Status__c> getAllEmployeeStatuses(String empId){

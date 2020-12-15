@@ -56,7 +56,7 @@ public class LWCEmployeeStatusControllerTest {
             List<Employee_Status__c> status = new List<Employee_Status__c>();
 			status.add(returnEmployeeStatusesStructure(eS1.Id));
             System.debug('eS1.Project__r.Id ' + eS1.Project__r.Id);
-            System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses(eS1.Project__r.Id, con.Id).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match');           
+            System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses(eS1.Project__r.Id, con.Id, false).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match');           
         }
     }
     
