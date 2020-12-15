@@ -13,12 +13,12 @@
                     </div>
                     <div class={cssClass}>
                         <div if:true={roleInfo} class="accordion-text">
-                            <p><strong>Actitud Required follow-up Mentoring:</strong>{roleInfo.Actitud_Required_follow_up_Mentoring__c}</p>
-                            <p><strong>Functional knowledge:</strong>{roleInfo.Functional_knowledge__c}</p>
-                            <p><strong>Technical knowledge:</strong>{roleInfo.Technical_knowledge__c}</p>
-                            <p><strong>Soft skills:</strong>{roleInfo.Soft_skills__c}</p>
-                            <p><strong>Language:</strong>{roleInfo.Language__c}</p>
-                            <p><strong>Communication:</strong>{roleInfo.Communication__c}</p>  
+                            <p if:true={roleInfo.Actitud_Required_follow_up_Mentoring__c}><strong>Actitud Required follow-up Mentoring:</strong>{roleInfo.Actitud_Required_follow_up_Mentoring__c}</p>
+                            <p if:true={roleInfo.Functional_knowledge__c}><strong>Functional knowledge:</strong>{roleInfo.Functional_knowledge__c}</p>
+                            <p if:true={roleInfo.Technical_knowledge__c}><strong>Technical knowledge:</strong>{roleInfo.Technical_knowledge__c}</p>
+                            <p if:true={roleInfo.Soft_skills__c}><strong>Soft skills:</strong>{roleInfo.Soft_skills__c}</p>
+                            <p if:true={roleInfo.Language__c}><strong>Language:</strong>{roleInfo.Language__c}</p>
+                            <p if:true={roleInfo.Communication__c}><strong>Communication:</strong>{roleInfo.Communication__c}</p>  
                         </div>
                         <div if:false={roleInfo}>
                             <p>No role information available</p>
