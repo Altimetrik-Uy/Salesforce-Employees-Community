@@ -28,7 +28,7 @@ public class LWCEmployeeStatusControllerTest {
            	empAssignmentList.add(returnEmployeeProjectsStructure(OppO1Id));
             empAssignmentList.add(returnEmployeeProjectsStructure(OppO2Id));
             empAssignmentList.add(returnEmployeeProjectsStructure(OppO3Id));
-            System.assertEquals(LWCEmployeeStatusController.getEmployeeProjects(con.Id).get(1).Project__r.Name, empAssignmentList.get(1).Project__r.Name,'One or more Projects do not match');
+           	System.assertEquals(LWCEmployeeStatusController.getEmployeeProjects(con.Id).get(1).Project__r.Name, empAssignmentList.get(1).Project__r.Name,'One or more Projects do not match');
         }
     }
     
@@ -55,8 +55,8 @@ public class LWCEmployeeStatusControllerTest {
             eS1.Meeting_Date__c =  date.parse('2/17/2021');
             List<Employee_Status__c> status = new List<Employee_Status__c>();
 			status.add(returnEmployeeStatusesStructure(eS1.Id));
-            System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses(eS1.Project__r.Id).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match');
-            
+            System.debug('eS1.Project__r.Id ' + eS1.Project__r.Id);
+            System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses(eS1.Project__r.Id, con.Id).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match');           
         }
     }
     

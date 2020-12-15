@@ -21,6 +21,12 @@ export default class EmployeeStatusSubtab extends LightningElement {
     @wire(getEmployeeProjects,{empId: '$employeeid'}) wiredProjects({error,data}){
         if(data){
             for(i=0; i<data.length; i++) {
+                if(i== 0){
+                    //Add the option view all
+                    this.projectItem = [...this.projectItem ,{value: '000000000000000000', label: 'All'}];
+                    //Set the most recent joined project as default
+                    this.comboBoxValue = data[i].Project__r.Id;
+                }
                 this.projectItem = [...this.projectItem ,{value: data[i].Project__r.Id , label: data[i].Project__r.Name}];  
             }
             this.error = undefined;
@@ -36,10 +42,9 @@ export default class EmployeeStatusSubtab extends LightningElement {
    
     handleChange(event) {
         this.comboBoxValue = event.detail.value;
-        //here we "call" getEmployeeStatuses
-        refreshApex(this.projectStatuses);
+       //here we "call" getEmployeeStatuses
+       refreshApex(this.projectStatuses);
     }
-
     @track projectStatuses;
     @track projectStatusesTableColumns = [ 
         { fieldName: 'Status'},
@@ -47,9 +52,9 @@ export default class EmployeeStatusSubtab extends LightningElement {
         { fieldName: 'StatusComments'},
         { fieldName: 'ManagerName'},
         { fieldName: 'ProjectName'}
-        ];
+        ]; 
 
-    @wire(getEmployeeStatuses,{projId: '$comboBoxValue'}) getEmployeeStatuses({error,data}){
+    @wire(getEmployeeStatuses,{projId: '$comboBoxValue', empId: '$employeeid'}) getEmployeeStatuses({error,data}){
         if (data) {
             this.projectStatuses = data;
             let preparedAssets = [];

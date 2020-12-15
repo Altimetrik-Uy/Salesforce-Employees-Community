@@ -18,8 +18,21 @@ public class LWCEmployeeStatusController {
         return eAList;
     }
     @AuraEnabled(cacheable=true)
-    public static List<Employee_Status__c> getEmployeeStatuses(Id projId){
-        return [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC];
+    public static List<Employee_Status__c> getEmployeeStatuses(Id projId, String empId){
+        List<Employee_Status__c> projList = new List<Employee_Status__c>();
+        projList = [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC]; 
+        if(projList.isEmpty() && projId == '000000000000000000'){
+            projList = getAllEmployeeStatuses(empId);
+        }
+        return projList;
+    }
+
+    public static List<Employee_Status__c> getAllEmployeeStatuses(String empId){
+        List<Id> projectsId = new List<Id>();
+        for(Employee_Assignment__c currentEA :[SELECT Project__r.Id FROM Employee_Assignment__c WHERE Employee__r.Id = :empId ORDER BY Project__r.Name]){
+            projectsId.add(currentEA.Project__r.Id);
+        } 
+        return [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id IN :projectsId ORDER BY Meeting_Date__c DESC];
     }
 
     @AuraEnabled(cacheable=true)
