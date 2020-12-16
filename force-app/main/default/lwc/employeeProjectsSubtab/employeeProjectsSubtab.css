@@ -8,7 +8,6 @@ blockquote.doc {
     background-color: #E5F1FB;
     padding: 16px;
     border-left: 5px solid #1589EE;
-    max-width: calc(100vw - 360px);
 }
 .icon-color{
     background-color: #FF9A3C;

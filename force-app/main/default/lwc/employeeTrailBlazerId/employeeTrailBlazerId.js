@@ -14,7 +14,6 @@ export default class EmployeeTrailBlazerId extends LightningElement {
     toggleSpinner(status) {
         this.spinnerOn = status;
     }
-
     @wire(getTrailBlazerId, {uId: '$userId'})
     wiredTrailblazer({ error, data }) {
         if (data) {
