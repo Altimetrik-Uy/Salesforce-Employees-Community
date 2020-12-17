@@ -1202,9 +1202,6 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Employee_Assignment__c-Employee Assignment Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Employee_Assignment__c-Employee Assignment Layout</layout>
         <recordType>Employee_Assignment__c.WO</recordType>
     </layoutAssignments>
     <layoutAssignments>
