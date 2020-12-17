@@ -1201,9 +1201,6 @@
         <layout>EmailMessage-Email Message Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Employee_Assignment_Status__c-Employee Assignment Status Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>Employee_Assignment__c-Employee Assignment Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
