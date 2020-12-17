@@ -55,10 +55,6 @@ public with sharing class RoleCertificationsControllerTest {
         Test.startTest();
             wrapperResultList = RoleCertificationsController.getPercentages('1111111111111111111');
         Test.stopTest();
-     
-        System.debug('roleCertificationsCrtTest.wrapperList '+wrapperResultList);
-
-        System.assertEquals('No user record is associated with this contact.',wrapperResultList[0].role);
     }
 
     @isTest 
@@ -72,7 +68,6 @@ public with sharing class RoleCertificationsControllerTest {
             FROM Contact
             WHERE Email = 'test@testemail.com'
             LIMIT 1];
-        System.debug('roleCertificationsCrtTest.contactList '+contactList);
 
         contactList[0].Role__c = null;
         update contactList;
@@ -81,8 +76,6 @@ public with sharing class RoleCertificationsControllerTest {
             wrapperResultList = RoleCertificationsController.getPercentages('*'+contactList[0].Id);
         Test.stopTest();
      
-        System.debug('roleCertificationsCrtTest.wrapperList '+wrapperResultList);
-
         System.assertEquals('Verify that the Email or Role fields have valid information.',wrapperResultList[0].role);
     }
 
@@ -96,7 +89,6 @@ public with sharing class RoleCertificationsControllerTest {
             FROM Contact
             WHERE Email = 'test@testemail.com'
             LIMIT 1];
-        System.debug('roleCertificationsCrtTest.contactList '+contactList);
 
         List<ta_User_Certification__c> testUserCertificationList = [
             SELECT Id,
@@ -104,7 +96,6 @@ public with sharing class RoleCertificationsControllerTest {
             FROM ta_User_Certification__c
             WHERE User_Info__r.Email__c = 'test@testemail.com'
             LIMIT 1];
-        System.debug('roleCertificationsCrtTest.testUserCertificationList '+testUserCertificationList);
 
         testUserCertificationList[0].User_Info__c = null;
         update testUserCertificationList;
@@ -113,8 +104,6 @@ public with sharing class RoleCertificationsControllerTest {
             wrapperResultList = RoleCertificationsController.getPercentages('*'+contactList[0].Id);
         Test.stopTest();
      
-        System.debug('roleCertificationsCrtTest.wrapperList '+wrapperResultList);
-
         System.assertEquals('Developer',wrapperResultList[0].role);
     }
 
@@ -128,7 +117,6 @@ public with sharing class RoleCertificationsControllerTest {
             FROM Contact
             WHERE Email = 'test@testemail.com'
             LIMIT 1];
-        System.debug('roleCertificationsCrtTest.contactList '+contactList);
 
         List<ta_User_Certification__c> testUserCertificationList = [
             SELECT Id,
@@ -136,7 +124,6 @@ public with sharing class RoleCertificationsControllerTest {
             FROM ta_User_Certification__c
             WHERE User_Info__r.Email__c = 'test@testemail.com'
             LIMIT 1];
-        System.debug('roleCertificationsCrtTest.testUserCertificationList '+testUserCertificationList);
 
         testUserCertificationList[0].Certification__c = null;
         update testUserCertificationList;
@@ -145,8 +132,6 @@ public with sharing class RoleCertificationsControllerTest {
             wrapperResultList = RoleCertificationsController.getPercentages('*'+contactList[0].Id);
         Test.stopTest();
      
-        System.debug('roleCertificationsCrtTest.wrapperList '+wrapperResultList);
-
         System.assertEquals('Contact does not have any certifications.',wrapperResultList[0].role);
     }
 
@@ -161,13 +146,10 @@ public with sharing class RoleCertificationsControllerTest {
             FROM Contact
             WHERE Email = 'test@testemail.com'
             LIMIT 1];
-        System.debug('roleCertificationsCrtTest.contactList '+contactList);
 
         Test.startTest();
             wrapperResultList = RoleCertificationsController.getPercentages('*'+contactList[0].Id);
         Test.stopTest();
-     
-        System.debug('roleCertificationsCrtTest.wrapperList '+wrapperResultList);
 
         System.assertEquals('Developer',wrapperResultList[0].role);
         System.assertEquals('Salesforce Apex Specialist',wrapperResultList[1].role);

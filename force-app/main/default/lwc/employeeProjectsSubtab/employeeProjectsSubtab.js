@@ -31,7 +31,6 @@ export default class EmployeeProjectsSubtab extends LightningElement {
                 preparedAssets.push(preparedAsset);
             });
             this.projectStatusImageName = preparedAssets;
-            window.console.log(JSON.stringify(this.assets));
         } else if (error) {
             this.error = error;
         }
