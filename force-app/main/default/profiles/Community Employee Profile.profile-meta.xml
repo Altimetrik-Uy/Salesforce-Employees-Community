@@ -1057,16 +1057,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Role_Description__mdt.Description__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Role_Description__mdt.IsInactive__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Salesforce_Career_Path_Settings__mdt.Actitud_Required_follow_up_Mentoring__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -1201,16 +1191,6 @@
         <layout>EmailMessage-Email Message Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Employee_Assignment__c-Employee Assignment Layout</layout>
-        <recordType>Employee_Assignment__c.WO</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Employee_Skill__c-Employee Skill Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Employee_Status__c-Employee Status Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>FeedItem-Feed Item Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -1231,9 +1211,7 @@
     <layoutAssignments>
         <layout>Macro-Macro Layout</layout>
     </layoutAssignments>
-    <layoutAssignments>
-        <layout>Managers_Assignment__c-Managers Assignment Layout</layout>
-    </layoutAssignments>
+
     <layoutAssignments>
         <layout>Metric-Metric Layout</layout>
     </layoutAssignments>
@@ -1244,16 +1222,7 @@
         <layout>Pricebook2-Price Book Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Project_Requirement__c-Project Requirement Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Project_Status__c-Project Status Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>QuickText-Quick Text Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Role_Description__mdt-Role Description Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Salesforce_Career_Path__c-Salesforce Career Path Layout</layout>
@@ -1268,22 +1237,7 @@
         <layout>ScorecardMetric-Scorecard Metric Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Skill__c-Skill Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>SocialPersona-Social Persona Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Sub_Project__c-Sub Project Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Survey_Answer__c-Survey Answer Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Survey_Question__c-Survey Question Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Survey_Template__c-Survey Template Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>UserAlt-User Profile Layout</layout>
