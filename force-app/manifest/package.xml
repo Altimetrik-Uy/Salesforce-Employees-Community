@@ -145,5 +145,9 @@
         <members>TrafficLightYellow</members>
         <name>StaticResource</name>
     </types>
+    <types>
+        <members>*</members>
+        <name>CspTrustedSite</name>
+    </types>
     <version>50.0</version>
 </Package>
