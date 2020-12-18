@@ -51,6 +51,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
        //here we "call" getEmployeeStatuses
        refreshApex(this.projectStatuses);
     }
+
     @track projectStatuses;
     @track projectStatusesTableColumns = [ 
         { fieldName: 'Status'},
@@ -72,7 +73,6 @@ export default class EmployeeStatusSubtab extends LightningElement {
                 preparedAsset.StatusDate = asset.Meeting_Date__c;
                 preparedAsset.StatusComments = asset.Comments__c;
                 preparedAsset.ManagerName = asset.CreatedBy.Name;
-                preparedAsset.ProjectName = asset.Project__r.Name;
                 preparedAssets.push(preparedAsset);
             });
             this.projectStatuses = preparedAssets;
