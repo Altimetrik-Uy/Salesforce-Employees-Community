@@ -46,14 +46,22 @@
                     <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
                         <lightning:icon class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default" 
                                         iconName="utility:user" size="xx-small" alternativeText="Email"/> 
-                        <lightning:input name="username" aura:id="username" value="" placeholder="{!v.usernameLabel}" class="slds-input" onchange="{!c.onKeyUp}" variant="label-hidden"/>
+                        <span onkeypress="{!c.pressEnter}">
+                            <lightning:input name="username" aura:id="username" value=""
+                                             placeholder="{!v.usernameLabel}" class="slds-input" 
+                                              variant="label-hidden"/>
+                        </span>
                     </div> 
                 </div>
                 <div id="sfdc_password_container" class="slds-form-element">
                     <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
                         <lightning:icon class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default" 
                                         iconName="utility:lock" size="xx-small" alternativeText="Password"/>
-                        <lightning:input name="password" type="password" aura:id="password" value="" placeholder="{!v.passwordLabel}" class="slds-input" onchange="{!c.onKeyUp}" variant="label-hidden"/>
+                        <span onkeypress="{!c.pressEnter}">
+                            <lightning:input name="password" type="password" aura:id="password" value=""
+                                             placeholder="{!v.passwordLabel}" class="slds-input"  
+                                              variant="label-hidden"/>
+                        </span>
                     </div>
                 </div>
         
