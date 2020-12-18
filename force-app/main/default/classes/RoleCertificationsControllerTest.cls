@@ -55,6 +55,7 @@ public with sharing class RoleCertificationsControllerTest {
         Test.startTest();
             wrapperResultList = RoleCertificationsController.getPercentages('1111111111111111111');
         Test.stopTest();
+        System.assertEquals('No user record is associated with this contact.',wrapperResultList[0].role);
     }
 
     @isTest 
