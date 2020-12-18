@@ -29,11 +29,7 @@ public class LWCEmployeeStatusController {
     }
 
     public static List<Employee_Status__c> getAllEmployeeStatuses(String empId){
-        List<Id> projectsId = new List<Id>();
-        for(Employee_Assignment__c currentEA :[SELECT Project__r.Id FROM Employee_Assignment__c WHERE Employee__r.Id = :empId ORDER BY Project__r.Name]){
-            projectsId.add(currentEA.Project__r.Id);
-        } 
-        return [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id IN :projectsId ORDER BY Meeting_Date__c DESC];
+        return [SELECT Id, Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name FROM Employee_Status__c WHERE Employee__r.Id =:empId ORDER BY Meeting_Date__c DESC];
     }
 
     @AuraEnabled(cacheable=true)
