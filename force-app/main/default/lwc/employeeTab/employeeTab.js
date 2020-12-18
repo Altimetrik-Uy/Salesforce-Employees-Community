@@ -138,10 +138,12 @@ export default class EmployeeTab extends LightningElement {
             if (!src) {
                 src = assets + '/img/noimage.jpg';
             }
-            this.imgMarkup = "<p style=\"margin-top: 0px; \"><img class=\"image-style;\" src=\"" + src + "\" alt=\"" + this.employeeName + "\"></img></p>";
+            this.imgMarkup = "<img style=\"width: 100%; height: 100%; display: inline; margin: 0 auto;\" src=\"" + src + "\" alt=\"" + this.employeeName + "\"></img>";
         }
     }
    
+
+    
     extract(str) {
         let m;
         if ((m = /src=\"(.+?)\"/.exec(str)) !== null) {
