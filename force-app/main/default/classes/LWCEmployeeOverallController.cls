@@ -44,7 +44,6 @@ public class LWCEmployeeOverallController{
                 return new  List<Project_Status__c>();
             }
         }catch(Exception ex){
-            System.debug('exception:' + ex);    
             return new  List<Project_Status__c>();
         }
     }
