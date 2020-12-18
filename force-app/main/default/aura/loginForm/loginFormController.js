@@ -27,10 +27,10 @@
         helper.setBrandingCookie(component, event, helper);
     },
     
-    onKeyUp: function(component, event, helpler){
+    pressEnter: function(component, event, helper){
         //checks for "enter" key
-        if (event.getParam('keyCode')===13) {
-            helpler.handleLogin(component, event, helpler);
+        if (event.which == 13) {
+           helper.handleLogin(component, event, helper);
         }
     },
     
