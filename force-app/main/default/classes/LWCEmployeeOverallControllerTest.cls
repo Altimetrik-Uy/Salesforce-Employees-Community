@@ -100,16 +100,20 @@ public class LWCEmployeeOverallControllerTest {
 
     @isTest
     public static void testInsertTrailBlazerId_WithoutUserInfo(){
-        //Account
-        Account acc = TestDataFactory.createAccount();
-        //Contact
-        Contact con = TestDataFactory.createContact(acc.Id);
-        //User
-        User newUser = TestDataFactory.createUser(con.Id);
-        Test.startTest();
-            LWCEmployeeOverallController.insertTrailBlazerId(newUser.Id, 'newTestTrailId');
-        Test.stopTest();
-        String trailId = LWCEmployeeOverallController.getTrailBlazerId(newUser.Id);
-        System.assertEquals('newTestTrailId', trailId);
+        //System Admin
+        User admin = TestDataFactory.createAdminUser();
+        System.runAs(admin) {
+            //Account
+            Account acc = TestDataFactory.createAccount();
+            //Contact
+            Contact con = TestDataFactory.createContact(acc.Id);
+            //User
+            User newUser = TestDataFactory.createUser(con.Id);
+            Test.startTest();
+                LWCEmployeeOverallController.insertTrailBlazerId(newUser.Id, 'newTestTrailId');
+            Test.stopTest();
+            String trailId = LWCEmployeeOverallController.getTrailBlazerId(newUser.Id);
+            System.assertEquals('newTestTrailId', trailId);
+        }
     }
 }   
