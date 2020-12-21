@@ -26,8 +26,17 @@
                                             <p><lightning-formatted-date-time value='{currentProjectStatus.ProjectJoinDate}' year="numeric" month="numeric" day="numeric" time-zone="UTC"></lightning-formatted-date-time></p>
                                             </template>
                                             <template if:false={currentProjectStatus.ProjectCurrent}>
-                                                <p><lightning-formatted-date-time value='{currentProjectStatus.ProjectJoinDate}' year="numeric" month="numeric" day="numeric" time-zone="UTC"></lightning-formatted-date-time> - 
-                                                    <lightning-formatted-date-time value='{currentProjectStatus.ProjectEndDate}' year="numeric" month="numeric" day="numeric" time-zone="UTC"></lightning-formatted-date-time></p>
+                                                <p>
+                                                    <lightning-formatted-date-time 
+                                                        value='{currentProjectStatus.ProjectJoinDate}' 
+                                                        year="numeric" month="numeric" day="numeric" 
+                                                        time-zone="UTC">
+                                                    </lightning-formatted-date-time> - <lightning-formatted-date-time 
+                                                        value='{currentProjectStatus.ProjectEndDate}' 
+                                                        year="numeric" month="numeric" day="numeric" 
+                                                        time-zone="UTC">
+                                                    </lightning-formatted-date-time>
+                                                </p>
                                             </template>
                                         </div>
                                     </div>
