@@ -8,20 +8,20 @@ export default class MainTabset extends LightningElement {
     
     employeeid;
 
-    @track homeTab  = 'slds-default-tabs__nav-item slds-is-active';
-    @track careerTab = 'slds-default-tabs__nav-item';
-    @track certificationsTab = 'slds-default-tabs__nav-item';
-    @track howTab = 'slds-default-tabs__nav-item'; 
+    @track homeTab  = 'slds-tabs--default__item slds-active';
+    @track careerTab = 'slds-tabs--default__item';
+    @track certificationsTab = 'slds-tabs--default__item';
+    @track howTab = 'slds-tabs--default__item'; 
  
-    @track homeCont = 'slds-default-tabs__content slds-show';
-    @track careerCont = 'slds-default-tabs__content slds-hide';
-    @track certificationsCont = 'slds-default-tabs__content slds-hide'; 
-    @track howCont = 'slds-default-tabs__content slds-hide';  
+    @track homeCont = 'slds-tabs--default__content slds-show';
+    @track careerCont = 'slds-tabs--default__content slds-hide';
+    @track certificationsCont = 'slds-tabs--default__content slds-hide'; 
+    @track howCont = 'slds-tabs--default__content slds-hide';  
 
-    tabClassActive = 'slds-default-tabs__nav-item slds-is-active';
-    tabClassInactive = "slds-default-tabs__nav-item";
-    contentClassShow = 'slds-default-tabs__content slds-show';
-    contentClassHide = "slds-default-tabs__content slds-hide";
+    tabClassActive = 'slds-tabs--default__item slds-active';
+    tabClassInactive = 'slds-tabs--default__item';
+    contentClassShow = 'slds-tabs--default__content slds-show';
+    contentClassHide = 'slds-tabs--default__content slds-hide';
 
     openTab(event) {
         var targetId = event.currentTarget.id;
