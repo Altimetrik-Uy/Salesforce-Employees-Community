@@ -44,7 +44,6 @@ public class LWCEmployeeOverallController{
                 return new  List<Project_Status__c>();
             }
         }catch(Exception ex){
-            System.debug('exception:' + ex);    
             return new  List<Project_Status__c>();
         }
     }
@@ -100,9 +99,18 @@ public class LWCEmployeeOverallController{
     @AuraEnabled
     public static void insertTrailBlazerId(String uId, String newTrailBlazerId){
         String contactId = [SELECT Contact.Id FROM User WHERE Id = :uId LIMIT 1].Contact.Id;
-        Contact userEmail = [SELECT Email FROM Contact WHERE Id = :contactId];
-        ta_User_Info__c idUserInfo = [SELECT Id FROM ta_User_Info__c WHERE Email__c = :userEmail.Email];
-        idUserInfo.TrailBlazerId__c = newTrailBlazerId;
-        update(idUserInfo);
+        Contact userEmail = [SELECT Email, Name FROM Contact WHERE Id = :contactId];
+        List<ta_User_Info__c> userInfoList = [SELECT Id FROM ta_User_Info__c WHERE Email__c = :userEmail.Email];
+        if(userInfoList.isEmpty()){
+            ta_User_Info__c newUserInfo = new ta_User_Info__c();
+            newUserInfo.Email__c = userEmail.Email;
+            newUserInfo.Role__c = 'Developer';
+            newUserInfo.Name = userEmail.Name;
+            newUserInfo.TrailBlazerId__c = newTrailBlazerId;
+            insert newUserInfo;  
+        } else{
+            userInfoList.get(0).TrailBlazerId__c = newTrailBlazerId;
+            update(userInfoList);
+        }
     }
 }

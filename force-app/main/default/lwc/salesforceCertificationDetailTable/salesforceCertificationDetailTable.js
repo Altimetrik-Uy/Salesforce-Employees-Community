@@ -22,7 +22,6 @@ export default class SalesforceCertificationDetailTable extends LightningElement
             }
         })
         .catch(error => {
-            console.log('Error -->', error);
             this.errorMsg = error.body.message;
         })
     }
