@@ -149,5 +149,9 @@
         <members>*</members>
         <name>CspTrustedSite</name>
     </types>
+    <types>
+        <members>*</members>
+        <name>SharingRules</name>
+    </types>
     <version>50.0</version>
 </Package>
