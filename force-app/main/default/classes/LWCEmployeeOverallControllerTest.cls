@@ -108,7 +108,8 @@ public class LWCEmployeeOverallControllerTest {
             String trailId = LWCEmployeeOverallController.getTrailBlazerId(newUser.Id);
             System.assertEquals('newTestTrailId', trailId);
         }
-
+    }
+    
     @isTest
     public static void testInsertTrailBlazerId_WithoutUserInfo(){
         //System Admin
