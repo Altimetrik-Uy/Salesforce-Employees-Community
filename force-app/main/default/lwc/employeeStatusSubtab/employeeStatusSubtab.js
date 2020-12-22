@@ -6,7 +6,6 @@ import getManager from '@salesforce/apex/LWCEmployeeStatusController.getManager'
 import getUser from '@salesforce/apex/LWCEmployeeStatusController.getUser';
 import getProjectActiveStauts from '@salesforce/apex/LWCEmployeeStatusController.getProjectActiveStauts';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-
 import { refreshApex } from '@salesforce/apex';
 let i = 0;
 
@@ -15,7 +14,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
     @track error; 
     @track projectItem = [];
     @track comboBoxValue = '';
-    @track managerId = '';
+    @track lstManagerId = [];
     @track userName = '';
     @track allSelected = false;
 
@@ -83,7 +82,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
 
     @wire(getManager,{projId: '$comboBoxValue'}) getManager({error,data}){
         if(data){
-            this.managerId = data;
+            this.lstManagerId = data;
         }else if (error){
             this.error = error;
         }
@@ -98,8 +97,9 @@ export default class EmployeeStatusSubtab extends LightningElement {
     }
     
     @wire(getProjectActiveStauts,{empId:'$employeeid', projId:'$comboBoxValue'}) isActive;
+
     onClickSendMessage(){
-        sendMessage({managerId:this.managerId, userName: this.userName})
+        sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
         .then (s=>{
             if(s){
                 const event = new ShowToastEvent({
