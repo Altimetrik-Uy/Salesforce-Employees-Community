@@ -64,6 +64,8 @@ public class LWCEmployeeStatusControllerTest {
     @isTest(SeeAllData=True)
     public static void statusTabTests(){
         User admin = TestDataFactory.createAdminUser();
+        Profile pAdmin = [SELECT Id, Name FROM Profile WHERE Name = 'System Administrator' LIMIT 1];
+        User manager = TestDataFactory.createAdminManagerUser();
         System.runAs(admin){
             //Account
             Account acc = TestDataFactory.createAccount();
@@ -74,14 +76,17 @@ public class LWCEmployeeStatusControllerTest {
             
          	Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
             Id ProjectId = [SELECT Id, Name FROM Opportunity LIMIT 1].Id;
-            Managers_Assignment__c mA1 = TestDataFactory.createManagersAssigment(admin.Id, ProjectId);
-            Managers_Assignment__c mA2 = TestDataFactory.createManagersAssigment(admin.Id, ProjectId);
+            Managers_Assignment__c mA1 = TestDataFactory.createManagersAssigment(manager.Id, ProjectId);
+            Managers_Assignment__c mA2 = TestDataFactory.createManagersAssigment(manager.Id, ProjectId);
            
             List<Employee_Assignment__c> empAssignmentList = new List<Employee_Assignment__c>();
             Employee_Assignment__c eA1 = returnEmployeeProjectsStructure(OppO1Id);
             eA1.Start_Date__c = date.parse('11/12/2020');
             eA1.End_Date__c = date.parse('11/12/2021');
             update eA1;
+            System.debug([SELECT Active__c, Start_Date__c, End_Date__c, Project__r.Name, Employee__r.Name FROM Employee_Assignment__c WHERE Employee__c=:con.Id]);
+            System.debug(con.Id);
+            System.debug(ProjectId);
             empAssignmentList.add(eA1);
             
             Employee_Status__c eS1 = TestDataFactory.createEmployeeStatus(con.Id,'Red', 'Red');
@@ -89,10 +94,11 @@ public class LWCEmployeeStatusControllerTest {
             update eS1;
 
             List<String> lstManagersId = new List<String>();
-            lstManagersId.add(admin.Id);
+            lstManagersId.add(manager.Id);
             List<Employee_Status__c> status = new List<Employee_Status__c>();
             status.add(returnEmployeeStatusesStructure(eS1.Id));
  			
+            
             Test.startTest();
             System.assertEquals(LWCEmployeeStatusController.getManager(ProjectId), lstManagersId, 'Project Manager do not match');
             System.assertEquals(LWCEmployeeStatusController.getUser(con.Id), 'Test Test' , 'Contact do not match');
