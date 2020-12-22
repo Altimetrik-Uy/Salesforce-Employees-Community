@@ -123,4 +123,13 @@ public class TestDataFactory {
         insert eStatus;
         return eStatus;
     }
+
+    public static Managers_Assignment__c createManagersAssigment(Id managerId, Id opportunityId){
+        Managers_Assignment__c mAssignment = new Managers_Assignment__c();
+        mAssignment.Project__c = opportunityId;
+        mAssignment.User__c = managerId;
+        insert mAssignment;
+        return mAssignment;
+    }
+
 }
