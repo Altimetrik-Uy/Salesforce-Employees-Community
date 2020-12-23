@@ -33,8 +33,18 @@ public class LWCEmployeeStatusController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static String getManager(String projId){
-        return [SELECT CreatedBy.Id FROM Employee_Status__c WHERE Project__r.Id =: projId LIMIT 1].CreatedBy.Id;
+    public static List<String> getManager(String projId){
+       List<String> lstManagersId = new List<String>();
+        for(Managers_Assignment__c currentMA : [SELECT User__r.Id FROM Managers_Assignment__c WHERE Project__r.Id = :projId ORDER BY Project__r.Id]){
+            if(lstManagersId.isEmpty()) {
+                lstManagersId.add(currentMA.User__r.Id);
+            }else{
+                if(!lstManagersId.contains(currentMA.User__r.Id)){
+                    lstManagersId.add(currentMA.User__r.Id);
+                }
+            }
+       } 
+       return lstManagersId;
     }
 
     @AuraEnabled(cacheable=true)
@@ -52,11 +62,11 @@ public class LWCEmployeeStatusController {
     }
  
     @AuraEnabled
-    public static Boolean sendMessage(String managerId, String userName){
-       return feedMessage(managerId, userName);
+    public static Boolean sendMessage(List<String> lstManagersId, String userName){
+       return feedMessage(lstManagersId, userName);
     }
 
-    public static Boolean feedMessage(String managerId, String userName){
+    public static Boolean feedMessage(List<String> lstManagersId, String userName){
         try {
             String postText = 'The Employee '  + userName + ' request a status update';
             // Define the FeedItemInput object to pass to postFeedElement
@@ -72,7 +82,9 @@ public class LWCEmployeeStatusController {
             // The FeedElementCapabilitiesInput object holds the capabilities of the feed item.
             // For this feed item, we define a direct message capability to hold the member(s) and the subject.
             List<String> memberIds = new List<String>();
-            memberIds.add(managerId);
+            for(String currentId : lstManagersId){
+                memberIds.add(currentId);
+            }
             ConnectApi.DirectMessageCapabilityInput dmInput = new ConnectApi.DirectMessageCapabilityInput();
             dmInput.subject = 'Thank you!';
             dmInput.membersToAdd = memberIds;
