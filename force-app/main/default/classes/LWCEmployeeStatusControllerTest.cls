@@ -62,6 +62,46 @@ public class LWCEmployeeStatusControllerTest {
     }
     
     @isTest(SeeAllData=True)
+    public static void sendMessage(){
+        User admin = TestDataFactory.createAdminUser();
+        Profile pAdmin = [SELECT Id, Name FROM Profile WHERE Name = 'System Administrator' LIMIT 1];
+        User manager = TestDataFactory.createAdminManagerUser();
+        System.runAs(admin){
+            //Account
+            Account acc = TestDataFactory.createAccount();
+            //Contact
+            Contact con = TestDataFactory.createContact(acc.Id);
+            //User
+            User usr = TestDataFactory.createUser(con.Id);
+            
+         	Id empAssignmentId = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+            Id projectId = [SELECT Id, Name FROM Opportunity WHERE Name = 'O1' LIMIT 1].Id;
+            Managers_Assignment__c mA1 = TestDataFactory.createManagersAssigment(manager.Id, projectId);
+            Managers_Assignment__c mA2 = TestDataFactory.createManagersAssigment(manager.Id, projectId);
+           
+            List<Employee_Assignment__c> empAssignmentList = new List<Employee_Assignment__c>();
+            Employee_Assignment__c eA1 = returnEmployeeProjectsStructure(empAssignmentId);
+            eA1.Start_Date__c = date.parse('11/12/2020');
+            eA1.End_Date__c = date.parse('11/12/2021');
+            update eA1;
+            empAssignmentList.add(eA1);
+            
+            Employee_Status__c eS1 = TestDataFactory.createEmployeeStatus(con.Id,'Red', 'Red');
+            eS1.Meeting_Date__c =  date.parse('2/17/2021');
+            update eS1;
+
+            List<String> lstManagersId = new List<String>();
+            lstManagersId.add(manager.Id);
+            List<Employee_Status__c> status = new List<Employee_Status__c>();
+            status.add(returnEmployeeStatusesStructure(eS1.Id));
+ 		
+            Test.startTest();
+     		System.assertEquals(LWCEmployeeStatusController.sendMessage(lstManagersId, 'Test Test'), true, 'Message error');  
+            Test.stopTest();
+            }
+        }
+   
+    @isTest
     public static void statusTabTests(){
         User admin = TestDataFactory.createAdminUser();
         Profile pAdmin = [SELECT Id, Name FROM Profile WHERE Name = 'System Administrator' LIMIT 1];
@@ -74,19 +114,16 @@ public class LWCEmployeeStatusControllerTest {
             //User
             User usr = TestDataFactory.createUser(con.Id);
             
-         	Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id ProjectId = [SELECT Id, Name FROM Opportunity LIMIT 1].Id;
-            Managers_Assignment__c mA1 = TestDataFactory.createManagersAssigment(manager.Id, ProjectId);
-            Managers_Assignment__c mA2 = TestDataFactory.createManagersAssigment(manager.Id, ProjectId);
+         	Id empAssignmentId = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+            Id projectId = [SELECT Id, Name FROM Opportunity WHERE Name = 'O1' LIMIT 1].Id;
+            Managers_Assignment__c mA1 = TestDataFactory.createManagersAssigment(manager.Id, projectId);
+            Managers_Assignment__c mA2 = TestDataFactory.createManagersAssigment(manager.Id, projectId);
            
             List<Employee_Assignment__c> empAssignmentList = new List<Employee_Assignment__c>();
-            Employee_Assignment__c eA1 = returnEmployeeProjectsStructure(OppO1Id);
+            Employee_Assignment__c eA1 = returnEmployeeProjectsStructure(empAssignmentId);
             eA1.Start_Date__c = date.parse('11/12/2020');
             eA1.End_Date__c = date.parse('11/12/2021');
             update eA1;
-            System.debug([SELECT Active__c, Start_Date__c, End_Date__c, Project__r.Name, Employee__r.Name FROM Employee_Assignment__c WHERE Employee__c=:con.Id]);
-            System.debug(con.Id);
-            System.debug(ProjectId);
             empAssignmentList.add(eA1);
             
             Employee_Status__c eS1 = TestDataFactory.createEmployeeStatus(con.Id,'Red', 'Red');
@@ -97,13 +134,11 @@ public class LWCEmployeeStatusControllerTest {
             lstManagersId.add(manager.Id);
             List<Employee_Status__c> status = new List<Employee_Status__c>();
             status.add(returnEmployeeStatusesStructure(eS1.Id));
- 			
-            
+ 			            
             Test.startTest();
-            System.assertEquals(LWCEmployeeStatusController.getManager(ProjectId), lstManagersId, 'Project Manager do not match');
+            System.assertEquals(LWCEmployeeStatusController.getManager(projectId), lstManagersId, 'Project Manager do not match');
             System.assertEquals(LWCEmployeeStatusController.getUser(con.Id), 'Test Test' , 'Contact do not match');
-     		System.assertEquals(LWCEmployeeStatusController.getProjectActiveStauts(con.Id, ProjectId), true , 'Active do not match');
-     		System.assertEquals(LWCEmployeeStatusController.sendMessage(lstManagersId, LWCEmployeeStatusController.getUser(con.Id)), true, 'Message error');  
+     		System.assertEquals(LWCEmployeeStatusController.getProjectActiveStauts(con.Id, projectId), true , 'Active do not match');
             Test.stopTest();
             }
         }
