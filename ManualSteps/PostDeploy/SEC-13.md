@@ -9,7 +9,7 @@ Run the following script in an anonymus window:
 
 
 ```
-List<String> certificationNames = new List<String>{'Sharing and Visibility', 'Data Architecture and Management', 'Development Lifecycle and Deployment', 'Identity and Access Management', 'Integration Architecture', 'Heroku Architecture Designer', 'Scrum Master'};
+List<String> certificationNames = new List<String>{'Advanced Administrator','JavaScript Developer I','Platform App Builder','Platform Developer I','Platform Developer II','Sharing and Visibility', 'Data Architecture and Management', 'Development Lifecycle and Deployment', 'Identity and Access Management', 'Integration Architecture', 'Heroku Architecture Designer', 'Scrum Master', 'System Architect', 'Technical Architect', 'Application Architect'};
 
 List<ta_Certification__c> certifications = new List<ta_Certification__c>();
 Map<String, ta_Certification__c> certNameMap = new Map<String, ta_Certification__c>();
