@@ -3,17 +3,12 @@
     <sharingCriteriaRules>
         <fullName>Read_to_all_Partner_Users</fullName>
         <accessLevel>Read</accessLevel>
-        <accountSettings>
-            <caseAccessLevel>None</caseAccessLevel>
-            <contactAccessLevel>Read</contactAccessLevel>
-            <opportunityAccessLevel>Read</opportunityAccessLevel>
-        </accountSettings>
         <label>Read to all Partner Users</label>
         <sharedTo>
             <allPartnerUsers/>
         </sharedTo>
         <criteriaItems>
-            <field>Name</field>
+            <field>Username</field>
             <operation>notEqual</operation>
             <value/>
         </criteriaItems>

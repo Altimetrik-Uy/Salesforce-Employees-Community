@@ -142,6 +142,10 @@
     margin-bottom: 0px;
 }
 
+a:focus {
+    text-decoration: none;
+}
+
 .slds-vertical-tabs__link span{
     font-size: 13px;
     color: #3E3E3C

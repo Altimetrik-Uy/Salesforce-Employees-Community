@@ -18,6 +18,23 @@ public class TestDataFactory {
         insert admin;
         return admin;
     }
+    
+    public static User createAdminManagerUser(){
+        Profile pAdmin = [SELECT Id, Name FROM Profile WHERE Name = 'System Administrator' LIMIT 1];
+        User admin = new User();
+        admin.firstname = 'Manager';
+        admin.lastname = 'Manager';
+        admin.Alias = 'Manager';
+        admin.email = 'manager@admin.com';
+        admin.username = 'project_manager@admin.com';
+        admin.profileId = pAdmin.id;
+        admin.emailencodingkey ='UTF-8';
+        admin.languagelocalekey ='en_US';
+        admin.localesidkey ='en_US';
+        admin.timezonesidkey ='America/Los_Angeles';
+        insert admin;
+        return admin;
+    }
 
     public static Contact createContact(Id accountId){
         Contact con = new Contact();
@@ -123,4 +140,13 @@ public class TestDataFactory {
         insert eStatus;
         return eStatus;
     }
+
+    public static Managers_Assignment__c createManagersAssigment(Id managerId, Id opportunityId){
+        Managers_Assignment__c mAssignment = new Managers_Assignment__c();
+        mAssignment.Project__c = opportunityId;
+        mAssignment.User__c = managerId;
+        insert mAssignment;
+        return mAssignment;
+    }
+
 }
