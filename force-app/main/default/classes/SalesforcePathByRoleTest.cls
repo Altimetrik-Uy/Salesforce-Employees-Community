@@ -23,8 +23,8 @@ public with sharing class SalesforcePathByRoleTest {
         insert usrRunAs;  
         
         ta_User_Info__c objUserInfo = new ta_User_Info__c (Name = 'AnyName', 
-        Role__c = 'Salesforce Developer', 
-        Email__c = 'test@test.com');
+        Role__c = 'Developer', 
+        Email__c = 'test1@test.com');
         insert objUserInfo;
 
         ta_Certification__c  objCertification = new ta_Certification__c();
