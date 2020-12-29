@@ -19,12 +19,28 @@ public class LWCEmployeeStatusController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<Employee_Status__c> getEmployeeStatuses(Id projId, String empId, Boolean allSelected){
-        List<Employee_Status__c> projList = new List<Employee_Status__c>();
+    public static List<Employee_Status__c> getEmployeeStatuses(Id projId, String empId, Boolean allSelected, Integer offsetRange){
         if(allSelected) {
-            return projList = getAllEmployeeStatuses(empId);
+            if(offsetRange == null){
+                return [SELECT Id, Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name FROM Employee_Status__c WHERE Employee__r.Id =:empId ORDER BY Meeting_Date__c DESC LIMIT 4];
+            }else {
+                return [SELECT Id, Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name FROM Employee_Status__c WHERE Employee__r.Id =:empId ORDER BY Meeting_Date__c DESC LIMIT 4 OFFSET :offsetRange];
+            }
         }else{
-            return  projList = [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC]; 
+            if(offsetRange == null){
+                return  [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC LIMIT 4]; 
+            }else{
+                return [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC OFFSET :offsetRange]; 
+            }
+        }
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static Integer getEmployeeStatusCount(Id projId, String empId, Boolean allSelected){
+        if (allSelected) {
+            return [SELECT COUNT() FROM Employee_Status__c WHERE Employee__r.Id = :empId];
+        }else{
+            return [SELECT COUNT() FROM Employee_Status__c WHERE Employee__r.Id = :empId AND Project__r.Id = :projId];
         }
     }
 
