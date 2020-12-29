@@ -1,38 +1,92 @@
-import {LightningElement, api, wire, track} from 'lwc';
+import { LightningElement, track, api} from 'lwc';
+
 import getEmployeeProjects from '@salesforce/apex/LWCEmployeeProjectsController.getEmployeeProjects';
+import getAllCount from '@salesforce/apex/LWCEmployeeProjectsController.getAllCount';
+import getEmployeeProjectsCount from '@salesforce/apex/LWCEmployeeProjectsController.getEmployeeProjectsCount';
 
 export default class EmployeeProjectsSubtab extends LightningElement {
     @api employeeid;
+    @track paginationRange = [];
+    @track totalRecords;
     @track error;
-    @track projectStatusImageName;
-    @track projectStatusImageNameTableColumns = [ 
-        { fieldName: 'ProjectName'},
-        { fieldName: 'ProjectJoinDate'},
-        { fieldName: 'ProjectEndDate'},
-        { fieldName: 'ProjectCurrent'},
-        { fieldName: 'ProjectInformation'}
-    ];
-    
-    @wire(getEmployeeProjects,{empId: '$employeeid'}) wiredEmployeeCurrentProjects({error,data}){
-        if (data) {
-            this.projectStatusImageName = data;
-            let preparedAssets = [];
-            let id = 0;
-            this.projectStatusImageName.forEach(asset => {
-                let preparedAsset = {};
-                preparedAsset.Id = id++;
-                preparedAsset.ProjectName = asset.Project__r.Name;
-                preparedAsset.ProjectJoinDate = asset.Start_Date__c;
-                preparedAsset.ProjectEndDate = asset.End_Date__c;
-                preparedAsset.ProjectInformation = asset.Project__r.Description;
-                if(asset.Active__c == true){
-                    preparedAsset.ProjectCurrent = asset.Active__c;
-                }
-                preparedAssets.push(preparedAsset);
-            });
-            this.projectStatusImageName = preparedAssets;
-        } else if (error) {
-            this.error = error;
-        }
+    @track projectTable;
+
+     constructor() {
+        super();
+        getAllCount().then(count => {
+            if (count) {
+                getEmployeeProjectsCount({empId: this.employeeid}).then(projectCount =>{
+                    if(projectCount){
+                    //get the total count of records
+                    this.totalRecords = projectCount;
+                    getEmployeeProjects({empId: this.employeeid}).then(data => {
+                        let i = 1;
+                        if (data) {
+                            this.projectTable = data;
+                            let preparedAssets = [];
+                            let id = 0;
+                            this.projectTable.forEach(asset => {
+                                let preparedAsset = {};
+                                preparedAsset.Id = id++;
+                                preparedAsset.ProjectName = asset.Project__r.Name;
+                                preparedAsset.ProjectJoinDate = asset.Start_Date__c;
+                                preparedAsset.ProjectEndDate = asset.End_Date__c;
+                                preparedAsset.ProjectInformation = asset.Project__r.Description;
+                                if(asset.Active__c == true){
+                                    preparedAsset.ProjectCurrent = asset.Active__c;
+                                }
+                                preparedAssets.push(preparedAsset);
+                            });
+                            this.projectTable = preparedAssets;
+                        } else if (error) {
+                            this.error = error;
+                        } 
+                        //looking at displaying 4 recrods per page
+                        const paginationNumbers = Math.ceil(this.totalRecords / 4);
+
+                        //create an array with size equals to paginationNumbers
+                        while (
+                            this.paginationRange.push(i++) < paginationNumbers
+                            // eslint-disable-next-line no-empty
+                        ) {}
+                    });
+                   }
+                });
+            }
+        });
     }
-}
+
+    handlePaginationClick(event) {
+        let offsetNumber = event.target.dataset.targetNumber;
+
+        //reduce 1 from the clciked number and multiply it with 4, 
+        //since we are showing 4 records per page and pass the offset to apex class 
+        getEmployeeProjects({empId: this.employeeid, offsetRange: 4 * (offsetNumber - 1) })
+            .then(data => {
+                if (data) {
+                    this.projectTable = data;
+                    let preparedAssets = [];
+                    let id = 0;
+                    this.projectTable.forEach(asset => {
+                        let preparedAsset = {};
+                        preparedAsset.Id = id++;
+                        preparedAsset.ProjectName = asset.Project__r.Name;
+                        preparedAsset.ProjectJoinDate = asset.Start_Date__c;
+                        preparedAsset.ProjectEndDate = asset.End_Date__c;
+                        preparedAsset.ProjectInformation = asset.Project__r.Description;
+                        if(asset.Active__c == true){
+                            preparedAsset.ProjectCurrent = asset.Active__c;
+                        }
+                        preparedAssets.push(preparedAsset);
+                    });
+                    this.projectTable = preparedAssets;
+                } else if (error) {
+                    this.error = error;
+                } 
+            })
+            .catch(error => {
+                // eslint-disable-next-line no-console
+                console.log(error);
+            });
+    } 
+} 
