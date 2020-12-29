@@ -1,14 +1,12 @@
 public without sharing class RoleCertificationsController{
 	@AuraEnabled(cacheable = true)
 	public static List<rolesCertificacionesWrapper> getPercentages(String userId){
-
         List<rolesCertificacionesWrapper> certificacionesWrapperList = new List<rolesCertificacionesWrapper>();
         rolesCertificacionesWrapper trailblazerWrapper = new rolesCertificacionesWrapper();
 		List<User> userList = [SELECT Id, Contact.Id
 		                       FROM User
 		                       WHERE Id = :userId
 		                       LIMIT 1];
-
 		if (!userList.isEmpty() || (Test.isRunningTest() && userId.contains('*'))){
 			String contactId;
 			if (!Test.isRunningTest()){
@@ -22,7 +20,7 @@ public without sharing class RoleCertificationsController{
 			                             FROM Contact
 			                             WHERE Id = :contactId
 			                             LIMIT 1];
-            String currentRole = contactList[0].Role__c;
+			String currentRole = contactList[0].Role__c;
 			if (!contactList.isEmpty() && !String.isBlank(contactList[0].Email) && !String.isBlank(contactList[0].Role__c)){
 
 				List<String> nextRolesList = new List<String>();
@@ -34,10 +32,13 @@ public without sharing class RoleCertificationsController{
 				List<ta_User_Certification__c> userCertificacionList = [SELECT Id, Certification__c, User_Info__r.TrailBlazerId__c
 				                                                        FROM ta_User_Certification__c
 				                                                        WHERE User_Info__r.Email__c = :contactList[0].Email];
-
-				String userInfoTBId = userCertificacionList[0].User_Info__r.TrailBlazerId__c;
+				String userInfoTBId = '';
+				if(!userCertificacionList.isEmpty()){
+					if(userCertificacionList[0].User_Info__r.TrailBlazerId__c != null){
+						userInfoTBId = userCertificacionList[0].User_Info__r.TrailBlazerId__c;
+					}
+				}
 				
-
 				if (!String.IsBlank(userInfoTBId)){
 					trailblazerWrapper.trailblazerId = true;
 					
@@ -84,7 +85,6 @@ public without sharing class RoleCertificationsController{
 							                           WHERE Role__c = :totalRolesList AND Required__c = true
 							                           GROUP BY Role__c
 							                           ORDER BY Role__c];
-
 							List<rolesCertificacionesWrapper> wrapperList = new List<rolesCertificacionesWrapper>();
 							for (AggregateResult ar : totalCertificationsList){
 								rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
@@ -154,10 +154,11 @@ public without sharing class RoleCertificationsController{
 				certificacionWrapper.porcentaje = contactList.size();
                 certificacionesWrapperList.add(certificacionWrapper); 
             }
-
             //if user does not have current role
-            if(!certificacionesWrapperList[0].isCurrent){  
-                certificacionesWrapperList = addCurrentRole(currentRole, certificacionesWrapperList);
+            if(certificacionesWrapperList[0].isCurrent!=null){ 
+				if(!certificacionesWrapperList[0].isCurrent){
+					certificacionesWrapperList = addCurrentRole(currentRole, certificacionesWrapperList);
+				}
             }
 		} else{
             rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
