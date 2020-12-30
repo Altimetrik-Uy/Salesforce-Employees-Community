@@ -18,7 +18,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
     @track lstManagerId = [];
     @track userName = '';
     @track allSelected = false;
-    @track projectStatuses;
+    @track projectStatuses=[];
     @track paginationRange = [];
     @track totalRecords;
 
@@ -52,14 +52,17 @@ export default class EmployeeStatusSubtab extends LightningElement {
             this.allSelected = false;
         }
        //here we "call" getEmployeeStatuses
+       this.projectStatuses = [];
        refreshApex(this.projectStatuses);
     }
 
     @wire(getEmployeeStatuses,{projId: '$comboBoxValue', empId: '$employeeid',allSelected: '$allSelected'}) getEmployeeStatuses({error,data}){
+        console.log('data ' + data);
         try{
             if(this.employeeid != '' && this.comboBoxValue != ''){
                 getEmployeeStatusCount({projId: this.comboBoxValue, empId: this.employeeid, allSelected: this.allSelected}).then(projectCount =>{ 
                     if(projectCount){
+                    this.projectStatuses = [];
                     this.totalRecords = projectCount;
                         let i = 1;
                         if (data) {
@@ -87,6 +90,9 @@ export default class EmployeeStatusSubtab extends LightningElement {
                             this.paginationRange.push(i++) < paginationNumbers
                             // eslint-disable-next-line no-empty
                         ) {}
+                    }else{
+                        this.projectStatuses = [];
+                        this.paginationRange = [];
                     }
                 });
             }
@@ -136,11 +142,12 @@ export default class EmployeeStatusSubtab extends LightningElement {
 
     handlePaginationClick(event) {
         let offsetNumber = event.target.dataset.targetNumber;
-
+        console.log('offsetNumber-- ' + offsetNumber);
         //reduce 1 from the clciked number and multiply it with 4, 
         //since we are showing 4 records per page and pass the offset to apex class 
         getEmployeeStatuses({projId: this.comboBoxValue, empId: this.employeeid, allSelected: this.allSelected, offsetRange: 4 * (offsetNumber - 1) })
             .then(data => {
+                console.log('data desde el event ' + data);
                 if (data) {
                     this.projectStatuses = data;
                     let preparedAssets = [];

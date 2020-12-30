@@ -30,7 +30,7 @@ public class LWCEmployeeStatusController {
             if(offsetRange == null){
                 return  [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC LIMIT 4]; 
             }else{
-                return [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC OFFSET :offsetRange]; 
+                return [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC LIMIT 4 OFFSET :offsetRange]; 
             }
         }
     }
