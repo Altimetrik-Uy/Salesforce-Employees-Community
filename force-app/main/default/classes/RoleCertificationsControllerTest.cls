@@ -124,8 +124,17 @@ public with sharing class RoleCertificationsControllerTest {
             FROM ta_User_Certification__c
             WHERE User_Info__r.Email__c = 'test@testemail.com'
             LIMIT 1];
+            
+        List<Salesforce_Career_Path__c> testRequiredFalse = [
+                SELECT Id, 
+                Required__c
+                FROM Salesforce_Career_Path__c
+                WHERE Role__c = 'Developer'
+            ];
         testUserCertificationList[0].Certification__c = null;
         update testUserCertificationList;
+        testRequiredFalse[0].Required__c = false;
+        update testRequiredFalse;
 
         List<ta_User_Info__c> userInfo = [
             SELECT Id,

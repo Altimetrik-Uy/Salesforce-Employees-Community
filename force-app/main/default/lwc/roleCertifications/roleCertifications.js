@@ -1,5 +1,5 @@
 import { LightningElement, api, wire, track } from 'lwc';
-import getPorcentaje from '@salesforce/apex/RoleCertificationsController.getPercentages';
+import getPercentages from '@salesforce/apex/RoleCertificationsController.getPercentages';
 import IsFlsUpdatable from '@salesforce/schema/UserEntityAccess.IsFlsUpdatable';
 import { NavigationMixin } from 'lightning/navigation';
 
@@ -9,7 +9,7 @@ export default class RoleCertifications extends NavigationMixin(LightningElement
     error;
     display = false;
 
-    @wire(getPorcentaje, { userId: '$userId' })
+    @wire(getPercentages, { userId: '$userId' })
     wiredWrapper({ error, data }) {
         if (data) {
             if (data[0].trailblazerId == false) {
