@@ -147,3 +147,13 @@ h1 {
 .button-box-text:hover .button-box-text-help {
     visibility: visible;
   }
+
+  .customPagination {
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 3px;
+}
+
+.customPagination>a {
+    padding: 5px 10px;
+}

@@ -26,7 +26,7 @@ public class LWCEmployeeProjectsControllerTest {
             empAssignmentList.add(returnProjectStatusStructure(OppO3Id));
 
             //Run LWCEmployeeProjectsController
-            System.assertEquals(LWCEmployeeProjectsController.getEmployeeProjects(con.Id).get(1).Project__r.Name, empAssignmentList.get(1).Project__r.Name,'One or more Projects do not match');
+            System.assertEquals(LWCEmployeeProjectsController.getEmployeeProjects(con.Id,0).get(1).Project__r.Name, empAssignmentList.get(1).Project__r.Name,'One or more Projects do not match');
         }  
     }
 }

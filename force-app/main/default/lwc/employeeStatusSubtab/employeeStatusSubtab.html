@@ -77,4 +77,13 @@
                 </div>
             </div>
         </div>
+        <div class="customPagination">
+            <template for:each={paginationRange} for:item="pageNumber">
+                <a onclick={handlePaginationClick}
+                    key={pageNumber}
+                    data-target-number={pageNumber}>
+                    {pageNumber}
+                </a>
+            </template>
+        </div> 
 </template>
