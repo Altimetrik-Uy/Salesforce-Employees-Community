@@ -1,14 +1,12 @@
 public without sharing class RoleCertificationsController{
 	@AuraEnabled(cacheable = true)
 	public static List<rolesCertificacionesWrapper> getPercentages(String userId){
-
         List<rolesCertificacionesWrapper> certificacionesWrapperList = new List<rolesCertificacionesWrapper>();
         rolesCertificacionesWrapper trailblazerWrapper = new rolesCertificacionesWrapper();
 		List<User> userList = [SELECT Id, Contact.Id
 		                       FROM User
 		                       WHERE Id = :userId
 		                       LIMIT 1];
-
 		if (!userList.isEmpty() || (Test.isRunningTest() && userId.contains('*'))){
 			String contactId;
 			if (!Test.isRunningTest()){
@@ -22,22 +20,31 @@ public without sharing class RoleCertificationsController{
 			                             FROM Contact
 			                             WHERE Id = :contactId
 			                             LIMIT 1];
-            String currentRole = contactList[0].Role__c;
+			String currentRole = contactList[0].Role__c;
 			if (!contactList.isEmpty() && !String.isBlank(contactList[0].Email) && !String.isBlank(contactList[0].Role__c)){
-
+				
 				List<String> nextRolesList = new List<String>();
 				List<String> totalRolesList = new List<String>();
 				List<Salesforce_Career_Path__c> totalCarreerPathList = new List<Salesforce_Career_Path__c>();
 				totalRolesList.add(currentRole);
 				Set<Id> certificationIdSet = new Set<Id>();
 
+				List<ta_User_Info__c> userInfoTrailId = [SELECT Id, TrailBlazerId__c
+				                                        FROM ta_User_Info__c
+														WHERE Email__c = :contactList[0].Email];
+
 				List<ta_User_Certification__c> userCertificacionList = [SELECT Id, Certification__c, User_Info__r.TrailBlazerId__c
 				                                                        FROM ta_User_Certification__c
-				                                                        WHERE User_Info__r.Email__c = :contactList[0].Email];
-
-				String userInfoTBId = userCertificacionList[0].User_Info__r.TrailBlazerId__c;
+																		WHERE User_Info__r.Email__c = :contactList[0].Email];
+				String userInfoTBId = '';
+				if(!userCertificacionList.isEmpty()){
+					if(userCertificacionList[0].User_Info__r.TrailBlazerId__c != null){
+						userInfoTBId = userCertificacionList[0].User_Info__r.TrailBlazerId__c;
+					}
+				} else if(userInfoTrailId[0].TrailBlazerId__c != null){
+					userInfoTBId = userInfoTrailId[0].TrailBlazerId__c;
+				}
 				
-
 				if (!String.IsBlank(userInfoTBId)){
 					trailblazerWrapper.trailblazerId = true;
 					
@@ -46,7 +53,7 @@ public without sharing class RoleCertificationsController{
 					certificacionesWrapperList.add(trailblazerWrapper);
 					return certificacionesWrapperList;
 				}
-
+				
 				for (ta_User_Certification__c userCert : userCertificacionList){
 					certificationIdSet.add(userCert.Certification__c);
 				}
@@ -54,8 +61,8 @@ public without sharing class RoleCertificationsController{
 				List<Salesforce_Career_Path__c> carreerPathList = [SELECT Id, Role__c, Possible_Next_Role__c
 				                                                   FROM Salesforce_Career_Path__c
 				                                                   WHERE Role__c = :currentRole
-				                                                   LIMIT 1];
-
+																   LIMIT 1];
+																   
 				if (!carreerPathList.isEmpty()){
 					if (!String.isBlank(carreerPathList[0].Possible_Next_Role__c)){
 						nextRolesList = carreerPathList[0].Possible_Next_Role__c.split(';');
@@ -78,13 +85,11 @@ public without sharing class RoleCertificationsController{
 						}
 
 						if (!roleCertificationsMap.isEmpty()){
-
 							totalCertificationsList = [SELECT Role__c, count(Id)total
 							                           FROM Salesforce_Career_Path__c
 							                           WHERE Role__c = :totalRolesList AND Required__c = true
 							                           GROUP BY Role__c
-							                           ORDER BY Role__c];
-
+													   ORDER BY Role__c];
 							List<rolesCertificacionesWrapper> wrapperList = new List<rolesCertificacionesWrapper>();
 							for (AggregateResult ar : totalCertificationsList){
 								rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
@@ -109,31 +114,44 @@ public without sharing class RoleCertificationsController{
 							}
 							certificacionesWrapperList.addAll(wrapperList);
 							
-					} else{
-                            for (String role : totalRolesList){
-                                rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
-                                List<Salesforce_Career_Path__c> noRequiredList = [SELECT Id, Name, Role__c, Required__c
-                                FROM Salesforce_Career_Path__c
-                                WHERE Role__c =: role AND Required__c = True];
-                                if(noRequiredList.isEmpty()){
-                                    certificacionWrapper.hasRequired = false;
-                                }else{
-                                    certificacionWrapper.hasRequired = true;
-                                }
-                                if (currentRole == role) {
-                                    certificacionWrapper.isCurrent = true;
-                                }else{
-                                    certificacionWrapper.isCurrent = false;
-                                }
-                                certificacionWrapper.role = role;
-                                certificacionWrapper.porcentaje = 0;
-                                certificacionesWrapperList.add(certificacionWrapper);
-                            }
-						}
+						} else{
+								for (String role : totalRolesList){
+									rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
+									List<Salesforce_Career_Path__c> noRequiredList = [SELECT Id, Name, Role__c, Required__c
+									FROM Salesforce_Career_Path__c
+									WHERE Role__c =: role AND Required__c = true];
+						
+									if(noRequiredList.isEmpty()){
+										certificacionWrapper.hasRequired = false;
+									}else{
+										certificacionWrapper.hasRequired = true;
+									}
+									if (currentRole == role) {
+										certificacionWrapper.isCurrent = true;
+									}else{
+										certificacionWrapper.isCurrent = false;
+									}
+									certificacionWrapper.role = role;
+									certificacionWrapper.porcentaje = 0;
+									certificacionesWrapperList.add(certificacionWrapper);
+								}
+							}
 					} else{
 						for (String role : totalRolesList){
-                            rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
-                            certificacionWrapper.hasRequired = true;
+							rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
+							List<Salesforce_Career_Path__c> noRequiredList = [SELECT Id, Name, Role__c, Required__c
+																			  FROM Salesforce_Career_Path__c
+																			  WHERE Role__c =: role AND Required__c = true];
+									if(noRequiredList.isEmpty()){
+										certificacionWrapper.hasRequired = false;
+									}else{
+										certificacionWrapper.hasRequired = true;
+									}
+									if (currentRole == role) {
+										certificacionWrapper.isCurrent = true;
+									}else{
+										certificacionWrapper.isCurrent = false;
+									}
 							certificacionWrapper.role = role;
 							certificacionWrapper.porcentaje = 0;
 							certificacionesWrapperList.add(certificacionWrapper);
@@ -141,7 +159,7 @@ public without sharing class RoleCertificationsController{
 					}
 				} else{
                     rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
-                    certificacionWrapper.hasRequired = true;
+					certificacionWrapper.hasRequired = true;
 					certificacionWrapper.role = 'There are no Salesforce Career Path Records.';
 					certificacionWrapper.porcentaje = carreerPathList.size();
                     certificacionesWrapperList.add(certificacionWrapper);
@@ -149,15 +167,16 @@ public without sharing class RoleCertificationsController{
                 }
 			} else{
                 rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
-                certificacionWrapper.hasRequired = true;
+				certificacionWrapper.hasRequired = true;				
 				certificacionWrapper.role = 'Verify that the Email or Role fields have valid information.';
 				certificacionWrapper.porcentaje = contactList.size();
                 certificacionesWrapperList.add(certificacionWrapper); 
             }
-
             //if user does not have current role
-            if(!certificacionesWrapperList[0].isCurrent){  
-                certificacionesWrapperList = addCurrentRole(currentRole, certificacionesWrapperList);
+            if(certificacionesWrapperList[0].isCurrent!=null){ 
+				if(!certificacionesWrapperList[0].isCurrent){
+					certificacionesWrapperList = addCurrentRole(currentRole, certificacionesWrapperList);
+				}
             }
 		} else{
             rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();

@@ -55,7 +55,7 @@ public class TestDataFactory {
 
     public static User createUser(Id contactId){
         User usr = new User();
-        Profile pUser = [SELECT Id FROM Profile WHERE Name = 'Partner Community User' LIMIT 1];
+        Profile pUser = [SELECT Id FROM Profile WHERE Name = 'Community Employee Profile' LIMIT 1];
         usr.firstname = 'Sebastian';
         usr.lastname = 'Trelles';
         usr.Alias = 'strel';

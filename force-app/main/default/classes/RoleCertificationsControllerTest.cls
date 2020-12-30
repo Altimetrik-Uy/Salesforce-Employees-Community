@@ -69,14 +69,13 @@ public with sharing class RoleCertificationsControllerTest {
             FROM Contact
             WHERE Email = 'test@testemail.com'
             LIMIT 1];
-
         contactList[0].Role__c = null;
         update contactList;
 
         Test.startTest();
             wrapperResultList = RoleCertificationsController.getPercentages('*'+contactList[0].Id);
         Test.stopTest();
-     
+        
         System.assertEquals('Verify that the Email or Role fields have valid information.',wrapperResultList[0].role);
     }
 
@@ -105,7 +104,7 @@ public with sharing class RoleCertificationsControllerTest {
             wrapperResultList = RoleCertificationsController.getPercentages('*'+contactList[0].Id);
         Test.stopTest();
      
-        System.assertEquals('Developer',wrapperResultList[0].role);
+        System.assertEquals(false,wrapperResultList[0].trailblazerId);
     }
 
     @isTest 
@@ -125,15 +124,35 @@ public with sharing class RoleCertificationsControllerTest {
             FROM ta_User_Certification__c
             WHERE User_Info__r.Email__c = 'test@testemail.com'
             LIMIT 1];
-
+            
+        List<Salesforce_Career_Path__c> testRequiredFalse = [
+                SELECT Id, 
+                Required__c
+                FROM Salesforce_Career_Path__c
+                WHERE Role__c = 'Developer'
+            ];
         testUserCertificationList[0].Certification__c = null;
         update testUserCertificationList;
+        testRequiredFalse[0].Required__c = false;
+        update testRequiredFalse;
+
+        List<ta_User_Info__c> userInfo = [
+            SELECT Id,
+            Role__c,
+            TrailBlazerId__c
+            FROM ta_User_Info__c
+            WHERE Email__c = 'test@testemail.com'
+            LIMIT 1
+        ];
+        userInfo[0].Role__c = 'Manager';
+        userInfo[0].TrailBlazerId__c = 'trailId';
+        update userInfo;
 
         Test.startTest();
             wrapperResultList = RoleCertificationsController.getPercentages('*'+contactList[0].Id);
         Test.stopTest();
      
-        System.assertEquals('Contact does not have any certifications.',wrapperResultList[0].role);
+        System.assertEquals(0,wrapperResultList[0].porcentaje);
     }
 
     @isTest 
@@ -148,11 +167,87 @@ public with sharing class RoleCertificationsControllerTest {
             WHERE Email = 'test@testemail.com'
             LIMIT 1];
 
+            List<ta_User_Info__c> userInfo = [
+            SELECT Id,
+            TrailBlazerId__c
+            FROM ta_User_Info__c
+            WHERE Email__c = 'test@testemail.com'
+            LIMIT 1
+        ];
+        userInfo[0].TrailBlazerId__c = 'trailId';
+        update userInfo;
+
         Test.startTest();
             wrapperResultList = RoleCertificationsController.getPercentages('*'+contactList[0].Id);
         Test.stopTest();
 
         System.assertEquals('Developer',wrapperResultList[0].role);
+        System.assertEquals(100,wrapperResultList[0].porcentaje);
         System.assertEquals('Salesforce Apex Specialist',wrapperResultList[1].role);
+    }
+
+    @isTest 
+    static void successAddCurrentRole() {
+        Integer randomNumber = Integer.valueof((Math.random() * 100));
+
+        List<RoleCertificationsController.rolesCertificacionesWrapper> wrapperResultList;
+        String mail  = 'testxyz'+randomNumber+'@testemail.com';
+
+        Contact testCont2 = new Contact();
+        testCont2.FirstName = 'FirstName 2';
+        testCont2.LastName = 'LastName 2';
+        testCont2.Email = mail;
+        testCont2.Role__c = 'Salesforce Trainee';
+        insert testCont2;
+        
+        List<ta_User_Info__c> userInfo = [
+            SELECT Id,
+            TrailBlazerId__c
+            FROM ta_User_Info__c
+            WHERE Email__c = :mail
+            LIMIT 1
+        ];
+        userInfo[0].TrailBlazerId__c = 'trailId';
+        update userInfo;
+
+        List<ta_Certification__c> testCertificationList = new List<ta_Certification__c>();
+        ta_Certification__c testCertification = new ta_Certification__c();
+        testCertification.Name = 'Administrator';
+        testCertificationList.add(testCertification);
+        ta_Certification__c testCertification2 = new ta_Certification__c();
+        testCertification2.Name = 'Administrator 2';
+        testCertificationList.add(testCertification2);
+        insert testCertificationList;
+
+        List<ta_User_Certification__c> certifications = new List<ta_User_Certification__c>();
+        ta_User_Certification__c testUserCertification = new ta_User_Certification__c();
+        testUserCertification.Certification__c = testCertification.Id;
+        testUserCertification.User_Info__c = userInfo[0].Id;
+        certifications.add(testUserCertification);
+        insert certifications;
+
+        List<Salesforce_Career_Path__c> testPAthList = new List<Salesforce_Career_Path__c>();
+        Salesforce_Career_Path__c testPath1 = new Salesforce_Career_Path__c();
+        testPath1.Certification__c = testCertification2.Id;
+        testPath1.Role__c = 'Salesforce Trainee';
+        testPath1.Possible_Next_Role__c = 'Salesforce Apex Specialist';
+        testPath1.Required__c = false;
+        testPathList.add(testPath1);
+        
+        Salesforce_Career_Path__c testPath2 = new Salesforce_Career_Path__c();
+        testPath2.Certification__c = testCertification.Id;
+        testPath2.Role__c = 'Salesforce Apex Specialist';
+        testPath2.Possible_Next_Role__c = 'Salesforce Lightning Specialist';
+        testPath2.Required__c = true;
+        testPathList.add(testPath2);
+
+        insert testPathList;
+
+        Test.startTest();
+            wrapperResultList = RoleCertificationsController.getPercentages('*'+testCont2.Id);
+        Test.stopTest();
+
+        System.assertEquals('Salesforce Trainee',wrapperResultList[0].role);
+        System.assertEquals(0,wrapperResultList[0].porcentaje);
     }
 }

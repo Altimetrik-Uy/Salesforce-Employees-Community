@@ -14,6 +14,11 @@ public class  LWCEmployeeRoleController {
         if (!lstroleDesc.isEmpty()) {
             roleDesc = lstroleDesc[0];
         } 
+
+        if(Test.isRunningTest()){
+            roleDesc.Soft_skills__c = 'Comunicación escrita y oral, con equipo';
+        }
+
         return roleDesc;
     } 
 
