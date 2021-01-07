@@ -20,6 +20,27 @@
                     </div>
                 </div>
                 <div class="slds-grid slds-wrap">
+                    <template if:true={trailBlazerId}>
+                        <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font18">                    
+                            <lightning-button-icon style="margin-top: -6px;" icon-name="utility:edit" variant="bare" alternative-text="Edit" title="Edit" onclick={editTrailblazerId}></lightning-button-icon>
+                            &nbsp;&nbsp;
+                            <template if:false={pressEditTrailblazerId}>
+                                <small class="employedata"><a href={hrefTrailId} target="_blank">trailblazer.me/id/{trailBlazerId}</a></small>
+                            </template>
+                            <template if:true={pressEditTrailblazerId}>
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <input type="text" value={trailBlazerId} oninput={handleInput} class="slds-input input"/>
+                                        <lightning-button-icon class="btnIconCheck" icon-name="action:approval" variant="bare" alternative-text="Save" title="Save" onclick={insertTrailIdClick}></lightning-button-icon>
+                                        <lightning-button-icon class="btnIconCancel" icon-name="action:remove" variant="bare" alternative-text="Cancel" title="Cancel" onclick={cancelTrailId}></lightning-button-icon>
+                                    </div>
+                                </div>
+                            </template>
+                            
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-grid slds-wrap slds-m-top_x-small">
                     <template if:true={imageStatus}>
                         <template for:each={imageStatus} for:item="currentStatus">
                             <span key={currentStatus.Id} class="slds-badge">
