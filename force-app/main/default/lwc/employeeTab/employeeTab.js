@@ -164,6 +164,7 @@ export default class EmployeeTab extends LightningElement {
     
     editTrailblazerId(){
         this.pressEditTrailblazerId = true;
+        this.newTrailId = this.trailBlazerId;
     }
 
     cancelTrailId(){
@@ -173,28 +174,56 @@ export default class EmployeeTab extends LightningElement {
     handleInput(event) {
         this.newTrailId = event.target.value;
     }
+
+    keyCheck({code}){
+        //checks for "enter" key
+        if (('Enter' === code) || ('NumpadEnter' === code)){
+            this.insertTrailIdClick();
+        }
+    }
     
     insertTrailIdClick(){
-        insertTrailBlazerId({ uId: this.userId, newTrailBlazerId: this.newTrailId })
-            .then(() => {
+        if(this.newTrailId){
+            if(this.newTrailId != this.trailBlazerId){
+                insertTrailBlazerId({ uId: this.userId, newTrailBlazerId: this.newTrailId })
+                .then(() => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: 'Success',
+                            message: 'Trailblazer Id was updated. Data may take up to 40 minutes to be updated',
+                            variant: 'success'
+                        })
+                    );
+                    this.trailBlazerId = this.newTrailId;
+                    this.pressEditTrailblazerId = false;
+                }).catch(error => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: 'Error updating the Trailblaizer Id',
+                            message: error.body.message,
+                            variant: 'error'
+                        })
+                    );
+                });
+            } else{
                 this.dispatchEvent(
                     new ShowToastEvent({
-                        title: 'Success',
-                        message: 'Trailblazer Id  was updated. Data will be updated in 40 minutes aprox',
-                        variant: 'success'
+                        title: 'Info',
+                        message: 'Trailblazer Id did not change',
+                        variant: 'info'
                     })
                 );
-                this.trailBlazerId = this.newTrailId;
                 this.pressEditTrailblazerId = false;
-            }).catch(error => {
+            }
+        }else{
                 this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Error updating the Trailblaizer Id',
-                        message: error.body.message,
-                        variant: 'error'
-                    })
-                );
-            });
+                        new ShowToastEvent({
+                            title: 'Warning',
+                            message: 'Trailblazer Id cannot be empty',
+                            variant: 'warning'
+                        })
+                    );
+            }
     }
 
     extract(str) {

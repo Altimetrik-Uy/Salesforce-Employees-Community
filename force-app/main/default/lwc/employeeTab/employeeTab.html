@@ -30,7 +30,7 @@
                             <template if:true={pressEditTrailblazerId}>
                                 <div class="slds-form-element">
                                     <div class="slds-form-element__control">
-                                        <input type="text" value={trailBlazerId} oninput={handleInput} class="slds-input input"/>
+                                        <input type="text" value={trailBlazerId} onkeyup={keyCheck} oninput={handleInput} class="slds-input input"/>
                                         <lightning-button-icon class="btnIconCheck" icon-name="action:approval" variant="bare" alternative-text="Save" title="Save" onclick={insertTrailIdClick}></lightning-button-icon>
                                         <lightning-button-icon class="btnIconCancel" icon-name="action:remove" variant="bare" alternative-text="Cancel" title="Cancel" onclick={cancelTrailId}></lightning-button-icon>
                                     </div>
