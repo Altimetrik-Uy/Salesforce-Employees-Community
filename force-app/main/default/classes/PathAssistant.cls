@@ -265,6 +265,13 @@ public with sharing class PathAssistant {
             qaPreRoles.add('QA Security Specialist Lead');
             qaPreRoles.add('QA Mobile Specialist Lead');
             qaPreRoles.add('QA Automation Specialist Lead');
+            qaPreRoles.add('QA Usability Specialist');
+            qaPreRoles.add('QA Security Specialist');
+            qaPreRoles.add('QA Mobile Specialist');
+            qaPreRoles.add('QA Automation Specialist');
+            qaPreRoles.add('QA Technology Specialist');
+            qaPreRoles.add('QA Lead');
+            qaPreRoles.add('QA Coach');
             qaPreRoles.add('QA Junior');
             qaPreRoles.add('QA Analyst');
             qaPreRoles.add('QA Senior');
