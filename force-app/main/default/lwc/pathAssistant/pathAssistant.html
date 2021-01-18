@@ -21,7 +21,7 @@
         <div if:false={errorMsg}>
             <div class="test">
             <lightning-spinner variant="brand" size="small" if:true={hasToShowSpinner}></lightning-spinner>
-                <ul if:true={isLoaded} class="slds-path__nav" role="listbox" aria-orientation="horizontal" key={organizedPath.lstWrpRoles}>
+                <ul if:true={isLoaded} class={careerPathStyle} role="listbox" aria-orientation="horizontal" key={organizedPath.lstWrpRoles}>
                     <template for:each={organizedPath} for:item="column">
                         <div class="slds-col" key={organizedPath.lstWrpRoles} style="padding-right: 22px;">
                             <template for:each={column.lstWrpRoles} for:item="step">      

@@ -4,6 +4,7 @@ public with sharing class PathAssistant {
         string strCurrentRole = '';
         Map<string,List<wrpRoles>> mapPositionXCareer = new Map<string,List<wrpRoles>>();
         List<Salesforce_Career_Path_Settings__mdt> lstCareerPathSettings = new List<Salesforce_Career_Path_Settings__mdt>();
+        List<Salesforce_Career_Path_Settings__mdt> lstQaCareerPathSettings = new List<Salesforce_Career_Path_Settings__mdt>();
         List<wrpColumns> lstWrpColumns = new List<wrpColumns>();
 
         List<Contact> lstContact = [SELECT Id, Name, Role__c 
@@ -12,27 +13,93 @@ public with sharing class PathAssistant {
         if(!Test.isRunningTest()) {
              lstCareerPathSettings = [SELECT Id, MasterLabel, Position__c
                                         FROM Salesforce_Career_Path_Settings__mdt
+                                        WHERE NOT MasterLabel LIKE 'QA%'
                                         ORDER BY Position__c];
-        }
-        else {
+            lstQaCareerPathSettings = [SELECT Id, MasterLabel, Position__c
+                                        FROM Salesforce_Career_Path_Settings__mdt
+                                        WHERE MasterLabel LIKE 'QA%'
+                                        ORDER BY Position__c];
+        } else {
+            // Test method metadata
             Salesforce_Career_Path_Settings__mdt mdtCareerPath1 = new Salesforce_Career_Path_Settings__mdt();
-            mdtCareerPath1.MasterLabel = 'Trainee';
-            mdtCareerPath1.Position__c = 11;
+            mdtCareerPath1.MasterLabel = 'Developer';
+            mdtCareerPath1.Position__c = 12;
             lstCareerPathSettings.add(mdtCareerPath1);
-
+            
             Salesforce_Career_Path_Settings__mdt mdtCareerPath2 = new Salesforce_Career_Path_Settings__mdt();
-            mdtCareerPath2.MasterLabel = 'Developer';
-            mdtCareerPath2.Position__c = 12;
+            mdtCareerPath2.MasterLabel = 'Platform Specialist';
+            mdtCareerPath2.Position__c = 33;
             lstCareerPathSettings.add(mdtCareerPath2);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath4 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath4.MasterLabel = 'Salesforce Senior Platform Specialist';
+            mdtCareerPath4.Position__c = 43;
+            lstCareerPathSettings.add(mdtCareerPath4);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath7 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath7.MasterLabel = 'Salesforce Delivery Manager';
+            mdtCareerPath7.Position__c = 51;
+            lstCareerPathSettings.add(mdtCareerPath7);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath8 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath8.MasterLabel = 'Salesforce Architect Chief';
+            mdtCareerPath8.Position__c = 52;
+            lstCareerPathSettings.add(mdtCareerPath8);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath9 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath9.MasterLabel = 'Salesforce Team Lead';
+            mdtCareerPath9.Position__c = 61;
+            lstCareerPathSettings.add(mdtCareerPath9);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath3 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath3.MasterLabel = 'QA Manager';
+            mdtCareerPath3.Position__c = 61;
+            lstQaCareerPathSettings.add(mdtCareerPath3);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath5 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath5.MasterLabel = 'QA Lead';
+            mdtCareerPath5.Position__c = 41;
+            lstQaCareerPathSettings.add(mdtCareerPath5);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath6 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath6.MasterLabel = 'QA Automation Specialist';
+            mdtCareerPath6.Position__c = 42;
+            lstQaCareerPathSettings.add(mdtCareerPath6);
         }
         
         if (lstContact != null) {
             strCurrentRole = lstContact[0].Role__c;
         }
 
-        Set<String> preRoles = calculatePreRole(strCurrentRole);
+        Set<String> devPreRoles = calculateDevPreRole(strCurrentRole);
+        Set<String> qaPreRoles = calculateQaPreRole(strCurrentRole);
 
-        if (!lstCareerPathSettings.isEmpty()) {
+        if(strCurrentRole.contains('QA')){
+            if (!lstQaCareerPathSettings.isEmpty()) {
+                wrpRoles objWrpRole;
+                List<wrpRoles> lstCareerTmp;
+                for (Salesforce_Career_Path_Settings__mdt objCareerPath : lstQaCareerPathSettings) {
+                    String strColumn = objCareerPath.Position__c.format().substring(0,1);
+                    String strRoleSalesforce = objCareerPath.MasterLabel;
+                    objWrpRole = new wrpRoles();
+                        objWrpRole.strRole = objCareerPath.MasterLabel;
+                        if(strRoleSalesforce == strCurrentRole){
+                            objWrpRole.blnCurrentRole = true;
+                        }else{
+                            objWrpRole.blnIsPreRole = qaPreRoles.contains(strRoleSalesforce);
+                        }
+                    if (mapPositionXCareer.containsKey(strColumn)){
+                        lstCareerTmp = mapPositionXCareer.get(strColumn);
+                            lstCareerTmp.add(objWrpRole);
+                    }
+                    else {
+                        lstCareerTmp = new List<wrpRoles>();
+                        lstCareerTmp.add(objWrpRole);
+                        mapPositionXCareer.put(strColumn,lstCareerTmp);
+                    }
+                }
+            }
+        } else if (!lstCareerPathSettings.isEmpty()) {
             wrpRoles objWrpRole;
             List<wrpRoles> lstCareerTmp;
             for (Salesforce_Career_Path_Settings__mdt objCareerPath : lstCareerPathSettings) {
@@ -43,7 +110,7 @@ public with sharing class PathAssistant {
                     if(strRoleSalesforce == strCurrentRole){
                         objWrpRole.blnCurrentRole = true;
                     }else{
-                        objWrpRole.blnIsPreRole = preRoles.contains(strRoleSalesforce);
+                        objWrpRole.blnIsPreRole = devPreRoles.contains(strRoleSalesforce);
                     }
                 if (mapPositionXCareer.containsKey(strColumn)){
                     lstCareerTmp = mapPositionXCareer.get(strColumn);
@@ -79,7 +146,7 @@ public with sharing class PathAssistant {
         @AuraEnabled public List<wrpRoles> lstWrpRoles = new List<wrpRoles>();
     }
 
-    private static Set<String> calculatePreRole (String currentRole){
+    private static Set<String> calculateDevPreRole (String currentRole){
         Set<String> preRoles = new Set<String>();
         if(currentRole.equals('Salesforce Developer')){
             preRoles.add('Salesforce Trainee');
@@ -158,5 +225,57 @@ public with sharing class PathAssistant {
             preRoles.add('Salesforce Certified Architect');  
         }
         return preRoles;
+    }
+
+    private static Set<String> calculateQaPreRole (String currentRole){
+        Set<String> qaPreRoles = new Set<String>();
+        if(currentRole.equals('QA Analyst')){
+            qaPreRoles.add('QA Junior');
+        } else if(currentRole.equals('QA Senior')){
+            qaPreRoles.add('QA Junior');
+            qaPreRoles.add('QA Analyst');
+        } else if(currentRole.equals('QA Lead') || currentRole.equals('QA Automation Specialist') || currentRole.equals('QA Mobile Specialist') ||
+                    currentRole.equals('QA Security Specialist') || currentRole.equals('QA Usability Specialist') || currentRole.equals('QA Technology Specialist') || 
+                    currentRole.equals('QA Coach')){
+                qaPreRoles.add('QA Junior');
+                qaPreRoles.add('QA Analyst');
+                qaPreRoles.add('QA Senior');
+        }else if(currentRole.equals('QA Automation Specialist Lead')){
+                qaPreRoles.add('QA Automation Specialist');
+                qaPreRoles.add('QA Junior');
+                qaPreRoles.add('QA Analyst');
+                qaPreRoles.add('QA Senior');
+        } else if(currentRole.equals('QA Mobile Specialist Lead')){
+            qaPreRoles.add('QA Mobile Specialist');
+            qaPreRoles.add('QA Junior');
+            qaPreRoles.add('QA Analyst');
+            qaPreRoles.add('QA Senior');
+        } else if(currentRole.equals('QA Security Specialist Lead')){
+            qaPreRoles.add('QA Security Specialist');
+            qaPreRoles.add('QA Junior');
+            qaPreRoles.add('QA Analyst');
+            qaPreRoles.add('QA Senior');
+        } else if(currentRole.equals('QA Usability Specialist Lead')){
+                qaPreRoles.add('QA Usability Specialist');
+                qaPreRoles.add('QA Junior');
+                qaPreRoles.add('QA Analyst');
+                qaPreRoles.add('QA Senior');
+        } else if(currentRole.equals('QA Manager')){
+            qaPreRoles.add('QA Usability Specialist Lead');
+            qaPreRoles.add('QA Security Specialist Lead');
+            qaPreRoles.add('QA Mobile Specialist Lead');
+            qaPreRoles.add('QA Automation Specialist Lead');
+            qaPreRoles.add('QA Usability Specialist');
+            qaPreRoles.add('QA Security Specialist');
+            qaPreRoles.add('QA Mobile Specialist');
+            qaPreRoles.add('QA Automation Specialist');
+            qaPreRoles.add('QA Technology Specialist');
+            qaPreRoles.add('QA Lead');
+            qaPreRoles.add('QA Coach');
+            qaPreRoles.add('QA Junior');
+            qaPreRoles.add('QA Analyst');
+            qaPreRoles.add('QA Senior');
+        }
+        return qaPreRoles;
     }
 }

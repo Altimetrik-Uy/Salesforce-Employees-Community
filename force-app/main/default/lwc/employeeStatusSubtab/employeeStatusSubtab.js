@@ -57,7 +57,6 @@ export default class EmployeeStatusSubtab extends LightningElement {
     }
 
     @wire(getEmployeeStatuses,{projId: '$comboBoxValue', empId: '$employeeid',allSelected: '$allSelected'}) getEmployeeStatuses({error,data}){
-        console.log('data ' + data);
         try{
             if(this.employeeid != '' && this.comboBoxValue != ''){
                 getEmployeeStatusCount({projId: this.comboBoxValue, empId: this.employeeid, allSelected: this.allSelected}).then(projectCount =>{ 
@@ -142,12 +141,10 @@ export default class EmployeeStatusSubtab extends LightningElement {
 
     handlePaginationClick(event) {
         let offsetNumber = event.target.dataset.targetNumber;
-        console.log('offsetNumber-- ' + offsetNumber);
         //reduce 1 from the clciked number and multiply it with 4, 
         //since we are showing 4 records per page and pass the offset to apex class 
         getEmployeeStatuses({projId: this.comboBoxValue, empId: this.employeeid, allSelected: this.allSelected, offsetRange: 4 * (offsetNumber - 1) })
             .then(data => {
-                console.log('data desde el event ' + data);
                 if (data) {
                     this.projectStatuses = data;
                     let preparedAssets = [];
