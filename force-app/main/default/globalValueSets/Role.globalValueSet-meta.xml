@@ -166,6 +166,41 @@
         <label>QA Technology Specialist</label>
     </customValue>
     <customValue>
+        <fullName>QA Junior</fullName>
+        <default>false</default>
+        <label>QA Junior</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Automation Specialist Lead</fullName>
+        <default>false</default>
+        <label>QA Automation Specialist Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Usability Specialist</fullName>
+        <default>false</default>
+        <label>QA Usability Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Usability Specialist Lead</fullName>
+        <default>false</default>
+        <label>QA Usability Specialist Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Security Specialist</fullName>
+        <default>false</default>
+        <label>QA Security Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Security Specialist Lead</fullName>
+        <default>false</default>
+        <label>QA Security Specialist Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Coach</fullName>
+        <default>false</default>
+        <label>QA Coach</label>
+    </customValue>
+    <customValue>
         <fullName>React Specialist</fullName>
         <default>false</default>
         <label>React Specialist</label>
@@ -269,6 +304,24 @@
         <fullName>Other</fullName>
         <default>false</default>
         <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Lightning Specialist</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Lightning Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Apex Specialist</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Apex Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Technical Architect Lead</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Salesforce Technical Architect Lead</label>
     </customValue>
     <masterLabel>Role</masterLabel>
     <sorted>false</sorted>

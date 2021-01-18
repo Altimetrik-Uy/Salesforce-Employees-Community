@@ -5,6 +5,7 @@ import sendMessage from '@salesforce/apex/LWCEmployeeStatusController.sendMessag
 import getManager from '@salesforce/apex/LWCEmployeeStatusController.getManager';
 import getUser from '@salesforce/apex/LWCEmployeeStatusController.getUser';
 import getProjectActiveStauts from '@salesforce/apex/LWCEmployeeStatusController.getProjectActiveStauts';
+import getEmployeeStatusCount from '@salesforce/apex/LWCEmployeeStatusController.getEmployeeStatusCount';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
 let i = 0;
@@ -17,6 +18,9 @@ export default class EmployeeStatusSubtab extends LightningElement {
     @track lstManagerId = [];
     @track userName = '';
     @track allSelected = false;
+    @track projectStatuses=[];
+    @track paginationRange = [];
+    @track totalRecords;
 
     @wire(getEmployeeProjects,{empId: '$employeeid'}) wiredProjects({error,data}){
         if(data){
@@ -48,37 +52,53 @@ export default class EmployeeStatusSubtab extends LightningElement {
             this.allSelected = false;
         }
        //here we "call" getEmployeeStatuses
+       this.projectStatuses = [];
        refreshApex(this.projectStatuses);
     }
 
-    @track projectStatuses;
-    @track projectStatusesTableColumns = [ 
-        { fieldName: 'Status'},
-        { fieldName: 'StatusDate'},
-        { fieldName: 'StatusComments'},
-        { fieldName: 'ManagerName'},
-        { fieldName: 'ProjectName'}
-        ]; 
-
     @wire(getEmployeeStatuses,{projId: '$comboBoxValue', empId: '$employeeid',allSelected: '$allSelected'}) getEmployeeStatuses({error,data}){
-        if (data) {
-            this.projectStatuses = data;
-            let preparedAssets = [];
-            let id = 0;
-            this.projectStatuses.forEach(asset => {
-                let preparedAsset = {};
-                preparedAsset.Id = id++;
-                preparedAsset.Status = asset.Status__c;
-                preparedAsset.StatusDate = asset.Meeting_Date__c;
-                preparedAsset.StatusComments = asset.Comments__c;
-                preparedAsset.ManagerName = asset.CreatedBy.Name;
-                preparedAssets.push(preparedAsset);
-            });
-            this.projectStatuses = preparedAssets;
-        } else if (error) {
-            this.error = error;
+        try{
+            if(this.employeeid != '' && this.comboBoxValue != ''){
+                getEmployeeStatusCount({projId: this.comboBoxValue, empId: this.employeeid, allSelected: this.allSelected}).then(projectCount =>{ 
+                    if(projectCount){
+                    this.projectStatuses = [];
+                    this.totalRecords = projectCount;
+                        let i = 1;
+                        if (data) {
+                            this.projectStatuses = data;
+                            let preparedAssets = [];
+                            let id = 0;
+                            this.projectStatuses.forEach(asset => {
+                                let preparedAsset = {};
+                                preparedAsset.Id = id++;
+                                preparedAsset.Status = asset.Status__c;
+                                preparedAsset.StatusDate = asset.Meeting_Date__c;
+                                preparedAsset.StatusComments = asset.Comments__c;
+                                preparedAsset.ManagerName = asset.CreatedBy.Name;
+                                preparedAssets.push(preparedAsset);
+                            });
+                            this.projectStatuses = preparedAssets;
+                        } else if (error) {
+                            this.error = error;
+                        }
+                        //looking at displaying 4 recrods per page
+                        const paginationNumbers = Math.ceil(this.totalRecords / 4);
+                        //create an array with size equals to paginationNumbers
+                        this.paginationRange = [];
+                        while (
+                            this.paginationRange.push(i++) < paginationNumbers
+                            // eslint-disable-next-line no-empty
+                        ) {}
+                    }else{
+                        this.projectStatuses = [];
+                        this.paginationRange = [];
+                    }
+                });
+            }
+        }catch(error){
+            console.log(error);
         }
-    }
+    } 
 
     @wire(getManager,{projId: '$comboBoxValue'}) getManager({error,data}){
         if(data){
@@ -118,4 +138,34 @@ export default class EmployeeStatusSubtab extends LightningElement {
             }
         })
     }
+
+    handlePaginationClick(event) {
+        let offsetNumber = event.target.dataset.targetNumber;
+        //reduce 1 from the clciked number and multiply it with 4, 
+        //since we are showing 4 records per page and pass the offset to apex class 
+        getEmployeeStatuses({projId: this.comboBoxValue, empId: this.employeeid, allSelected: this.allSelected, offsetRange: 4 * (offsetNumber - 1) })
+            .then(data => {
+                if (data) {
+                    this.projectStatuses = data;
+                    let preparedAssets = [];
+                    let id = 0;
+                    this.projectStatuses.forEach(asset => {
+                        let preparedAsset = {};
+                        preparedAsset.Id = id++;
+                        preparedAsset.Status = asset.Status__c;
+                        preparedAsset.StatusDate = asset.Meeting_Date__c;
+                        preparedAsset.StatusComments = asset.Comments__c;
+                        preparedAsset.ManagerName = asset.CreatedBy.Name;
+                        preparedAssets.push(preparedAsset);
+                    });
+                    this.projectStatuses = preparedAssets;
+                } else if (error) {
+                    this.error = error;
+                }
+            })
+            .catch(error => {
+                // eslint-disable-next-line no-console
+                console.log(error);
+            });
+    } 
 }

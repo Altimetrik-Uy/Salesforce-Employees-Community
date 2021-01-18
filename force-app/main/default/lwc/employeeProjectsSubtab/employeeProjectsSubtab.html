@@ -1,7 +1,7 @@
 <template>  
-        <div class="main">
+         <div class="main">
             <ul class="slds-has-dividers_around-space">
-                <template for:each={projectStatusImageName} for:item="currentProjectStatus">      
+                <template for:each={projectTable} for:item="currentProjectStatus">      
                     <li key={currentProjectStatus.Id} class="slds-item project-box">
                         <article class="slds-tile slds-tile_board">
                         <blockquote>
@@ -50,5 +50,14 @@
                     </li>
                 </template>
             </ul>
+        </div> 
+        <div class="customPagination">
+            <template for:each={paginationRange} for:item="pageNumber">
+                <a onclick={handlePaginationClick}
+                    key={pageNumber}
+                    data-target-number={pageNumber}>
+                    {pageNumber}
+                </a>
+            </template>
         </div>
 </template>

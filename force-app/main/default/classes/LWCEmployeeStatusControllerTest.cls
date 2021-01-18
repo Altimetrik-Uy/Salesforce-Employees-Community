@@ -56,8 +56,8 @@ public class LWCEmployeeStatusControllerTest {
             eS1.Meeting_Date__c =  date.parse('2/17/2021');
             List<Employee_Status__c> status = new List<Employee_Status__c>();
 			status.add(returnEmployeeStatusesStructure(eS1.Id));
-          	System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses(empAssignmentList.get(1).Project__r.Id, con.Id, false).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match'); 
-          	System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses('000000000000000000', con.Id, true).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match');        
+          	System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses(empAssignmentList.get(1).Project__r.Id, con.Id, false,0).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match'); 
+          	System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses('000000000000000000', con.Id, true,0).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match');        
         }
     }
     

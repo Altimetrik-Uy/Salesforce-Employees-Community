@@ -20,7 +20,8 @@ export default class PathAssistant extends LightningElement {
     @track possibleSteps;
     // step selected by the user
     @track selectedStepValue;
-
+    
+    @track careerPathStyle = 'slds-path__nav careerPath';
     _optionSelected;
 
     constructor() {
@@ -31,14 +32,19 @@ export default class PathAssistant extends LightningElement {
         if(data){
             if (data) {
                 let arrPossibleSteps = [];
-                let index = 0; 
+                let index = 0;
+                var roleQA = '';
                 for (const objCareerPath of data) {
-                    for (const role of objCareerPath.lstWrpRoles) {
+                    for (const role of objCareerPath.lstWrpRoles){ 
+                        roleQA = role.strRole;
+                        if(roleQA.includes('QA')){
+                            this.careerPathStyle = 'slds-path__nav careerPathQA';
+                        }
                         arrPossibleSteps.push(new Step(role.strRole, role.strRole, index));
                         index++;
                         if(objCareerPath.blnCurrentRole){
                             this._optionSelected = objCareerPath.strRole.replace('Salesforce ', '');
-                        }
+                        } 
                     }
                 }
                 this.possibleSteps = arrPossibleSteps;

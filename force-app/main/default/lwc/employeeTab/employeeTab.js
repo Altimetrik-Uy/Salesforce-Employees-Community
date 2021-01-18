@@ -1,6 +1,11 @@
 import { LightningElement, wire, api, track } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import assets from '@salesforce/resourceUrl/assets';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+import strUserId from '@salesforce/user/Id';
+import getTrailBlazerId from '@salesforce/apex/LWCEmployeeOverallController.getTrailBlazerId';
+import insertTrailBlazerId from '@salesforce/apex/LWCEmployeeOverallController.insertTrailBlazerId';
+
 const NAME_FIELD = 'Contact.Name';
 const ROLE_FIELD = 'Contact.Role__c';
 const IMAGE_FIELD = 'Contact.Image__c';
@@ -8,6 +13,11 @@ const IMAGE_FIELD = 'Contact.Image__c';
 export default class EmployeeTab extends LightningElement {
 
     @api employeeid;
+    @track userId = strUserId;
+    @track trailBlazerId;
+    newTrailId;
+    hrefTrailId;
+    @track pressEditTrailblazerId = false;
 
     imgMarkup;
     employeeName;
@@ -142,8 +152,80 @@ export default class EmployeeTab extends LightningElement {
         }
     }
    
-
+    @wire(getTrailBlazerId, {uId: '$userId'})
+    wiredTrailblazer({ error, data }) {
+        if (data) {
+            this.trailBlazerId = data;
+            this.hrefTrailId = "https://trailblazer.me/id/"+this.trailBlazerId;
+        } else if (error) {
+            this.trailBlazerId = undefined;
+        }
+    }
     
+    editTrailblazerId(){
+        this.pressEditTrailblazerId = true;
+        this.newTrailId = this.trailBlazerId;
+    }
+
+    cancelTrailId(){
+        this.pressEditTrailblazerId = false;
+    }
+
+    handleInput(event) {
+        this.newTrailId = event.target.value;
+    }
+
+    keyCheck({code}){
+        //checks for "enter" key
+        if (('Enter' === code) || ('NumpadEnter' === code)){
+            this.insertTrailIdClick();
+        }
+    }
+    
+    insertTrailIdClick(){
+        if(this.newTrailId){
+            if(this.newTrailId != this.trailBlazerId){
+                insertTrailBlazerId({ uId: this.userId, newTrailBlazerId: this.newTrailId })
+                .then(() => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: 'Success',
+                            message: 'Trailblazer Id was updated. Data may take up to 40 minutes to be updated',
+                            variant: 'success'
+                        })
+                    );
+                    this.trailBlazerId = this.newTrailId;
+                    this.pressEditTrailblazerId = false;
+                }).catch(error => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: 'Error updating the Trailblaizer Id',
+                            message: error.body.message,
+                            variant: 'error'
+                        })
+                    );
+                });
+            } else{
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Info',
+                        message: 'Trailblazer Id did not change',
+                        variant: 'info'
+                    })
+                );
+                this.pressEditTrailblazerId = false;
+            }
+        }else{
+                this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: 'Warning',
+                            message: 'Trailblazer Id cannot be empty',
+                            variant: 'warning'
+                        })
+                    );
+            }
+    }
+
     extract(str) {
         let m;
         if ((m = /src=\"(.+?)\"/.exec(str)) !== null) {

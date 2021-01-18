@@ -14,11 +14,16 @@ blockquote.doc {
     background-color: #FF9A3C;
 }
 
-/* .icon-date-color{
-    background-color:white ;
-    color:#706E6B;
-} */
-
 .main{
     background-color: white;
+}
+
+.customPagination {
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 3px;
+}
+
+.customPagination>a {
+    padding: 5px 10px;
 }

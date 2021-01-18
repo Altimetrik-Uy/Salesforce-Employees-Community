@@ -160,7 +160,7 @@ public without sharing class RoleCertificationsController{
 				} else{
                     rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
 					certificacionWrapper.hasRequired = true;
-					certificacionWrapper.role = 'There are no Salesforce Career Path Records.';
+					certificacionWrapper.role = 'There are no Salesforce Career Records.';
 					certificacionWrapper.porcentaje = carreerPathList.size();
                     certificacionesWrapperList.add(certificacionWrapper);
                     
@@ -168,7 +168,7 @@ public without sharing class RoleCertificationsController{
 			} else{
                 rolesCertificacionesWrapper certificacionWrapper = new rolesCertificacionesWrapper();
 				certificacionWrapper.hasRequired = true;				
-				certificacionWrapper.role = 'Verify that the Email or Role fields have valid information.';
+				certificacionWrapper.role = 'Verify that the Email or Role fields have valid info.';
 				certificacionWrapper.porcentaje = contactList.size();
                 certificacionesWrapperList.add(certificacionWrapper); 
             }
