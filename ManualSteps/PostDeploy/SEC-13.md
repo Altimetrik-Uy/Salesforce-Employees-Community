@@ -9,7 +9,7 @@ Run the following script in an anonymus window:
 
 
 ```
-List<String> certificationNames = new List<String>{'Advanced Administrator','JavaScript Developer I','Platform App Builder','Platform Developer I','Platform Developer II','Sharing and Visibility', 'Data Architecture and Management', 'Development Lifecycle and Deployment', 'Identity and Access Management', 'Integration Architecture', 'Heroku Architecture Designer', 'Scrum Master', 'System Architect', 'Technical Architect', 'Application Architect'};
+List<String> certificationNames = new List<String>{'Administrator','JavaScript Developer I','Platform App Builder','Platform Developer I','Platform Developer II','Sharing and Visibility', 'Data Architecture and Management', 'Development Lifecycle and Deployment', 'Identity and Access Management', 'Integration Architecture', 'Heroku Architecture Designer', 'Scrum Master', 'System Architect', 'Technical Architect', 'Application Architect'};
 
 List<ta_Certification__c> certifications = new List<ta_Certification__c>();
 Map<String, ta_Certification__c> certNameMap = new Map<String, ta_Certification__c>();
@@ -135,7 +135,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'Salesforce Platform Specialist';
 scp.Required__c = false;
 scp.Possible_Next_Role__c = 'Salesforce Senior Platform Specialist';
-scp.Certification__c = certNameMap.get('Advanced Administrator').Id;
+scp.Certification__c = certNameMap.get('Administrator').Id;
 careerPaths.add(scp);
 
 insert careerPaths;
@@ -186,7 +186,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'Salesforce Senior Lightning Specialist';
 scp.Required__c = false;
 scp.Possible_Next_Role__c = 'Salesforce Team Lead;Salesforce Techincal Architect';
-scp.Certification__c = certNameMap.get('Advanced Administrator').Id;
+scp.Certification__c = certNameMap.get('Administrator').Id;
 careerPaths.add(scp);
 
 //Senior Apex Specialist
@@ -222,7 +222,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'Salesforce Senior Apex Specialist';
 scp.Required__c = false;
 scp.Possible_Next_Role__c = 'Salesforce Team Lead;Salesforce Techincal Architect';
-scp.Certification__c = certNameMap.get('Advanced Administrator').Id;
+scp.Certification__c = certNameMap.get('Administrator').Id;
 careerPaths.add(scp);
 
 //Senior Platform Specialist
@@ -258,7 +258,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'Salesforce Senior Platform Specialist';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'Salesforce Team Lead;Salesforce Techincal Architect';
-scp.Certification__c = certNameMap.get('Advanced Administrator').Id;
+scp.Certification__c = certNameMap.get('Administrator').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -337,7 +337,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'Salesforce Team Lead';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'Salesforce Manager';
-scp.Certification__c = certNameMap.get('Advanced Administrator').Id;
+scp.Certification__c = certNameMap.get('Administrator').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -408,7 +408,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'Salesforce Technical Architect';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'Salesforce Certified Architect';
-scp.Certification__c = certNameMap.get('Advanced Administrator').Id;
+scp.Certification__c = certNameMap.get('Administrator').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -529,7 +529,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'Salesforce Manager';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'Salesforce Delivery Manager';
-scp.Certification__c = certNameMap.get('Advanced Administrator').Id;
+scp.Certification__c = certNameMap.get('Administrator').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
