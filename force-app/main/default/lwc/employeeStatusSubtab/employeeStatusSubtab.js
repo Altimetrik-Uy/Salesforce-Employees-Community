@@ -131,7 +131,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
             }else{
                 const event = new ShowToastEvent({
                     title: 'Fail!',
-                    message: 'Message has not been sent.',
+                    message: 'Message has not been sent. Current project does not have a manager assigned to be notified',
                     variant: 'error',
                 });
                 this.dispatchEvent(event);
