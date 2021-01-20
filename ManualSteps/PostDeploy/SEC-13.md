@@ -572,7 +572,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'Salesforce Certified Architect';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'Salesforce Certified Architect';
-scp.Certification__c = certNameMap.get('Advanced Administrator').Id;
+scp.Certification__c = certNameMap.get('Administrator').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
