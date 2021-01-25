@@ -19,62 +19,45 @@ public class LWCEmployeeStatusController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<Employee_Status__c> getEmployeeStatuses(Id projId, String empId, Boolean allSelected, Integer offsetRange){
-        if(allSelected) {
-            if(offsetRange == null){
-                return [SELECT Id, Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name FROM Employee_Status__c WHERE Employee__r.Id =:empId ORDER BY Meeting_Date__c DESC LIMIT 4];
-            }else {
-                return [SELECT Id, Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name FROM Employee_Status__c WHERE Employee__r.Id =:empId ORDER BY Meeting_Date__c DESC LIMIT 4 OFFSET :offsetRange];
-            }
-        }else{
-            if(offsetRange == null){
-                return  [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC LIMIT 4]; 
-            }else{
-                return [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Project__r.Id =: projId ORDER BY Meeting_Date__c DESC LIMIT 4 OFFSET :offsetRange]; 
-            }
+    public static List<Employee_Status__c> getEmployeeStatuses(String empId, Integer offsetRange){
+        if(offsetRange == null){
+            return [SELECT Id, Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Employee__r.Id =:empId ORDER BY Meeting_Date__c DESC LIMIT 4];
+        }else {
+            return [SELECT Id, Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Employee__r.Id =:empId ORDER BY Meeting_Date__c DESC LIMIT 4 OFFSET :offsetRange];
         }
     }
 
     @AuraEnabled(cacheable=true)
-    public static Integer getEmployeeStatusCount(Id projId, String empId, Boolean allSelected){
-        if (allSelected) {
-            return [SELECT COUNT() FROM Employee_Status__c WHERE Employee__r.Id = :empId];
-        }else{
-            return [SELECT COUNT() FROM Employee_Status__c WHERE Employee__r.Id = :empId AND Project__r.Id = :projId];
-        }
-    }
-
-    public static List<Employee_Status__c> getAllEmployeeStatuses(String empId){
-        return [SELECT Id, Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name FROM Employee_Status__c WHERE Employee__r.Id =:empId ORDER BY Meeting_Date__c DESC];
+    public static Integer getEmployeeStatusCount(String empId){
+        return [SELECT COUNT() FROM Employee_Status__c WHERE Employee__r.Id = :empId];
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<String> getManager(String projId){
-       List<String> lstManagersId = new List<String>();
-        for(Managers_Assignment__c currentMA : [SELECT User__r.Id FROM Managers_Assignment__c WHERE Project__r.Id = :projId ORDER BY Project__r.Id]){
-            if(lstManagersId.isEmpty()) {
-                lstManagersId.add(currentMA.User__r.Id);
-            }else{
-                if(!lstManagersId.contains(currentMA.User__r.Id)){
+    public static List<String> getManager(String empId){
+        List<String> lstProjectsActive = new List<String>();
+        for(Employee_Assignment__c activeProj : [SELECT Project__r.Id FROM Employee_Assignment__c WHERE Employee__r.Id = :empId AND Active__c = true]){
+            lstProjectsActive.add(activeProj.Project__r.Id);
+        }
+        List<String> lstManagersId = new List<String>();
+        if(!lstProjectsActive.isEmpty()){
+            for(Managers_Assignment__c currentMA : [SELECT User__r.Id FROM Managers_Assignment__c WHERE Project__r.Id IN :lstProjectsActive ORDER BY Project__r.Id]){
+                if(lstManagersId.isEmpty()) {
                     lstManagersId.add(currentMA.User__r.Id);
+                }else{
+                    if(!lstManagersId.contains(currentMA.User__r.Id)){
+                        lstManagersId.add(currentMA.User__r.Id);
+                    }
                 }
-            }
-       } 
-       return lstManagersId;
+           } 
+           return lstManagersId;
+        }
+        lstManagersId.add('You dont have manager assigned');
+        return lstManagersId;
     }
 
     @AuraEnabled(cacheable=true)
     public static string getUser(String empId){
         return [SELECT Contact.Name FROM User WHERE Contact.Id =: empId LIMIT 1].Contact.Name;
-    }
-
-     @AuraEnabled(cacheable=true)
-    public static Boolean getProjectActiveStauts(String empId, Id projId){
-            try {
-                return [SELECT Active__c FROM Employee_Assignment__c WHERE Employee__r.Id = :empId AND Project__r.Id =: projId ORDER BY Active__c DESC LIMIT 1].Active__c;
-            } catch (Exception e) {
-                return false;
-           }  
     }
  
     @AuraEnabled
@@ -84,7 +67,7 @@ public class LWCEmployeeStatusController {
 
     public static Boolean feedMessage(List<String> lstManagersId, String userName){
         try {
-            String postText = 'The Employee '  + userName + ' request a status update';
+            String postText = 'The Employee '  + userName + ' requests a status update.';
             // Define the FeedItemInput object to pass to postFeedElement
             ConnectApi.FeedItemInput feedItemInput = new ConnectApi.FeedItemInput();
             ConnectApi.MessageBodyInput messageBodyInput = new ConnectApi.MessageBodyInput();

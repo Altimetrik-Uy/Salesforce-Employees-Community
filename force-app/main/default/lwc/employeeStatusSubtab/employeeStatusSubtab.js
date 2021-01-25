@@ -4,7 +4,6 @@ import getEmployeeStatuses from '@salesforce/apex/LWCEmployeeStatusController.ge
 import sendMessage from '@salesforce/apex/LWCEmployeeStatusController.sendMessage';
 import getManager from '@salesforce/apex/LWCEmployeeStatusController.getManager';
 import getUser from '@salesforce/apex/LWCEmployeeStatusController.getUser';
-import getProjectActiveStauts from '@salesforce/apex/LWCEmployeeStatusController.getProjectActiveStauts';
 import getEmployeeStatusCount from '@salesforce/apex/LWCEmployeeStatusController.getEmployeeStatusCount';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
@@ -25,12 +24,6 @@ export default class EmployeeStatusSubtab extends LightningElement {
     @wire(getEmployeeProjects,{empId: '$employeeid'}) wiredProjects({error,data}){
         if(data){
             for(i=0; i<data.length; i++) {
-                if(i== 0){
-                    //Add the option view all
-                    this.projectItem = [...this.projectItem ,{value: '000000000000000000', label: 'All'}];
-                    //Set the most recent joined project as default
-                    this.comboBoxValue = data[i].Project__r.Id;
-                }
                 this.projectItem = [...this.projectItem ,{value: data[i].Project__r.Id , label: data[i].Project__r.Name}];  
             }
             this.error = undefined;
@@ -44,22 +37,10 @@ export default class EmployeeStatusSubtab extends LightningElement {
         return this.projectItem;
     }
    
-    handleChange(event) {
-        this.comboBoxValue = event.detail.value;
-        if(this.comboBoxValue == '000000000000000000'){
-            this.allSelected = true;
-        }else{
-            this.allSelected = false;
-        }
-       //here we "call" getEmployeeStatuses
-       this.projectStatuses = [];
-       refreshApex(this.projectStatuses);
-    }
-
-    @wire(getEmployeeStatuses,{projId: '$comboBoxValue', empId: '$employeeid',allSelected: '$allSelected'}) getEmployeeStatuses({error,data}){
+    @wire(getEmployeeStatuses,{ empId: '$employeeid'}) getEmployeeStatuses({error,data}){
         try{
-            if(this.employeeid != '' && this.comboBoxValue != ''){
-                getEmployeeStatusCount({projId: this.comboBoxValue, empId: this.employeeid, allSelected: this.allSelected}).then(projectCount =>{ 
+            if(this.employeeid != '' ){
+                getEmployeeStatusCount({empId: this.employeeid}).then(projectCount =>{ 
                     if(projectCount){
                     this.projectStatuses = [];
                     this.totalRecords = projectCount;
@@ -100,7 +81,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
         }
     } 
 
-    @wire(getManager,{projId: '$comboBoxValue'}) getManager({error,data}){
+    @wire(getManager,{empId: '$employeeid'}) getManager({error,data}){
         if(data){
             this.lstManagerId = data;
         }else if (error){
@@ -116,8 +97,6 @@ export default class EmployeeStatusSubtab extends LightningElement {
         }
     }
     
-    @wire(getProjectActiveStauts,{empId:'$employeeid', projId:'$comboBoxValue'}) isActive;
-
     onClickSendMessage(){
         sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
         .then (s=>{
@@ -143,7 +122,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
         let offsetNumber = event.target.dataset.targetNumber;
         //reduce 1 from the clciked number and multiply it with 4, 
         //since we are showing 4 records per page and pass the offset to apex class 
-        getEmployeeStatuses({projId: this.comboBoxValue, empId: this.employeeid, allSelected: this.allSelected, offsetRange: 4 * (offsetNumber - 1) })
+        getEmployeeStatuses({empId: this.employeeid, offsetRange: 4 * (offsetNumber - 1) })
             .then(data => {
                 if (data) {
                     this.projectStatuses = data;
