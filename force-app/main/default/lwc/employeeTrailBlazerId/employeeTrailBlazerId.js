@@ -41,6 +41,9 @@ export default class EmployeeTrailBlazerId extends LightningElement {
                     })
                 );
                 this.trailBlazerId = this.newTrailId;
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1500);
             }).catch(error => {
                 this.dispatchEvent(
                     new ShowToastEvent({

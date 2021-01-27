@@ -55,12 +55,45 @@ public class LWCEmployeeStatusControllerTest {
             update eS1;
             eS1.Meeting_Date__c =  date.parse('2/17/2021');
             List<Employee_Status__c> status = new List<Employee_Status__c>();
-			status.add(returnEmployeeStatusesStructure(eS1.Id));
-          	System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses(empAssignmentList.get(1).Project__r.Id, con.Id, false,0).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match'); 
-          	System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses('000000000000000000', con.Id, true,0).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match');        
+            status.add(returnEmployeeStatusesStructure(eS1.Id));
+
+            Test.startTest();
+              System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses(con.Id, 0).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match');         
+            Test.stopTest();
         }
     }
     
+    @isTest
+    public static void getEmployeeStatusCount(){
+    	 //System Admin
+    	User admin = TestDataFactory.createAdminUser();
+        System.runAs(admin){
+            //Account
+            Account acc = TestDataFactory.createAccount();
+            //Contact
+            Contact con = TestDataFactory.createContact(acc.Id);
+            //User
+            User usr = TestDataFactory.createUser(con.Id);
+            Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+            Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O3',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+            List<Employee_Assignment__c> empAssignmentList = new List<Employee_Assignment__c>();
+           	empAssignmentList.add(returnEmployeeProjectsStructure(OppO1Id));
+            empAssignmentList.add(returnEmployeeProjectsStructure(OppO2Id));
+            empAssignmentList.add(returnEmployeeProjectsStructure(OppO3Id));
+        	Employee_Status__c eS1 = TestDataFactory.createEmployeeStatus(con.Id,'Red', 'Red');
+            eS1.Project__c = empAssignmentList.get(1).Project__r.Id; 
+            update eS1;
+            eS1.Meeting_Date__c =  date.parse('2/17/2021');
+            List<Employee_Status__c> status = new List<Employee_Status__c>();
+            status.add(returnEmployeeStatusesStructure(eS1.Id));
+
+            Test.startTest();
+              System.assertEquals(LWCEmployeeStatusController.getEmployeeStatusCount(con.Id), 1);         
+            Test.stopTest();
+        }
+    }
+
     @isTest(SeeAllData=True)
     public static void sendMessage(){
         User admin = TestDataFactory.createAdminUser();
@@ -136,10 +169,9 @@ public class LWCEmployeeStatusControllerTest {
             status.add(returnEmployeeStatusesStructure(eS1.Id));
  			            
             Test.startTest();
-            System.assertEquals(LWCEmployeeStatusController.getManager(projectId), lstManagersId, 'Project Manager do not match');
+            System.assertEquals(LWCEmployeeStatusController.getManager(con.Id), lstManagersId, 'You dont have manager assigned');
             System.assertEquals(LWCEmployeeStatusController.getUser(con.Id), 'Test Test' , 'Contact do not match');
-     		System.assertEquals(LWCEmployeeStatusController.getProjectActiveStauts(con.Id, projectId), true , 'Active do not match');
-            Test.stopTest();
+     		Test.stopTest();
             }
         }
 }

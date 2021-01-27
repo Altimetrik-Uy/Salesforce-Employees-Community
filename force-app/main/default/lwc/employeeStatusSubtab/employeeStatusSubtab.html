@@ -4,25 +4,13 @@
                 <div class="slds-col">
                     <div class="slds-grid slds-wrap">
                         <div class="slds-col slds-size_8-of-12">
-                            <div class="">
-                                <template if:false={comboBoxValue}>
-                                    <div class=" slds-scrollable top-box">
-                                        <lightning-combobox  dropdown-alignment="auto" name="projects" label="Project" placeholder="Choose Project" value={comboBoxValue} onchange={handleChange} options={projectOptions}></lightning-combobox>    
-                                    </div>
-                                </template>
-                                <template if:true={comboBoxValue}>
-                                    <lightning-combobox dropdown-alignment="auto" name="projects" label="Project" placeholder="Choose Project" value={comboBoxValue} onchange={handleChange} options={projectOptions}></lightning-combobox>    
-                                </template>
-                            </div>
                         </div>
                         <div class="slds-col slds-size_4-of-12">
                             <div class="slds-m-top_large button-box">
-                                <template if:true={isActive.data}>
-                                    <div class="button-box-text">
+                                <div class="button-box-text">
                                     <lightning-button variant="brand-outline" label="Add Status" onclick={onClickSendMessage} class="slds-m-left_x-small tooltip"></lightning-button>
-                                        <span class="button-box-text-help">Click to notifying your manager that you want a meeting for status update</span>
-                                    </div>
-                                </template>
+                                    <span class="button-box-text-help">Click to notify your manager that you want a meeting for status update</span>
+                                </div>
                             </div>
                         </div>
                     </div>
