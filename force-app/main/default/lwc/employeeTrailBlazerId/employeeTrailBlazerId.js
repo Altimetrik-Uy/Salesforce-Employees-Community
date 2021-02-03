@@ -30,29 +30,39 @@ export default class EmployeeTrailBlazerId extends LightningElement {
 
     insertTrailIdClick(){
         this.newTrailId = this.template.querySelector("lightning-input[data-id=idInput]").value;
-        if(!this.trailBlazerId){
-            insertTrailBlazerId({ uId: this.userId, newTrailBlazerId: this.newTrailId })
-            .then(() => {
-                this.dispatchEvent(
+        if(this.newTrailId){
+            if(!this.trailBlazerId){
+                insertTrailBlazerId({ uId: this.userId, newTrailBlazerId: this.newTrailId })
+                .then(() => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: 'Success',
+                            message: 'Trailblazer Id  was updated. Data will be updated in 40 minutes aprox',
+                            variant: 'success'
+                        })
+                    );
+                    this.trailBlazerId = this.newTrailId;
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1500);
+                }).catch(error => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: 'Error creating the Trailblaizer Id',
+                            message: error.body.message,
+                            variant: 'error'
+                        })
+                    );
+                });
+            }
+        }else{
+            this.dispatchEvent(
                     new ShowToastEvent({
-                        title: 'Success',
-                        message: 'Trailblazer Id  was updated. Data will be updated in 40 minutes aprox',
-                        variant: 'success'
+                        title: 'Warning',
+                        message: 'Trailblazer Id cannot be empty',
+                        variant: 'warning'
                     })
                 );
-                this.trailBlazerId = this.newTrailId;
-                setTimeout(function() {
-                    window.location.reload();
-                }, 1500);
-            }).catch(error => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Error creating the Trailblaizer Id',
-                        message: error.body.message,
-                        variant: 'error'
-                    })
-                );
-            });
         }
     }
 }
