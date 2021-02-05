@@ -4,7 +4,7 @@ Run the following script in an anonymus window:
 
 
 ```
-List<String> certificationNames = new List<String>{'ISTQB'};
+List<String> certificationNames = new List<String>{'ISTQB Foundation Level'};
 
 List<ta_Certification__c> certifications = new List<ta_Certification__c>();
 Map<String, ta_Certification__c> certNameMap = new Map<String, ta_Certification__c>();
@@ -34,7 +34,7 @@ Salesforce_Career_Path__c scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Junior';
 scp.Required__c = false;
 scp.Possible_Next_Role__c = 'QA Analyst';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -49,7 +49,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Analyst';
 scp.Required__c = false;
 scp.Possible_Next_Role__c = 'QA Senior';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -64,7 +64,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Senior';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'QA Senior';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -79,7 +79,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Automation Specialist';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'QA Automation Specialist Lead';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -94,7 +94,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Mobile Specialist';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'QA Mobile Specialist Lead';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -109,7 +109,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Security Specialist';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'QA Security Specialist Lead';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -124,7 +124,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Usability Specialist';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'QA Usability Specialist Lead';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -139,7 +139,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Technology Specialist';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'QA Manager';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -154,7 +154,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Coach';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'QA Manager';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -169,7 +169,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Lead';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'QA Manager';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -184,7 +184,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Automation Specialist Lead';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'QA Manager';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -199,7 +199,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Mobile Specialist Lead';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'QA Manager';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -214,7 +214,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Security Specialist Lead';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'QA Manager';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -229,7 +229,7 @@ scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Usability Specialist Lead';
 scp.Required__c = true;
 scp.Possible_Next_Role__c = 'QA Manager';
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
@@ -243,7 +243,7 @@ careerPaths.add(scp);
 scp = new Salesforce_Career_Path__c();
 scp.Role__c = 'QA Manager';
 scp.Required__c = true;
-scp.Certification__c = certNameMap.get('ISTQB').Id;
+scp.Certification__c = certNameMap.get('ISTQB Foundation Level').Id;
 careerPaths.add(scp);
 
 scp = new Salesforce_Career_Path__c();
