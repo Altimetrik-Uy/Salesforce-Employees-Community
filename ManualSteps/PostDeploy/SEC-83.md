@@ -239,4 +239,17 @@ scp.Possible_Next_Role__c = 'QA Manager';
 scp.Certification__c = certNameMap.get('Administrator').Id;
 careerPaths.add(scp);
 
+//QA Manager
+scp = new Salesforce_Career_Path__c();
+scp.Role__c = 'QA Manager';
+scp.Required__c = true;
+scp.Certification__c = certNameMap.get('ISTQB').Id;
+careerPaths.add(scp);
+
+scp = new Salesforce_Career_Path__c();
+scp.Role__c = 'QA Manager';
+scp.Required__c = true;
+scp.Certification__c = certNameMap.get('Administrator').Id;
+careerPaths.add(scp);
+
 insert careerPaths;
