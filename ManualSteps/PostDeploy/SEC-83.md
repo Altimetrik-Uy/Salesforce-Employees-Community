@@ -4,7 +4,7 @@ Run the following script in an anonymus window:
 
 
 ```
-List<String> certificationNames = new List<String>{'ISTQB', 'Administrator'};
+List<String> certificationNames = new List<String>{'ISTQB'};
 
 List<ta_Certification__c> certifications = new List<ta_Certification__c>();
 Map<String, ta_Certification__c> certNameMap = new Map<String, ta_Certification__c>();
