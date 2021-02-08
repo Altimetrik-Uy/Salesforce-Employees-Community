@@ -23,8 +23,8 @@
     <referrerPolicyOriginWhenCrossOrigin>true</referrerPolicyOriginWhenCrossOrigin>
     <requireHttps>true</requireHttps>
     <selfRegPage>CommunitiesSelfReg</selfRegPage>
-    <siteAdmin>testlogin@sf-employees-comm.com</siteAdmin>
-    <siteGuestRecordDefaultOwner>testlogin@sf-employees-comm.com</siteGuestRecordDefaultOwner>
+    <siteAdmin>bdibello@altimetrik-mgmt.com.trailadv</siteAdmin>
+    <siteGuestRecordDefaultOwner>bdibello@altimetrik-mgmt.com.trailadv</siteGuestRecordDefaultOwner>
     <siteType>ChatterNetwork</siteType>
-    <subdomain>verotestlogin-developer-edition</subdomain>
+    <subdomain>trailadv-altimetrik-uy</subdomain>
 </CustomSite>
