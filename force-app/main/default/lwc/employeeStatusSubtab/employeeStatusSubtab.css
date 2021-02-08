@@ -1,0 +1,159 @@
+.light-box {
+    padding: 1rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.light-container {
+    position: relative;
+    height: 100%;
+}
+
+.scroll-box{
+    margin-bottom:2.5%;
+}
+
+.top-box {
+    min-height:20rem;
+}
+
+.project-box{
+    border-width: 0px;
+}
+
+.status-box{
+    background-color: #F3F2F2;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.container-box{
+    display: table;
+    width: 100%;
+    margin-bottom: 2%;
+    border-radius: 5px 0px 5px 5px;
+    border-width: 0px;
+    box-shadow: 1.25px 2.5px 2px #d8d8d8;
+  }
+
+.dimension-box{
+    display: table-cell;
+    align-items: flex-end;
+}
+
+.button-box{
+    float: right;
+}
+
+
+
+blockquote.doc {
+    margin-top: 10px;
+    background-color: #E5F1FB;
+    padding: 16px;
+    border-left: 5px solid #1589EE;
+    max-width: calc(100vw - 425px);
+}
+
+.icon-color-manager{
+    background-color: #65CAE4 !important;
+}
+
+.Green{
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    display: inline-block;
+    background-image: linear-gradient(#627361, #44CB7E);
+    border:2px solid white;   
+    border-radius :50%; 
+
+}
+
+.Red{
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    display: inline-block;
+    background-image: linear-gradient(#9D331A, #D64E48);
+    border:2px solid white;   
+    border-radius :50%; 
+}
+
+.Yellow{
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    display: inline-block;
+    background-image: linear-gradient(#FFB26C, #F3D050);
+    border:2px solid white;   
+    border-radius :50%; 
+}
+
+h1 {
+    font-weight: bold;
+}
+
+.main{
+   background-color: #FCFCFC;
+}
+
+.color-box{
+    background-color: white;
+}
+
+.left-box-size{
+   width: 92px; 
+    min-width: 92px;
+
+}
+
+.right-box-size{
+   width:1550px;
+}
+
+.button-box-text {
+    position: relative;
+    display: inline-block;
+  }
+  
+.button-box-text .button-box-text-help {
+    visibility: hidden;
+    width: 260px;
+    height: 120;
+    background-color: #1589EE;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 110%;
+  }
+  
+.button-box-text .button-box-text-help::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #1589EE;
+  }
+
+.button-box-text:hover .button-box-text-help {
+    visibility: visible;
+  }
+
+  .customPagination {
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 3px;
+}
+
+.customPagination>a {
+    padding: 5px 10px;
+}

@@ -10,6 +10,7 @@
     <authorizationRequiredPage>CommunitiesLogin</authorizationRequiredPage>
     <bandwidthExceededPage>BandwidthExceeded</bandwidthExceededPage>
     <browserXssProtection>true</browserXssProtection>
+    <changePasswordPage>ChangePassword</changePasswordPage>
     <clickjackProtectionLevel>SameOriginOnly</clickjackProtectionLevel>
     <contentSniffingProtection>true</contentSniffingProtection>
     <cspUpgradeInsecureRequests>true</cspUpgradeInsecureRequests>
@@ -22,8 +23,8 @@
     <referrerPolicyOriginWhenCrossOrigin>true</referrerPolicyOriginWhenCrossOrigin>
     <requireHttps>true</requireHttps>
     <selfRegPage>CommunitiesSelfReg</selfRegPage>
-    <siteAdmin>ramiro-sec@altimetrik.com</siteAdmin>
-    <siteGuestRecordDefaultOwner>ramiro-sec@altimetrik.com</siteGuestRecordDefaultOwner>
+    <siteAdmin>bdibello@altimetrik-mgmt.com.trailadv</siteAdmin>
+    <siteGuestRecordDefaultOwner>bdibello@altimetrik-mgmt.com.trailadv</siteGuestRecordDefaultOwner>
     <siteType>ChatterNetwork</siteType>
-    <subdomain>sec-ramiro-developer-edition</subdomain>
+    <subdomain>trailadv-altimetrik-uy</subdomain>
 </CustomSite>

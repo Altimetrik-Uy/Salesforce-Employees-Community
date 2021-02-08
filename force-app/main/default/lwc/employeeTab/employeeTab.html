@@ -1,48 +1,121 @@
 <template>
-    <div>
-        
-        <div class="slds-grid slds-wrap border">
-            <div class="slds-col slds-size_2-of-12 imgCont">
-                <lightning-formatted-rich-text class="imageContainer" value={imgMarkup}></lightning-formatted-rich-text>
+    <div class="main">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_4-of-12 image-containter">
+                <lightning-formatted-rich-text value={imgMarkup}></lightning-formatted-rich-text>
             </div>
-
-            <div class="slds-col slds-size_10-of-12">
+            <div class="slds-col slds-size_8-of-12 employee-data">
                 <div class="slds-grid slds-wrap">
                     <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font21">
-                        <b>Name:</b>&nbsp;&nbsp;<i class="employedata">{employeeName}</i>
+                        <lightning-icon icon-name="utility:user" alternative-text="User" title="User" size="x-small" class="employee-icon-color"></lightning-icon>
+                        &nbsp;&nbsp;
+                        <b class="employeeName" >{employeeName}</b>
                     </div>
                 </div>
                 <div class="slds-grid slds-wrap">
                     <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font18">
-                        <b>Role:</b>&nbsp;&nbsp;<i class="employedata">{employeeRole}</i>
+                        <lightning-icon icon-name="utility:company" alternative-text="Company" title="Company" size="x-small" class="employee-icon-color"></lightning-icon>
+                        &nbsp;&nbsp;
+                        <small class="employedata">{employeeRole}</small>
                     </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <template if:true={trailBlazerId}>
+                        <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font18">                    
+                            <lightning-button-icon style="margin-top: -6px;" icon-name="utility:edit" variant="bare" alternative-text="Edit" title="Edit" onclick={editTrailblazerId}></lightning-button-icon>
+                            &nbsp;&nbsp;
+                            <template if:false={pressEditTrailblazerId}>
+                                <small class="employedata"><a href={hrefTrailId} target="_blank">trailblazer.me/id/{trailBlazerId}</a></small>
+                            </template>
+                            <template if:true={pressEditTrailblazerId}>
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <input type="text" value={trailBlazerId} onkeyup={keyCheck} oninput={handleInput} class="slds-input input"/>
+                                        <lightning-button-icon class="btnIconCheck" icon-name="action:approval" variant="bare" alternative-text="Save" title="Save" onclick={insertTrailIdClick}></lightning-button-icon>
+                                        <lightning-button-icon class="btnIconCancel" icon-name="action:remove" variant="bare" alternative-text="Cancel" title="Cancel" onclick={cancelTrailId}></lightning-button-icon>
+                                    </div>
+                                </div>
+                            </template>
+                            
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-grid slds-wrap slds-m-top_x-small">
+                    <template if:true={imageStatus}>
+                        <template for:each={imageStatus} for:item="currentStatus">
+                            <span key={currentStatus.Id} class="slds-badge">
+                                <div class="light-box">
+                                    <span class={currentStatus.AssetImageSrc}></span>
+                                </div>
+                                Status
+                            </span>
+                        </template>
+                    </template>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <template if:true={projectStatusImageName}>
+                        <div class="slds-grid slds-gutters">
+                            <template for:each={projectStatusImageName} for:item="currentProjectStatus">
+                                <span key={currentProjectStatus.Id} class="slds-badge">
+                                    <div class="light-box">
+                                        <span class={currentProjectStatus.ProjectImageSrc}></span>
+                                    </div>
+                                    {currentProjectStatus.ProjectName}
+                                </span>
+                            </template>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
-
-        <lightning-tabset variant="vertical">
-            
-            <lightning-tab label="Overall">
-                <c-employee-overall-subtab employeeid={employeeid}></c-employee-overall-subtab>
-            </lightning-tab>
-
-            <lightning-tab label="Career Path">
-                <c-employee-career-path-subtab employeeid={employeeid}></c-employee-career-path-subtab>
-            </lightning-tab>
-
-            <lightning-tab label="Status">
-                <c-employee-status-subtab employeeid={employeeid}></c-employee-status-subtab>
-            </lightning-tab>
-
-            <lightning-tab label="Projects">
-                <c-employee-projects-subtab employeeid={employeeid}></c-employee-projects-subtab>
-            </lightning-tab>
-
-            <lightning-tab label="Performance Evaluations">
-                <c-employee-performance-evaluations-subtab employeeid={employeeid}></c-employee-performance-evaluations-subtab>
-            </lightning-tab>
-
-        </lightning-tabset>
-
+    </div>
+    <!-- Left Tabs  -->
+    <div class="slds-vertical-tabs">
+        <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
+            <li class={overallTab} title="Overall" role="presentation">
+                <a class="slds-vertical-tabs__link" id="linkoverall" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="0" aria-selected="true" >
+                    <lightning-icon class="my-icon slds-vertical-tabs__left-icon" icon-name="standard:channel_program_levels" size="small" alternative-text="Overall" title="Overall"></lightning-icon>
+                    <span title="Overall">Overall</span>
+                </a>
+            </li>
+            <li class={careerTab} title="Career Path" role="presentation">
+                <a class="slds-vertical-tabs__link"  id="linkcareerpath" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="-1" aria-selected="false">
+                    <lightning-icon class="my-icon slds-vertical-tabs__left-icon" icon-name="standard:case" size="small" alternative-text="Career Path" title="Career Path"></lightning-icon>
+                    <span title="Career Path">Career Path</span>
+                </a>                            
+            </li>
+            <li class={statusTab} title="Status" role="presentation">
+                <a class="slds-vertical-tabs__link" id="linkstatus" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="-1" aria-selected="false">
+                    <lightning-icon class="my-icon slds-vertical-tabs__left-icon" icon-name="standard:outcome" size="small" alternative-text="Status" title="Status"></lightning-icon>
+                    <span  title="Status">Status</span>
+                </a>                            
+            </li>
+            <li class={projectsTab} title="Projects" role="presentation">
+                <a class="slds-vertical-tabs__link" id="linkprojects" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="-1" aria-selected="false" >
+                    <lightning-icon class="my-icon slds-vertical-tabs__left-icon" icon-name="standard:store_group" size="small" alternative-text="Projects" title="Projects"></lightning-icon>
+                    <span title="Projects">Projects</span>
+                </a>                            
+            </li>
+            <li class={performanceTab} title="Performance Evaluations" role="presentation">
+                <a class="slds-vertical-tabs__link" id="linkperformance" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="-1" aria-selected="false">
+                    <lightning-icon class="my-icon slds-vertical-tabs__left-icon" icon-name="standard:work_order_item" size="small" alternative-text="Performance Evaluations" title="Performance Evaluations"></lightning-icon>
+                    <span title="Performance Evaluations">Performance Evaluations</span>
+                </a>                            
+            </li>
+        </ul>
+        <div class={overallCont} data-id="overall_cont" role="tabpanel" aria-labelledby="slds-vertical-tabs-0__nav">
+            <c-employee-overall-subtab employeeid={employeeid} onestatus={handleEmployeeStatus} onpstatus={handleProjectStatus} ongotocpath={handleGoToCPath}></c-employee-overall-subtab>
+        </div>
+        <div class={careerCont} data-id="career_path_cont" role="tabpanel" aria-labelledby="slds-vertical-tabs-1__nav">
+            <c-employee-career-path-subtab employeeid={employeeid}></c-employee-career-path-subtab>
+        </div>
+        <div class={statusCont} id="status1" role="tabpanel" aria-labelledby="slds-vertical-tabs-2__nav">
+            <c-employee-status-subtab employeeid={employeeid}></c-employee-status-subtab>
+        </div>
+        <div class={projectsCont} id="projects" role="tabpanel" aria-labelledby="slds-vertical-tabs-3__nav">
+            <c-employee-projects-subtab employeeid={employeeid}></c-employee-projects-subtab>
+        </div>
+        <div class={performanceCont} id="performance_evaluations" role="tabpanel" aria-labelledby="slds-vertical-tabs-4__nav">
+            <c-employee-performance-evaluations-subtab employeeid={employeeid}></c-employee-performance-evaluations-subtab>
+        </div>
     </div>
 </template>

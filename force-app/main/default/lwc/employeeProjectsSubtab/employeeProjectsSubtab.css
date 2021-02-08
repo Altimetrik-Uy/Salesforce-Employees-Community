@@ -1,0 +1,32 @@
+.project-box{
+    border-width: 0px;
+    box-shadow: 1.25px 2.5px 2px #d8d8d8;
+}
+
+blockquote.doc {
+    margin-top: 10px;
+    background-color: #E5F1FB;
+    padding: 16px;
+    border-left: 5px solid #1589EE;
+    max-width: calc(100vw - 360px);
+}
+.icon-color{
+    background-color: #FF9A3C;
+}
+
+h1 {
+    font-weight: bold;
+}
+.main{
+    background-color: white;
+}
+
+.customPagination {
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 3px;
+}
+
+.customPagination>a {
+    padding: 5px 10px;
+}

@@ -16,11 +16,6 @@
         <label>Angular Specialist</label>
     </customValue>
     <customValue>
-        <fullName>Apex Specialist</fullName>
-        <default>false</default>
-        <label>Apex Specialist</label>
-    </customValue>
-    <customValue>
         <fullName>Automation Specialist Lead</fullName>
         <default>false</default>
         <label>Automation Specialist Lead</label>
@@ -111,11 +106,6 @@
         <label>iOS Engineer</label>
     </customValue>
     <customValue>
-        <fullName>Lightning Specialist</fullName>
-        <default>false</default>
-        <label>Lightning Specialist</label>
-    </customValue>
-    <customValue>
         <fullName>Playground Coach Leader</fullName>
         <default>false</default>
         <label>Playground Coach Leader</label>
@@ -176,6 +166,41 @@
         <label>QA Technology Specialist</label>
     </customValue>
     <customValue>
+        <fullName>QA Junior</fullName>
+        <default>false</default>
+        <label>QA Junior</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Automation Specialist Lead</fullName>
+        <default>false</default>
+        <label>QA Automation Specialist Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Usability Specialist</fullName>
+        <default>false</default>
+        <label>QA Usability Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Usability Specialist Lead</fullName>
+        <default>false</default>
+        <label>QA Usability Specialist Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Security Specialist</fullName>
+        <default>false</default>
+        <label>QA Security Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Security Specialist Lead</fullName>
+        <default>false</default>
+        <label>QA Security Specialist Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Coach</fullName>
+        <default>false</default>
+        <label>QA Coach</label>
+    </customValue>
+    <customValue>
         <fullName>React Specialist</fullName>
         <default>false</default>
         <label>React Specialist</label>
@@ -186,9 +211,9 @@
         <label>Receptionist</label>
     </customValue>
     <customValue>
-        <fullName>Salesforce Delivery Manager</fullName>
+        <fullName>Salesforce Trainee</fullName>
         <default>false</default>
-        <label>Salesforce Delivery Manager</label>
+        <label>Salesforce Trainee</label>
     </customValue>
     <customValue>
         <fullName>Salesforce Developer</fullName>
@@ -196,9 +221,14 @@
         <label>Salesforce Developer</label>
     </customValue>
     <customValue>
-        <fullName>Salesforce Manager</fullName>
+        <fullName>Salesforce Apex Specialist</fullName>
         <default>false</default>
-        <label>Salesforce Manager</label>
+        <label>Salesforce Apex Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Senior Apex Specialist</fullName>
+        <default>false</default>
+        <label>Salesforce Senior Apex Specialist</label>
     </customValue>
     <customValue>
         <fullName>Salesforce Platform Specialist</fullName>
@@ -206,14 +236,49 @@
         <label>Salesforce Platform Specialist</label>
     </customValue>
     <customValue>
+        <fullName>Salesforce Senior Platform Specialist</fullName>
+        <default>false</default>
+        <label>Salesforce Senior Platform Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Lightning Specialist</fullName>
+        <default>false</default>
+        <label>Salesforce Lightning Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Senior Lightning Specialist</fullName>
+        <default>false</default>
+        <label>Salesforce Senior Lightning Specialist</label>
+    </customValue>
+    <customValue>
         <fullName>Salesforce Team Lead</fullName>
         <default>false</default>
         <label>Salesforce Team Lead</label>
     </customValue>
     <customValue>
-        <fullName>Salesforce Technical Architect Lead</fullName>
+        <fullName>Salesforce Manager</fullName>
         <default>false</default>
-        <label>Salesforce Technical Architect Lead</label>
+        <label>Salesforce Manager</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Delivery Manager</fullName>
+        <default>false</default>
+        <label>Salesforce Delivery Manager</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Technical Architect</fullName>
+        <default>false</default>
+        <label>Salesforce Technical Architect</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Certified Architect</fullName>
+        <default>false</default>
+        <label>Salesforce Certified Architect</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Architect Chief</fullName>
+        <default>false</default>
+        <label>Salesforce Architect Chief</label>
     </customValue>
     <customValue>
         <fullName>Senior Frontend Developer</fullName>
@@ -239,6 +304,24 @@
         <fullName>Other</fullName>
         <default>false</default>
         <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Lightning Specialist</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Lightning Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Apex Specialist</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Apex Specialist</label>
+    </customValue>
+    <customValue>
+        <fullName>Salesforce Technical Architect Lead</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Salesforce Technical Architect Lead</label>
     </customValue>
     <masterLabel>Role</masterLabel>
     <sorted>false</sorted>

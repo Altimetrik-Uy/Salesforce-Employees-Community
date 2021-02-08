@@ -2,6 +2,11 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>*</members>
+<<<<<<< HEAD
+=======
+        <members>PathAssistant</members>
+		<members>PathAssistantTest</members>
+>>>>>>> 0fa926657dbbdbc7c8d9d73a8d9050303c8b9e0f
         <members>SalesforcePathByRole</members>
 		<members>SalesforcePathByRoleTest</members>
         <name>ApexClass</name>
@@ -19,6 +24,10 @@
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
+		<members>Salesforce_Career_Path__c-Salesforce Career Path Layout</members>
+		<name>Layout</name>
+	</types>
+    <types>
         <members>*</members>
         <name>LightningComponentBundle</name>
     </types>
@@ -33,10 +42,13 @@
         <members>Lead</members>
         <members>Opportunity</members>
         <members>Campaign</members>
+        <members>Salesforce_Career_Path__c</members>
+        <members>Salesforce_Career_Path_Settings__mdt</members>
         <name>CustomObject</name>
     </types>
-    <types>
+   <types>
         <members>*</members>
+        <members>Salesforce_Career_Path_Settings__mdt.Position__c</members>
         <name>CustomField</name>
     </types>
     <types>
@@ -44,6 +56,10 @@
         <members>GenericErrorMessage_lbl</members>
         <name>CustomLabel</name>
     </types>
+    <types>
+		<members>Salesforce_Career_Path__c</members>
+		<name>CustomTab</name>
+	</types>
     <types>
         <members>*</members>
         <name>HomePageComponent</name>
@@ -55,6 +71,14 @@
     <types>
         <members>*</members>
         <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>Community Employee Profile</members>
+        <name>Profile</name>
+    </types>
+    <types>
+        <members>Community_Employee_Permission_Set</members>
+        <name>PermissionSet</name>
     </types>
     <types>
         <members>*</members>
@@ -80,6 +104,11 @@
         <name>FlexiPage</name>
     </types>
     <types>
+        <members>Update_User_Info_Record</members>
+		<members>User_Info_Object_Manage</members>
+		<name>Flow</name>
+	</types>
+    <types>
         <members>*</members>
         <name>Network</name>
     </types>
@@ -87,6 +116,10 @@
         <members>*</members>
         <name>NetworkBranding</name>
     </types>
+	<types>
+		<members>*</members>
+		<name>ContentAsset</name>
+	</types>
     <types>
         <members>*</members>
         <name>CustomSite</name>
@@ -115,5 +148,13 @@
         <members>TrafficLightYellow</members>
         <name>StaticResource</name>
     </types>
-    <version>49.0</version>
+    <types>
+        <members>*</members>
+        <name>CspTrustedSite</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>SharingRules</name>
+    </types>
+    <version>50.0</version>
 </Package>

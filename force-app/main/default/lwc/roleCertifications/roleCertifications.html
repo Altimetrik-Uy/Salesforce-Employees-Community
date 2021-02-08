@@ -1,0 +1,34 @@
+<template>
+    <template if:true={display}>
+        <template if:true={wrapper}>
+                <div class="slds-grid slds-wrap slds-grid_align-center main">
+                    <template for:each={wrapper} for:item="w">
+                        <div key={w.role} class="slds-col chart-box">
+                        <template if:true={w.hasRequired}>
+                            <lightning-layout-item key={w.role} padding="around-small" size="6" >
+                                <c-role-requirements-chart roles-wrapper={w} onclick={goToPath}></c-role-requirements-chart> 
+                            </lightning-layout-item>         
+                        </template>
+                        <template if:false={w.hasRequired}>
+                                <div class="no-cert-required-text">
+                                    <template if:true={w.isCurrent}>        
+                                        <p class="hover-text" onclick={goToPath}>
+                                            Current role <b>{w.role}</b> does not have any required certifications. In order to see suggested certifications for this role, visit Career Path subtab.
+                                        </p>
+                                    </template>
+                                    <template if:false={w.isCurrent}>
+                                        <p class="hover-text" onclick={goToPath}>
+                                            Next role <b>{w.role}</b> does not have any required certifications. In order to see suggested certifications for this role, visit Career Path subtab.
+                                        </p>
+                                    </template>
+                                </div> 
+                        </template>
+                    </div>
+                    </template>
+                </div>
+            </template>
+        <template if:true={error}>
+            {error}
+        </template>
+    </template>
+</template>

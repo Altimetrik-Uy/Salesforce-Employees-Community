@@ -98,7 +98,8 @@ public class lookupfiledControllerTest {
             employees.add(
                 new Contact(
                     AccountId = acc.Id,
-                    LastName = '[TEST] Employee ' + i
+                    LastName = '[TEST] Employee ' + i,
+                    Email = i + '@email.com'
                 )
             );
         }

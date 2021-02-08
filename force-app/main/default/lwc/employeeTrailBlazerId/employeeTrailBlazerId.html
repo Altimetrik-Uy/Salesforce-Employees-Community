@@ -1,0 +1,33 @@
+<template>
+    <template if:false={trailBlazerId}>
+        <p if:true={spinnerOn}>
+            <lightning-spinner size="medium"></lightning-spinner>
+        </p>
+        <div class="trailblazerMenu">
+            <div class="slds-grid slds-wrap">
+                <div class="descriptionText slds-size_12-of-12 slds-m-bottom_small">In order to track your progress please add your Trailblazer Id:</div>
+                <div class="slds-grid slds-wrap slds-size_12-of-12">
+                    <div class="typeLink slds-col slds-p-top_x-small slds-size_2-of-12">https://trailblazer.me/id/</div>
+                    <div class="slds-col slds-m-left_medium slds-size_7-of-12">
+                        <div>
+                            <lightning-input variant="label-hidden"
+                                class="input"
+                                value={newTrailId}
+                                data-id="idInput"
+                                placeholder="Insert here">
+                            </lightning-input>
+                            <div class="helpText slds-form-element__help" id="error-message-unique-id">*Please make sure your profile is public</div>
+                        </div>
+                    </div>
+                    <div class="btnSave slds-col slds-size_2-of-12">
+                        <lightning-button label="Save" 
+                            variant="brand-outline"
+                            title="Save" 
+                            onclick={insertTrailIdClick}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

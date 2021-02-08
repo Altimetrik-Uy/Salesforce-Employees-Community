@@ -1,0 +1,22 @@
+.main{
+    background-color: #ededed;
+    border-radius: 15px;
+    min-height: 200px;
+    max-width: 910px;
+}
+
+.no-cert-required-text{
+    text-align: center;
+    padding-left: 20px;
+    margin-top:22%; 
+}
+.hover-text:hover{
+    cursor:pointer;
+    text-decoration: underline;
+}
+
+.chart-box{
+    min-width:50px;
+    min-height: 250px;
+    max-width: 300px;
+}
