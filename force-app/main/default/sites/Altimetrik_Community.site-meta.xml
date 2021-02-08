@@ -10,6 +10,7 @@
     <authorizationRequiredPage>CommunitiesLogin</authorizationRequiredPage>
     <bandwidthExceededPage>BandwidthExceeded</bandwidthExceededPage>
     <browserXssProtection>true</browserXssProtection>
+    <changePasswordPage>ChangePassword</changePasswordPage>
     <clickjackProtectionLevel>SameOriginOnly</clickjackProtectionLevel>
     <contentSniffingProtection>true</contentSniffingProtection>
     <cspUpgradeInsecureRequests>true</cspUpgradeInsecureRequests>
@@ -22,8 +23,8 @@
     <referrerPolicyOriginWhenCrossOrigin>true</referrerPolicyOriginWhenCrossOrigin>
     <requireHttps>true</requireHttps>
     <selfRegPage>CommunitiesSelfReg</selfRegPage>
-    <siteAdmin>strellesdev11@communityorg.com</siteAdmin>
-    <siteGuestRecordDefaultOwner>strellesdev11@communityorg.com</siteGuestRecordDefaultOwner>
+    <siteAdmin>testlogin@sf-employees-comm.com</siteAdmin>
+    <siteGuestRecordDefaultOwner>testlogin@sf-employees-comm.com</siteGuestRecordDefaultOwner>
     <siteType>ChatterNetwork</siteType>
-    <subdomain>strellesdevcommunity11-developer-edition</subdomain>
+    <subdomain>verotestlogin-developer-edition</subdomain>
 </CustomSite>
