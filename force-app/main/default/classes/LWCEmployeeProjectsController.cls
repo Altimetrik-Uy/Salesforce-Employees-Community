@@ -5,7 +5,7 @@ public with sharing class LWCEmployeeProjectsController {
 
     @AuraEnabled(cacheable=true)
     public static Integer getEmployeeProjectsCount(String empId){
-        return [SELECT COUNT() FROM Employee_Assignment__c WHERE Employee__r.Id = :empId];
+        return [SELECT COUNT() FROM Employee_Assignment__c WHERE (Base_Category__c = 'BILLED' OR Project__r.Name = 'Bench') AND Employee__r.Id = :empId];
     }
 
     @AuraEnabled(cacheable=true)
