@@ -18,22 +18,12 @@ div table:nth-child(4){
     position: relative;
 }
 
-<<<<<<< HEAD
-.slds-icon-action-approval{
-    background-color: #178b55 !important;
-}
-
-=======
->>>>>>> 0fa926657dbbdbc7c8d9d73a8d9050303c8b9e0f
 .backgrd{
     background: #ecebea !important;
 }
 
 .text-bold{
     font-weight: bold !important;
-<<<<<<< HEAD
-}
-=======
 }
 
 .rolessection {
@@ -93,4 +83,3 @@ div table:nth-child(4){
 .main{
     background-color: #FCFCFC;
 }
->>>>>>> 0fa926657dbbdbc7c8d9d73a8d9050303c8b9e0f
