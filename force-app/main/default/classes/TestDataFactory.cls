@@ -96,6 +96,7 @@ public class TestDataFactory {
         eAssignment.Employee__c = contactId;
         eAssignment.Project__c = opportunityId;
         eAssignment.Start_Date__c = startDate;
+        eAssignment.Base_Category__c = 'BILLED';
         eAssignment.End_Date__c = endDate;
         insert eAssignment;
         return eAssignment;
