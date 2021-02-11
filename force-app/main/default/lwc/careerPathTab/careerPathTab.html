@@ -1,0 +1,35 @@
+<template>
+    <div class="main">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_12-of-12">
+                <div class="slds-vertical-tabs">
+                    <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
+                        <li class={detailsTab} title="Details" role="presentation">
+                            <a class="slds-vertical-tabs__link" name="linkdetails" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="0" aria-selected="true" >
+                                <lightning-icon class="custom-tab-icon slds-vertical-tabs__left-icon" icon-name="standard:channel_program_levels" size="small" alternative-text="Details" title="Details"></lightning-icon>
+                                <span title="Details">Details</span>
+                            </a>
+                        </li>
+                        <li class={certificationsTab} title="Certifications Required" role="presentation">
+                            <a class="slds-vertical-tabs__link" name="linkcertifications" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="0" aria-selected="true" >
+                                <lightning-icon class="custom-tab-icon slds-vertical-tabs__left-icon" icon-name="standard:channel_program_levels" size="small" alternative-text="Certifications Required" title="Certifications Required"></lightning-icon>
+                                <span title="Certifications Required">Certifications Required</span>
+                            </a>
+                        </li>
+                        <li class={salaryTab} title="Salary Ranges" role="presentation">
+                            <a class="slds-vertical-tabs__link" name="linksalary" onclick={openTab} href="javascript:void(0)" role="tab" tabindex="0" aria-selected="true" >
+                                <lightning-icon class="custom-tab-icon slds-vertical-tabs__left-icon" icon-name="standard:channel_program_levels" size="small" alternative-text="Salary Ranges" title="Salary Ranges"></lightning-icon>
+                                <span title="Salary Ranges">Salary Ranges</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="slds-vertical-tabs__content" role="tabpanel">
+                        <c-career-path-details-subtab employeeid={employeeid} if:true={isDetailsSelected}></c-career-path-details-subtab>
+                        <c-career-path-certifications-subtab employeeid={employeeid} if:true={isCertificationsSelected}></c-career-path-certifications-subtab>
+                        <c-career-path-salary-subtab employeeid={employeeid} if:true={isSalarySelected}></c-career-path-salary-subtab>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
