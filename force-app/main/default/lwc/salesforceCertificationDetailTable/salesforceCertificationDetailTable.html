@@ -1,88 +1,99 @@
-<template>
-    <lightning-card style="background:white; height: auto;">
-        <div if:true={errorMsg} class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
-            <span class="slds-assistive-text">error</span>
-            <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
-                <lightning-icon icon-name="utility:error" size="small"></lightning-icon>
-            </span>
-            <h2>
-                {genericErrorMessage}
-            </h2>
-            <p>
-                {errorMsg}
-            </p>
-        </div>
-       <div style="padding:10px; text-align:center;" if:true={roles}>
-          <template for:each={roles} for:item="role">
-             <template if:true={role.blnExtraTable}>
-                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" style="visibility: hidden;width:45%; display:inline-table;border: 1px solid #999;" key={role.blnCurrentRole}>
-                </table>
-             </template>
-             <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" style="width:45%; display:inline-table;" key={role.blnCurrentRole}>
-                <template if:true={role.blnCurrentRole}>
-                   <tr class="slds-line-height_reset">
-                      <th class="" scope="col">
-                         <div class="slds-truncate" title="Account Name" style="text-align: center;">Current Role:</div>
-                      </th>
-                      <th class="" scope="col" >
-                         <div class="slds-truncate" title="Cloudhub" style="text-align: center;">
-                            <div class="slds-truncate" title="Close Date"><a href="javascript:void(0);" tabindex="-1" style="font-weight:bold;text-align: center;">{role.strRole}</a></div>
-                         </div>
-                      </th>
-                   </tr>
-                </template>
-                <template if:false={role.blnCurrentRole}>
-                   <tr class="slds-line-height_reset">
-                      <th class="" scope="col">
-                         <div class="slds-truncate" title="Account Name" style="text-align: center;">Possible Next Role:</div>
-                      </th>
-                      <th class="" scope="col" style="text-align: center;">
-                         <div class="slds-truncate" title="Close Date"><a href="javascript:void(0);" tabindex="-1" style="font-weight:bold;">{role.strRole}</a></div>
-                      </th>
-                   </tr>
-                </template>
-                <tr class="slds-line-height_reset backgrd">
-                   <th class="" scope="col">
-                      <div class="slds-truncate text-bold" title="Account Name" style="text-align: center;">Certification</div>
-                   </th>
-                   <th class="" scope="col">
-                      <div class="slds-truncate text-bold" title="Close Date" style="text-align: center;">Status</div>
-                   </th>
-                </tr>
-                <template for:each={role.lstWrpCertifications} for:item="certification">
-                   <tr key={certification.strIdPathRecord} class="slds-hint-parent">
-                      <template key={certification.strIdPathRecord} if:true={certification.bnlRequired} >
-                         <td key={certification.strIdPathRecord} data-label="Opportunity Name" scope="row">
-                            <div class="slds-truncate" title="Cloudhub">
-                               {certification.srtCertification} <span style="color:red;font-size: 19px;">*</span>
-                            </div>
-                         </td>
-                      </template>
-                      <template key={certification.strIdPathRecord} if:false={certification.bnlRequired}>
-                         <td key={certification.strIdPathRecord} data-label="Opportunity Name" scope="row">
-                            <div class="slds-truncate" title="Cloudhub">
-                               {certification.srtCertification}
-                            </div>
-                         </td>
-                      </template>
-                      <template key={certification.strIdPathRecord} if:true={certification.blnAchieved}>
-                         <td data-label="Opportunity Name" scope="row" style="text-align:center;" key={certification.strIdPathRecord}>
-                            <div class="slds-truncate" title="Cloudhub">
-                               <lightning-icon icon-name="action:approval" alternative-text="Approved" title="Approved" size="xx-small"></lightning-icon>
-                            </div>
-                         </td>
-                      </template>
-                      <template key={certification.strIdPathRecord} if:false={certification.blnAchieved}>
-                         <td data-label="Opportunity Name" scope="row" style="text-align:center;" key={certification.strIdPathRecord}>
-                            <div class="slds-truncate" title="Cloudhub">
-                               <lightning-icon icon-name="action:close" alternative-text="close" title="close" size="xx-small"></lightning-icon>
-                            </div>
-                         </td>
-                      </template>
-                   </tr>
-                </template>
-             </table>
-          </template>
+<template >
+   <template if:true={trailBlazerId}>
+       <p if:true={spinnerOn}>
+           <lightning-spinner size="medium"></lightning-spinner>
+       </p>
+       <div if:true={errorMsg} class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+           <span class="slds-assistive-text">error</span>
+           <span class="slds-icon_container slds-icon-utility-error slds-var-m-right_x-small" title="Description of icon when needed">
+               <lightning-icon icon-name="utility:error" size="small"></lightning-icon>
+           </span>
+           <h2>{genericErrorMessage}</h2>
+           <p>&nbsp;&nbsp; ({errorMsg})</p>
        </div>
-    </lightning-card>
- </template>
+       <div class="rolessection main" if:true={roles}>
+           <template for:each={roles} for:item="role">
+               <template if:true={role.blnExtraTable}>
+                   <table class="slds-table slds-table_cell-buffer slds-table_bordered currentrole" key={role.blnCurrentRole}></table>
+               </template>
+               <table class="slds-table slds-table_cell-buffer roletable" key={role.blnCurrentRole}>
+                   <!-- Current Role titulo -->
+                   <template if:true={role.blnCurrentRole}>
+                       <tr class="slds-line-height_reset border-row">
+                           <th colspan="2" scope="col" >
+                               <div title="Role Name"><p class="title-role">{role.strRole}</p></div>
+                           </th>
+                       </tr>
+                   </template>
+                   <!-- Next Possible Role titulo -->
+                   <template if:false={role.blnCurrentRole}>
+                       <tr class="slds-line-height_reset border-row">
+                          <th colspan="2" scope="col">
+                               <div title="Role Name"><p class="title-role">{role.strRole}</p></div>
+                           </th>
+                       </tr>
+                   </template>
+                   <!-- Titulos de las columans -->
+                   <tr class="slds-line-height_reset backgrd border-row">
+                       <th scope="col">
+                           <div class="slds-truncate text-bold textcenter" title="Account Name"><p>Certification</p></div>
+                       </th>
+                       <th scope="col">
+                           <div class="slds-truncate text-bold textcenter" title="Close Date"><p>Status</p></div>
+                       </th>
+                   </tr>
+                   <!-- Certicaions current role-->
+                   <template for:each={role.lstWrpCertifications} for:item="certification">
+                       <tr key={certification.strIdPathRecord} class="slds-hint-parent border-row">
+                           <template if:true={certification.bnlRequired} >
+                               <td data-label="Opportunity Name" scope="row">
+                                   <div class="slds-truncate" title="Cloudhub">
+                                       <p>{certification.srtCertification}</p>
+                                   </div>
+                               </td>
+                               <template if:true={certification.blnAchieved}>
+                                   <td data-label="Opportunity Name" scope="row" class="textcenter">
+                                       <div class="slds-truncate" title="Cloudhub">
+                                           <a><lightning-icon icon-name="action:approval" alternative-text="Completed" title="Completed" size="x-small" class="cert-approved-icon"></lightning-icon></a>
+                                       </div>
+                                   </td>
+                               </template>
+                               <template  if:false={certification.blnAchieved}>
+                                   <td data-label="Opportunity Name" scope="row" class="textcenter">
+                                       <div class="slds-truncate" title="Cloudhub">
+                                           <a><lightning-icon icon-name="action:close" alternative-text="Required" title="Required" size="x-small" class="cert-required-icon"></lightning-icon></a>
+                                       </div>
+                                   </td>
+                               </template>
+                           </template>
+
+                           <template  if:false={certification.bnlRequired}>
+                               <td data-label="Opportunity Name" scope="row">
+                                   <div class="slds-truncate" title="Cloudhub">
+                                       <p>{certification.srtCertification}</p>
+                                   </div>
+                               </td>
+
+                               <template if:true={certification.blnAchieved}>
+                                   <td data-label="Opportunity Name" scope="row" class="textcenter">
+                                       <div class="slds-truncate" title="Cloudhub">
+                                           <a><lightning-icon icon-name="action:approval" alternative-text="Completed" title="Completed" size="x-small" class="cert-approved-icon"></lightning-icon></a>
+                                       </div>
+                                   </td>
+                               </template>
+
+                               <template  if:false={certification.blnAchieved}>
+                                   <td data-label="Opportunity Name" scope="row" class="textcenter">
+                                       <div class="slds-truncate" title="Cloudhub">
+                                       <a><lightning-icon icon-name="action:close" alternative-text="Suggested" title="Suggested" size="x-small" class="cert-no-required-icon"></lightning-icon></a>
+                                       </div>
+                                   </td>
+                               </template>
+                           </template>
+                       </tr>
+                   </template>
+               </table>
+           </template>
+       </div>
+   </template>
+</template>
