@@ -42,15 +42,15 @@ public class LWCEmployeeProjectsControllerTest {
             //User
             User usr = TestDataFactory.createUser(con.Id);
             Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
- 			      Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O3',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+ 			Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/22/2021'));
+            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
             List<Employee_Assignment__c> empAssignmentList = new List<Employee_Assignment__c>();
             empAssignmentList.add(returnProjectStatusStructure(OppO1Id));
             empAssignmentList.add(returnProjectStatusStructure(OppO2Id));
             empAssignmentList.add(returnProjectStatusStructure(OppO3Id));
 
             //Run LWCEmployeeProjectsController
-            System.assertEquals(LWCEmployeeProjectsController.getEmployeeProjects(con.Id,null).get(1).Project__r.Name, empAssignmentList.get(1).Project__r.Name,'One or more Projects do not match');
+            System.assertEquals(empAssignmentList.get(0).Project__r.Name, LWCEmployeeProjectsController.getEmployeeProjects(con.Id,null).get(0).Project__r.Name, 'One or more Projects do not match');
         }  
     }
 
