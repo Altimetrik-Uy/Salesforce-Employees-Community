@@ -1,0 +1,6 @@
+<p>A new 'In progress' project as been created without Manager: </p>
+
+<p><b>Project Name: </b> {!Opportunity.Name}</p>
+<p><b>Project Status: </b> {!Opportunity.DeliveryInstallationStatus__c}</p>
+
+Go to opportunity: <a href="{!Opportunity.Link}"> {!Opportunity.Name}</a>
