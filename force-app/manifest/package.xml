@@ -153,5 +153,19 @@
         <members>*</members>
         <name>SharingRules</name>
     </types>
+    	<types>
+		<members>unfiled$public/Employee_assigned_notification</members>
+		<name>EmailTemplate</name>
+	</types>
+	<types>
+		<members>Employee_Assignment__c.Employee_assigned_notification</members>
+		<members>Employee_Assignment__c.Employee_assigned_notification_2</members>
+		<name>WorkflowAlert</name>
+	</types>
+	<types>
+		<members>Employee_Assignment__c.SendEmployeeAssignedNotification</members>
+		<members>Employee_Assignment__c.SendEmployeeAssignedNotification2</members>
+		<name>WorkflowRule</name>
+	</types>
     <version>50.0</version>
 </Package>
