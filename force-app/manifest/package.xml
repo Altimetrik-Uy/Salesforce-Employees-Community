@@ -154,6 +154,7 @@
         <name>SharingRules</name>
     </types>
     <types>
+        <members>Opportunity_Project</members>
 		<members>Opportunity_Project/Project_Without_Manager</members>
 		<name>EmailTemplate</name>
 	</types>
