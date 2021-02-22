@@ -7,9 +7,9 @@
                     <p class="slds-accordion__summary-heading slds-truncate">
                         <button aria-controls="accordion-details-01" 
                                 aria-expanded="true" 
-                                class="slds-button slds-button_reset slds-accordion__summary-action" 
+                                class="slds-button slds-button_reset slds-accordion__summary-action tooltip" 
                                 onclick={handleClick}>
-                        <span class="slds-accordion__summary-content" title="Project information">{projectInformation}</span>
+                        <span class="slds-accordion__summary-content">{projectInformation}</span>
                         </button>
                     </p>
                 </template>
@@ -18,7 +18,7 @@
                             aria-expanded="true" 
                             class="slds-button slds-button_reset slds-accordion__summary-action" 
                             onclick={handleClick}>
-                        <span class={cssClass} title="Project information">{projectInformation}</span>
+                        <span class={cssClass}>{projectInformation}</span>
                     </button>
                 </p>
             </div>

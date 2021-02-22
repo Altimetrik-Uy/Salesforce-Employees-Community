@@ -157,3 +157,39 @@ h1 {
 .customPagination>a {
     padding: 5px 10px;
 }
+
+.button-box-text {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 7px
+  }
+  
+.button-box-text-section .button-box-text-help-section {
+    visibility: hidden;
+    width: 22%;
+    background-color: #1589EE;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 70%;
+    font-size: 13px;
+  }
+  
+.button-box-text-section .button-box-text-help-section::before {
+    content: "";
+    position: absolute;
+    top: 115%;
+    right: 92%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #1589EE transparent  transparent transparent ;
+  }
+
+.button-box-text-section:hover .button-box-text-help-section {
+    visibility: visible;
+  }

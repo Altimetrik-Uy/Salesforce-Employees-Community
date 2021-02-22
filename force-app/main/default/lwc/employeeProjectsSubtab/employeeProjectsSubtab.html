@@ -46,7 +46,10 @@
                             </div>
                         </blockquote>  
                             <blockquote class="doc">
-                                <c-custom-accordion project-information={currentProjectStatus.ProjectInformation} showinfo={handleClick}></c-custom-accordion>
+                                <div class="button-box-text-section">
+                                    <c-custom-accordion project-information={currentProjectStatus.ProjectInformation} showinfo={handleClick}></c-custom-accordion>
+                                    <span class="button-box-text-help-section">Click to see/hide project details</span>
+                                </div>
                             </blockquote>
                         </article>
                     </li>

@@ -25,3 +25,39 @@
 .accordion-text strong{
    margin-right: 0.5%;
 }
+
+.button-box-text {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 7px
+  }
+  
+.button-box-text .button-box-text-help {
+    visibility: hidden;
+    width: 100%;
+    background-color: #1589EE;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 3px;
+    left: 110%;
+    font-size: 13px;
+  }
+  
+.button-box-text .button-box-text-help::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color:  transparent #1589EE transparent transparent ;
+  }
+
+.button-box-text:hover .button-box-text-help {
+    visibility: visible;
+  }
