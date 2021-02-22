@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Employee_assigned_notification</fullName>
+        <ccEmails>comunidad@mailinator.com</ccEmails>
+        <description>Employee assigned notification</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Employee_assigned_notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Employee_assigned_notification_2</fullName>
+        <ccEmails>comunidad1@mailinator.com</ccEmails>
+        <description>Employee assigned notification 2</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Employee_assigned_notification</template>
+    </alerts>
+    <rules>
+        <fullName>SendEmployeeAssignedNotification</fullName>
+        <actions>
+            <name>Employee_assigned_notification</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(  
+   OR(
+     ISNEW(),
+     ISCHANGED(Base_Category__c),
+     ISCHANGED(Active__c)    
+   ),
+Base_Category__c = &apos;BILLED&apos;
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>SendEmployeeAssignedNotification2</fullName>
+        <actions>
+            <name>Employee_assigned_notification_2</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( 
+    OR(
+      ISNEW(),
+      ISCHANGED(Area__c),
+      ISCHANGED(Base_Category__c),
+      ISCHANGED(Active__c)
+    ),
+ISPICKVAL(Area__c, &apos;Salesforce&apos;), 
+Base_Category__c = &apos;BILLED&apos;
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>
