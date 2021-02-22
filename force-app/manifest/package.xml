@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <!--types>
+    <types>
         <members>*</members>
         <members>PathAssistant</members>
 		<members>PathAssistantTest</members>
@@ -152,7 +152,7 @@
     <types>
         <members>*</members>
         <name>SharingRules</name>
-    </types-->
+    </types>
     <types>
 		<members>Opportunity_Project/Project_Without_Manager</members>
 		<name>EmailTemplate</name>
