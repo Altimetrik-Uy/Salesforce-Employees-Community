@@ -8,6 +8,32 @@
         <senderType>CurrentUser</senderType>
         <template>Opportunity_Project/Project_Without_Manager</template>
     </alerts>
+    <alerts>
+        <fullName>Report_no_project_update</fullName>
+        <ccEmails>salesforce-managers@altimetrik.com.invalid</ccEmails>
+        <description>Report no project update</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>Opportunity_Project/Project_Without_Status_Update</template>
+    </alerts>
+    <rules>
+        <fullName>Last Project Update</fullName>
+        <active>true</active>
+        <formula>AND (
+   NOT(IsClosed),
+   Last_Status_Date__c &gt;= TODAY()
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Report_no_project_update</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Opportunity.Last_Status_Date__c</offsetFromField>
+            <timeLength>20</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
     <rules>
         <fullName>Project Without Manager</fullName>
         <actions>

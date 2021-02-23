@@ -1,0 +1,7 @@
+<p>Following project has not been updated:<p>
+
+<p><b>Name:</b> {!Opportunity.Name} </p>
+<p><b>Account:</b> {!Opportunity.Account} </p>
+<p><b>Last Status:</b> {!Opportunity.Last_Project_Status__c} </p>
+<p><b>Last Status Update Date:</b> {!Opportunity.Last_Status_Date__c} </p>
+<p>To go to the project click <a href="{!Opportunity.Link}"> here </a></p>
