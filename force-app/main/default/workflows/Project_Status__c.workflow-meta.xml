@@ -20,8 +20,8 @@
         <active>true</active>
         <formula>OR (
    ISNULL(Project__r.Last_Status_Date__c), 
-   Project__r.Last_Status_Date__c &lt;&gt;  Meeting_Date__c,
-   NOT(ISPICKVAL(Project__r.DeliveryInstallationStatus__c, &apos;Completed&apos;))
+   Project__r.Last_Status_Date__c &lt;  TODAY(),
+   NOT( Project__r.IsClosed )
 )</formula>
         <triggerType>onCreateOnly</triggerType>
     </rules>
