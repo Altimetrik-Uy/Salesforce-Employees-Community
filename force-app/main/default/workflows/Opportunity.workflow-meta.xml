@@ -16,9 +16,9 @@
         </actions>
         <active>true</active>
         <criteriaItems>
-            <field>Opportunity.DeliveryInstallationStatus__c</field>
+            <field>Opportunity.StageName</field>
             <operation>equals</operation>
-            <value>In progress</value>
+            <value>In Progress</value>
         </criteriaItems>
         <criteriaItems>
             <field>Opportunity.Number_Managers__c</field>
