@@ -278,4 +278,133 @@ public with sharing class PathAssistant {
         }
         return qaPreRoles;
     }
+
+    @AuraEnabled(cacheable=true)
+    public static List<wrpColumns> getPathByMainRole(String mainRole){
+        
+        Map<string,List<wrpRoles>> mapPositionXCareer = new Map<string,List<wrpRoles>>();
+        List<Salesforce_Career_Path_Settings__mdt> lstCareerPathSettings = new List<Salesforce_Career_Path_Settings__mdt>();
+        List<Salesforce_Career_Path_Settings__mdt> lstQaCareerPathSettings = new List<Salesforce_Career_Path_Settings__mdt>();
+        List<wrpColumns> lstWrpColumns = new List<wrpColumns>();
+
+        if(!Test.isRunningTest()) {
+             lstCareerPathSettings = [SELECT Id, MasterLabel, Position__c
+                                        FROM Salesforce_Career_Path_Settings__mdt
+                                        WHERE NOT MasterLabel LIKE 'QA%'
+                                        ORDER BY Position__c];
+            lstQaCareerPathSettings = [SELECT Id, MasterLabel, Position__c
+                                        FROM Salesforce_Career_Path_Settings__mdt
+                                        WHERE MasterLabel LIKE 'QA%'
+                                        ORDER BY Position__c];
+        } else {
+            // Test method metadata
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath1 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath1.MasterLabel = 'Developer';
+            mdtCareerPath1.Position__c = 12;
+            lstCareerPathSettings.add(mdtCareerPath1);
+            
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath2 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath2.MasterLabel = 'Platform Specialist';
+            mdtCareerPath2.Position__c = 33;
+            lstCareerPathSettings.add(mdtCareerPath2);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath4 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath4.MasterLabel = 'Salesforce Senior Platform Specialist';
+            mdtCareerPath4.Position__c = 43;
+            lstCareerPathSettings.add(mdtCareerPath4);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath7 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath7.MasterLabel = 'Salesforce Delivery Manager';
+            mdtCareerPath7.Position__c = 51;
+            lstCareerPathSettings.add(mdtCareerPath7);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath8 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath8.MasterLabel = 'Salesforce Architect Chief';
+            mdtCareerPath8.Position__c = 52;
+            lstCareerPathSettings.add(mdtCareerPath8);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath9 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath9.MasterLabel = 'Salesforce Team Lead';
+            mdtCareerPath9.Position__c = 61;
+            lstCareerPathSettings.add(mdtCareerPath9);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath3 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath3.MasterLabel = 'QA Manager';
+            mdtCareerPath3.Position__c = 61;
+            lstQaCareerPathSettings.add(mdtCareerPath3);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath5 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath5.MasterLabel = 'QA Lead';
+            mdtCareerPath5.Position__c = 41;
+            lstQaCareerPathSettings.add(mdtCareerPath5);
+
+            Salesforce_Career_Path_Settings__mdt mdtCareerPath6 = new Salesforce_Career_Path_Settings__mdt();
+            mdtCareerPath6.MasterLabel = 'QA Automation Specialist';
+            mdtCareerPath6.Position__c = 42;
+            lstQaCareerPathSettings.add(mdtCareerPath6);
+        }
+        
+        Set<String> devPreRoles = calculateDevPreRole(mainRole);
+        Set<String> qaPreRoles = calculateQaPreRole(mainRole);
+
+        if(mainRole == 'QA'){
+            if (!lstQaCareerPathSettings.isEmpty()) {
+                wrpRoles objWrpRole;
+                List<wrpRoles> lstCareerTmp;
+                for (Salesforce_Career_Path_Settings__mdt objCareerPath : lstQaCareerPathSettings) {
+                    String strColumn = objCareerPath.Position__c.format().substring(0,1);
+                    String strRoleSalesforce = objCareerPath.MasterLabel;
+                    objWrpRole = new wrpRoles();
+                        objWrpRole.strRole = objCareerPath.MasterLabel;
+                        if(strRoleSalesforce == mainRole){
+                            objWrpRole.blnCurrentRole = true;
+                        }else{
+                            objWrpRole.blnIsPreRole = qaPreRoles.contains(strRoleSalesforce);
+                        }
+                    if (mapPositionXCareer.containsKey(strColumn)){
+                        lstCareerTmp = mapPositionXCareer.get(strColumn);
+                            lstCareerTmp.add(objWrpRole);
+                    }
+                    else {
+                        lstCareerTmp = new List<wrpRoles>();
+                        lstCareerTmp.add(objWrpRole);
+                        mapPositionXCareer.put(strColumn,lstCareerTmp);
+                    }
+                }
+            }
+        } else if (!lstCareerPathSettings.isEmpty()) {
+            wrpRoles objWrpRole;
+            List<wrpRoles> lstCareerTmp;
+            for (Salesforce_Career_Path_Settings__mdt objCareerPath : lstCareerPathSettings) {
+                String strColumn = objCareerPath.Position__c.format().substring(0,1);
+                String strRoleSalesforce = 'Salesforce ' + objCareerPath.MasterLabel;
+                objWrpRole = new wrpRoles();
+                    objWrpRole.strRole = objCareerPath.MasterLabel;
+                    if(strRoleSalesforce == mainRole){
+                        objWrpRole.blnCurrentRole = true;
+                    }else{
+                        objWrpRole.blnIsPreRole = devPreRoles.contains(strRoleSalesforce);
+                    }
+                if (mapPositionXCareer.containsKey(strColumn)){
+                    lstCareerTmp = mapPositionXCareer.get(strColumn);
+                        lstCareerTmp.add(objWrpRole);
+                }
+                else {
+                    lstCareerTmp = new List<wrpRoles>();
+                    lstCareerTmp.add(objWrpRole);
+                    mapPositionXCareer.put(strColumn,lstCareerTmp);
+                }
+            }
+        }
+
+        if (!mapPositionXCareer.isEmpty()) {
+            for (string strPosition : mapPositionXCareer.keySet()) {
+                wrpColumns objWrpColumn = new wrpColumns();
+                objWrpColumn.strColumn = strPosition;
+                objWrpColumn.lstWrpRoles = mapPositionXCareer.get(strPosition);
+                lstWrpColumns.add(objWrpColumn);
+            }
+        }
+        return lstWrpColumns;
+    }
 }

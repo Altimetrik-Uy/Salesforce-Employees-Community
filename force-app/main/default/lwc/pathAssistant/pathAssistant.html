@@ -20,7 +20,7 @@
     <!-- Path -->
         <div if:false={errorMsg}>
             <div class="test">
-            <lightning-spinner variant="brand" size="small" if:true={hasToShowSpinner}></lightning-spinner>
+                <lightning-spinner variant="brand" size="small" if:true={hasToShowSpinner}></lightning-spinner>
                 <ul if:true={isLoaded} class={careerPathStyle} role="listbox" aria-orientation="horizontal" key={organizedPath.lstWrpRoles}>
                     <template for:each={organizedPath} for:item="column">
                         <div class="slds-col" key={organizedPath.lstWrpRoles} style="padding-right: 22px;">
@@ -61,7 +61,7 @@
                                             </a>
                                         </li>
                                     </template>
-                                <template if:false={step.blnIsPreRole}>
+                                    <template if:false={step.blnIsPreRole}>
                                         <li key={step.strRole} class='slds-path__item slds-is-incomplete' role="presentation">
                                             <a aria-selected="false" 
                                             class="slds-path__link" 
