@@ -40,10 +40,13 @@ export default class EmployeeCareerPathSubtab extends LightningElement {
     }
 
     get cssClass(){
-        return (this.isCollapsed ? 'slds-hide' : 'slds-accordion__content' ) + ' slds-var-p-left_small';
+        return (this.isCollapsed ? 'slds-accordion__content':'slds-hide' ) + ' slds-var-p-left_small';
     }
-
+    get cssOpen(){
+        return this.isCollapsed ? 'slds-accordion__section slds-is-open':'slds-accordion__section';
+    }
+    
     get iconName(){
-        return this.isCollapsed ? 'utility:chevronright' : 'utility:chevrondown' ;
+        return this.isCollapsed ? 'utility:chevrondown' : 'utility:chevronright';
     }
 }
