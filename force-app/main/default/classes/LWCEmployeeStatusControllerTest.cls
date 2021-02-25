@@ -7,7 +7,7 @@ public class LWCEmployeeStatusControllerTest {
     } 
     public static Employee_Status__c returnEmployeeStatusesStructure(Id projectId){
        //This method return the fields used by the getEmployeeStatuses
-         return [SELECT Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Id = :projectId];
+         return [SELECT Status__c, CreatedDate, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Id = :projectId];
     } 
        
     @isTest
@@ -53,7 +53,6 @@ public class LWCEmployeeStatusControllerTest {
         	Employee_Status__c eS1 = TestDataFactory.createEmployeeStatus(con.Id,'Red', 'Red');
             eS1.Project__c = empAssignmentList.get(1).Project__r.Id; 
             update eS1;
-            eS1.Meeting_Date__c =  date.parse('2/17/2021');
             List<Employee_Status__c> status = new List<Employee_Status__c>();
             status.add(returnEmployeeStatusesStructure(eS1.Id));
 
@@ -84,7 +83,6 @@ public class LWCEmployeeStatusControllerTest {
         	Employee_Status__c eS1 = TestDataFactory.createEmployeeStatus(con.Id,'Red', 'Red');
             eS1.Project__c = empAssignmentList.get(1).Project__r.Id; 
             update eS1;
-            eS1.Meeting_Date__c =  date.parse('2/17/2021');
             List<Employee_Status__c> status = new List<Employee_Status__c>();
             status.add(returnEmployeeStatusesStructure(eS1.Id));
 
@@ -120,7 +118,6 @@ public class LWCEmployeeStatusControllerTest {
             empAssignmentList.add(eA1);
             
             Employee_Status__c eS1 = TestDataFactory.createEmployeeStatus(con.Id,'Red', 'Red');
-            eS1.Meeting_Date__c =  date.parse('2/17/2021');
             update eS1;
 
             List<String> lstManagersId = new List<String>();
@@ -160,7 +157,6 @@ public class LWCEmployeeStatusControllerTest {
             empAssignmentList.add(eA1);
             
             Employee_Status__c eS1 = TestDataFactory.createEmployeeStatus(con.Id,'Red', 'Red');
-            eS1.Meeting_Date__c =  date.parse('2/17/2021');
             update eS1;
 
             List<String> lstManagersId = new List<String>();

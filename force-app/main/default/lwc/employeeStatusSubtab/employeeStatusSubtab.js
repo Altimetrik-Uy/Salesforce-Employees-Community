@@ -53,7 +53,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
                                 let preparedAsset = {};
                                 preparedAsset.Id = id++;
                                 preparedAsset.Status = asset.Status__c;
-                                preparedAsset.StatusDate = asset.Meeting_Date__c;
+                                preparedAsset.StatusDate = asset.CreatedDate;
                                 preparedAsset.StatusComments = asset.Comments__c;
                                 preparedAsset.ManagerName = asset.CreatedBy.Name;
                                 preparedAssets.push(preparedAsset);
@@ -132,7 +132,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
                         let preparedAsset = {};
                         preparedAsset.Id = id++;
                         preparedAsset.Status = asset.Status__c;
-                        preparedAsset.StatusDate = asset.Meeting_Date__c;
+                        preparedAsset.StatusDate = asset.CreatedDate;
                         preparedAsset.StatusComments = asset.Comments__c;
                         preparedAsset.ManagerName = asset.CreatedBy.Name;
                         preparedAssets.push(preparedAsset);
