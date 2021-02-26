@@ -5,9 +5,9 @@ public class LWCEmployeeStatusControllerTest {
        //This method return the fields used by the getEmployeeProjects
          return [SELECT Project__r.Id, Project__r.Name FROM Employee_Assignment__c WHERE Id = :eAssigmentId];
     } 
-    public static Employee_Status__c returnEmployeeStatusesStructure(Id projectId){
+    public static Employee_Status__c returnEmployeeStatusesStructure(Id currentId){
        //This method return the fields used by the getEmployeeStatuses
-         return [SELECT Status__c, CreatedDate, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Id = :projectId];
+         return [SELECT Status__c, CreatedDate, Comments__c, CreatedBy.Name FROM Employee_Status__c WHERE Id = :currentId];
     } 
        
     @isTest
@@ -50,8 +50,7 @@ public class LWCEmployeeStatusControllerTest {
            	empAssignmentList.add(returnEmployeeProjectsStructure(OppO1Id));
             empAssignmentList.add(returnEmployeeProjectsStructure(OppO2Id));
             empAssignmentList.add(returnEmployeeProjectsStructure(OppO3Id));
-        	Employee_Status__c eS1 = TestDataFactory.createEmployeeStatus(con.Id,'Red', 'Red');
-            eS1.Project__c = empAssignmentList.get(1).Project__r.Id; 
+        	Employee_Status__c eS1 = TestDataFactory.createEmployeeStatus(con.Id,'Red', 'Red'); 
             update eS1;
             List<Employee_Status__c> status = new List<Employee_Status__c>();
             status.add(returnEmployeeStatusesStructure(eS1.Id));
@@ -81,7 +80,6 @@ public class LWCEmployeeStatusControllerTest {
             empAssignmentList.add(returnEmployeeProjectsStructure(OppO2Id));
             empAssignmentList.add(returnEmployeeProjectsStructure(OppO3Id));
         	Employee_Status__c eS1 = TestDataFactory.createEmployeeStatus(con.Id,'Red', 'Red');
-            eS1.Project__c = empAssignmentList.get(1).Project__r.Id; 
             update eS1;
             List<Employee_Status__c> status = new List<Employee_Status__c>();
             status.add(returnEmployeeStatusesStructure(eS1.Id));
