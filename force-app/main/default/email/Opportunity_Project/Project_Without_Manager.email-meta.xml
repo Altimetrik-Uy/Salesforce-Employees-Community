@@ -9,7 +9,7 @@
 
 Project Name:  {!Opportunity.Name}
 
-Project Status:  {!Opportunity.DeliveryInstallationStatus__c}
+Project Status:  {!Opportunity.StageName}
 
 Go to opportunity:  {!Opportunity.Name}</textOnly>
     <type>custom</type>
