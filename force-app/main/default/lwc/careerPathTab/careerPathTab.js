@@ -3,7 +3,6 @@ import { LightningElement, api } from 'lwc';
 const ACTIVE_CLASS = ' slds-is-active';
 const NAV_ITEM_CLASS = 'slds-vertical-tabs__nav-item';
 
-
 export default class CareerPathTab extends LightningElement {
     @api employeeid;
     @api mainRole = "Developer";
@@ -26,7 +25,6 @@ export default class CareerPathTab extends LightningElement {
 
     handleRoleChange(event) {
         this.mainRole = event.detail.value;
-        //eval("$A.get(e.force:refreshView).fire();");
     }
 
     get isDetailsSelected(){

@@ -52,46 +52,6 @@
 .slds-path__item:last-child:before, .slds-path__item:last-child:after{
     right: -0.4rem !important;
 }
-/* Career path Dev 
-ul.careerPath div:nth-child(1){
-    margin-top:52px !important;
-}
-
-ul.careerPath div:nth-child(2){
-    margin-top:52px !important;
-}
-
-ul.careerPath div:nth-child(5){
-    margin-top: 25px !important;
-}
-
-ul.careerPath div:nth-child(6){
-    margin-top: 25px !important;
-}
-
-ul.careerPath div:nth-child(7){
-    margin-top: 25px !important;
-}*/
-/* Career path QA 
-ul.careerPathQA div:nth-child(1){
-    margin-top: 156px !important;
-}
-
-ul.careerPathQA div:nth-child(2){
-    margin-top: 156px !important;
-}
-
-ul.careerPathQA div:nth-child(3){
-    margin-top: 156px !important;
-}
-
-ul.careerPathQA div:nth-child(5){
-    margin-top: 52px !important;
-}
-
-ul.careerPathQA div:nth-child(6){
-    margin-top: 156px !important;
-}*/
 
 .slds-is-won:hover,.slds-is-won:hover:after,.slds-is-won:hover:before {
     background-color: rgb(27, 94, 11);

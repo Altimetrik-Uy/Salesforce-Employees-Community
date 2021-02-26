@@ -23,12 +23,10 @@ export default class PathAssistant extends LightningElement {
     // step selected by the user
     @track selectedStepValue;
     
-    //@track careerPathStyle = 'slds-path__nav careerPath';
     @track careerPathStyle = 'slds-path__nav slds-grid slds-grid_vertical-align-center';
     
     _optionSelected;
 
-    refreshing = false;
 
     constructor() {
         super();
@@ -44,7 +42,6 @@ export default class PathAssistant extends LightningElement {
                     for (const role of objCareerPath.lstWrpRoles){ 
                         roleQA = role.strRole;
                         if(roleQA.includes('QA')){
-                            //this.careerPathStyle = 'slds-path__nav';
                             this.careerPathStyle = 'slds-path__nav  slds-grid slds-grid_vertical-align-center';
                         }
                         arrPossibleSteps.push(new Step(role.strRole, role.strRole, index));
@@ -65,7 +62,6 @@ export default class PathAssistant extends LightningElement {
     @wire(getPathByMainRole, {mainRole:'$mainRole'}) getPathWithoutEmpId({error,data}) {
         this.possibleSteps = undefined;
         this.organizedPath = undefined;
-        this.refreshing = true;
         if(data){
             if (data) {
                 let arrPossibleSteps = [];
@@ -76,7 +72,6 @@ export default class PathAssistant extends LightningElement {
                         roleQA = role.strRole;
                         if(roleQA.includes('QA')){
                             this.careerPathStyle = 'slds-path__nav  slds-grid slds-grid_vertical-align-center';
-                            //this.careerPathStyle = 'slds-path__nav careerPathQA';
                         }
                         arrPossibleSteps.push(new Step(role.strRole, role.strRole, index));
                         index++;
@@ -91,7 +86,6 @@ export default class PathAssistant extends LightningElement {
                 this.errorMsg = 'Impossible to load';
             }
         }
-        this.refreshing = false;
     }
 
     // true when all required data is loaded
