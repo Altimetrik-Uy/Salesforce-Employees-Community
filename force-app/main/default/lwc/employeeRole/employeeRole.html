@@ -2,13 +2,16 @@
     <div class="slds-size_12-of-12">
         <ul class="slds-accordion">
             <li class="slds-accordion__list-item">
-                <section class="slds-accordion__section slds-is-open ">
+                <section class={cssOpen}>
                     <div class="slds-accordion__summary accordionbk slds-var-p-left_small accordion-color">
                         <h3 class="slds-accordion__summary-heading">
-                                <button class="slds-button slds-accordion__summary-action roledetailheader" title="Role Description" onclick={handleClick} >
-                                <lightning-icon icon-name={iconName} alternative-text="Role" title="Image" size="x-small" class='accordion-icon'></lightning-icon>
-                                <span class="slds-var-p-left_small slds-accordion__summary-content accordion-font">Role Description</span>
-                            </button>
+                            <div class="button-box-text">
+                                <button class="slds-button slds-accordion__summary-action roledetailheader tooltip" onclick={handleClick} >
+                                    <lightning-icon icon-name={iconName} alternative-text="Role" title="Image" size="x-small" class='accordion-icon'></lightning-icon>
+                                    <span class="slds-var-p-left_small slds-accordion__summary-content accordion-font">Role Description</span>
+                                </button>
+                                <span class="button-box-text-help">Click to see more/less</span>
+                            </div>
                         </h3>
                     </div>
                     <div class={cssClass}>

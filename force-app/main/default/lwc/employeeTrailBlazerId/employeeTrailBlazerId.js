@@ -37,7 +37,7 @@ export default class EmployeeTrailBlazerId extends LightningElement {
                     this.dispatchEvent(
                         new ShowToastEvent({
                             title: 'Success',
-                            message: 'Trailblazer Id  was updated. Data will be updated in 40 minutes aprox',
+                            message: 'Trailblazer Id  was updated. Data will be updated in 40 minutes aprox.',
                             variant: 'success'
                         })
                     );
@@ -48,7 +48,7 @@ export default class EmployeeTrailBlazerId extends LightningElement {
                 }).catch(error => {
                     this.dispatchEvent(
                         new ShowToastEvent({
-                            title: 'Error creating the Trailblaizer Id',
+                            title: 'Error creating the Trailblaizer Id.',
                             message: error.body.message,
                             variant: 'error'
                         })
@@ -59,7 +59,7 @@ export default class EmployeeTrailBlazerId extends LightningElement {
             this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Warning',
-                        message: 'Trailblazer Id cannot be empty',
+                        message: 'Trailblazer Id cannot be empty.',
                         variant: 'warning'
                     })
                 );

@@ -1,5 +1,6 @@
 <template>
-    <div class="slds-float_right"  style="border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,#D4D4D4); padding-bottom: 7px"> 
-        <lightning-button label="Log out" title="Log out" icon-name="utility:outcome" class="slds-m-left_x-small" onclick={handleClick}></lightning-button>
+    <div class="slds-float_right button-box-text"> 
+        <lightning-button label="Log out" icon-name="utility:outcome" class="slds-m-left_x-small tooltip" onclick={handleClick}></lightning-button>
+        <span class="button-box-text-help">Click to Log out</span>
     </div>
 </template>

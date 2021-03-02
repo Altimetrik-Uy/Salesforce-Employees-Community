@@ -209,7 +209,7 @@ export default class EmployeeTab extends LightningElement {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Info',
-                        message: 'Trailblazer Id did not change',
+                        message: 'Trailblazer id should be different.',
                         variant: 'info'
                     })
                 );
@@ -219,7 +219,7 @@ export default class EmployeeTab extends LightningElement {
                 this.dispatchEvent(
                         new ShowToastEvent({
                             title: 'Warning',
-                            message: 'Trailblazer Id cannot be empty',
+                            message: 'Trailblazer Id cannot be empty.',
                             variant: 'warning'
                         })
                     );
