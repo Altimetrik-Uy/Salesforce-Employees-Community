@@ -3,9 +3,9 @@
     <types>
         <members>*</members>
         <members>PathAssistant</members>
-        <members>PathAssistantTest</members>
+		<members>PathAssistantTest</members>
         <members>SalesforcePathByRole</members>
-        <members>SalesforcePathByRoleTest</members>
+		<members>SalesforcePathByRoleTest</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -21,9 +21,9 @@
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
-        <members>Salesforce_Career_Path__c-Salesforce Career Path Layout</members>
-        <name>Layout</name>
-    </types>
+		<members>Salesforce_Career_Path__c-Salesforce Career Path Layout</members>
+		<name>Layout</name>
+	</types>
     <types>
         <members>*</members>
         <name>LightningComponentBundle</name>
@@ -54,9 +54,9 @@
         <name>CustomLabel</name>
     </types>
     <types>
-        <members>Salesforce_Career_Path__c</members>
-        <name>CustomTab</name>
-    </types>
+		<members>Salesforce_Career_Path__c</members>
+		<name>CustomTab</name>
+	</types>
     <types>
         <members>*</members>
         <name>HomePageComponent</name>
@@ -102,9 +102,9 @@
     </types>
     <types>
         <members>Update_User_Info_Record</members>
-        <members>User_Info_Object_Manage</members>
-        <name>Flow</name>
-    </types>
+		<members>User_Info_Object_Manage</members>
+		<name>Flow</name>
+	</types>
     <types>
         <members>*</members>
         <name>Network</name>
@@ -113,10 +113,10 @@
         <members>*</members>
         <name>NetworkBranding</name>
     </types>
-    <types>
-        <members>*</members>
-        <name>ContentAsset</name>
-    </types>
+	<types>
+		<members>*</members>
+		<name>ContentAsset</name>
+	</types>
     <types>
         <members>*</members>
         <name>CustomSite</name>
@@ -153,18 +153,17 @@
         <members>*</members>
         <name>SharingRules</name>
     </types>
-    	<types>
-		<members>unfiled$public/Employee_assigned_notification</members>
+    <types>
+        <members>Opportunity_Project</members>
+		<members>Opportunity_Project/Project_Without_Manager</members>
 		<name>EmailTemplate</name>
 	</types>
 	<types>
-		<members>Employee_Assignment__c.Employee_assigned_notification</members>
-		<members>Employee_Assignment__c.Employee_assigned_notification_2</members>
+		<members>Opportunity.Project_Without_Manager</members>
 		<name>WorkflowAlert</name>
 	</types>
 	<types>
-		<members>Employee_Assignment__c.SendEmployeeAssignedNotification</members>
-		<members>Employee_Assignment__c.SendEmployeeAssignedNotification2</members>
+		<members>Opportunity.Project Without Manager</members>
 		<name>WorkflowRule</name>
 	</types>
     <version>50.0</version>
