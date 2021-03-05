@@ -1,6 +1,8 @@
-/*eslint no-console: “error”*/
-import { LightningElement, api } from 'lwc';
-
+import { LightningElement, api, wire, track} from 'lwc';
+import sendMessage from '@salesforce/apex/LWCEmployeeCareerPathController.sendMessage';
+import getManager from '@salesforce/apex/LWCEmployeeCareerPathController.getManager';
+import getUser from '@salesforce/apex/LWCEmployeeCareerPathController.getUser';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 const ACTIVE_CLASS = ' slds-is-active';
 const NAV_ITEM_CLASS = 'slds-vertical-tabs__nav-item';
 
@@ -8,6 +10,9 @@ export default class CareerPathTab extends LightningElement {
     @api employeeid;
     @api mainRole = "Developer Path";
     selectedrole;
+    @track error; 
+    @track lstManagerId = [];
+    @track userName = '';
 
     selectedTab = 'linkdetails';
     detailsTab = NAV_ITEM_CLASS  + ACTIVE_CLASS;
@@ -60,5 +65,42 @@ export default class CareerPathTab extends LightningElement {
 
     handleOnRoleSelected(event) {
         this.selectedrole = event.detail;
+    }
+    
+    @wire(getManager,{empId: '$employeeid'}) getManager({error,data}){
+        if(data){
+            this.lstManagerId = data;
+        }else if (error){
+            this.error = error;
+        }
+    }
+
+    @wire(getUser,{empId: '$employeeid'}) getUser({error,data}){
+        if(data){
+            this.userName = data;
+        }else if (error){
+            this.error = error;
+        }
+    }
+    
+    onClickSendMessage(){
+        sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
+        .then (s=>{
+            if(s){
+                const event = new ShowToastEvent({
+                    title: 'Success!',
+                    message: 'Message has been sent.',
+                    variant: 'success',
+                });
+                this.dispatchEvent(event);
+            }else{
+                const event = new ShowToastEvent({
+                    title: 'Fail!',
+                    message: 'Message has not been sent. Current project does not have a manager assigned to be notified.',
+                    variant: 'error',
+                });
+                this.dispatchEvent(event);
+            }
+        })
     }
 }
