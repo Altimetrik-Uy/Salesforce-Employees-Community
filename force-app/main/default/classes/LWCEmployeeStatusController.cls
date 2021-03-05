@@ -21,9 +21,9 @@ public class LWCEmployeeStatusController {
     @AuraEnabled(cacheable=true)
     public static List<Employee_Status__c> getEmployeeStatuses(String empId, Integer offsetRange){
         if(offsetRange == null){
-            return [SELECT Id, Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Employee__r.Id =:empId ORDER BY Meeting_Date__c DESC LIMIT 4];
+            return [SELECT Id, Status__c, CreatedDate, Comments__c, CreatedBy.Name FROM Employee_Status__c WHERE Employee__r.Id =:empId ORDER BY CreatedDate DESC LIMIT 4];
         }else {
-            return [SELECT Id, Status__c, Meeting_Date__c, Comments__c, CreatedBy.Name, Project__r.Name FROM Employee_Status__c WHERE Employee__r.Id =:empId ORDER BY Meeting_Date__c DESC LIMIT 4 OFFSET :offsetRange];
+            return [SELECT Id, Status__c, CreatedDate, Comments__c, CreatedBy.Name FROM Employee_Status__c WHERE Employee__r.Id =:empId ORDER BY CreatedDate DESC LIMIT 4 OFFSET :offsetRange];
         }
     }
 

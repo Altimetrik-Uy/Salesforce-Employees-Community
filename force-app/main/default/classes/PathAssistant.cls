@@ -1,15 +1,21 @@
 public with sharing class PathAssistant {
-    @AuraEnabled(cacheable=true)
-    public static List<wrpColumns> getPath(String empId){
-        string strCurrentRole = '';
+    public static List<wrpColumns> getPath(String empId, String mainRole){
+        string strCurrentRole = (mainRole != null && !String.isEmpty(mainRole)) ? mainRole : '';
         Map<string,List<wrpRoles>> mapPositionXCareer = new Map<string,List<wrpRoles>>();
         List<Salesforce_Career_Path_Settings__mdt> lstCareerPathSettings = new List<Salesforce_Career_Path_Settings__mdt>();
         List<Salesforce_Career_Path_Settings__mdt> lstQaCareerPathSettings = new List<Salesforce_Career_Path_Settings__mdt>();
         List<wrpColumns> lstWrpColumns = new List<wrpColumns>();
 
-        List<Contact> lstContact = [SELECT Id, Name, Role__c 
+        if (empId != null && !String.isEmpty(empId) ) {
+            List<Contact> lstContact = [SELECT Id, Name, Role__c 
                                     FROM Contact 
                                     WHERE Id =: empId];
+
+            if (lstContact != null) {
+                strCurrentRole = lstContact[0].Role__c;
+            }
+        }
+        
         if(!Test.isRunningTest()) {
              lstCareerPathSettings = [SELECT Id, MasterLabel, Position__c
                                         FROM Salesforce_Career_Path_Settings__mdt
@@ -67,9 +73,7 @@ public with sharing class PathAssistant {
             lstQaCareerPathSettings.add(mdtCareerPath6);
         }
         
-        if (lstContact != null) {
-            strCurrentRole = lstContact[0].Role__c;
-        }
+        
 
         Set<String> devPreRoles = calculateDevPreRole(strCurrentRole);
         Set<String> qaPreRoles = calculateQaPreRole(strCurrentRole);
@@ -133,6 +137,11 @@ public with sharing class PathAssistant {
             }
         }
         return lstWrpColumns;
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static List<wrpColumns> getPath(String empId){
+        return getPath(empId, null);
     }
 
     public class wrpRoles {
@@ -277,5 +286,10 @@ public with sharing class PathAssistant {
             qaPreRoles.add('QA Senior');
         }
         return qaPreRoles;
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static List<wrpColumns> getPathByMainRole(String mainRole){
+        return getPath(null, mainRole);
     }
 }
