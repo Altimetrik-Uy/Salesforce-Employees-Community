@@ -3,6 +3,10 @@
     white-space:nowrap;
 }
 
+.slds-is-active {
+    color:white;
+}
+
 .border-radious{
     margin-left: 0;
     border-top-left-radius: 2rem !important;

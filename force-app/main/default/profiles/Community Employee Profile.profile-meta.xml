@@ -101,6 +101,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>LWCEmployeeCareerPathController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>LWCEmployeeCareerPathControllerTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>LWCEmployeeOverallController</apexClass>
         <enabled>true</enabled>
     </classAccesses>

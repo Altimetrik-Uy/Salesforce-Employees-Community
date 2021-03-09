@@ -26,7 +26,7 @@
                         <div class="slds-col" key={organizedPath.lstWrpRoles} style="padding-right: 22px;">
                             <template for:each={column.lstWrpRoles} for:item="step">      
                                 <template if:true={step.blnCurrentRole}>
-                                    <li key={step.strRole} class='slds-path__item slds-is-current slds-is-active' role="presentation">
+                                    <li key={step.strRole} class='slds-path__item slds-is-current slds-is-active' role="presentation" data-item={step.strRole} onclick={handleRolClicked}>
                                         <a aria-selected="false"
                                             class="slds-path__link"
                                             href="javascript:void(0);"
@@ -45,7 +45,7 @@
 
                                 <template if:false={step.blnCurrentRole}>
                                     <template if:true={step.blnIsPreRole}>
-                                        <li key={step.strRole}  class='slds-path__item slds-is-won' role="presentation">
+                                        <li key={step.strRole}  class='slds-path__item slds-is-won' role="presentation" data-item={step.strRole} onclick={handleRolClicked}>
                                             <a aria-selected="false" 
                                             class="slds-path__link" 
                                             href="javascript:void(0);" 
@@ -62,7 +62,7 @@
                                         </li>
                                     </template>
                                     <template if:false={step.blnIsPreRole}>
-                                        <li key={step.strRole} class='slds-path__item slds-is-incomplete' role="presentation">
+                                        <li key={step.strRole} class='slds-path__item slds-is-incomplete' role="presentation" data-item={step.strRole} onclick={handleRolClicked}>
                                             <a aria-selected="false" 
                                             class="slds-path__link" 
                                             href="javascript:void(0);" 
