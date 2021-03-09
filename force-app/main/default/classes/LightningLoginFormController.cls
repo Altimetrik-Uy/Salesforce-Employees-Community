@@ -1,12 +1,17 @@
 global class LightningLoginFormController {
-
+    
     public LightningLoginFormController() {
         
     }
-
+    
     @AuraEnabled
     public static String login(String username, String password, String startUrl) {
         try{
+            HttpRequest req = new HttpRequest();
+            req.setEndpoint('callout:communityCredentials/services/apexrest/v1/allowUser?username='+username);
+            req.setMethod('PATCH');
+            Http http = new Http();
+            HTTPResponse res = http.send(req);
             ApexPages.PageReference lgn = Site.login(username, password, startUrl);
             aura.redirect(lgn);
             return null;
