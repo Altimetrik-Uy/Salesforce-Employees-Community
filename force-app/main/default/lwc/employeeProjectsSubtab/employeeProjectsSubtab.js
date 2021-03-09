@@ -44,7 +44,7 @@ export default class EmployeeProjectsSubtab extends LightningElement {
             });
     } 
 
-    @wire(getEmployeeProjects,{empId: '$employeeid'}) wiredEmployeeCurrentProjects({error,data}){
+    @wire(getEmployeeProjects,{empId: '$employeeid', offsetRange: 0}) wiredEmployeeCurrentProjects({error,data}){
         try{
             if(this.employeeid != ''){
                 getEmployeeProjectsCount({empId: this.employeeid}).then(projectCount =>{ 
@@ -54,7 +54,7 @@ export default class EmployeeProjectsSubtab extends LightningElement {
                         if (data) {
                             this.projectTable = data;
                             let preparedAssets = [];
-                            let id = 0;
+                            let id = 1;
                             this.projectTable.forEach(asset => {
                                 let preparedAsset = {};
                                 preparedAsset.Id = id++;
@@ -73,8 +73,6 @@ export default class EmployeeProjectsSubtab extends LightningElement {
                         }
                         //looking at displaying 4 recrods per page
                         const paginationNumbers = Math.ceil(this.totalRecords / 4);
-                        //create an array with size equals to paginationNumbers
-                        //this.paginationRange = [];
                         while (
                             this.paginationRange.push(i++) < paginationNumbers
                             // eslint-disable-next-line no-empty
