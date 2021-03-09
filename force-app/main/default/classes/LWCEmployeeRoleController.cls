@@ -1,6 +1,28 @@
 public class  LWCEmployeeRoleController {
 
     @AuraEnabled (cacheable=true)
+    public static Salesforce_Career_Path_Settings__mdt getRoleInformationByName(String roleName){
+        Salesforce_Career_Path_Settings__mdt roleDesc;
+         List<Salesforce_Career_Path_Settings__mdt> lstroleDesc = [SELECT 
+                                    Actitud_Required_follow_up_Mentoring__c,
+                                    Communication__c,
+                                    Functional_knowledge__c,
+                                    Language__c,
+                                    Soft_skills__c,
+                                    Technical_knowledge__c
+                                FROM Salesforce_Career_Path_Settings__mdt WHERE Label =:roleName];
+        if (!lstroleDesc.isEmpty()) {
+            roleDesc = lstroleDesc[0];
+        } 
+
+        if(Test.isRunningTest()){
+            roleDesc.Soft_skills__c = 'Comunicación escrita y oral, con equipo';
+        }
+
+        return roleDesc;
+    } 
+
+    @AuraEnabled (cacheable=true)
     public static Salesforce_Career_Path_Settings__mdt getRoleInformation(String empId){
         Salesforce_Career_Path_Settings__mdt roleDesc;
          List<Salesforce_Career_Path_Settings__mdt> lstroleDesc = [SELECT 

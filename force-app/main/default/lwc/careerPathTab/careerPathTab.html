@@ -11,7 +11,7 @@
                     onchange={handleRoleChange} ></lightning-combobox>
         </div>
         <div class="slds-col slds-size_11-of-12">
-            <c-path-assistant main-role={mainRole}></c-path-assistant>
+            <c-path-assistant main-role={mainRole} onroleselected={handleOnRoleSelected}></c-path-assistant>
         </div>
         
     </div>
@@ -41,7 +41,7 @@
                         </li>
                     </ul>
                     <div class="slds-vertical-tabs__content" role="tabpanel">
-                        <c-career-path-details-subtab employeeid={employeeid} if:true={isDetailsSelected}></c-career-path-details-subtab>
+                        <c-career-path-details-subtab selectedrole={selectedrole} if:true={isDetailsSelected}></c-career-path-details-subtab>
                         <c-career-path-certifications-subtab employeeid={employeeid} if:true={isCertificationsSelected}></c-career-path-certifications-subtab>
                         <c-career-path-salary-subtab employeeid={employeeid} if:true={isSalarySelected}></c-career-path-salary-subtab>
                     </div>

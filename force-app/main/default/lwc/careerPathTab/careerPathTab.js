@@ -1,3 +1,4 @@
+/*eslint no-console: “error”*/
 import { LightningElement, api } from 'lwc';
 
 const ACTIVE_CLASS = ' slds-is-active';
@@ -5,7 +6,8 @@ const NAV_ITEM_CLASS = 'slds-vertical-tabs__nav-item';
 
 export default class CareerPathTab extends LightningElement {
     @api employeeid;
-    @api mainRole = "Developer";
+    @api mainRole = "Developer Path";
+    selectedrole;
 
     selectedTab = 'linkdetails';
     detailsTab = NAV_ITEM_CLASS  + ACTIVE_CLASS;
@@ -18,8 +20,8 @@ export default class CareerPathTab extends LightningElement {
 
     get options() {
         return [
-            { label: 'QA', value: 'QA' },
-            { label: 'Developer', value: 'Developer' },
+            { label: 'QA Path', value: 'QA Path' },
+            { label: 'Developer Path', value: 'Developer Path' },
         ];
     }
 
@@ -54,5 +56,9 @@ export default class CareerPathTab extends LightningElement {
             default:
                 this.detailsTab +=  ACTIVE_CLASS;
           }
+    }
+
+    handleOnRoleSelected(event) {
+        this.selectedrole = event.detail;
     }
 }

@@ -290,6 +290,8 @@ public with sharing class PathAssistant {
 
     @AuraEnabled(cacheable=true)
     public static List<wrpColumns> getPathByMainRole(String mainRole){
-        return getPath(null, mainRole);
+        List<wrpColumns> lstToReturn = getPath(null, mainRole);
+        if (!lstToReturn.isEmpty()) lstToReturn.get(0).lstWrpRoles[0].blnCurrentRole = true;
+        return lstToReturn;
     }
 }
