@@ -8,12 +8,12 @@ public class NoEmployeeStatusUpdateNotificationTest {
         System.assertEquals('0 0 0 3 9 ? 2022', ct.CronExpression);
         System.assertEquals(0, ct.TimesTriggered);
         System.assertEquals('2022-09-03 00:00:00', String.valueOf(ct.NextFireTime));
-        List<EmailMessage> emailMessage  =[SELECT Id FROM EmailMessage LIMIT 1];
-        System.assertNotEquals(0, emailMessage.size());
+        List<EmailMessage> emailMessage  = [SELECT Id FROM EmailMessage LIMIT 1];
+        System.assertNotEquals(1, emailMessage.size());
 
         Test.stopTest();
 
-        List<EmailMessage> emailMessage  =[SELECT Id FROM EmailMessage LIMIT 1];
-        System.assertEquals(0, emailMessage.size());
+        emailMessage  = [SELECT Id FROM EmailMessage LIMIT 1];
+        System.assertEquals(1, emailMessage.size());
     }
 }
