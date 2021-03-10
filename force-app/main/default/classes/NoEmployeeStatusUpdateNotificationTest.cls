@@ -1,6 +1,6 @@
 @isTest
 public class NoEmployeeStatusUpdateNotificationTest {
-    static void testNoEmployeeStatusUpdateNotification() {
+    @isTest static void testNoEmployeeStatusUpdateNotification() {
         Test.startTest();
 
         String jobId = System.schedule('testBasicScheduledApex', '0 0 0 3 9 ? 2022', new NoEmployeeStatusUpdateNotification());
