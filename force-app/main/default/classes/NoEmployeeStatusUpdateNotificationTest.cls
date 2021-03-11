@@ -3,7 +3,7 @@ public class NoEmployeeStatusUpdateNotificationTest {
     @isTest static void testNoEmployeeStatusUpdateNotification() {
         Test.startTest();
 
-        String jobId = System.schedule('testBasicScheduledApex', '0 0 0 3 9 ? 2022', new NoEmployeeStatusUpdateNotification());
+        String jobId = System.schedule('testBasicScheduledApex', '0 0 0 3 9 ? 2022', new NoEmployeeStatusUpdateNotification('emailAddress@test.foo'));
         CronTrigger ct = [SELECT Id, CronExpression, TimesTriggered, NextFireTime FROM CronTrigger WHERE id = :jobId];
         System.assertEquals('0 0 0 3 9 ? 2022', ct.CronExpression);
         System.assertEquals(0, ct.TimesTriggered);
