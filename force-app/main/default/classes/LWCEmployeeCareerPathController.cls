@@ -28,6 +28,11 @@ public class LWCEmployeeCareerPathController {
         return [SELECT Contact.Name FROM User WHERE Contact.Id =: empId LIMIT 1].Contact.Name;
     }
 
+    @AuraEnabled(cacheable=true)
+    public static string getRole(String empId){
+        return [SELECT Contact.Role__c FROM User WHERE Contact.Id =: empId LIMIT 1].Contact.Role__c;
+    }
+
     @AuraEnabled
     public static Boolean sendMessage(List<String> lstManagersId, String userName){
         String requestType = 'Role';
