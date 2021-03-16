@@ -3,6 +3,12 @@
     background-color: #FCFCFC;
 }
 
+.dropdown{
+    min-width: 145px;
+    width: 190px;
+    margin-right: 1%;
+}
+
 .custom-tab-icon {
     --sds-c-icon-color-background: #FF9A3C;
 }
