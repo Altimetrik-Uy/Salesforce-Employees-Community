@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
     <available>true</available>
     <encodingKey>UTF-8</encodingKey>
     <name>Project Without Manager</name>
     <style>none</style>
     <subject>In progress project without manager</subject>
-    <textOnly>A new &apos;In progress&apos; project has been created without Manager:
-
+    <textOnly>A new &apos;In progress&apos; project as been created without Manager:
 Project Name:  {!Opportunity.Name}
-
-Project Status:  {!Opportunity.StageName}
-
+Project Status:  {!Opportunity.DeliveryInstallationStatus__c}
 Go to opportunity:  {!Opportunity.Name}</textOnly>
     <type>custom</type>
     <uiType>Aloha</uiType>
