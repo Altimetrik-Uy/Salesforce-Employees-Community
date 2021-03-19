@@ -12,6 +12,7 @@ export default class PathAssistant extends LightningElement {
    
     @api employeeid;
     @api mainRole;
+    @track isCarrerTab;
     @track error;
     @track isPreRole = true;
     @track organizedPath;
@@ -36,6 +37,7 @@ export default class PathAssistant extends LightningElement {
     @wire(getPath,{empId: '$employeeid'}) getPath({error,data}){
         if(data){
             if (data) {
+                this.isCarrerTab = false;
                 let arrPossibleSteps = [];
                 let index = 0;
                 var roleQA = '';
@@ -65,6 +67,7 @@ export default class PathAssistant extends LightningElement {
         this.organizedPath = undefined;
         if(data){
             if (data) {
+                this.isCarrerTab = true;
                 let arrPossibleSteps = [];
                 let index = 0;
                 var roleQA = '';

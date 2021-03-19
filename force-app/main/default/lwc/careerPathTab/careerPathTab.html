@@ -1,6 +1,6 @@
 <template>
     <div class="slds-grid slds-grid_vertical-align-center">
-        <div class="slds-col slds-size_2-of-12 dropdown">
+        <div class="slds-col slds-size_1-of-12 button-box-text">
             <lightning-combobox
                     name="selectRole"
                     label="Role"
@@ -9,9 +9,10 @@
                     options={options}
                     variant="label-hidden"
                     onchange={handleRoleChange} ></lightning-combobox>
+            <span class="button-box-text-help-path">You can switch between Developer Path and QA Path</span>
         </div>
         <div class="slds-col slds-size_11-of-12">
-            <c-path-assistant main-role={mainRole} onroleselected={handleOnRoleSelected}></c-path-assistant>
+            <c-path-assistant carrertab={isCarrerTab} main-role={mainRole} onroleselected={handleOnRoleSelected}></c-path-assistant>
         </div>
         
     </div>
