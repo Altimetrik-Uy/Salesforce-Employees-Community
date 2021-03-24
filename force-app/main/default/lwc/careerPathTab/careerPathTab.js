@@ -86,7 +86,11 @@ export default class CareerPathTab extends LightningElement {
 
     @wire(getRole,{empId: '$employeeid'}) getRole({error,data}){
         if(data){
-            this.selectedrole = data;
+            console.debug(data);
+            if(data.contains('QA')) 
+                this.selectedrole = 'QA Path';
+            else
+                this.selectedrole = 'Developer Path';
         }else if (error){
             this.error = error;
         }
