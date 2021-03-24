@@ -90,6 +90,7 @@ export default class CareerPathTab extends LightningElement {
                 this.mainRole = 'QA Path';
             else
                 this.mainRole = 'Developer Path';
+            this.selectedrole = data;
         }else if (error){
             this.error = error;
         }
