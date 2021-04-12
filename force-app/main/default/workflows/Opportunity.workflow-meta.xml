@@ -18,7 +18,7 @@
     </alerts>
     <rules>
         <fullName>Last Project Update</fullName>
-        <active>true</active>
+        <active>false</active>
         <formula>AND (
    NOT(IsClosed),
    Last_Status_Date__c &gt;= TODAY()
