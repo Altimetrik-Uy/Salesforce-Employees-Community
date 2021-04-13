@@ -1,8 +1,7 @@
 global class NoEmployeeStatusUpdateNotification implements Schedulable{
 
     String emailAddress = Label.EmailManagers;
-    global NoEmployeeStatusUpdateNotification(String testEmailAddress){
-        emailAddress = testEmailAddress;
+    global NoEmployeeStatusUpdateNotification(){
     }
 
     global void execute(SchedulableContext SC) {
