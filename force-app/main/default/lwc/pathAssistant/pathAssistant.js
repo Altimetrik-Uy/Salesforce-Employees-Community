@@ -11,6 +11,7 @@ import {
 export default class PathAssistant extends LightningElement {
    
     @api employeeid;
+    @api newRole;
     @api mainRole;
     @api careertab;
     @track error;
@@ -55,6 +56,37 @@ export default class PathAssistant extends LightningElement {
                 }
                 this.possibleSteps = arrPossibleSteps;
                 this.organizedPath = data;
+            } else {
+                this.errorMsg = 'Impossible to load';
+            }
+        }
+    }
+
+    @wire(getPathByMainRole, {mainRole:'$newRole'}) getPathWithoutEmpId({error,data}) {
+        this.possibleSteps = undefined;
+        this.organizedPath = undefined;
+        if(data){
+            if (data) {
+                this.isCarrerTab = true;
+                let arrPossibleSteps = [];
+                let index = 0;
+                var roleQA = '';
+                for (const objCareerPath of data) {
+                    for (const role of objCareerPath.lstWrpRoles){ 
+                        roleQA = role.strRole;
+                        if(roleQA.includes('QA')){
+                            this.careerPathStyle = 'slds-path__nav  slds-grid slds-grid_vertical-align-center';
+                        }
+                        arrPossibleSteps.push(new Step(role.strRole, role.strRole, index));
+                        index++;
+                        if(objCareerPath.blnCurrentRole){
+                            this._optionSelected = objCareerPath.strRole.replace('Salesforce ', '');
+                        } 
+                    }
+                }
+                this.possibleSteps = arrPossibleSteps;
+                this.organizedPath = data;
+                this.setDefault();
             } else {
                 this.errorMsg = 'Impossible to load';
             }

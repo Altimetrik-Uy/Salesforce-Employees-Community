@@ -9,7 +9,9 @@ const NAV_ITEM_CLASS = 'slds-vertical-tabs__nav-item';
 
 export default class CareerPathTab extends LightningElement {
     @api employeeid;
-    @api mainRole = "Developer Path";
+    @api mainRole = '';
+    @api newRole = '';
+    employeeidAux;
     @track selectedrole;
     @track error; 
     @track lstManagerId = [];
@@ -32,7 +34,14 @@ export default class CareerPathTab extends LightningElement {
     }
 
     handleRoleChange(event) {
-        this.mainRole = event.detail.value;
+        if(this.mainRole != event.detail.value){
+            this.employeeidAux = this.employeeid 
+            this.employeeid = null;
+            this.newRole = event.detail.value;
+        }else{
+            this.employeeid = this.employeeidAux;
+            this.newRole = event.detail.value;
+        }
     }
 
     get isDetailsSelected(){
@@ -86,10 +95,11 @@ export default class CareerPathTab extends LightningElement {
 
     @wire(getRole,{empId: '$employeeid'}) getRole({error,data}){
         if(data){
-            if(data.includes('QA')) 
+            if(data.includes('QA')){
                 this.mainRole = 'QA Path';
-            else
+            } else {
                 this.mainRole = 'Developer Path';
+            }
             this.selectedrole = data;
         }else if (error){
             this.error = error;
