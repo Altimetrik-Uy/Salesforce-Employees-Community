@@ -9,8 +9,8 @@ const NAV_ITEM_CLASS = 'slds-vertical-tabs__nav-item';
 
 export default class CareerPathTab extends LightningElement {
     @api employeeid;
-    @api mainRole = '';
-    @api newRole = '';
+    @api mainRole;
+    @api newRole;
     employeeidAux;
     @track selectedrole;
     @track error; 
@@ -40,7 +40,8 @@ export default class CareerPathTab extends LightningElement {
             this.newRole = event.detail.value;
         }else{
             this.employeeid = this.employeeidAux;
-            this.newRole = event.detail.value;
+            this.mainRole = event.detail.value;
+            this.newRole = undefined;
         }
     }
 

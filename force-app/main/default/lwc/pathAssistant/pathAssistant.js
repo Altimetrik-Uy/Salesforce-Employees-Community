@@ -30,7 +30,6 @@ export default class PathAssistant extends LightningElement {
     
     _optionSelected;
 
-
     constructor() {
         super();
     }
@@ -67,7 +66,6 @@ export default class PathAssistant extends LightningElement {
         this.organizedPath = undefined;
         if(data){
             if (data) {
-                this.isCarrerTab = true;
                 let arrPossibleSteps = [];
                 let index = 0;
                 var roleQA = '';
@@ -86,29 +84,26 @@ export default class PathAssistant extends LightningElement {
                 }
                 this.possibleSteps = arrPossibleSteps;
                 this.organizedPath = data;
-                this.setDefault();
             } else {
                 this.errorMsg = 'Impossible to load';
             }
         }
     }
 
-    setDefault () {
-        if (this.organizedPath && this.organizedPath[0].lstWrpRoles) {
-            let firstStep = this.organizedPath[0].lstWrpRoles[0].strRole;
-            this.dispatchRoleSelected ( firstStep );
-        }
-    }
-
     handleRolClicked (event) {
-        if (this.mainRole) {
+        if (this.newRole) {
             let divs = this.template.querySelectorAll('.slds-path__item');
             for (let i=0; i < divs.length; i++){
                 divs[i].className = 'slds-path__item slds-is-incomplete';
             }
+        } else if(this.mainRole) {
+                let divs = this.template.querySelectorAll('.slds-path__item');
+                for (let i=0; i < divs.length; i++){
+                    divs[i].className = 'slds-path__item slds-is-incomplete';
+                }
+            }
             this.template.querySelector('[data-item="' + event.currentTarget.dataset.item + '"]').className='slds-path__item slds-is-active'
-            this.dispatchRoleSelected (event.currentTarget.dataset.item);
-        }        
+            this.dispatchRoleSelected (event.currentTarget.dataset.item);          
     }
 
     dispatchRoleSelected (roleSelected) {
