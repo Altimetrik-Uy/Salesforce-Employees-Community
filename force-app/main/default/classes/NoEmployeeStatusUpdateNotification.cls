@@ -29,9 +29,16 @@ global class NoEmployeeStatusUpdateNotification implements Schedulable{
             mail.setToAddresses(sendTo);
             mail.setSenderDisplayName('Salesforce Employee Community');
             mail.setSubject('No Status Update Notification');
-            String body = '';
+            String body = '<p>Following employees have not had a status update for 45 days.</p>';
+            body += '<p></p>';
+            body += '<p></p>';
+            body += '<table border ="1" style="border-collapse: collapse;text-align: left;" >';
+            body += '<tr><th>First Name</th><th>Last Name</th></tr>';
             for(Contact c : employees){
-                body += 'The employee ' + c.FirstName + ' ' + c.LastName + ' has not had a status update for 45 days </br>';
+                body +='<tr>';
+                body +='<td>'+c.FirstName+'</td>';
+                body +='<td>'+c.LastName +'</td>';
+                body +='</tr>';
             }   
             mail.setHtmlBody(body);
             mails.add(mail);
