@@ -30,6 +30,7 @@
         <permissionSet>Community_Employee_Permission_Set</permissionSet>
         <profile>community employee profile</profile>
         <profile>admin</profile>
+        <profile>force.com - free user</profile>
     </networkMemberGroups>
     <networkPageOverrides>
         <changePasswordPageOverrideSetting>VisualForce</changePasswordPageOverrideSetting>

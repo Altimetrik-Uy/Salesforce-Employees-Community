@@ -11,7 +11,6 @@ import {
 export default class PathAssistant extends LightningElement {
    
     @api employeeid;
-    @api newRole;
     @api mainRole;
     @api careertab;
     @track error;
@@ -30,6 +29,7 @@ export default class PathAssistant extends LightningElement {
     
     _optionSelected;
 
+
     constructor() {
         super();
     }
@@ -37,6 +37,7 @@ export default class PathAssistant extends LightningElement {
     @wire(getPath,{empId: '$employeeid'}) getPath({error,data}){
         if(data){
             if (data) {
+                this.isCarrerTab = false;
                 let arrPossibleSteps = [];
                 let index = 0;
                 var roleQA = '';
@@ -61,51 +62,22 @@ export default class PathAssistant extends LightningElement {
         }
     }
 
-    @wire(getPathByMainRole, {mainRole:'$newRole'}) getPathWithoutEmpId({error,data}) {
-        this.possibleSteps = undefined;
-        this.organizedPath = undefined;
-        if(data){
-            if (data) {
-                let arrPossibleSteps = [];
-                let index = 0;
-                var roleQA = '';
-                for (const objCareerPath of data) {
-                    for (const role of objCareerPath.lstWrpRoles){ 
-                        roleQA = role.strRole;
-                        if(roleQA.includes('QA')){
-                            this.careerPathStyle = 'slds-path__nav  slds-grid slds-grid_vertical-align-center';
-                        }
-                        arrPossibleSteps.push(new Step(role.strRole, role.strRole, index));
-                        index++;
-                        if(objCareerPath.blnCurrentRole){
-                            this._optionSelected = objCareerPath.strRole.replace('Salesforce ', '');
-                        } 
-                    }
-                }
-                this.possibleSteps = arrPossibleSteps;
-                this.organizedPath = data;
-            } else {
-                this.errorMsg = 'Impossible to load';
-            }
+    setDefault () {
+        if (this.organizedPath && this.organizedPath[0].lstWrpRoles) {
+            let firstStep = this.organizedPath[0].lstWrpRoles[0].strRole;
+            this.dispatchRoleSelected ( firstStep );
         }
     }
 
     handleRolClicked (event) {
-        if(this.careertab !== undefined){
-            if (this.newRole) {
-                let divs = this.template.querySelectorAll('.slds-path__item');
-                for (let i=0; i < divs.length; i++){
-                    divs[i].className = 'slds-path__item slds-is-incomplete';
-                }
-            } else if(this.mainRole) {
-                    let divs = this.template.querySelectorAll('.slds-path__item');
-                    for (let i=0; i < divs.length; i++){
-                        divs[i].className = 'slds-path__item slds-is-incomplete';
-                    }
-                }
-                this.template.querySelector('[data-item="' + event.currentTarget.dataset.item + '"]').className='slds-path__item slds-is-active'
-                this.dispatchRoleSelected (event.currentTarget.dataset.item); 
-        }
+        if (this.mainRole) {
+            let divs = this.template.querySelectorAll('.slds-path__item');
+            for (let i=0; i < divs.length; i++){
+                divs[i].className = 'slds-path__item slds-is-incomplete';
+            }
+            this.template.querySelector('[data-item="' + event.currentTarget.dataset.item + '"]').className='slds-path__item slds-is-active'
+            this.dispatchRoleSelected (event.currentTarget.dataset.item);
+        }        
     }
 
     dispatchRoleSelected (roleSelected) {

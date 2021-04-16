@@ -9,10 +9,8 @@ const NAV_ITEM_CLASS = 'slds-vertical-tabs__nav-item';
 
 export default class CareerPathTab extends LightningElement {
     @api employeeid;
-    @api mainRole;
-    @api newRole;
-    employeeidAux;
-    @track selectedrole;
+    @api mainRole = "Developer Path";
+    @api selectedrole;
     @track error; 
     @track lstManagerId = [];
     @track userName = '';
@@ -34,15 +32,7 @@ export default class CareerPathTab extends LightningElement {
     }
 
     handleRoleChange(event) {
-        if(this.mainRole != event.detail.value){
-            this.employeeidAux = this.employeeid 
-            this.employeeid = null;
-            this.newRole = event.detail.value;
-        }else{
-            this.employeeid = this.employeeidAux;
-            this.mainRole = event.detail.value;
-            this.newRole = undefined;
-        }
+        this.mainRole = event.detail.value;
     }
 
     get isDetailsSelected(){
@@ -96,11 +86,10 @@ export default class CareerPathTab extends LightningElement {
 
     @wire(getRole,{empId: '$employeeid'}) getRole({error,data}){
         if(data){
-            if(data.includes('QA')){
+            if(data.includes('QA')) 
                 this.mainRole = 'QA Path';
-            } else {
+            else
                 this.mainRole = 'Developer Path';
-            }
             this.selectedrole = data;
         }else if (error){
             this.error = error;
@@ -108,32 +97,23 @@ export default class CareerPathTab extends LightningElement {
     }
     
     onClickSendMessage(){
-        if(this.lstManagerId[0] !== 'You dont have manager assigned'){
-            sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
-            .then (s=>{
-                if(s){
-                    const event = new ShowToastEvent({
-                        title: 'Success!',
-                        message: 'Message has been sent.',
-                        variant: 'success',
-                    });
-                    this.dispatchEvent(event);
-                }else{
-                    const event = new ShowToastEvent({
-                        title: 'Warning!',
-                        message: 'You must wait 24hs since the last request, to sent another one.',
-                        variant: 'warning',
-                    });
-                    this.dispatchEvent(event);
-                }
-            })
-        }else{
-            const event = new ShowToastEvent({
-                title: 'Fail!',
-                message: 'Message has not been sent. Current project does not have a manager assigned to be notified.',
-                variant: 'error',
-            });
-            this.dispatchEvent(event);
-        }
+        sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
+        .then (s=>{
+            if(s){
+                const event = new ShowToastEvent({
+                    title: 'Success!',
+                    message: 'Message has been sent.',
+                    variant: 'success',
+                });
+                this.dispatchEvent(event);
+            }else{
+                const event = new ShowToastEvent({
+                    title: 'Fail!',
+                    message: 'Message has not been sent. Current project does not have a manager assigned to be notified.',
+                    variant: 'error',
+                });
+                this.dispatchEvent(event);
+            }
+        })
     }
 }
