@@ -32,13 +32,12 @@ public without sharing class ReportNoProjectUpdateNotification implements Schedu
             body += '<p></p>';
             body += '<p></p>';
             body += '<table border ="1" style="border-collapse: collapse;text-align: left;" >';
-            body += '<tr><th>Name</th><th>Account</th><th>Last Status</th><th>Last Status Update Date</th></tr>';
+            body += '<tr><th>Name</th><th>Account</th><th>Last Status Update Date</th></tr>';
             String host= System.URL.getSalesforceBaseUrl().toExternalForm();
             for(Opportunity opp : listOpptiesNoUpdate){
                 body +='<tr>';
                 body +='<td><a href="'+host+'/'+opp.Id+'" target="_blank">'+opp.Name+'</a></td>';
                 body +='<td>'+opp.Account.Name+'</td>';
-                body += String.isNotBlank(opp.Last_Project_Status__c)?'<td>'+opp.Last_Project_Status__c+'</td>': '<td></td>';
                 body += opp.Last_Status_Date__c!=null ? '<td>'+opp.Last_Status_Date__c.format()+'</td>':'<td></td>';
                 body +='</tr>';
             }  
