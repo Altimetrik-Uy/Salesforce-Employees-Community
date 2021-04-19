@@ -107,6 +107,7 @@
         <name>QuickAction</name>
     </types>
     <types>
+        <members>Bench_Report_Page</members>
         <members>Employee_Record_Page</members>
         <members>Project_Record_Page</members>
         <name>FlexiPage</name>
@@ -194,5 +195,9 @@
         <members>Project_Status__c.Update_Project_Last_Status_Date</members>
 		<name>WorkflowFieldUpdate</name>
 	</types>
+    <types>
+        <members>Bench_Report_App</members>
+        <name>CustomApplication</name>
+    </types>
     <version>50.0</version>
 </Package>
