@@ -98,24 +98,33 @@ export default class EmployeeStatusSubtab extends LightningElement {
     }
     
     onClickSendMessage(){
-        sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
-        .then (s=>{
-            if(s){
-                const event = new ShowToastEvent({
-                    title: 'Success!',
-                    message: 'Manager has been notified.',
-                    variant: 'success',
-                });
-                this.dispatchEvent(event);
-            }else{
-                const event = new ShowToastEvent({
-                    title: 'Fail!',
-                    message: 'No active project assignment or manager assigned. Contact your administrator for more details',
-                    variant: 'error',
-                });
-                this.dispatchEvent(event);
-            }
-        })
+        if(!this.lstManagerId){
+            const event = new ShowToastEvent({
+                title: 'Fail!',
+                message: 'No active project assignment or manager assigned. Contact your administrator for more details',
+                variant: 'error',
+            });
+            this.dispatchEvent(event);
+        }else{
+            sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
+            .then (s=>{
+                if(s){
+                    const event = new ShowToastEvent({
+                        title: 'Success!',
+                        message: 'Manager has been notified.',
+                        variant: 'success',
+                    });
+                    this.dispatchEvent(event);
+                }else{
+                    const event = new ShowToastEvent({
+                        title: 'Warning!',
+                        message: 'You must wait 24hs since the last request, to sent another one.',
+                        variant: 'warning',
+                    });
+                    this.dispatchEvent(event);
+                }
+            })
+        }
     }
 
     handlePaginationClick(event) {
