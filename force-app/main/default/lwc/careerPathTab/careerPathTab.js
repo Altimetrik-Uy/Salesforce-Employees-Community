@@ -84,7 +84,7 @@ export default class CareerPathTab extends LightningElement {
     }
     
     onClickSendMessage(){
-        if(this.lstManagerId && this.lstManagerId.length>0){
+        if(this.lstManagerId[0] !== 'You dont have manager assigned'){
             sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
             .then (s=>{
                 if(s){
