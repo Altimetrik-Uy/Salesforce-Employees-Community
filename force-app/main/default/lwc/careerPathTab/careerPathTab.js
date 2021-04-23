@@ -84,14 +84,7 @@ export default class CareerPathTab extends LightningElement {
     }
     
     onClickSendMessage(){
-        if(!this.lstManagerId){
-            const event = new ShowToastEvent({
-                title: 'Fail!',
-                message: 'Message has not been sent. Current project does not have a manager assigned to be notified.',
-                variant: 'error',
-            });
-            this.dispatchEvent(event);
-        }else{
+        if(this.lstManagerId && this.lstManagerId.length>0){
             sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
             .then (s=>{
                 if(s){
@@ -110,6 +103,13 @@ export default class CareerPathTab extends LightningElement {
                     this.dispatchEvent(event);
                 }
             })
+        }else{
+            const event = new ShowToastEvent({
+                title: 'Fail!',
+                message: 'Message has not been sent. Current project does not have a manager assigned to be notified.',
+                variant: 'error',
+            });
+            this.dispatchEvent(event);
         }
     }
 }

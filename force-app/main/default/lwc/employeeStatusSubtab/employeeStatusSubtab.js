@@ -15,6 +15,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
     @track projectItem = [];
     @track comboBoxValue = '';
     @track lstManagerId = [];
+    managerList = false;
     @track userName = '';
     @track allSelected = false;
     @track projectStatuses=[];
@@ -84,6 +85,8 @@ export default class EmployeeStatusSubtab extends LightningElement {
     @wire(getManager,{empId: '$employeeid'}) getManager({error,data}){
         if(data){
             this.lstManagerId = data;
+            console.log('data manager ' +  this.lstManagerId);
+            this.managerList = true;
         }else if (error){
             this.error = error;
         }
@@ -98,14 +101,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
     }
     
     onClickSendMessage(){
-        if(!this.lstManagerId){
-            const event = new ShowToastEvent({
-                title: 'Fail!',
-                message: 'No active project assignment or manager assigned. Contact your administrator for more details',
-                variant: 'error',
-            });
-            this.dispatchEvent(event);
-        }else{
+        if(this.lstManagerId && this.lstManagerId.length>0){
             sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
             .then (s=>{
                 if(s){
@@ -124,6 +120,13 @@ export default class EmployeeStatusSubtab extends LightningElement {
                     this.dispatchEvent(event);
                 }
             })
+        }else{
+            const event = new ShowToastEvent({
+                title: 'Fail!',
+                message: 'No active project assignment or manager assigned. Contact your administrator for more details',
+                variant: 'error',
+            });
+            this.dispatchEvent(event);
         }
     }
 
