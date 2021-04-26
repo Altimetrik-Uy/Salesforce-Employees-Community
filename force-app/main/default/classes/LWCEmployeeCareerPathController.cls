@@ -33,15 +33,20 @@ public class LWCEmployeeCareerPathController {
         String requestType = 'Role';
 
         List<Community_Request_Notification__c> roleNotification = [
-            SELECT CreatedDate, OwnerId FROM Community_Request_Notification__c WHERE CreatedById = :UserInfo.getUserId() AND Request_type__c = :requestType LIMIT 1
+            SELECT LastModifiedDate, OwnerId FROM Community_Request_Notification__c WHERE CreatedById = :UserInfo.getUserId() AND Request_type__c = :requestType LIMIT 1
             ];
             DateTime last24hours = System.Now()-1;
         try {
-            if(roleNotification.isEmpty() || roleNotification.get(0).CreatedDate < last24hours){
+            if(roleNotification.isEmpty() || roleNotification.get(0).LastModifiedDate < last24hours){
                 String postText = 'The Employee '  + userName + ' requests a role change.';
                 Community_Request_Notification__c newRoleNotification = new Community_Request_Notification__c();
                 newRoleNotification.Request_type__c = requestType;
-                insert newRoleNotification;
+                upsert newRoleNotification;
+                if(roleNotification.isEmpty()){
+                    insert newRoleNotification;
+                }else{
+                    upsert roleNotification;
+                }  
 
                 // Define the FeedItemInput object to pass to postFeedElement
                 ConnectApi.FeedItemInput feedItemInput = new ConnectApi.FeedItemInput();

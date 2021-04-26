@@ -69,15 +69,19 @@ public class LWCEmployeeStatusController {
         String requestType = 'Status';
 
         List<Community_Request_Notification__c> statusNotification = [
-            SELECT CreatedDate, OwnerId FROM Community_Request_Notification__c WHERE CreatedById = :UserInfo.getUserId() AND Request_type__c = :requestType LIMIT 1
+            SELECT LastModifiedDate, OwnerId FROM Community_Request_Notification__c WHERE CreatedById = :UserInfo.getUserId() AND Request_type__c = :requestType LIMIT 1
             ];
             DateTime last24hours = System.Now()-1;
         try {
-            if(statusNotification.isEmpty() || statusNotification.get(0).CreatedDate < last24hours){
+            if(statusNotification.isEmpty() || statusNotification.get(0).LastModifiedDate < last24hours){
                 String postText = 'The Employee '  + userName + ' requests a status update.';
                 Community_Request_Notification__c newStatusNotification = new Community_Request_Notification__c();
                 newStatusNotification.Request_type__c = requestType;
-                insert newStatusNotification;
+                if(statusNotification.isEmpty()){
+                    insert newStatusNotification;
+                }else{
+                    upsert statusNotification;
+                }      
                   
                 // Define the FeedItemInput object to pass to postFeedElement
                 ConnectApi.FeedItemInput feedItemInput = new ConnectApi.FeedItemInput();
