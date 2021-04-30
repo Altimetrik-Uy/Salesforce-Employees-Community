@@ -91,19 +91,21 @@ export default class PathAssistant extends LightningElement {
     }
 
     handleRolClicked (event) {
-        if (this.newRole) {
-            let divs = this.template.querySelectorAll('.slds-path__item');
-            for (let i=0; i < divs.length; i++){
-                divs[i].className = 'slds-path__item slds-is-incomplete';
-            }
-        } else if(this.mainRole) {
+        if(this.careertab !== undefined){
+            if (this.newRole) {
                 let divs = this.template.querySelectorAll('.slds-path__item');
                 for (let i=0; i < divs.length; i++){
                     divs[i].className = 'slds-path__item slds-is-incomplete';
                 }
-            }
-            this.template.querySelector('[data-item="' + event.currentTarget.dataset.item + '"]').className='slds-path__item slds-is-active'
-            this.dispatchRoleSelected (event.currentTarget.dataset.item);          
+            } else if(this.mainRole) {
+                    let divs = this.template.querySelectorAll('.slds-path__item');
+                    for (let i=0; i < divs.length; i++){
+                        divs[i].className = 'slds-path__item slds-is-incomplete';
+                    }
+                }
+                this.template.querySelector('[data-item="' + event.currentTarget.dataset.item + '"]').className='slds-path__item slds-is-active'
+                this.dispatchRoleSelected (event.currentTarget.dataset.item); 
+        }
     }
 
     dispatchRoleSelected (roleSelected) {
