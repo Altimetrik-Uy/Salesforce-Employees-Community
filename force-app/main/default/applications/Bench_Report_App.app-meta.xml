@@ -10,6 +10,6 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Bench Report App</label>
     <navType>Standard</navType>
+    <tabs>Bench_Report</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>Bench_Report_App_UtilityBar</utilityBar>
 </CustomApplication>

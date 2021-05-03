@@ -24,7 +24,14 @@
                             <lightning-layout-item key={employee.Name} size="3" class="slds-var-p-around_x-small">
                                 <!-- Start employee tile -->
                                 <div class="slds-media__figure">
-                                    <img src={appResources.employeeSilhouette} alt="Employee profile" class="employee-silhouette"/>
+                                    <template if:true={employee.Image}>
+                                        <lightning-formatted-rich-text value={employee.Image} class="employee-silhouette"></lightning-formatted-rich-text>
+                                    </template>
+                                    <template if:false={employee.Image}>
+                                        <img src={appResources.employeeSilhouette} alt="Employee profile" class="employee-silhouette"/>
+                                    </template>
+                                    <!-- <img src={appResources.employeeSilhouette} alt="Employee profile" class="employee-silhouette"/> -->
+                                    <!-- <img src={employee.Image} alt={employee.Name} class="employee-silhouette"/> -->
                                 </div>
                                 <div class="slds-media">
                                     <div class="slds-media__body">
@@ -33,7 +40,7 @@
                                 </div>   
                                 <div class="slds-media">
                                     <div class="slds-media__body">
-                                        <p class="slds-var-m-bottom_xx-small">{employee.Position__c}</p>
+                                        <p class="slds-var-m-bottom_xx-small">{employee.Role}</p>
                                     </div>
                                 </div>
                                 <!-- End employee tile -->
