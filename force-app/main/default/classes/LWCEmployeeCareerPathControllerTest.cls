@@ -31,10 +31,6 @@ public class LWCEmployeeCareerPathControllerTest {
             update eA1;
             empAssignmentList.add(eA1);
             
-            Employee_Status__c eS1 = TestDataFactory.createEmployeeStatus(con.Id,'Red', 'Red');
-            eS1.Meeting_Date__c =  date.parse('2/17/2021');
-            update eS1;
-
             List<String> lstManagersId = new List<String>();
             lstManagersId.add(manager.Id);
             
