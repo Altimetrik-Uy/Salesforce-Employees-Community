@@ -84,23 +84,32 @@ export default class CareerPathTab extends LightningElement {
     }
     
     onClickSendMessage(){
-        sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
-        .then (s=>{
-            if(s){
-                const event = new ShowToastEvent({
-                    title: 'Success!',
-                    message: 'Message has been sent.',
-                    variant: 'success',
-                });
-                this.dispatchEvent(event);
-            }else{
-                const event = new ShowToastEvent({
-                    title: 'Fail!',
-                    message: 'Message has not been sent. Current project does not have a manager assigned to be notified.',
-                    variant: 'error',
-                });
-                this.dispatchEvent(event);
-            }
-        })
+        if(this.lstManagerId[0] !== 'You dont have manager assigned'){
+            sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
+            .then (s=>{
+                if(s){
+                    const event = new ShowToastEvent({
+                        title: 'Success!',
+                        message: 'Message has been sent.',
+                        variant: 'success',
+                    });
+                    this.dispatchEvent(event);
+                }else{
+                    const event = new ShowToastEvent({
+                        title: 'Warning!',
+                        message: 'You must wait 24hs since the last request, to sent another one.',
+                        variant: 'warning',
+                    });
+                    this.dispatchEvent(event);
+                }
+            })
+        }else{
+            const event = new ShowToastEvent({
+                title: 'Fail!',
+                message: 'Message has not been sent. Current project does not have a manager assigned to be notified.',
+                variant: 'error',
+            });
+            this.dispatchEvent(event);
+        }
     }
 }

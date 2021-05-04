@@ -15,6 +15,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
     @track projectItem = [];
     @track comboBoxValue = '';
     @track lstManagerId = [];
+    managerList = false;
     @track userName = '';
     @track allSelected = false;
     @track projectStatuses=[];
@@ -84,6 +85,7 @@ export default class EmployeeStatusSubtab extends LightningElement {
     @wire(getManager,{empId: '$employeeid'}) getManager({error,data}){
         if(data){
             this.lstManagerId = data;
+            this.managerList = true;
         }else if (error){
             this.error = error;
         }
@@ -98,24 +100,33 @@ export default class EmployeeStatusSubtab extends LightningElement {
     }
     
     onClickSendMessage(){
-        sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
-        .then (s=>{
-            if(s){
-                const event = new ShowToastEvent({
-                    title: 'Success!',
-                    message: 'Manager has been notified.',
-                    variant: 'success',
-                });
-                this.dispatchEvent(event);
-            }else{
-                const event = new ShowToastEvent({
-                    title: 'Fail!',
-                    message: 'No active project assignment or manager assigned. Contact your administrator for more details',
-                    variant: 'error',
-                });
-                this.dispatchEvent(event);
-            }
-        })
+        if(this.lstManagerId[0] !== 'You dont have manager assigned'){
+            sendMessage({lstManagersId:this.lstManagerId, userName:this.userName})
+            .then (s=>{
+                if(s){
+                    const event = new ShowToastEvent({
+                        title: 'Success!',
+                        message: 'Manager has been notified.',
+                        variant: 'success',
+                    });
+                    this.dispatchEvent(event);
+                }else{
+                    const event = new ShowToastEvent({
+                        title: 'Warning!',
+                        message: 'You must wait 24hs since the last request, to sent another one.',
+                        variant: 'warning',
+                    });
+                    this.dispatchEvent(event);
+                }
+            })
+        }else{
+            const event = new ShowToastEvent({
+                title: 'Fail!',
+                message: 'No active project assignment or manager assigned. Contact your administrator for more details',
+                variant: 'error',
+            });
+            this.dispatchEvent(event);
+        }
     }
 
     handlePaginationClick(event) {
