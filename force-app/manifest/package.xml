@@ -65,6 +65,7 @@
     </types>
     <types>
 		<members>Salesforce_Career_Path__c</members>
+        <members>Bench_Report</members>
 		<name>CustomTab</name>
 	</types>
     <types>
