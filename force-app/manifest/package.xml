@@ -21,6 +21,11 @@
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
+        <members>Plan_Item__c-Plan Item Layout</members>
+        <members>Evaluated_KPI__c-Evaluated KPI Layout</members>
+        <members>KPI__c-KPI Layout</members>
+        <members>Review_Assignment__c-Review Assignment Layout</members>
+        <members>Review__c-Review Layout</members>
 		<members>Salesforce_Career_Path__c-Salesforce Career Path Layout</members>
 		<name>Layout</name>
 	</types>
@@ -34,6 +39,11 @@
     </types>
     <types>
         <members>*</members>
+        <members>Plan_Item__c</members>
+        <members>Evaluated_KPI__c</members>
+        <members>KPI__c</members>
+        <members>Review_Assignment__c</members>
+        <members>Review__c</members>
         <members>Account</members>
         <members>Contact</members>
         <members>Lead</members>
@@ -70,6 +80,7 @@
         <name>ApexTrigger</name>
     </types>
     <types>
+        <members>Admin</members>
         <members>Community Employee Profile</members>
         <name>Profile</name>
     </types>
