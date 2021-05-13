@@ -147,6 +147,10 @@
     </types>
     <types>
         <members>*</members>
+        <name>SharingRules</name>
+    </types>
+    <types>
+        <members>*</members>
         <name>CspTrustedSite</name>
     </types>
     <types>
@@ -156,23 +160,28 @@
     <types>
         <members>Opportunity_Project</members>
 		<members>Opportunity_Project/Project_Without_Manager</members>
+		<members>unfiled$public/Employee_assigned_notification</members>
         <members>Opportunity_Project/Project_Without_Status_Update</members>
 		<name>EmailTemplate</name>
 	</types>
 	<types>
 		<members>Opportunity.Project_Without_Manager</members>
+		<members>Employee_Assignment__c.Employee_assigned_notification</members>
+		<members>Employee_Assignment__c.Employee_assigned_notification_2</members>
         <members>Opportunity.Report_no_project_update</members>
 		<name>WorkflowAlert</name>
 	</types>
     <types>
-        <members>Project_Status__c.Update_Project_Last_Status_Date</members>
-		<name>WorkflowFieldUpdate</name>
-	</types>
-	<types>
-		<members>Opportunity.Project Without Manager</members>
+		<members>Employee_Assignment__c.SendEmployeeAssignedNotification</members>
+		<members>Employee_Assignment__c.SendEmployeeAssignedNotification2</members>
+        <members>Opportunity.Project Without Manager</members>
         <members>Opportunity.Last Project Update</members>
         <members>Project_Status__c.New Project Status</members>
 		<name>WorkflowRule</name>
+	</types>
+    <types>
+        <members>Project_Status__c.Update_Project_Last_Status_Date</members>
+		<name>WorkflowFieldUpdate</name>
 	</types>
     <version>50.0</version>
 </Package>
