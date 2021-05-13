@@ -1,0 +1,21 @@
+<template>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="utility:connected_apps" size="small"></lightning-icon>
+            Card Title
+        </h3>
+        <div slot="footer">
+            <lightning-button-group>
+                <template if:true={reviewOpen}>
+                    <lightning-button label="Back"></lightning-button>
+                    <lightning-button label="Save"></lightning-button>
+                    <lightning-button variant="brand" label="Submit Review"></lightning-button>
+                </template>
+                <template if:false={reviewOpen}>
+                    <lightning-button label="Back"></lightning-button>
+                </template>
+            </lightning-button-group>
+        </div>
+        <p class="slds-p-horizontal_small">Card Body {status}</p>
+    </lightning-card>
+</template>
