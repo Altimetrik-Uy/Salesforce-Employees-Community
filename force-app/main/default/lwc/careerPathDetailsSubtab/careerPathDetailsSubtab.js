@@ -6,7 +6,7 @@ export default class CareerPathDetailsSubtab extends LightningElement {
     @api selectedrole;
 
     get selectedRole() {
-        console.log (JSON.stringify(this.template.querySelector('c-employee-role')));
+        //console.log (JSON.stringify(this.template.querySelector('c-employee-role')));
         let comp = this.template.querySelector('c-employee-role');
         if (comp) {
             comp.refreshRoleInfo(this.selectedrole);

@@ -1,0 +1,4 @@
+Step 1 - You need to verify if the process builder "User Info Object Manage" is active. 
+       - If "User Info Object Manage" is not active, you should active it.
+Step 2 - You need to verify if the flow "Update User Info Record" is active. 
+       - If "Update User Info Record" is not active, you should active it.

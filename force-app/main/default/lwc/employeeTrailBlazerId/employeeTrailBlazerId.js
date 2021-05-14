@@ -55,7 +55,7 @@ export default class EmployeeTrailBlazerId extends LightningElement {
                     );
                 });
             }
-        }else{
+        } else {
             this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Warning',

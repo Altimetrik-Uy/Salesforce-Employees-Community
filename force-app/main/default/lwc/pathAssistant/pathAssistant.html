@@ -40,42 +40,80 @@
                                             </span>
                                             <span class="slds-path__title">{step.strRole}</span>
                                         </a>
-                                    </li> 
+                                    </li>
                                 </template>
 
                                 <template if:false={step.blnCurrentRole}>
                                     <template if:true={step.blnIsPreRole}>
-                                        <li key={step.strRole}  class='slds-path__item slds-is-won' role="presentation" data-item={step.strRole} onclick={handleRolClicked}>
-                                            <a aria-selected="false" 
-                                            class="slds-path__link" 
-                                            href="javascript:void(0);" 
-                                            role="option"
-                                            tabindex="-1" 
-                                            data-value={step.strRole} 
-                                            onclick={handleStepSelected}>
-                                            <span class="slds-path__stage">
-                                                <lightning-icon icon-name="utility:check" size="xx-small" variant="inverse"></lightning-icon>
-                                                <span class="slds-assistive-text">Current Stage:</span>
-                                            </span>
-                                            <span class="slds-path__title is-pre-role-text">{step.strRole}</span>
-                                            </a>
-                                        </li>
+                                        <div class="button-box-text-section" if:true={careertab} key={step.strRole}>
+                                            <li  class='slds-path__item slds-is-incomplete' role="presentation" data-item={step.strRole} onclick={handleRolClicked}>
+                                                <a aria-selected="false" 
+                                                class="slds-path__link" 
+                                                href="javascript:void(0);" 
+                                                role="option"
+                                                tabindex="-1" 
+                                                data-value={step.strRole} 
+                                                onclick={handleStepSelected}>
+                                                <span class="slds-path__stage">
+                                                    <lightning-icon icon-name="utility:check" size="xx-small" variant="inverse"></lightning-icon>
+                                                </span>
+                                                <span class="slds-path__title">{step.strRole}</span>
+                                                </a>
+                                            </li>
+                                            <span class="button-box-text-help-section">Click on any of the roles to see its description and required certifications below</span>
+                                        </div>
+                                        <div if:false={careertab} key={step.strRole}>
+                                            <li  class='slds-path__item slds-is-won' role="presentation" data-item={step.strRole} onclick={handleRolClicked}>
+                                                <a aria-selected="false" 
+                                                class="slds-path__link" 
+                                                href="javascript:void(0);" 
+                                                role="option"
+                                                tabindex="-1" 
+                                                data-value={step.strRole} 
+                                                onclick={handleStepSelected}>
+                                                <span class="slds-path__stage">
+                                                    <lightning-icon icon-name="utility:check" size="xx-small" variant="inverse"></lightning-icon>
+                                                    <span class="slds-assistive-text">Current Stage:</span>
+                                                </span>
+                                                <span class="slds-path__title is-pre-role-text">{step.strRole}</span>
+                                                </a>
+                                            </li>
+                                        </div>
                                     </template>
                                     <template if:false={step.blnIsPreRole}>
-                                        <li key={step.strRole} class='slds-path__item slds-is-incomplete' role="presentation" data-item={step.strRole} onclick={handleRolClicked}>
-                                            <a aria-selected="false" 
-                                            class="slds-path__link" 
-                                            href="javascript:void(0);" 
-                                            role="option"
-                                            tabindex="-1" 
-                                            data-value={step.strRole} 
-                                            onclick={handleStepSelected}>
-                                            <span class="slds-path__stage">
-                                                <lightning-icon icon-name="utility:check" size="xx-small" variant="inverse"></lightning-icon>
-                                            </span>
-                                            <span class="slds-path__title">{step.strRole}</span>
-                                            </a>
-                                        </li>
+                                        <div class="button-box-text-section" if:true={careertab} key={step.strRole}>
+                                            <li  class='slds-path__item slds-is-incomplete' role="presentation" data-item={step.strRole} onclick={handleRolClicked}>
+                                                <a aria-selected="false" 
+                                                class="slds-path__link" 
+                                                href="javascript:void(0);" 
+                                                role="option"
+                                                tabindex="-1" 
+                                                data-value={step.strRole} 
+                                                onclick={handleStepSelected}>
+                                                <span class="slds-path__stage">
+                                                    <lightning-icon icon-name="utility:check" size="xx-small" variant="inverse"></lightning-icon>
+                                                </span>
+                                                <span class="slds-path__title">{step.strRole}</span>
+                                                </a>
+                                            </li>
+                                            <span class="button-box-text-help-section">Click on any of the roles to see its description and required certifications below</span>
+                                        </div>
+                                        <div if:false={careertab} key={step.strRole}>
+                                            <li  class='slds-path__item slds-is-incomplete' role="presentation" data-item={step.strRole} onclick={handleRolClicked}>
+                                                <a aria-selected="false" 
+                                                class="slds-path__link" 
+                                                href="javascript:void(0);" 
+                                                role="option"
+                                                tabindex="-1" 
+                                                data-value={step.strRole} 
+                                                onclick={handleStepSelected}>
+                                                <span class="slds-path__stage">
+                                                    <lightning-icon icon-name="utility:check" size="xx-small" variant="inverse"></lightning-icon>
+                                                </span>
+                                                <span class="slds-path__title">{step.strRole}</span>
+                                                </a>
+                                            </li>
+                                        </div>
                                     </template> 
                                 </template>
                             </template>

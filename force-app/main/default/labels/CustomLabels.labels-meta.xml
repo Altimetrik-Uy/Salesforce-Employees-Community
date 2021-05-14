@@ -7,4 +7,11 @@
         <shortDescription>GenericErrorMessage_lbl</shortDescription>
         <value>An unexpected error occurred. Please contact your System Administrator.</value>
     </labels>
+    <labels>
+        <fullName>EmailManagers</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>EmailManagers</shortDescription>
+        <value>salesforce-managers@altimetrik.com</value>
+    </labels>
 </CustomLabels>

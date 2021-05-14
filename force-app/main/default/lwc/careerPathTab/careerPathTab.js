@@ -2,6 +2,7 @@ import { LightningElement, api, wire, track} from 'lwc';
 import sendMessage from '@salesforce/apex/LWCEmployeeCareerPathController.sendMessage';
 import getManager from '@salesforce/apex/LWCEmployeeCareerPathController.getManager';
 import getUser from '@salesforce/apex/LWCEmployeeCareerPathController.getUser';
+import getRole from '@salesforce/apex/LWCEmployeeCareerPathController.getRole';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 const ACTIVE_CLASS = ' slds-is-active';
 const NAV_ITEM_CLASS = 'slds-vertical-tabs__nav-item';
@@ -9,7 +10,7 @@ const NAV_ITEM_CLASS = 'slds-vertical-tabs__nav-item';
 export default class CareerPathTab extends LightningElement {
     @api employeeid;
     @api mainRole = "Developer Path";
-    selectedrole;
+    @api selectedrole;
     @track error; 
     @track lstManagerId = [];
     @track userName = '';
@@ -78,6 +79,18 @@ export default class CareerPathTab extends LightningElement {
     @wire(getUser,{empId: '$employeeid'}) getUser({error,data}){
         if(data){
             this.userName = data;
+        }else if (error){
+            this.error = error;
+        }
+    }
+
+    @wire(getRole,{empId: '$employeeid'}) getRole({error,data}){
+        if(data){
+            if(data.includes('QA')) 
+                this.mainRole = 'QA Path';
+            else
+                this.mainRole = 'Developer Path';
+            this.selectedrole = data;
         }else if (error){
             this.error = error;
         }

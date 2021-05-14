@@ -1205,16 +1205,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Employee_Status__c.Meeting_Date__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Employee_Status__c.Project__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Employee_Status__c.Red_Reason__c</field>
         <readable>true</readable>
     </fieldPermissions>

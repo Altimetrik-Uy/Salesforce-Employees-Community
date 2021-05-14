@@ -1,4 +1,5 @@
 public class LWCEmployeeOverallController{
+
     @AuraEnabled(cacheable=true)
     public static List<Project_Status__c> getProjectStatusImageName(String uId){
         try{   

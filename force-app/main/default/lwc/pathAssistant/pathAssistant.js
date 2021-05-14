@@ -12,6 +12,7 @@ export default class PathAssistant extends LightningElement {
    
     @api employeeid;
     @api mainRole;
+    @api careertab;
     @track error;
     @track isPreRole = true;
     @track organizedPath;
@@ -36,6 +37,7 @@ export default class PathAssistant extends LightningElement {
     @wire(getPath,{empId: '$employeeid'}) getPath({error,data}){
         if(data){
             if (data) {
+                this.isCarrerTab = false;
                 let arrPossibleSteps = [];
                 let index = 0;
                 var roleQA = '';
@@ -54,36 +56,6 @@ export default class PathAssistant extends LightningElement {
                 }
                 this.possibleSteps = arrPossibleSteps;
                 this.organizedPath = data;
-            } else {
-                this.errorMsg = 'Impossible to load';
-            }
-        }
-    }
-
-    @wire(getPathByMainRole, {mainRole:'$mainRole'}) getPathWithoutEmpId({error,data}) {
-        this.possibleSteps = undefined;
-        this.organizedPath = undefined;
-        if(data){
-            if (data) {
-                let arrPossibleSteps = [];
-                let index = 0;
-                var roleQA = '';
-                for (const objCareerPath of data) {
-                    for (const role of objCareerPath.lstWrpRoles){ 
-                        roleQA = role.strRole;
-                        if(roleQA.includes('QA')){
-                            this.careerPathStyle = 'slds-path__nav  slds-grid slds-grid_vertical-align-center';
-                        }
-                        arrPossibleSteps.push(new Step(role.strRole, role.strRole, index));
-                        index++;
-                        if(objCareerPath.blnCurrentRole){
-                            this._optionSelected = objCareerPath.strRole.replace('Salesforce ', '');
-                        } 
-                    }
-                }
-                this.possibleSteps = arrPossibleSteps;
-                this.organizedPath = data;
-                this.setDefault();
             } else {
                 this.errorMsg = 'Impossible to load';
             }
@@ -105,9 +77,7 @@ export default class PathAssistant extends LightningElement {
             }
             this.template.querySelector('[data-item="' + event.currentTarget.dataset.item + '"]').className='slds-path__item slds-is-active'
             this.dispatchRoleSelected (event.currentTarget.dataset.item);
-        }
-        console.log ('Rol Clicked ' + event.currentTarget.dataset.item);
-        
+        }        
     }
 
     dispatchRoleSelected (roleSelected) {

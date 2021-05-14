@@ -7,6 +7,11 @@ export default class EmployeeOverallSubtab extends LightningElement {
     @api employeeId;
     @track userId = strUserId;
     @track error;
+    @track imageStatus;
+    @track statusTableColumns = [
+        { label: 'Profile Pic', fieldName: 'AssetImageSrc', type:'image'},
+        { label: 'alt', fieldName: 'AssetImageAlt'},
+    ];
     @track projectStatusImageName;
     @track rolesWrapper;
     @track projectStatusImageNameTableColumns = [ 
