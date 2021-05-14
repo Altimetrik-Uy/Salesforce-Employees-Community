@@ -21,9 +21,9 @@ public class LWCEmployeeStatusControllerTest {
             Contact con = TestDataFactory.createContact(acc.Id);
             //User
             User usr = TestDataFactory.createUser(con.Id);
-            Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O3',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+            Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'),'BILLED');
+            Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
+            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O3',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
             List<Employee_Assignment__c> empAssignmentList = new List<Employee_Assignment__c>();
            	empAssignmentList.add(returnEmployeeProjectsStructure(OppO1Id));
             empAssignmentList.add(returnEmployeeProjectsStructure(OppO2Id));
@@ -43,9 +43,9 @@ public class LWCEmployeeStatusControllerTest {
             Contact con = TestDataFactory.createContact(acc.Id);
             //User
             User usr = TestDataFactory.createUser(con.Id);
-            Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O3',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+            Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
+            Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
+            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O3',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
             List<Employee_Assignment__c> empAssignmentList = new List<Employee_Assignment__c>();
            	empAssignmentList.add(returnEmployeeProjectsStructure(OppO1Id));
             empAssignmentList.add(returnEmployeeProjectsStructure(OppO2Id));
@@ -72,9 +72,9 @@ public class LWCEmployeeStatusControllerTest {
             Contact con = TestDataFactory.createContact(acc.Id);
             //User
             User usr = TestDataFactory.createUser(con.Id);
-            Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O3',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+            Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
+            Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
+            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O3',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
             List<Employee_Assignment__c> empAssignmentList = new List<Employee_Assignment__c>();
            	empAssignmentList.add(returnEmployeeProjectsStructure(OppO1Id));
             empAssignmentList.add(returnEmployeeProjectsStructure(OppO2Id));
@@ -103,7 +103,7 @@ public class LWCEmployeeStatusControllerTest {
             //User
             User usr = TestDataFactory.createUser(con.Id);
             
-         	Id empAssignmentId = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+         	Id empAssignmentId = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
             Id projectId = [SELECT Id, Name FROM Opportunity WHERE Name = 'O1' LIMIT 1].Id;
             Managers_Assignment__c mA1 = TestDataFactory.createManagersAssigment(manager.Id, projectId);
             Managers_Assignment__c mA2 = TestDataFactory.createManagersAssigment(manager.Id, projectId);
@@ -142,7 +142,7 @@ public class LWCEmployeeStatusControllerTest {
             //User
             User usr = TestDataFactory.createUser(con.Id);
             
-         	Id empAssignmentId = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+         	Id empAssignmentId = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
             Id projectId = [SELECT Id, Name FROM Opportunity WHERE Name = 'O1' LIMIT 1].Id;
             Managers_Assignment__c mA1 = TestDataFactory.createManagersAssigment(manager.Id, projectId);
             Managers_Assignment__c mA2 = TestDataFactory.createManagersAssigment(manager.Id, projectId);
