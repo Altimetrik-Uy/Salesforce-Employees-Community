@@ -23,8 +23,8 @@
     <referrerPolicyOriginWhenCrossOrigin>true</referrerPolicyOriginWhenCrossOrigin>
     <requireHttps>true</requireHttps>
     <selfRegPage>CommunitiesSelfReg</selfRegPage>
-    <siteAdmin>sec-qa@altimetrik.com.qa</siteAdmin>
-    <siteGuestRecordDefaultOwner>sec-qa@altimetrik.com.qa</siteGuestRecordDefaultOwner>
+    <siteAdmin>bdibello@altimetrik-mgmt.com.trailadv</siteAdmin>
+    <siteGuestRecordDefaultOwner>bdibello@altimetrik-mgmt.com.trailadv</siteGuestRecordDefaultOwner>
     <siteType>ChatterNetwork</siteType>
-    <subdomain>qa-community-dev-ed</subdomain>
+    <subdomain>trailadv-altimetrik-uy</subdomain>
 </CustomSite>

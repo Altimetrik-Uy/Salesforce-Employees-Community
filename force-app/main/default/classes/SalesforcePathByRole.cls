@@ -1,6 +1,11 @@
 public without sharing class SalesforcePathByRole {
     @AuraEnabled
     public static Object getSalesforcePath(){
+        return SalesforcePathByRole.getSalesforcePathFromSelectedRole(null);
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static Object getSalesforcePathFromSelectedRole(String selectedRole){
         string strRoleUser;
         string strTaUserInfoId;
         Set<Id> setUserCertifications = new Set<Id>();
@@ -24,7 +29,11 @@ public without sharing class SalesforcePathByRole {
         }
         
         if (lstContact != null && !lstContact.isEmpty()) {
-            strRoleUser = lstContact[0].Role__c;
+            if(String.isBlank(selectedRole)){
+                strRoleUser = lstContact[0].Role__c;
+            }else {
+                strRoleUser = 'Salesforce '+selectedRole;
+            }
             //Get the user role
             lstCareerPathByRole = [SELECT Id, Certification__c, Certification__r.Name, Role__c, Required__c, Possible_Next_Role__c FROM Salesforce_Career_Path__c WHERE Role__c =: strRoleUser];
             if (!lstCareerPathByRole.isEmpty()) { 

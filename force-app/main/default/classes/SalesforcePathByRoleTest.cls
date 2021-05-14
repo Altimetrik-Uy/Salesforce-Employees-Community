@@ -82,6 +82,8 @@ public with sharing class SalesforcePathByRoleTest {
         System.RunAs(usrRunAs){
             List<SalesforcePathByRole.wrpRolesSalesforce> lstWrpRolesSalesforce = (List<SalesforcePathByRole.wrpRolesSalesforce>) SalesforcePathByRole.getSalesforcePath();
             System.assertEquals(lstWrpRolesSalesforce.size(), 3);
+            lstWrpRolesSalesforce = (List<SalesforcePathByRole.wrpRolesSalesforce>) SalesforcePathByRole.getSalesforcePathFromSelectedRole('Developer');
+            System.assertEquals(lstWrpRolesSalesforce.size(), 2);
         }
         Test.stopTest();
     }
