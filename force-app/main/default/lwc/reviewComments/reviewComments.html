@@ -1,0 +1,25 @@
+<template>
+    <template if:true={open}>
+        <template if:true={isSaved}>
+            <lightning-spinner alternative-text="Loading" variant="brand" ></lightning-spinner>
+        </template>
+        <lightning-record-edit-form 
+            id="editform"
+            record-id={idReview}
+            object-api-name="Review__c"
+            onsuccess={handleSuccess} >
+            <lightning-messages>                </lightning-messages>
+            <lightning-input-field field-name="Comments__c"></lightning-input-field>
+        </lightning-record-edit-form>
+    </template>
+    <template if:false={open}>
+        <lightning-record-view-form
+            id="viewForm"
+            record-id={idReview}
+            object-api-name="Review__c">
+            <div class="slds-box">
+                <lightning-output-field field-name="Comments__c"></lightning-output-field>
+            </div>
+    </lightning-record-view-form>
+    </template>
+</template>
