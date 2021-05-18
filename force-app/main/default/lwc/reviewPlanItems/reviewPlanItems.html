@@ -1,0 +1,7 @@
+<template>
+    <template for:each={planItems} for:item=planItem>
+        <div class="slds-size_1-of-3" key={planItem.Id}>
+            <c-plan-item-card planitem={planItem} isreviewopen={isReviewOpen}></c-plan-item-card>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,17 @@
+<template>
+    <lightning-card  title={planItem.Name}>
+        <template if:true={isReviewOpen}>
+            <lightning-button label="Edit" slot="actions"></lightning-button>
+        </template>        
+        <template if:false={isReviewOpen}>
+            <lightning-button label="View" slot="actions"></lightning-button>
+        </template>
+        <p class="slds-p-horizontal_small">{planItem.Plan__c}</p>
+        <p slot="footer">
+            {planItem.End_Date__c}
+            <template if:false={isReviewOpen}>
+                <c-plan-item-icon statustodisplay={planItem.State__c}></c-plan-item-icon>
+            </template>
+        </p>
+    </lightning-card>
+</template>
