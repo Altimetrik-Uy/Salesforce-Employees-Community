@@ -1,0 +1,10 @@
+:host{
+    --sds-c-card-footer-spacing-inline-start:0px;
+    --sds-c-card-footer-spacing-inline:0px;
+    --sds-c-card-footer-color-border:rgb(221, 219, 218);
+    --sds-c-card-heading-font-weight:bold;
+}
+
+.padding-top{
+    padding-top: 0.40rem;
+}

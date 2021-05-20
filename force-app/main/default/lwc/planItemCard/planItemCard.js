@@ -1,6 +1,7 @@
-import { LightningElement,api } from 'lwc';
+import { LightningElement,api, track} from 'lwc';
 
 export default class PlanItemCard extends LightningElement {
-    @api planItem;
-    @api isReviewOpen;
+    @api planitem;
+    @api isreviewopen;
+
 }

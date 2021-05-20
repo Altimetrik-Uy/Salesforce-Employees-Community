@@ -1,21 +1,21 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 
 export default class PlanItemIcon extends LightningElement {
     @api status;
-    statusToDisplay;
+    @track statusToDisplay;
     connectedCallback() {
        switch (this.status) {
         case 'Non Started':
-            this.statusToDisplay = 'slds-progress-ring slds-progress-ring_expired';
+            this.statusToDisplay = 'red-icon';
             break;
         case 'Started':
-            this.statusToDisplay = 'slds-progress-ring .slds-progress-ring_warning';
+            this.statusToDisplay = 'yellow-icon';
             break;
         case 'Completed':
-            this.statusToDisplay = 'slds-progress-ring slds-progress-ring_complete';
-          break;
+            this.statusToDisplay = 'green-icon';
+            break;
         default:
-            
+            console.log('default');
       }
     }
 }

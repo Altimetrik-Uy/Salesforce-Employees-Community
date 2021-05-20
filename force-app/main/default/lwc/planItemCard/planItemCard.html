@@ -1,17 +1,24 @@
 <template>
-    <lightning-card  title={planItem.Name}>
-        <template if:true={isReviewOpen}>
+    <lightning-card  title={planitem.Name}>
+        <template if:true={isreviewopen}>
             <lightning-button label="Edit" slot="actions"></lightning-button>
         </template>        
-        <template if:false={isReviewOpen}>
+        <template if:false={isreviewopen}>
             <lightning-button label="View" slot="actions"></lightning-button>
         </template>
-        <p class="slds-p-horizontal_small">{planItem.Plan__c}</p>
-        <p slot="footer">
-            {planItem.End_Date__c}
-            <template if:false={isReviewOpen}>
-                <c-plan-item-icon statustodisplay={planItem.State__c}></c-plan-item-icon>
+        <p class="slds-p-horizontal_small slds-truncate">{planitem.Plan__c}</p>
+        <div class="slds-grid slds-grid_align-spread" slot="footer">
+            <div class="slds-col padding-top">
+                <lightning-formatted-date-time
+                value={planitem.End_Date__c}
+                year="numeric"
+                month="numeric"
+                day="numeric">
+                </lightning-formatted-date-time>
+            </div>
+            <template class="slds-col" if:false={isreviewopen}>
+                <c-plan-item-icon status={planitem.State__c}></c-plan-item-icon>
             </template>
-        </p>
+        </div>
     </lightning-card>
 </template>

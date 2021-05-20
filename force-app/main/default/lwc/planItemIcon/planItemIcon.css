@@ -1,0 +1,15 @@
+.red-icon {
+    --sds-c-icon-color-foreground-default: red;
+    --sds-c-icon-color-background: white;
+}
+
+.green-icon {
+    --sds-c-icon-color-foreground-default: green;
+    --sds-c-icon-color-background: white;
+
+}
+.yellow-icon {
+    --sds-c-icon-color-foreground-default: yellow;
+    --sds-c-icon-color-background: white;
+
+}
