@@ -1,3 +1,87 @@
 <template>
-        <h1>Coming soon...</h1>
+        <div class="top-box main">
+            <div class="slds-grid slds-grid_vertical">
+                <div class="slds-col">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_8-of-12">
+                        </div>
+                        <div class="slds-col slds-size_4-of-12">
+                            <div class="slds-m-top_large button-box">
+                                <div class="button-box-text">
+                                    <lightning-combobox
+            name="progress"
+            label=""
+            value={valueFilter}
+            placeholder="Select Filter"
+            options={optionsFilter}
+            onchange={handleChangeFilter} ></lightning-combobox>
+
+    <p>Selected value is: {valueFilter}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-m-top_large">
+                    <ul class="slds-has-dividers_around-space">
+                        <template for:each={projectStatuses} for:item="currentProjectStatus">               
+                            <li key={currentProjectStatus.Id}>   
+                                <div class="slds-wrap container-box">
+                                    <div class="slds-item slds-size_1-of-12 project-box status-box dimension-box light-container left-box-size" >
+                                            <div class="light-box">
+                                                <span class={currentProjectStatus.Status}></span>
+                                            </div>          
+                                    </div>
+                                    <div class="slds-item project-box slds-size_11-of-12 dimension-box color-box right-box-size">
+                                        <article class="slds-tile slds-tile_board ">
+                                            <blockquote>
+                                                <div class="slds-size_3-of-4">
+                                                    <div class="slds-media">
+                                                        <div class="slds-media__figure">
+                                                            <span class="slds-avatar slds-avatar_small">
+                                                                <lightning-icon icon-name="standard:user" alternative-text="Manager" title="Manager" size="small" class="icon-color-manager"> </lightning-icon>
+                                                            </span>
+                                                        </div>
+                                                        <div class="slds-media__body">
+                                                            <div class="slds-m-top_xxx-small">
+                                                                <h1 key={currentProjectStatus.Id} class="slds-text-heading_small">{currentProjectStatus.ManagerName}</h1>
+                                                            </div>
+                                                        </div>
+                                                        <div class="slds-media__figure">
+                                                            <span class="slds-avatar slds-avatar_small">
+                                                                <lightning-icon icon-name="standard:date_time" alternative-text="Date" size="small"> </lightning-icon>
+                                                            </span>
+                                                        </div>
+                                                        <div class="slds-media__body">
+                                                            <div class="slds-m-top_xx-small">
+                                                                <p><lightning-formatted-date-time value='{currentProjectStatus.StatusDate}' year="numeric" month="numeric" day="numeric" time-zone="UTC"></lightning-formatted-date-time></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>   
+                                            </blockquote>  
+                                            <blockquote class="doc">
+                                                <div class="button-box-text-section">
+                                                    <c-custom-accordion project-information={currentProjectStatus.StatusComments} showinfo={handleClick}></c-custom-accordion>
+                                                    <span class="button-box-text-help-section">Click to see/hide status details</span>
+                                                </div>
+                                            </blockquote>
+                                        </article>
+                                    </div>   
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="customPagination">
+            <template for:each={paginationRange} for:item="pageNumber">
+                <a onclick={handlePaginationClick}
+                    key={pageNumber}
+                    data-target-number={pageNumber}>
+                    {pageNumber}
+                </a>
+            </template>
+        </div> 
 </template>
