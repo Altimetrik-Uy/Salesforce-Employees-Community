@@ -34,11 +34,11 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
         this.valueFilter = event.detail.value;
         
         getEmployeeReview({ empId:this.employeeid , filterStatus : this.valueFilter}).then(data => {
-            console.log('data handleChangeFilter ',data);
+            
         
             if(this.employeeid != '' ){
                 getEmployeeReviewCount({empId: this.employeeid,filterStatus : this.valueFilter}).then(projectCount =>{ 
-                    console.log('projectCount handleChangeFilter ',projectCount);
+                    
                     if(projectCount){
                     this.projectStatuses = [];
                     this.totalRecords = projectCount;
@@ -102,8 +102,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
         try{
             if(this.employeeid != '' ){
                 getEmployeeReviewCount({empId: this.employeeid,filterStatus : 'Reviews about me'}).then(projectCount =>{ 
-                    console.log('projectCount ',projectCount);
-                    console.log('data ',data);
+                    
                     if(projectCount){
                     this.projectStatuses = [];
                     this.totalRecords = projectCount;
