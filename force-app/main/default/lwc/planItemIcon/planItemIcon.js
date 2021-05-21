@@ -15,8 +15,6 @@ export default class PlanItemIcon extends LightningElement {
         case 'Completed':
             this.statusToDisplay = 'green-icon';
             break;
-        default:
-            console.log('default');
       }
     }
 }
