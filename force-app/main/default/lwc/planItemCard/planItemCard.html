@@ -16,9 +16,9 @@
                 day="numeric">
                 </lightning-formatted-date-time>
             </div>
-            <template class="slds-col" if:false={isreviewopen}>
-                <c-plan-item-icon status={planitem.State__c}></c-plan-item-icon>
-            </template>
+            <div class="slds-col">
+                <c-plan-item-icon status={planitem.State__c} isreviewopen={isreviewopen}></c-plan-item-icon>
+            </div>
         </div>
     </lightning-card>
 </template>

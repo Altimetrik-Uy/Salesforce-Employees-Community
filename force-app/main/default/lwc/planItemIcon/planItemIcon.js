@@ -2,6 +2,7 @@ import { LightningElement, api, track } from 'lwc';
 
 export default class PlanItemIcon extends LightningElement {
     @api status;
+    @api isreviewopen;
     @track statusToDisplay;
     connectedCallback() {
        switch (this.status) {
