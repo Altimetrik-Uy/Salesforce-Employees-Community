@@ -11,9 +11,11 @@ export default class PerformanceEvaluationWrapper extends LightningElement {
         let status = getFieldValue(this.review.data, STATUS_FIELD);
         return status == 'Open' || status == 'In Progress';         
     }
-
-    handleClick() {
-        this.dispatchEvent(new CustomEvent('back'));
+    saveComments(){
+        this.template.querySelector("c-review-comments").saveForm();
+    }
+    openReviewComments(){
+        this.template.querySelector("c-plan-items-Modal").openModal();
     }
     
     saveComments(){

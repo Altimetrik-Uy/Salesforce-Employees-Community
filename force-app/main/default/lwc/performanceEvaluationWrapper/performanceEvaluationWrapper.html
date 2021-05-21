@@ -10,11 +10,14 @@
                     <lightning-button label="Back" onclick={handleClick} ></lightning-button>
                     <lightning-button label="Save" onclick={saveComments}></lightning-button>
                     <lightning-button variant="brand" label="Submit Review"></lightning-button>
+                    
                 </template>
                 <template if:false={reviewOpen}>
                     <lightning-button label="Back" onclick={handleClick}></lightning-button>
                 </template>
+                <lightning-button label="Create New Plan Item" onclick={openReviewComments}></lightning-button>
             </lightning-button-group>
         </div>
+        <c-plan-items-Modal id-review={recordId} is-open-review={reviewOpen} ></c-plan-items-Modal>       
     </lightning-card>
 </template>
