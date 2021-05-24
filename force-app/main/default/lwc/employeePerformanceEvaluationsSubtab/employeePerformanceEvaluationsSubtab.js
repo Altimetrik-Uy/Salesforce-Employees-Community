@@ -1,11 +1,7 @@
 import {LightningElement, api, wire, track} from 'lwc';
-import getEmployeeReview from '@salesforce/apex/LWCEmployeeStatusController.getEmployeeReview';
-import sendMessage from '@salesforce/apex/LWCEmployeeStatusController.sendMessage';
-import getManager from '@salesforce/apex/LWCEmployeeStatusController.getManager';
-import getUser from '@salesforce/apex/LWCEmployeeStatusController.getUser';
-import getEmployeeReviewCount from '@salesforce/apex/LWCEmployeeStatusController.getEmployeeReviewCount';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import { refreshApex } from '@salesforce/apex';
+import getEmployeeReview from '@salesforce/apex/LWCPerformanceEvaluationController.getEmployeeReview';
+import getEmployeeReviewCount from '@salesforce/apex/LWCPerformanceEvaluationController.getEmployeeReviewCount';
+
 let i = 0;
 
 export default class EmployeePerformanceEvaluationsSubtab extends LightningElement {
