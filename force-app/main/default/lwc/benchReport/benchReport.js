@@ -8,7 +8,7 @@ const columns = [
     '26-Feb',
     '5-Mar',
 ];
-export default class BechReport extends LightningElement {
+export default class BenchReport extends LightningElement {
     data = [];
     @track employees;
     /*@track employees = [{ Name: 'Iron man', Position__c: 'Lead'}, 

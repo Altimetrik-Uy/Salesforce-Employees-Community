@@ -75,13 +75,13 @@
                 <tr class="slds-hint-parent" key={proy}>
                     <th  class="category" scope="row">
                         <div class="slds-truncate" title={proy.Project}>
-                        <a href="#" tabindex="-1">{proy.Project}</a>
+                        {proy.Project}
                         </div>
                     </th>
                     <template for:each={proy.Days} for:item="day">
                         <td class="cell" key={day.Id}>
                             <template if:true={day.dataFound}>
-                                <button class="slds-button slds-button_neutral cellButton" value={day.Id}  onclick={selectDay} ></button>
+                                <button class="slds-button slds-button_neutral cellButton" value={day.Id}  onclick={selectDay}>{day.counter}</button>
                             </template>
                             <template if:false={day.dataFound}>
                                 <button class="slds-button slds-button_brand cellButton" disabled ></button>
@@ -92,6 +92,5 @@
             </template>              
             </tbody>
         </table>
-        <p slot="footer"></p>
     </lightning-card>   
 </template>

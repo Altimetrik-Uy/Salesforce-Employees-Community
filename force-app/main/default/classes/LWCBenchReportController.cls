@@ -48,12 +48,12 @@ public class LWCBenchReportController {
                 ]){
                 // Overall Non Billed Opening Count
                 if(assignment.Base_Category__c == 'NON-BILLED' || assignment.Base_Category__c == 'WFB' || assignment.Base_Category__c == 'INVESTMENT'){
-                    wrpCalendar oNBOC = processAssignment(assignment, OverallNonBilledOpeningCount, calendarByProject);
+                    wrpCalendar oNBOC = processOpeningAssignment(assignment, OverallNonBilledOpeningCount, calendarByProject);
                     calendarByProject.put(OverallNonBilledOpeningCount,oNBOC);
                 }
                 // WFB Opening Count
                 if(assignment.Base_Category__c == 'WFB'){
-                    wrpCalendar wOC = processAssignment(assignment, WFBOpeningCount, calendarByProject);
+                    wrpCalendar wOC = processOpeningAssignment(assignment, WFBOpeningCount, calendarByProject);
                     calendarByProject.put(WFBOpeningCount,wOC);
                 }
                 // WFB to Billed
@@ -66,7 +66,7 @@ public class LWCBenchReportController {
                 calendarByProject.put(WFBClosingCount,wCC);
                 // BU Investment Opening Count
                 if(assignment.Base_Category__c == 'INVESTMENT'){
-                    wrpCalendar bIOC = processAssignment(assignment, BUInvestmentOpeningCount, calendarByProject);
+                    wrpCalendar bIOC = processOpeningAssignment(assignment, BUInvestmentOpeningCount, calendarByProject);
                     calendarByProject.put(BUInvestmentOpeningCount,bIOC);
                 }
                 // BU Investment to Billed
@@ -78,8 +78,10 @@ public class LWCBenchReportController {
                 wrpCalendar bICC = processAssignmentClosing(BUInvestmentOpeningCount, BUInvestmentToBilled, BUInvestmentClosingCount, calendarByProject);
                 calendarByProject.put(BUInvestmentClosingCount,bICC);
                 // Corp Bench Opening Count
-                wrpCalendar cBOC = processAssignmentCorpBenchOpeningCount(calendarByProject);
-                calendarByProject.put(CorpBenchOpeningCount,cBOC);
+                if(assignment.Base_Category__c == 'NON-BILLED'){
+                    wrpCalendar cBOC = processOpeningAssignment(assignment, CorpBenchOpeningCount, calendarByProject);
+                    calendarByProject.put(CorpBenchOpeningCount,cBOC);
+                }
                 // Corp Bench Deployment
                 if(assignment.Base_Category__c == 'NON-BILLED'){
                     wrpCalendar cBD = processAssignmentCorpBenchDeployment(assignment, calendarByProject.get(CorpBenchDeployment));
@@ -91,15 +93,17 @@ public class LWCBenchReportController {
                     calendarByProject.put(RollOffBilledToBench,rOBTB);
                 }
                 // Roll Off Deployed
-                if(assignment.Base_Category__c == 'NON-BILLED'){
-                    wrpCalendar rOD= processAssignmentRollOffDeployed(assignment, calendarByProject.get(RollOffDeployed));
+                if(assignment.Base_Category__c != 'NON-BILLED' && assignment.Base_Category__c != 'WFB' && assignment.Base_Category__c != 'INVESTMENT'){
+                    wrpCalendar rOD = processAssignmentToBilled(assignment, RollOffDeployed, calendarByProject);
                     calendarByProject.put(RollOffDeployed,rOD);
                 }
                 // Corp Bench Closing Count
-                wrpCalendar cBCC = processAssignmentClosing(CorpBenchOpeningCount, CorpBenchDeployment, CorpBenchClosingCount, calendarByProject, RollOffBilledToBench, RollOffDeployed);
+                wrpCalendar cBCC = processAssignmentClosing(CorpBenchOpeningCount, CorpBenchDeployment, CorpBenchClosingCount, calendarByProject);
                 calendarByProject.put(CorpBenchClosingCount,cBCC);
+                wrpCalendar cBCC2 = processAssignmentClosing(RollOffBilledToBench, RollOffDeployed, CorpBenchClosingCount, calendarByProject);
+                calendarByProject.put(CorpBenchClosingCount,cBCC2);
                 // Overall Non Billed Closing Count
-                wrpCalendar oNBCC = processAssignmentClosing(WFBOpeningCount, BUInvestmentClosingCount, OverallNonBilledClosingCount, calendarByProject, CorpBenchClosingCount);
+                wrpCalendar oNBCC = processoNBCCAssignmentClosing(WFBClosingCount, BUInvestmentClosingCount, CorpBenchClosingCount, OverallNonBilledClosingCount, calendarByProject);
                 calendarByProject.put(OverallNonBilledClosingCount,oNBCC);
             }
             
@@ -199,18 +203,19 @@ public class LWCBenchReportController {
         return calendar;
     }
 
-    private static wrpEmployee initEmployee(Employee_Assignment__c assignment){
+    private static wrpEmployee initEmployee(Employee_Assignment__c assignment, Boolean isAssignmentEnding){
         wrpEmployee employee = new wrpEmployee();
         employee.Id = assignment.Employee__c;
         employee.Name = assignment.Employee__r.Name;
         employee.Role = assignment.Employee__r.Role__c;
         employee.Image = assignment.Employee__r.Image__c;
+        employee.isAssignmentEnding = isAssignmentEnding;
         return employee;
     }
 
-    private static wrpCalendar processAssignment(Employee_Assignment__c assignment, String project, Map<String, wrpCalendar> calendarByProject){
+    private static wrpCalendar processOpeningAssignment(Employee_Assignment__c assignment, String project, Map<String, wrpCalendar> calendarByProject){
         wrpCalendar calendar = calendarByProject.get(project);
-        wrpEmployee employee = initEmployee(assignment);
+        wrpEmployee employee = initEmployee(assignment, false);
         List<wrpDays> Days;
         if(isInWeek(assignment,1)){
             Days = addEmployee(calendar.Days, employee, 1);
@@ -232,18 +237,22 @@ public class LWCBenchReportController {
 
     private static wrpCalendar processAssignmentToBilled(Employee_Assignment__c assignment, String project, Map<String, wrpCalendar> calendarByProject){
         wrpCalendar calendar = calendarByProject.get(project);
-        wrpEmployee employee = initEmployee(assignment);
+        wrpEmployee employee = new wrpEmployee();
         List<wrpDays> Days;
-        if(isInWeekToBilled(assignment,1)){
+        if(startsInWeek(assignment,1) || endsInWeek(assignment,1)){
+            employee = endsInWeek(assignment,1) ?  initEmployee(assignment, true) : initEmployee(assignment, false);
             Days = addEmployee(calendar.Days, employee, 1);
         }
-        if(isInWeekToBilled(assignment,2)){
+        if(startsInWeek(assignment,2) || endsInWeek(assignment,2)){
+            employee = endsInWeek(assignment,2) ? initEmployee(assignment, true) : initEmployee(assignment, false);            
             Days = addEmployee(calendar.Days, employee, 2);
         }
-        if(isInWeekToBilled(assignment,3)){
+        if(startsInWeek(assignment,3) || endsInWeek(assignment,3)){
+            employee = endsInWeek(assignment,3) ? initEmployee(assignment, true) : initEmployee(assignment, false);
             Days = addEmployee(calendar.Days, employee, 3);
         }
-        if(isInWeekToBilled(assignment,4)){
+        if(startsInWeek(assignment,4) || endsInWeek(assignment,4)){
+            employee = endsInWeek(assignment,4) ? initEmployee(assignment, true) : initEmployee(assignment, false);
             Days = addEmployee(calendar.Days, employee, 4);
         }
         if(Days != null){
@@ -253,110 +262,36 @@ public class LWCBenchReportController {
     }
 
     private static wrpCalendar processAssignmentClosing(String project1, String project2, String projectResult, Map<String, wrpCalendar> calendarByProject){
-        return processAssignmentClosing(project1, project2, projectResult, calendarByProject, null, null);
-    }
-
-    private static wrpCalendar processAssignmentClosing(String project1, String project2, String projectResult, Map<String, wrpCalendar> calendarByProject, String project3){
-        return processAssignmentClosing(project1, project2, projectResult, calendarByProject, project3, null);
-    }
-
-    private static wrpCalendar processAssignmentClosing(String project1, String project2, String projectResult, Map<String, wrpCalendar> calendarByProject, String project3, String project4){
         wrpCalendar cal1 = calendarByProject.get(project1);
         wrpCalendar cal2 = calendarByProject.get(project2);
-        wrpCalendar cal3, cal4;
-        if(project3 != null){
-            cal3 = calendarByProject.get(project3);
-        }
-        if(project4 != null){
-            cal4 = calendarByProject.get(project4);
-        }
         wrpCalendar calR = calendarByProject.get(projectResult);
         List<wrpDays> days1 = cal1.Days;
         List<wrpDays> days2 = cal2.Days;
-        List<wrpDays> days3,days4;
-        if(cal3 != null){
-            days3 = cal3.Days;
-        }
-        if(cal4 != null){
-            days4 = cal4.Days;
-        }
         List<wrpDays> daysR = calR.Days;
         for(Integer index=0; index < 4; index++){
             wrpDays day1 = days1.get(index);
             wrpDays day2 = days2.get(index);
-            wrpDays day3,day4;
+            List<wrpEmployee> emp2 = day2.employees;
             wrpDays dayR = daysR.get(index);
             dayR.employees = day1.employees;
-            for(wrpEmployee emp : day2.employees){
-                /*Boolean found = false;
-                for(wrpEmployee added: dayR.employees){
-                    if(emp.Id == added.Id) found = true;
-                }
-                if(!found) dayR.employees.add(emp);*/
+            for(wrpEmployee emp :emp2){
                 if(!dayR.employees.contains(emp)){
                     dayR.employees.add(emp);
                 }
-            }
-            if(days3 != null){
-                day3 = days3.get(index);
-                for(wrpEmployee emp : day3.employees){
-                    if(!dayR.employees.contains(emp)){
-                        dayR.employees.add(emp);
-                    }
-                }
-            }
-            if(days4 != null){
-                day4 = days4.get(index);
-                for(wrpEmployee emp : day4.employees){
-                    if(!dayR.employees.contains(emp)){
-                        dayR.employees.add(emp);
-                    }
+                if(emp.isAssignmentEnding){
+                    Integer i = dayR.employees.indexOf(emp);
+                    dayR.employees.remove(i);
                 }
             }
             dayR.dataFound = (dayR.employees.size() > 0) ? true : false;
+            dayR.counter = dayR.employees.size();
             calR.Days.set(index,dayR);
         }
         return calR;
     }
 
-    private static wrpCalendar processAssignmentCorpBenchOpeningCount(Map<String,wrpCalendar> calendarByProject){
-        wrpCalendar oNBOC = calendarByProject.get(OverallNonBilledOpeningCount);
-        wrpCalendar wOC = calendarByProject.get(WFBOpeningCount);
-        wrpCalendar bIOC = calendarByProject.get(BUInvestmentOpeningCount);
-        wrpCalendar cBOC = calendarByProject.get(CorpBenchOpeningCount);
-        List<wrpDays> oNBOCDays = oNBOC.Days;
-        List<wrpDays> wOCDays = wOC.Days;
-        List<wrpDays> bIOCDays = bIOC.Days;
-        List<wrpDays> cBOCDays = cBOC.Days;
-        for(Integer index=0; index < 4; index++){
-            wrpDays oNBOCDay = oNBOCDays.get(index);
-            wrpDays wOCDay = wOCDays.get(index);
-            wrpDays bIOCDay = bIOCDays.get(index);
-            wrpDays cBOCDay = cBOCDays.get(index);
-            cBOCDay.employees = oNBOCDay.employees;
-            for(wrpEmployee emp: wOCDay.employees){
-                for(integer i = cBOCDay.employees.size()-1; i >= 0; --i){
-                    if(emp.equals(cBOCDay.employees.get(i))){
-                        cBOCDay.employees.remove(i);
-                    }
-                }
-            }
-            for(wrpEmployee emp: bIOCDay.employees){
-                for(integer i = cBOCDay.employees.size()-1; i >= 0; --i){
-                    if(emp.equals(cBOCDay.employees.get(i))){
-                        cBOCDay.employees.remove(i);
-                    }
-                }
-            }
-            cBOCDay.dataFound = (cBOCDay.employees.size() > 0) ? true : false;
-            cBOCDays.set(index, cBOCDay);
-        }
-        cBOC.Days = cBOCDays;
-        return cBOC;
-    }
-
     private static wrpCalendar processAssignmentCorpBenchDeployment(Employee_Assignment__c assignment, wrpCalendar cBD){
-        wrpEmployee employee = initEmployee(assignment);
+        wrpEmployee employee = initEmployee(assignment, true);
         List<wrpDays> Days;
         if(endsInWeek(assignment,1)){
             Days = addEmployee(cBD.Days, employee, 1);
@@ -374,7 +309,7 @@ public class LWCBenchReportController {
     }
 
     private static wrpCalendar processAssignmentRollOffBilledToBench(Employee_Assignment__c assignment, wrpCalendar rOBTB){
-        wrpEmployee employee = initEmployee(assignment);
+        wrpEmployee employee = initEmployee(assignment, false);
         List<wrpDays> Days;
         if(startsInWeek(assignment,1)){
             Days = addEmployee(rOBTB.Days, employee, 1);
@@ -392,7 +327,7 @@ public class LWCBenchReportController {
     }
 
     private static wrpCalendar processAssignmentRollOffDeployed(Employee_Assignment__c assignment, wrpCalendar rOD){
-        wrpEmployee employee = initEmployee(assignment);
+        wrpEmployee employee = initEmployee(assignment, false);
         List<wrpDays> Days;
         if(endsInWeek(assignment,1)){
             Days = addEmployee(rOD.Days, employee, 1);
@@ -409,6 +344,60 @@ public class LWCBenchReportController {
         return rOD;
     }
 
+    private static wrpCalendar processoNBCCAssignmentClosing(String project1, String project2, String project3, String projectResult, Map<String, wrpCalendar> calendarByProject){
+        wrpCalendar cal1 = calendarByProject.get(project1);
+        wrpCalendar cal2 = calendarByProject.get(project2);
+        wrpCalendar cal3 = calendarByProject.get(project3);
+        wrpCalendar calR = calendarByProject.get(projectResult);
+        List<wrpDays> days1 = cal1.Days;
+        List<wrpDays> days2 = cal2.Days;
+        List<wrpDays> days3 = cal3.Days;
+        List<wrpDays> daysR = calR.Days;
+        
+        for(Integer index=0; index < 4; index++){
+            wrpDays day1 = days1.get(index);
+            wrpDays day2 = days2.get(index);
+            wrpDays day3 = days3.get(index);
+            wrpDays dayR = daysR.get(index);
+            List<wrpEmployee> empR = dayR.employees;
+            
+            try{
+                if(dayR.week == day1.week && day1.dataFound == true){
+                    for(wrpEmployee emp1 :day1.employees){
+                        if(!dayR.employees.contains(emp1)){
+                            empR.add(emp1);
+                            system.debug('empR1 ' + empR);
+                        }
+                    }
+                }
+                if(dayR.week == day2.week && day2.dataFound == true){
+                    for(wrpEmployee emp2 :day2.employees){
+                        if(!dayR.employees.contains(emp2)){
+                            empR.add(emp2);
+                            system.debug('empR2 ' + empR);
+                        }
+                    }
+                }
+                if(dayR.week == day3.week && day3.dataFound == true){
+                    for(wrpEmployee emp3 :day3.employees){
+                        if(!dayR.employees.contains(emp3)){
+                            empR.add(emp3);
+                            system.debug('empR3 ' + empR);
+                        }
+                    }
+                }
+            }
+            catch(Exception e){
+                system.debug('error ' + e);
+            }
+
+            dayR.dataFound = (dayR.employees.size() > 0) ? true : false;
+            dayR.counter = dayR.employees.size();
+            calR.Days.set(index,dayR);
+        }
+        return calR;
+    }
+
     private static Boolean isInWeek(Employee_Assignment__c assignment, Integer week){
         Date startDate = assignment.Start_Date__c;
         Date endDate = assignment.End_Date__c;
@@ -423,36 +412,11 @@ public class LWCBenchReportController {
         }else if(week == 3){
             startOfWeek = startOfWeek3;
             startOfNextWeek = startOfWeek4;
-        }else {
+        }else if(week == 4) {
             startOfWeek = startOfWeek4;
             startOfNextWeek = startOfWeek5;
         }
-        if( (startDate <= startOfWeek && endDate > startOfWeek) ||
-            (startDate > startOfWeek && startDate < startOfNextWeek)){
-            return true;
-        }
-        return false;
-    }
-
-    private static Boolean isInWeekToBilled(Employee_Assignment__c assignment, Integer week){
-        Date startDate = assignment.Start_Date__c;
-        Date endDate = assignment.End_Date__c;
-        Date startOfWeek,endOfWeek;
-
-        if(week == 1){
-            startOfWeek = startOfWeek1;
-            endOfWeek = endOfWeek1;
-        }else if(week == 2){
-            startOfWeek = startOfWeek2;
-            endOfWeek = endOfWeek2;
-        }else if(week == 3){
-            startOfWeek = startOfWeek3;
-            endOfWeek = endOfWeek3;
-        }else {
-            startOfWeek = startOfWeek4;
-            endOfWeek = endOfWeek4;
-        }
-        if(startDate < endOfWeek && endDate > endOfWeek){
+        if(startDate < startOfWeek && endDate > startOfWeek){
             return true;
         }
         return false;
@@ -460,21 +424,22 @@ public class LWCBenchReportController {
 
     private static Boolean startsInWeek(Employee_Assignment__c assignment, Integer week){
         Date startDate = assignment.Start_Date__c;
-        Date startOfWeek,endOfWeek;
+        Date startOfWeek,startOfNextWeek;
+
         if(week == 1){
             startOfWeek = startOfWeek1;
-            endOfWeek = endOfWeek1;
+            startOfNextWeek = startOfWeek2;
         }else if(week == 2){
             startOfWeek = startOfWeek2;
-            endOfWeek = endOfWeek2;
+            startOfNextWeek = startOfWeek3;
         }else if(week == 3){
             startOfWeek = startOfWeek3;
-            endOfWeek = endOfWeek3;
-        }else {
+            startOfNextWeek = startOfWeek4;
+        }else if(week == 4) {
             startOfWeek = startOfWeek4;
-            endOfWeek = endOfWeek4;
+            startOfNextWeek = startOfWeek5;
         }
-        if(startDate >= startOfWeek && startDate <= endOfWeek){
+        if(startDate >= startOfWeek && startDate < startOfNextWeek){
             return true;
         }
         return false;
@@ -482,17 +447,21 @@ public class LWCBenchReportController {
 
     private static Boolean endsInWeek(Employee_Assignment__c assignment, Integer week){
         Date endDate = assignment.End_Date__c;
-        Date endOfWeek;
+        Date startOfWeek,startOfNextWeek;
         if(week == 1){
-            endOfWeek = endOfWeek1;
+            startOfWeek = startOfWeek1;
+            startOfNextWeek = startOfWeek2;
         }else if(week == 2){
-            endOfWeek = endOfWeek2;
+            startOfWeek = startOfWeek2;
+            startOfNextWeek = startOfWeek3;
         }else if(week == 3){
-            endOfWeek = endOfWeek3;
-        }else {
-            endOfWeek = endOfWeek4;
+            startOfWeek = startOfWeek3;
+            startOfNextWeek = startOfWeek4;
+        }else if(week == 4) {
+            startOfWeek = startOfWeek4;
+            startOfNextWeek = startOfWeek5;
         }
-        if(endDate <= endOfWeek){
+        if(endDate >= startOfWeek && endDate < startOfNextWeek){
             return true;
         }
         return false;
@@ -505,6 +474,9 @@ public class LWCBenchReportController {
         employees.add(employee);
         day.dataFound = true;
         day.employees = employees;
+        if(!employees.isEmpty()){
+            day.counter = employees.size();
+        }
         Days.set(index,day);
         return Days;
     }
@@ -540,6 +512,7 @@ public class LWCBenchReportController {
         @AuraEnabled public Boolean dataFound;
         @AuraEnabled public String week;
         @AuraEnabled public List<wrpEmployee> employees = new List<wrpEmployee>();
+        @AuraEnabled public Integer counter;
     }
 
     public class wrpEmployee {
@@ -547,6 +520,7 @@ public class LWCBenchReportController {
         @AuraEnabled public String Name;
         @AuraEnabled public String Role;
         @AuraEnabled public String Image;
+        @AuraEnabled public Boolean isAssignmentEnding;
 
         public Boolean equals(Object instance)
         {
