@@ -1,0 +1,20 @@
+<template>
+    <template if:true={isReviewOpen}>
+        <lightning-radio-group name={kpiName}
+                        label={kpiName}
+                        options={options}
+                        value={value}
+                        type="button"
+                        onchange={handleChange}
+                       ></lightning-radio-group> 
+    </template>
+    <template if:false={isReviewOpen}>
+        <lightning-radio-group name={kpiName}
+                        label={kpiName}
+                        options={options}
+                        value={value}
+                        type="button"
+                        disabled
+                    ></lightning-radio-group> 
+    </template>
+</template>
