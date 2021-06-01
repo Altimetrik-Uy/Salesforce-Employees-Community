@@ -107,7 +107,6 @@ public class LWCBenchReportController {
                 calendarByProject.put(OverallNonBilledClosingCount,oNBCC);
             }
             
-
             List<wrpCalendar> calendar = initCalendarList(calendarByProject);
             benchReport.calendar = calendar;
             return benchReport;
@@ -271,9 +270,14 @@ public class LWCBenchReportController {
         for(Integer index=0; index < 4; index++){
             wrpDays day1 = days1.get(index);
             wrpDays day2 = days2.get(index);
+            List<wrpEmployee> emp1 = day1.employees;
             List<wrpEmployee> emp2 = day2.employees;
             wrpDays dayR = daysR.get(index);
-            dayR.employees = day1.employees;
+            for(wrpEmployee emp :emp1){
+                if(!dayR.employees.contains(emp)){
+                    dayR.employees.add(emp);
+                }
+            }
             for(wrpEmployee emp :emp2){
                 if(!dayR.employees.contains(emp)){
                     dayR.employees.add(emp);
@@ -366,7 +370,6 @@ public class LWCBenchReportController {
                     for(wrpEmployee emp1 :day1.employees){
                         if(!dayR.employees.contains(emp1)){
                             empR.add(emp1);
-                            system.debug('empR1 ' + empR);
                         }
                     }
                 }

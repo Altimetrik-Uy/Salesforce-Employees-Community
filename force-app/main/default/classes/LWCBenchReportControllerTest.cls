@@ -14,7 +14,7 @@ private class LWCBenchReportControllerTest {
             User usr = TestDataFactory.createUser(con.Id);
 
             TestDataFactory.createDataForBenchReport('O1',acc.Id, con.Id, date.parse('5/12/2020'), date.parse('3/15/2199'), 'NON-BILLED');
-            TestDataFactory.createDataForBenchReport('O2',acc.Id, con.Id, date.parse('11/20/2021'), date.parse('1/20/2199'), 'WFB');
+            TestDataFactory.createDataForBenchReport('O2',acc.Id, con.Id, date.parse('1/20/2021'), date.parse('1/20/2199'), 'WFB');
             TestDataFactory.createDataForBenchReport('O3',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2199'), 'INVESTMENT');
         
             Test.startTest();
@@ -37,7 +37,7 @@ private class LWCBenchReportControllerTest {
 
             System.assertEquals(con.Id, empId,'Id of employee doesnt match');
             System.assert(dataf,'DataFound is false');
-            System.assertEquals(false, dataf3,'DataFound is true');
+            System.assertEquals(true, dataf3,'DataFound is true');
 
 
         }  
