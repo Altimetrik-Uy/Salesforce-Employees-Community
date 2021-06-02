@@ -66,4 +66,13 @@ public without sharing class LWCPerformanceEvaluationController {
         }
     }
 
+    @AuraEnabled(cacheable=true)
+    public static SObject getEmployeeReviewItem(String reviewId,string filterStatus){   
+        if (filterStatus == 'Reviews about me'){
+            return [SELECT Id, Status__c, CreatedDate, Comments__c, CreatedBy.Name FROM Review__c WHERE Id =:reviewId];
+        }
+        else {
+            return [SELECT Id, Review__r.Status__c, Review__r.CreatedDate, Review__r.Comments__c, Review__r.CreatedBy.Name,Review__r.Evaluated__r.name FROM Review_Assignment__c WHERE ID =: reviewId];
+        }
+    }
 }
