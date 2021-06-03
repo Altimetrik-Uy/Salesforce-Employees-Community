@@ -7,7 +7,7 @@
         <div slot="footer">
             <lightning-button-group>
                 <template if:true={reviewOpen}>
-                    <lightning-button label="Back"></lightning-button>
+                    <lightning-button label="Back" onclick={handleClick} ></lightning-button>
                     <lightning-button label="Save"></lightning-button>
                     <lightning-button variant="brand" label="Submit Review"></lightning-button>
                 </template>

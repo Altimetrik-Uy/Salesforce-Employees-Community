@@ -20,9 +20,9 @@ public without sharing class LWCPerformanceEvaluationController {
             statusFilter.add('Submitted');
             statusFilter.add('Approved');
             if(offsetRange == null){
-                return [SELECT Id, Review__r.Status__c, Review__r.CreatedDate, Review__r.Comments__c, Review__r.CreatedBy.Name,Review__r.Evaluated__r.name FROM Review_Assignment__c WHERE Evaluator__c =: empId AND Review__r.Status__c IN : statusFilter ORDER BY CreatedDate DESC LIMIT 4];
+                return [SELECT Id, Review__c,Review__r.Status__c, Review__r.CreatedDate, Review__r.Comments__c, Review__r.CreatedBy.Name,Review__r.Evaluated__r.name FROM Review_Assignment__c WHERE Evaluator__c =: empId AND Review__r.Status__c IN : statusFilter ORDER BY CreatedDate DESC LIMIT 4];
             }else {
-                return [SELECT Id, Review__r.Status__c, Review__r.CreatedDate, Review__r.Comments__c, Review__r.CreatedBy.Name,Review__r.Evaluated__r.name FROM Review_Assignment__c WHERE Evaluator__c =: empId AND Review__r.Status__c IN : statusFilter ORDER BY CreatedDate DESC LIMIT 4 OFFSET :offsetRange];
+                return [SELECT Id, Review__c,Review__r.Status__c, Review__r.CreatedDate, Review__r.Comments__c, Review__r.CreatedBy.Name,Review__r.Evaluated__r.name FROM Review_Assignment__c WHERE Evaluator__c =: empId AND Review__r.Status__c IN : statusFilter ORDER BY CreatedDate DESC LIMIT 4 OFFSET :offsetRange];
             }
             
         }else if (filterStatus == 'Reviews to do') {
@@ -30,9 +30,9 @@ public without sharing class LWCPerformanceEvaluationController {
             statusFilter.add('In Progress');
             
             if(offsetRange == null){
-                return [SELECT Id, Review__r.Status__c, Review__r.CreatedDate, Review__r.Comments__c, Review__r.CreatedBy.Name,Review__r.Evaluated__r.name FROM Review_Assignment__c WHERE Evaluator__c =:empId AND Review__r.Status__c IN : statusFilter ORDER BY CreatedDate DESC LIMIT 4];
+                return [SELECT Id, Review__c,Review__r.Status__c, Review__r.CreatedDate, Review__r.Comments__c, Review__r.CreatedBy.Name,Review__r.Evaluated__r.name FROM Review_Assignment__c WHERE Evaluator__c =:empId AND Review__r.Status__c IN : statusFilter ORDER BY CreatedDate DESC LIMIT 4];
             }else {
-                return [SELECT Id, Review__r.Status__c, Review__r.CreatedDate, Review__r.Comments__c, Review__r.CreatedBy.Name,Review__r.Evaluated__r.name FROM Review_Assignment__c WHERE Evaluator__c =:empId AND Review__r.Status__c IN : statusFilter ORDER BY CreatedDate DESC LIMIT 4  OFFSET :offsetRange];
+                return [SELECT Id, Review__c,Review__r.Status__c, Review__r.CreatedDate, Review__r.Comments__c, Review__r.CreatedBy.Name,Review__r.Evaluated__r.name FROM Review_Assignment__c WHERE Evaluator__c =:empId AND Review__r.Status__c IN : statusFilter ORDER BY CreatedDate DESC LIMIT 4  OFFSET :offsetRange];
             }
         }else {
             return null;
@@ -63,16 +63,6 @@ public without sharing class LWCPerformanceEvaluationController {
             return [SELECT COUNT() FROM Review_Assignment__c WHERE Evaluator__c =:empId AND Review__r.Status__c IN : statusFilter];
         }else {
             return null;
-        }
-    }
-
-    @AuraEnabled(cacheable=true)
-    public static SObject getEmployeeReviewItem(String reviewId,string filterStatus){   
-        if (filterStatus == 'Reviews about me'){
-            return [SELECT Id, Status__c, CreatedDate, Comments__c, CreatedBy.Name FROM Review__c WHERE Id =:reviewId];
-        }
-        else {
-            return [SELECT Id, Review__r.Status__c, Review__r.CreatedDate, Review__r.Comments__c, Review__r.CreatedBy.Name,Review__r.Evaluated__r.name FROM Review_Assignment__c WHERE ID =: reviewId];
         }
     }
 }
