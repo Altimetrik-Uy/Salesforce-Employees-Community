@@ -60,7 +60,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                             }else{
                                 this.projectStatuses.forEach(asset => {
                                     let preparedAsset = {};
-                                    preparedAsset.Id = asset.Review__c;
+                                    preparedAsset.Id = asset.Id;
                                     preparedAsset.Status = asset.Status__c;
                                     preparedAsset.StatusDate = asset.CreatedDate;
                                     preparedAsset.StatusComments = asset.Comments__c;
