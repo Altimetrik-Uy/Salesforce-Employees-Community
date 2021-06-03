@@ -2,7 +2,7 @@ import { LightningElement,api,wire,track } from 'lwc';
 import getPlanItems from '@salesforce/apex/LWCReviewPlanItemsController.getPlanItems';
 
 export default class ReviewPlanItems extends LightningElement {
-    @api isReviewOpen;
+    @api isreviewopen;
     @api reviewId;
     @track planItems;
     
