@@ -1,8 +1,8 @@
 <template>
     <div class="slds-grid slds-gutters slds-wrap">
         <template for:each={planItems} for:item=planItem>
-                <div class="slds-col slds-p-horizontal_large slds-p-vertical_large slds-size_1-of-3" key={planItem.Id}>
-                    <c-plan-item-card planitem={planItem} isreviewopen={isReviewOpen}></c-plan-item-card>
+                <div class="slds-col slds-p-horizontal_large slds-p-vertical_large slds-size_1-of-4" key={planItem.Id}>
+                    <c-plan-item-card planitem={planItem} isreviewopen={isreviewopen}></c-plan-item-card>
                 </div>
         </template>
     </div>

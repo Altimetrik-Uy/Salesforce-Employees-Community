@@ -1,5 +1,9 @@
 <template>
     <lightning-card>
+        <h3 slot="title">
+        </h3>
+        <c-review-comments id-review={recordId} open={reviewOpen} ></c-review-comments>
+        <c-review-plan-items review-id={recordId} is-review-open={reviewOpen}></c-review-plan-items>
         <div slot="footer">
             <lightning-button-group>
                 <template if:true={reviewOpen}>
@@ -12,8 +16,5 @@
                 </template>
             </lightning-button-group>
         </div>
-
-        <c-review-comments id-review={recordId} open={reviewOpen} ></c-review-comments>
-       
     </lightning-card>
 </template>

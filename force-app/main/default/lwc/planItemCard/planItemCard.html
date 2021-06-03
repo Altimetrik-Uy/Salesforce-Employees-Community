@@ -1,24 +1,26 @@
 <template>
-    <lightning-card  title={planitem.Name}>
-        <template if:true={isreviewopen}>
-            <lightning-button label="Edit" slot="actions"></lightning-button>
-        </template>        
-        <template if:false={isreviewopen}>
-            <lightning-button label="View" slot="actions"></lightning-button>
-        </template>
-        <p class="slds-p-horizontal_small slds-truncate">{planitem.Plan__c}</p>
-        <div class="slds-grid slds-grid_align-spread" slot="footer">
-            <div class="slds-col padding-top">
-                <lightning-formatted-date-time
-                value={planitem.End_Date__c}
-                year="numeric"
-                month="numeric"
-                day="numeric">
-                </lightning-formatted-date-time>
+    <div class="border">
+        <lightning-card title={planitem.Name}>
+            <template if:true={isreviewopen}>
+                <lightning-button label="Edit" slot="actions"></lightning-button>
+            </template>        
+            <template if:false={isreviewopen}>
+                <lightning-button label="View" slot="actions"></lightning-button>
+            </template>
+            <p class="slds-p-horizontal_small slds-truncate">{planitem.Plan__c}</p>
+            <div class="slds-grid slds-grid_align-spread" slot="footer">
+                <div class="slds-col padding-top">
+                    <lightning-formatted-date-time
+                    value={planitem.End_Date__c}
+                    year="numeric"
+                    month="numeric"
+                    day="numeric">
+                    </lightning-formatted-date-time>
+                </div>
+                <div class="slds-col">
+                    <c-plan-item-icon status={planitem.State__c} isreviewopen={isreviewopen}></c-plan-item-icon>
+                </div>
             </div>
-            <div class="slds-col">
-                <c-plan-item-icon status={planitem.State__c} isreviewopen={isreviewopen}></c-plan-item-icon>
-            </div>
-        </div>
-    </lightning-card>
+        </lightning-card>
+    </div>
 </template>
