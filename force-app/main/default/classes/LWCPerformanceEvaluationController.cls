@@ -9,9 +9,10 @@ public without sharing class LWCPerformanceEvaluationController {
         if (filterStatus == 'Reviews about me'){
             statusFilter.add('Approved');
             if(offsetRange == null){
-                return [SELECT Id, Status__c, CreatedDate, Comments__c, CreatedBy.Name FROM Review__c WHERE Evaluated__c =:empId AND Status__c IN : statusFilter ORDER BY CreatedDate DESC LIMIT 4];
+                return [SELECT Id, Review__r.Status__c, Review__r.CreatedDate, Review__r.Comments__c, Review__r.CreatedBy.Name,Review__r.Evaluated__r.name, Review__c, Evaluator__r.name FROM Review_Assignment__c WHERE Review__r.Evaluated__c =: empId AND Review__r.Status__c IN : statusFilter ORDER BY CreatedDate DESC LIMIT 4];
             }else {
-                return [SELECT Id, Status__c, CreatedDate, Comments__c, CreatedBy.Name FROM Review__c WHERE Evaluated__c =:empId AND Status__c IN : statusFilter ORDER BY CreatedDate DESC LIMIT 4 OFFSET :offsetRange];
+                return [SELECT Id, Review__r.Status__c, Review__r.CreatedDate, Review__r.Comments__c, Review__r.CreatedBy.Name,Review__r.Evaluated__r.name, Review__c, Evaluator__r.name FROM Review_Assignment__c WHERE Review__r.Evaluated__c =: empId AND Review__r.Status__c IN : statusFilter ORDER BY CreatedDate DESC LIMIT 4 OFFSET :offsetRange];
+
             }
 
         }

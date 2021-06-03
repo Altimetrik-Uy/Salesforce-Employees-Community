@@ -55,16 +55,27 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                                 });
                                 this.projectStatuses = preparedAssets;
                             }else{
-                                this.projectStatuses.forEach(asset => {
-                                    let preparedAsset = {};
-                                    preparedAsset.Id = id++;
-                                    preparedAsset.Status = asset.Status__c;
-                                    preparedAsset.StatusDate = asset.CreatedDate;
-                                    preparedAsset.StatusComments = asset.Comments__c;
-                                    preparedAsset.ManagerName = asset.CreatedBy.Name;
-                                    preparedAssets.push(preparedAsset);
+                                const map = new Map();
+                                this.projectStatuses.forEach(asset => {                 
+                                    if(map.has(asset.Review__c)){
+                                        let preparedAssetval= map.get(asset.Review__c);
+
+                                        preparedAssetval.ManagerName = preparedAssetval.ManagerName +' - '+asset.Evaluator__r.Name;
+                                        map.set(asset.Review__c, preparedAssetval);
+                                    }
+                                    else{
+                                        let preparedAsset = {};
+                                        preparedAsset.Id = id++;
+                                        preparedAsset.Status = asset.Review__r.Status__c;
+                                        preparedAsset.StatusDate = asset.Review__r.CreatedDate;
+                                        preparedAsset.StatusComments = asset.Review__r.Comments__c;
+                                        preparedAsset.ManagerName = asset.Evaluator__r.Name;
+                                        map.set(asset.Review__c, preparedAsset);
+
+                                    }                                    
                                 });
-                                this.projectStatuses = preparedAssets;
+
+                                this.projectStatuses = map.values();
                             }
                         } else if (error) {
                             this.error = error;
@@ -107,16 +118,26 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                             this.projectStatuses = data;
                             let preparedAssets = [];
                             let id = 0;
+                            const map = new Map();
                             this.projectStatuses.forEach(asset => {
-                                let preparedAsset = {};
-                                preparedAsset.Id = id++;
-                                preparedAsset.Status = asset.Status__c;
-                                preparedAsset.StatusDate = asset.CreatedDate;
-                                preparedAsset.StatusComments = asset.Comments__c;
-                                preparedAsset.ManagerName = asset.CreatedBy.Name;
-                                preparedAssets.push(preparedAsset);
+                                if(map.has(asset.Review__c)){
+                                    let preparedAssetval= map.get(asset.Review__c);
+
+                                    preparedAssetval.ManagerName = preparedAssetval.ManagerName +' - '+asset.Evaluator__r.Name;
+                                    map.set(asset.Review__c, preparedAssetval);
+                                }
+                                else{
+                                    let preparedAsset = {};
+                                    preparedAsset.Id = id++;
+                                    preparedAsset.Status = asset.Review__r.Status__c;
+                                    preparedAsset.StatusDate = asset.Review__r.CreatedDate;
+                                    preparedAsset.StatusComments = asset.Review__r.Comments__c;
+                                    preparedAsset.ManagerName = asset.Evaluator__r.Name;
+                                    map.set(asset.Review__c, preparedAsset);
+
+                                }         
                             });
-                            this.projectStatuses = preparedAssets;
+                            this.projectStatuses = map.values();
                         } else if (error) {
                             this.error = error;
                         }
@@ -174,16 +195,26 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                         });
                         this.projectStatuses = preparedAssets;
                     }else{
+                        const map = new Map();
                         this.projectStatuses.forEach(asset => {
-                            let preparedAsset = {};
-                            preparedAsset.Id = id++;
-                            preparedAsset.Status = asset.Status__c;
-                            preparedAsset.StatusDate = asset.CreatedDate;
-                            preparedAsset.StatusComments = asset.Comments__c;
-                            preparedAsset.ManagerName = asset.CreatedBy.Name;
-                            preparedAssets.push(preparedAsset);
+                            if(map.has(asset.Review__c)){
+                                let preparedAssetval= map.get(asset.Review__c);
+
+                                preparedAssetval.ManagerName = preparedAssetval.ManagerName +' - '+asset.Evaluator__r.Name;
+                                map.set(asset.Review__c, preparedAssetval);
+                            }
+                            else{
+                                let preparedAsset = {};
+                                preparedAsset.Id = id++;
+                                preparedAsset.Status = asset.Review__r.Status__c;
+                                preparedAsset.StatusDate = asset.Review__r.CreatedDate;
+                                preparedAsset.StatusComments = asset.Review__r.Comments__c;
+                                preparedAsset.ManagerName = asset.Evaluator__r.Name;
+                                map.set(asset.Review__c, preparedAsset);
+
+                            }        
                         });
-                        this.projectStatuses = preparedAssets;
+                        this.projectStatuses = map.values();
                     }
                 } else if (error) {
                     this.error = error;
