@@ -4,15 +4,15 @@
             <lightning-button-group>
                 <template if:true={reviewOpen}>
                     <lightning-button label="Back" onclick={handleClick} ></lightning-button>
-                    <lightning-button label="Save" ></lightning-button>
-                    <lightning-button variant="brand" label="Submit Review" onclick={handleSubmit}></lightning-button>
+                    <lightning-button label="Save" onclick={saveComments}></lightning-button>
+                    <lightning-button variant="brand" label="Submit Review"></lightning-button>
                 </template>
                 <template if:false={reviewOpen}>
-                    <lightning-button label="Back" onclick={handleClick} ></lightning-button>
+                    <lightning-button label="Back" onclick={handleClick}></lightning-button>
                 </template>
             </lightning-button-group>
         </div>
-      
+
         <c-review-comments id-review={recordId} open={reviewOpen} ></c-review-comments>
        
     </lightning-card>
