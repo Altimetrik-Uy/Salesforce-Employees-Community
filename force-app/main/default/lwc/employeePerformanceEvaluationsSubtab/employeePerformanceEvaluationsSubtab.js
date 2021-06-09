@@ -105,7 +105,6 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
 
     handleWrapper(event){
 
-
         if (this.isReviewSelected){
             this.isReviewSelected = false;
         }
