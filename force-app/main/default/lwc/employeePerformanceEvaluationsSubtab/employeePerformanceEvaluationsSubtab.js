@@ -1,8 +1,6 @@
 import {LightningElement, api, wire, track} from 'lwc';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent'
 import getEmployeeReview from '@salesforce/apex/LWCPerformanceEvaluationController.getEmployeeReview';
 import getEmployeeReviewCount from '@salesforce/apex/LWCPerformanceEvaluationController.getEmployeeReviewCount';
-import updateSubmittedByEvaluator from '@salesforce/apex/LWCPerformanceEvaluationController.updateSubmittedByEvaluator';
 
 let i = 0;
 
@@ -22,9 +20,6 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
     isReviewSelected = false;
     @api projectInformation;
     @api reviewSelected;
-    @api reviewAssignmnetSelected;
-    @track isDialogVisible = false;
-
 
     get optionsFilter() {
         return [
@@ -55,7 +50,6 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                                 this.projectStatuses.forEach(asset => {
                                     let preparedAsset = {};
                                     preparedAsset.Id = asset.Review__c;
-                                    preparedAsset.ReviewAssignmnetId = asset.Id;
                                     preparedAsset.Status = asset.Review__r.Status__c;
                                     preparedAsset.StatusDate = asset.Review__r.CreatedDate;
                                     preparedAsset.StatusComments = asset.Review__r.Comments__c;
@@ -118,39 +112,13 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
         else {
             
             let newSelection = event.currentTarget.dataset.id;
-            this.reviewAssignmnetSelected = event.currentTarget.dataset.reviewassigid;
             this.reviewSelected = newSelection;
             this.isReviewSelected = true;                     
         }
     }
 
-    handleSubmit(event){
-        this.isDialogVisible = true;
-    }
-
     handleClick(event){
-        if(event.target.name === 'confirmModal'){
-              if(event.detail.status === 'confirm') {
-                    updateSubmittedByEvaluator({ reviewAssignmentId: this.reviewAssignmnetSelected })
-                    .then(result => {
-                        if (result) {
-                            const toast = new ShowToastEvent({
-                                title: 'Success',
-                                variant: 'success',
-                                message: 'Submitted successfully'
-                            });
-                            this.dispatchEvent(toast);
-                        } else {
-                            console.log('Error - Not Submitted');
-                        }
-                    })
-                    .catch(error => {
-                        console.log('error: ', error);
-                    });
-                }else if(event.detail.status === 'cancel'){
-                }
-            this.isDialogVisible = false;
-        }
+       
     }
 
    
@@ -241,7 +209,6 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                         this.projectStatuses.forEach(asset => {
                             let preparedAsset = {};
                             preparedAsset.Id = asset.Review__c;
-                            preparedAsset.ReviewAssignmnetId = asset.Id;
                             preparedAsset.Status = asset.Review__r.Status__c;
                             preparedAsset.StatusDate = asset.Review__r.CreatedDate;
                             preparedAsset.StatusComments = asset.Review__r.Comments__c;
