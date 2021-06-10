@@ -34,7 +34,6 @@ public without sharing class SalesforcePathByRole {
             }else {
                 strRoleUser = 'Salesforce '+selectedRole;
             }
-            
             //Get the user role
             lstCareerPathByRole = [SELECT Id, Certification__c, Certification__r.Name, Role__c, Required__c, Possible_Next_Role__c FROM Salesforce_Career_Path__c WHERE Role__c =: strRoleUser];
             if (!lstCareerPathByRole.isEmpty()) { 
