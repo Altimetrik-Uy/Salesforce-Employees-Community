@@ -17,11 +17,11 @@ public class LWCEmployeeOverallControllerTest {
             Contact con = TestDataFactory.createContact(acc.Id);
             //User
             User usr = TestDataFactory.createUser(con.Id);
-            Id OppO1Id = TestDataFactory.createDataForTestProjectStatusImageName('O1',acc.Id, con.Id, 'Red', date.parse('11/12/2020'), date.parse('2/17/2021'));
- 			Id OppO2Id = TestDataFactory.createDataForTestProjectStatusImageName('O2',acc.Id, con.Id, 'Green', date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id OppO3Id = TestDataFactory.createDataForTestProjectStatusImageName('O3',acc.Id, con.Id, 'Red', date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id OppO4Id = TestDataFactory.createDataForTestProjectStatusImageName('O3',acc.Id, con.Id, '', date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id OppO5Id = TestDataFactory.createDataForTestProjectStatusImageName('O5',acc.Id, con.Id, 'Yellow', date.parse('11/12/2020'), date.parse('2/17/2021'));
+            Id OppO1Id = TestDataFactory.createDataForTestProjectStatusImageName('O1',acc.Id, con.Id, 'Red', date.parse('11/12/2020'), date.parse('2/17/2199'), 'BILLED');
+ 			Id OppO2Id = TestDataFactory.createDataForTestProjectStatusImageName('O2',acc.Id, con.Id, 'Green', date.parse('11/12/2020'), date.parse('2/17/2199'), 'BILLED');
+            Id OppO3Id = TestDataFactory.createDataForTestProjectStatusImageName('O3',acc.Id, con.Id, 'Red', date.parse('11/12/2020'), date.parse('2/17/2199'), 'BILLED');
+            Id OppO4Id = TestDataFactory.createDataForTestProjectStatusImageName('O3',acc.Id, con.Id, 'Green', date.parse('11/12/2020'), date.parse('2/17/2199'), 'BILLED');
+            Id OppO5Id = TestDataFactory.createDataForTestProjectStatusImageName('O5',acc.Id, con.Id, 'Yellow', date.parse('11/12/2020'), date.parse('2/17/2199'), 'BILLED');
             List<Project_Status__c> proS = new List<Project_Status__c>();
             proS.add(returnProjectStatusStructure(OppO3Id));
             proS.add(returnProjectStatusStructure(OppO1Id));
