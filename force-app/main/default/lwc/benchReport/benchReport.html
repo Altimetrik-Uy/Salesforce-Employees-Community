@@ -1,0 +1,96 @@
+<template>
+    <!--Use template if:true to display/hide popup based on isModalOpen value--> 
+    <template if:true={isModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Employees</h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <!-- Start employee list -->
+                <template if:true={employees}>
+                    <lightning-layout multiple-rows="true" pull-to-boundary="small" class="lightningLayout">
+                        <template for:each={employees} for:item="employee">
+                            <lightning-layout-item key={employee.Name} size="3" class="slds-var-p-around_x-small">
+                                <!-- Start employee tile -->
+                                <div class="slds-media__figure">
+                                    <template if:true={employee.Image}>
+                                        <lightning-formatted-rich-text value={employee.Image} class="employee-silhouette"></lightning-formatted-rich-text>
+                                    </template>
+                                    <template if:false={employee.Image}>
+                                        <img src={appResources.employeeSilhouette} alt="Employee profile" class="employee-silhouette"/>
+                                    </template>
+                                    <!-- <img src={appResources.employeeSilhouette} alt="Employee profile" class="employee-silhouette"/> -->
+                                    <!-- <img src={employee.Image} alt={employee.Name} class="employee-silhouette"/> -->
+                                </div>
+                                <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <p class="slds-var-m-bottom_xx-small nameEmployee">{employee.Name}</p>
+                                    </div>
+                                </div>   
+                                <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <p class="slds-var-m-bottom_xx-small">{employee.Role}</p>
+                                    </div>
+                                </div>
+                                <!-- End employee tile -->
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </template>
+                <!-- End bear list -->
+            </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_brand" onclick={closeModal} title="Close">Close</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <lightning-card  title="Bench Report" icon-name="standard:report"	>
+        <lightning-button label="Export Report" slot="actions"></lightning-button>
+        <table class="slds-table slds-table_cell-buffer slds-table_col-bordered slds-table_bordered">
+            <thead>                
+                <tr class="slds-line-height_reset">
+                    <template for:each={data.columns} for:item="col">
+                        <th key={col} class="" scope="col">
+                            <div class="slds-truncate">{col}</div>
+                        </th>
+                    </template>
+                </tr>
+            </thead>
+            <tbody>
+            <template for:each={data.calendar} for:item="proy">
+                <tr class="slds-hint-parent" key={proy}>
+                    <th  class="category" scope="row">
+                        <div class="slds-truncate" title={proy.Project}>
+                        {proy.Project}
+                        </div>
+                    </th>
+                    <template for:each={proy.Days} for:item="day">
+                        <td class="cell" key={day.Id}>
+                            <template if:true={day.dataFound}>
+                                <button class="slds-button slds-button_neutral cellButton" value={day.Id}  onclick={selectDay}>{day.counter}</button>
+                            </template>
+                            <template if:false={day.dataFound}>
+                                <button class="slds-button slds-button_brand cellButton" disabled ></button>
+                            </template>                                
+                        </td>
+                    </template>                
+                </tr>
+            </template>              
+            </tbody>
+        </table>
+    </lightning-card>   
+</template>

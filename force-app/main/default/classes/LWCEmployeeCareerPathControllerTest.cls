@@ -19,7 +19,7 @@ public class LWCEmployeeCareerPathControllerTest {
             //User
             User usr = TestDataFactory.createUser(con.Id);
             
-         	Id empAssignmentId = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+         	Id empAssignmentId = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
             Id projectId = [SELECT Id, Name FROM Opportunity WHERE Name = 'O1' LIMIT 1].Id;
             Managers_Assignment__c mA1 = TestDataFactory.createManagersAssigment(manager.Id, projectId);
             Managers_Assignment__c mA2 = TestDataFactory.createManagersAssigment(manager.Id, projectId);

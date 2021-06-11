@@ -17,9 +17,9 @@ public class LWCEmployeeProjectsControllerTest {
             Contact con = TestDataFactory.createContact(acc.Id);
             //User
             User usr = TestDataFactory.createUser(con.Id);
-            Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
- 			      Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O3',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+            Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
+ 			Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
+            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O3',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'),'BILLED');
             List<Employee_Assignment__c> empAssignmentList = new List<Employee_Assignment__c>();
             empAssignmentList.add(returnProjectStatusStructure(OppO1Id));
             empAssignmentList.add(returnProjectStatusStructure(OppO2Id));
@@ -40,9 +40,9 @@ public class LWCEmployeeProjectsControllerTest {
             //Contact
             Contact con = TestDataFactory.createContact(acc.Id);
             //User
-            Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
-            Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/22/2021'));
-            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'));
+            Id OppO1Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
+            Id OppO2Id = TestDataFactory.createDataForTestProjectsTab('O1',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/22/2021'), 'BILLED');
+            Id OppO3Id = TestDataFactory.createDataForTestProjectsTab('O2',acc.Id, con.Id, date.parse('11/12/2020'), date.parse('2/17/2021'), 'BILLED');
             List<Employee_Assignment__c> empAssignmentList = new List<Employee_Assignment__c>();
             empAssignmentList.add(returnProjectStatusStructure(OppO1Id));
             empAssignmentList.add(returnProjectStatusStructure(OppO2Id));

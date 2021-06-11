@@ -1,0 +1,33 @@
+.cell{
+    margin: 0;
+    padding: 0 !important;
+    text-align: center;
+}
+.cellButton{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    height: 2rem;
+    width: 100%;
+    border-radius: 0;
+}
+.category{
+  width: 30%;
+}
+.nameEmployee {
+    font-weight: bold;
+}
+.employee-silhouette {
+    height: 100px;
+}
+.lightningLayout {
+    margin-left: 10px;
+}
+button:disabled {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    height: 2rem;
+    width: 100%;
+    border-radius: 0;
+}
