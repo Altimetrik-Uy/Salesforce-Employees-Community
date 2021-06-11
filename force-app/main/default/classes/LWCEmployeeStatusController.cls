@@ -1,4 +1,4 @@
-public class LWCEmployeeStatusController {
+public without sharing class LWCEmployeeStatusController {
 
     @AuraEnabled(cacheable=true)
     public static List<Employee_Assignment__c> getEmployeeProjects(String empId){
@@ -31,6 +31,10 @@ public class LWCEmployeeStatusController {
     public static Integer getEmployeeStatusCount(String empId){
         return [SELECT COUNT() FROM Employee_Status__c WHERE Employee__r.Id = :empId];
     }
+
+      
+   
+   
 
     @AuraEnabled(cacheable=true)
     public static List<String> getManager(String empId){
@@ -115,8 +119,3 @@ public class LWCEmployeeStatusController {
         }
     }
 }
-
-
-
-    
-    

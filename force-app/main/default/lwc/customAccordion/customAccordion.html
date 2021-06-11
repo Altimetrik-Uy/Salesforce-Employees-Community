@@ -9,7 +9,11 @@
                                 aria-expanded="true" 
                                 class="slds-button slds-button_reset slds-accordion__summary-action tooltip" 
                                 onclick={handleClick}>
-                        <span class="slds-accordion__summary-content">{projectInformation}</span>
+                        <span class="slds-accordion__summary-content">
+                            <lightning-formatted-rich-text
+                            value={projectInformation}
+                        ></lightning-formatted-rich-text>
+                        </span>
                         </button>
                     </p>
                 </template>
@@ -18,7 +22,11 @@
                             aria-expanded="true" 
                             class="slds-button slds-button_reset slds-accordion__summary-action" 
                             onclick={handleClick}>
-                        <span class={cssClass}>{projectInformation}</span>
+                        <span class={cssClass}>
+                            <lightning-formatted-rich-text
+                            value={projectInformation}
+                        ></lightning-formatted-rich-text>
+                        </span>
                     </button>
                 </p>
             </div>

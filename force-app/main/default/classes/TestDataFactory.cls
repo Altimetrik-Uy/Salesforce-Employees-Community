@@ -54,13 +54,17 @@ public class TestDataFactory {
     }
 
     public static User createUser(Id contactId){
+        String orgId = UserInfo.getOrganizationId();
+        String dateString = String.valueof(Datetime.now()).replace(' ','').replace(':','').replace('-','');
+        Integer randomInt = Integer.valueOf(math.rint(math.random()*1000000));
+        String uniqueName = orgId + dateString + randomInt;
         User usr = new User();
         Profile pUser = [SELECT Id FROM Profile WHERE Name = 'Community Employee Profile' LIMIT 1];
         usr.firstname = 'Sebastian';
         usr.lastname = 'Trelles';
-        usr.Alias = 'strel';
-        usr.email = 'strel@test.com';
-        usr.username = 'strel@test.com';
+        usr.Alias = uniqueName.substring(18, 23);
+        usr.email = uniqueName+'@test.com';
+        usr.username = uniqueName+'@test.com';
         usr.profileId = pUser.id;
         usr.emailencodingkey ='UTF-8';
         usr.languagelocalekey ='en_US';

@@ -56,7 +56,7 @@ public class LWCEmployeeStatusControllerTest {
             status.add(returnEmployeeStatusesStructure(eS1.Id));
 
             Test.startTest();
-              System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses(con.Id, 0).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match');         
+              System.assertEquals(LWCEmployeeStatusController.getEmployeeStatuses(con.Id, 0).get(0).Status__c, status.get(0).Status__c, 'One or more Statuses do not match');  
             Test.stopTest();
         }
     }
@@ -86,6 +86,7 @@ public class LWCEmployeeStatusControllerTest {
 
             Test.startTest();
               System.assertEquals(LWCEmployeeStatusController.getEmployeeStatusCount(con.Id), 1);         
+                
             Test.stopTest();
         }
     }
@@ -168,4 +169,6 @@ public class LWCEmployeeStatusControllerTest {
      		Test.stopTest();
             }
         }
+
+
 }
