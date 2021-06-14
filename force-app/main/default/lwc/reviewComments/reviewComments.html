@@ -2,23 +2,24 @@
     <template if:true={open}>
         <template if:true={isSaved}>
             <lightning-spinner alternative-text="Loading" variant="brand" ></lightning-spinner>
-        </template>
+        </template>                   
         <lightning-record-edit-form 
             id="editform"
             record-id={idReview}
             object-api-name="Review__c"
             onsuccess={handleSuccess} >
-            <lightning-messages>                </lightning-messages>
-            <lightning-input-field field-name="Comments__c"></lightning-input-field>
+            <lightning-messages>                </lightning-messages>            
+            <lightning-input-field field-name="Comments__c" variant="label-hidden"></lightning-input-field>
         </lightning-record-edit-form>
     </template>
-    <template if:false={open}>
+    <template if:false={open}>        
         <lightning-record-view-form
             id="viewForm"
             record-id={idReview}
-            object-api-name="Review__c">
+            object-api-name="Review__c">              
+            <h1 class="slds-text-heading_small">Review Comments:</h1>      
             <div class="slds-box">
-                <lightning-output-field field-name="Comments__c"></lightning-output-field>
+                <lightning-output-field field-name="Comments__c"  variant="label-hidden"></lightning-output-field>
             </div>
     </lightning-record-view-form>
     </template>
