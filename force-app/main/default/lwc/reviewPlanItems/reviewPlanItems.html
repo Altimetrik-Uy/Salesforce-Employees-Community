@@ -6,4 +6,8 @@
                 </div>
         </template>
     </div>
+    <template if:true={isreviewopen}>
+            <lightning-button label="Create New Plan Item" onclick={openReviewComments}  variant="brand" class="slds-align_absolute-center"></lightning-button>
+    </template>
+    <c-plan-items-Modal id-review={reviewId} is-open-review={isreviewopen}></c-plan-items-Modal>       
 </template>

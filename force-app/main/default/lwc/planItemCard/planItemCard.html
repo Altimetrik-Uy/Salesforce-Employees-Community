@@ -2,10 +2,12 @@
     <div class="border">
         <lightning-card title={planitem.Name}>
             <template if:true={isreviewopen}>
-                <lightning-button label="Edit" slot="actions"></lightning-button>
+                <lightning-button label="Edit" onclick={openModal} slot="actions"></lightning-button>
+                <c-plan-items-Modal id-review={recordId} is-open-review={isreviewopen} plan-item-id={planitem.Id} plan-item-name={planitem.Name}></c-plan-items-Modal> 
             </template>        
             <template if:false={isreviewopen}>
-                <lightning-button label="View" slot="actions"></lightning-button>
+                <lightning-button label="View" onclick={openModal} slot="actions"></lightning-button>
+                <c-plan-items-Modal id-review={recordId} is-open-review={isreviewopen} plan-item-id={planitem.Id} plan-item-name={planitem.Name}></c-plan-items-Modal> 
             </template>
             <p class="slds-p-horizontal_small slds-truncate">{planitem.Plan__c}</p>
             <div class="slds-grid slds-grid_align-spread" slot="footer">

@@ -1,6 +1,5 @@
 import { LightningElement,api,wire,track } from 'lwc';
 import getPlanItems from '@salesforce/apex/LWCReviewPlanItemsController.getPlanItems';
-
 export default class ReviewPlanItems extends LightningElement {
     @api isreviewopen;
     @api reviewId;
@@ -13,5 +12,7 @@ export default class ReviewPlanItems extends LightningElement {
             this.error = error;
         }
     }
-    
+    openReviewComments(){
+        this.template.querySelector("c-plan-items-Modal").openModal();
+    }    
 }

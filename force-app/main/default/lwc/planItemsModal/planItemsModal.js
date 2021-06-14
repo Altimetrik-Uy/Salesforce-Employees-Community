@@ -5,7 +5,8 @@ export default class PlanItemsModal extends LightningElement {
     @api isModalOpen = false;
     @api idReview;
     isSaved = false
-    recordId;
+    @api planItemId;
+    @api planItemName;
     
     
     @api openModal() {
@@ -27,7 +28,7 @@ export default class PlanItemsModal extends LightningElement {
             variant: 'success',
             message: 'Saved successfully'
         });
-        this.dispatchEvent(toast);
+        this.dispatchEvent(toast);        
     }
 
    
