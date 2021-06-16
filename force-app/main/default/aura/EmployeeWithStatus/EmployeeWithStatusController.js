@@ -5,7 +5,7 @@
 
 		component.set('v.columns', [
             {label: 'Status', sortable: true, initialWidth: 75,  fieldName: 'status', type: 'text', cellAttributes: { class: { fieldName: 'status' } } },
-            {label: 'Employee', sortable: true, fieldName: 'employee', type: 'text'},
+            {label: 'Employee', sortable: true, fieldName: 'employeeId', type: 'url', typeAttributes: { label: { fieldName: 'employee' }}},
             {label: 'Last Update', sortable: true, fieldName: 'lastdate', type: 'date'},
             { type: 'action', fieldName: 'Id', typeAttributes: { rowActions: actions } }
         ]);
@@ -21,7 +21,9 @@
                     }else{
                         record.Id = record.id;
                     }
+                    record.employeeId = '/' + record.employeeId;
                 });
+                
                 component.set('v.data', records );
             } else {
                 console.error(reponse.getError());
