@@ -4,12 +4,13 @@ import STATUS_FIELD from '@salesforce/schema/Review__c.Status__c';
 
 export default class PerformanceEvaluationWrapper extends LightningElement {
     @api recordId;
+    @api filterStatus;
+    statusReview;
     @wire(getRecord, { recordId:'$recordId', fields: [STATUS_FIELD], optionalFields: [] })
     review;
     get reviewOpen() {
         let status = getFieldValue(this.review.data, STATUS_FIELD);
-        console.log('status {'+ status+'}');
-        console.log('recordId {'+ this.recordId+'}');
+        this.statusReview= status;
         return status == 'Open' || status == 'In Progress';         
     }
     handleClick() {
@@ -17,12 +18,10 @@ export default class PerformanceEvaluationWrapper extends LightningElement {
     }
     saveComments(){
         this.template.querySelector("c-review-comments").saveForm();
+        this.template.querySelector("c-evaluated-kpi").getEvaluatedKpi();
+        this.template.querySelector("c-review-comments").saveForm();
     }
     openReviewComments(){
         this.template.querySelector("c-plan-items-Modal").openModal();
-    }
-    
-    saveComments(){
-        this.template.querySelector("c-review-comments").saveForm();
     }
 }

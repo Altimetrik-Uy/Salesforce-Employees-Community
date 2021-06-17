@@ -5,7 +5,7 @@ export default class EvaluatedKpiRadioGroup extends LightningElement {
     @api kpiName;
     @api kpiPoint;
     @api reviewStatus;
-    isReviewOpen = false;
+    @api isReviewOpen;
 
     value = '';
 
@@ -23,14 +23,16 @@ export default class EvaluatedKpiRadioGroup extends LightningElement {
         if(this.kpiPoint){
             this.value = this.kpiPoint.toString();
         }
-        if(this.reviewStatus == 'Open' || this.reviewStatus == 'In Progress'){
-            this.isReviewOpen = true;
-        }
     }
    
     handleChange(event) {
         this.value = event.detail.value;
-        console.log('new value ' + this.value);
     }
 
+    @api getKpiValue() {
+        var mapKpi = [];
+        mapKpi.push({kpiId: this.kpiId, point: this.value});
+        return mapKpi;
+      }
+      
 }
