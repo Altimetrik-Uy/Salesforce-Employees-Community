@@ -13,10 +13,10 @@ public with sharing class LWCEvaluatedKpiController {
     
     @AuraEnabled
     public static void setEvaluatedKpi(String evaluatedKpis){
-        System.debug('evaluated Kpis json: '+evaluatedKpis);
+        
         List<Evaluated_Kpi__c> evaluatedKpisToSet = new List<Evaluated_Kpi__c>();
         List<List<EvaluatedKpisWrapper>> evaluatedKpiWrapper = parse(evaluatedKpis);
-        System.debug('evaluatedKpiWrapper: '+evaluatedKpiWrapper);
+        
         for( List<EvaluatedKpisWrapper> kpisList: evaluatedKpiWrapper ){
             for( EvaluatedKpisWrapper kpi: kpisList ){
                 Evaluated_Kpi__c newEvaluatedKpi = new Evaluated_Kpi__c();
@@ -29,7 +29,6 @@ public with sharing class LWCEvaluatedKpiController {
     }
 
     private class EvaluatedKpisWrapper {
-    
         public String kpiId;
         public String point;
     
