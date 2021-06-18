@@ -243,6 +243,8 @@
         <fields>NAME</fields>
         <fields>Opportunity.NAME</fields>
         <fields>CREATED_DATE</fields>
+        <fields>Opportunity.OPP_STAGE_NAME</fields>
+        <fields>Active__c</fields>
         <relatedList>Employee_Assignment__c.Employee__c</relatedList>
     </relatedLists>
     <relatedLists>
