@@ -8,8 +8,8 @@
             <lightning-button-group>
                 <template if:true={reviewOpen}>
                     <lightning-button label="Back" onclick={handleClick} ></lightning-button>
-                    <lightning-button label="Save"></lightning-button>
-                    <lightning-button variant="brand" label="Submit Review"></lightning-button>
+                    <lightning-button label="Save" ></lightning-button>
+                    <lightning-button variant="brand" label="Submit Review" onclick={handleSubmit}></lightning-button>
                 </template>
                 <template if:false={reviewOpen}>
                     <lightning-button label="Back" onclick={handleClick} ></lightning-button>

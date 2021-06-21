@@ -163,4 +163,22 @@ public class TestDataFactory {
         return mAssignment;
     }
 
+    public static Review__c createReview(Id contactId, Id opportunityId, String status){
+        Review__c review = new Review__c();
+        review.Evaluated__c = contactId;
+        review.Project__c = opportunityId;
+        review.Status__c = status;
+        insert review;
+        return review;
+    }
+
+    public static Review_Assignment__c createReviewAssignment(Id reviewId, Id evaluatorId){
+        Review_Assignment__c reviewAssignment = new Review_Assignment__c();
+        reviewAssignment.Evaluator__c = evaluatorId;
+        reviewAssignment.Review__c = reviewId;
+        reviewAssignment.Name = 'Review Assignment Test';
+        insert reviewAssignment;
+        return reviewAssignment;
+    }
+
 }

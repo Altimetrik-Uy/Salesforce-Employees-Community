@@ -18,4 +18,8 @@ export default class PerformanceEvaluationWrapper extends LightningElement {
     handleClick() {
         this.dispatchEvent(new CustomEvent('back'));
     }
+
+    handleSubmit(){
+        this.dispatchEvent(new CustomEvent('submit'));
+    }
 }

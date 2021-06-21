@@ -65,4 +65,16 @@ public without sharing class LWCPerformanceEvaluationController {
             return null;
         }
     }
+
+    @AuraEnabled(Cacheable=false)
+    public static boolean updateSubmittedByEvaluator(String reviewAssignmentId){
+        try{
+            Review_assignment__c reviewAssignment = [Select Id, Submitted_By_Evaluator__c from Review_assignment__c WHERE Id =: reviewAssignmentId];
+            reviewAssignment.Submitted_By_Evaluator__c = true;
+            update reviewAssignment;
+            return true;        
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

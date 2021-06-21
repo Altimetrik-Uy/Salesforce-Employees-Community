@@ -44,7 +44,7 @@
                                                         </div>
                                                         <div class="slds-media__body">
                                                             <div class="slds-m-top_xxx-small" >
-                                                                <h1 key={currentProjectStatus.Id} data-id={currentProjectStatus.Id} onclick={handleWrapper} class="slds-text-heading_small">{currentProjectStatus.ManagerName}</h1>
+                                                                <h1 key={currentProjectStatus.Id} data-id={currentProjectStatus.Id} data-reviewaid={currentProjectStatus.ReviewAssignmnetId} onclick={handleWrapper} class="slds-text-heading_small">{currentProjectStatus.ManagerName}</h1>
                                                             </div>
                                                         </div>
                                                         <div class="slds-media__figure">
@@ -86,6 +86,16 @@
         </div> 
     </div>
     <div if:true={isReviewSelected}>
-        <c-performance-evaluation-wrapper record-id={reviewSelected} filter-status={valueFilter} onback={handleWrapper}></c-performance-evaluation-wrapper>
+        <c-performance-evaluation-wrapper record-id={reviewSelected} filter-status={valueFilter} onback={handleWrapper} onsubmit={handleSubmit}></c-performance-evaluation-wrapper>
     </div>
+    <c-confirmation-dialog title='Confirm Submit Review'
+    message='Do you want to proceed?'
+    confirm-label='Yes'
+    cancel-label='No'
+    visible={isDialogVisible}
+    original-message={originalMessage}
+    name="confirmModal"
+    onclick={handleClick}>
+</c-confirmation-dialog>
+
 </template>

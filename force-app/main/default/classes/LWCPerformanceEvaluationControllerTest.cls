@@ -45,5 +45,24 @@ public static void getEmployeeStatuses(){
     }
 }
 
+@isTest
+public static void submittedByEvaluatorTest(){
+  //System Admin
+  User admin = TestDataFactory.createAdminUser();
+  System.runAs(admin) {
+      Account acc = TestDataFactory.createAccount();
+      Contact con = TestDataFactory.createContact(acc.Id);
+      Opportunity project = TestDataFactory.createOpportunity('Test', acc.Id);
+      Review__c review = TestDataFactory.createReview(con.Id, project.Id, 'Open');
+      Review_Assignment__c reviewAssignment = TestDataFactory.createReviewAssignment(review.Id, con.Id);
+      
+      Test.startTest();
+      LWCPerformanceEvaluationController.updateSubmittedByEvaluator(reviewAssignment.Id);
+      Test.stopTest();
+      Review_Assignment__c reviewAssignmentUpdate = [ SELECT Submitted_By_Evaluator__c FROM Review_Assignment__c WHERE Id = :reviewAssignment.Id ];
+      System.assertEquals(true, reviewAssignmentUpdate.Submitted_By_Evaluator__c);
+  }
+}
+
 
 }
