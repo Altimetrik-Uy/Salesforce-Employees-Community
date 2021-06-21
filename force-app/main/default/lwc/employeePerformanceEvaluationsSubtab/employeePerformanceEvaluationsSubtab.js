@@ -118,7 +118,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
         else {
             
             let newSelection = event.currentTarget.dataset.id;
-            this.reviewAssignmnetSelected = event.currentTarget.dataset.reviewaid;
+            this.reviewAssignmnetSelected = event.currentTarget.dataset.reviewassigid;
             this.reviewSelected = newSelection;
             this.isReviewSelected = true;                     
         }
