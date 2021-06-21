@@ -21,8 +21,8 @@ export default class PerformanceEvaluationWrapper extends LightningElement {
     openReviewComments(){
         this.template.querySelector("c-plan-items-Modal").openModal();
     }
-    
-    saveComments(){
-        this.template.querySelector("c-review-comments").saveForm();
+
+    handleSubmit(){
+        this.dispatchEvent(new CustomEvent('submit'));
     }
 }
