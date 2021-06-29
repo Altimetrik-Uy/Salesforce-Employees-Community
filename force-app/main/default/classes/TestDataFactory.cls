@@ -95,12 +95,12 @@ public class TestDataFactory {
         return opp;
     }
 
-    public static Employee_Assignment__c createEmployeeAssigment(Id contactId, Id opportunityId, Date startDate, Date endDate){
+    public static Employee_Assignment__c createEmployeeAssigment(Id contactId, Id opportunityId, Date startDate, Date endDate, String baseCat){
         Employee_Assignment__c eAssignment = new Employee_Assignment__c();
         eAssignment.Employee__c = contactId;
         eAssignment.Project__c = opportunityId;
         eAssignment.Start_Date__c = startDate;
-        eAssignment.Base_Category__c = 'BILLED';
+        eAssignment.Base_Category__c = baseCat;
         eAssignment.End_Date__c = endDate;
         insert eAssignment;
         return eAssignment;
@@ -116,11 +116,11 @@ public class TestDataFactory {
         return pStatus;
     }
 
-    public static Id createDataForTestProjectStatusImageName(String name, Id accountId, Id conntactId, String status, Date startDate, Date endDate){
+    public static Id createDataForTestProjectStatusImageName(String name, Id accountId, Id conntactId, String status, Date startDate, Date endDate, String baseCat){
     	//Opportunity
         Opportunity opp = createOpportunity(name, accountId);
         //Employee Assignment
-        Employee_Assignment__c eAssignment = createEmployeeAssigment(conntactId, opp.Id, startDate, endDate);
+        Employee_Assignment__c eAssignment = createEmployeeAssigment(conntactId, opp.Id, startDate, endDate, baseCat);
         //If status is null do not create Project Status
         if(status != ''){
             //Project Status
@@ -129,11 +129,20 @@ public class TestDataFactory {
        	return opp.Id;
     }
 
-    public static Id createDataForTestProjectsTab(String name, Id accountId, Id conntactId, Date startDate, Date endDate){
+    public static Employee_Assignment__c createDataForBenchReport(String name, Id accountId, Id conntactId, Date startDate, Date endDate, String baseCat){
+        //Opportunity
+        Opportunity opp = createOpportunity(name, accountId);
+        //Employee Assignment
+        Employee_Assignment__c eAssignment = createEmployeeAssigment(conntactId, opp.Id, startDate, endDate, baseCat);
+        //If status is null do not create Project Status
+        return eAssignment;
+    }
+
+    public static Id createDataForTestProjectsTab(String name, Id accountId, Id conntactId, Date startDate, Date endDate, String baseCat){
     	//Opportunity
         Opportunity opp = createOpportunity(name, accountId);
         //Employee Assignment
-        Employee_Assignment__c eAssignment = createEmployeeAssigment(conntactId, opp.Id, startDate, endDate);
+        Employee_Assignment__c eAssignment = createEmployeeAssigment(conntactId, opp.Id, startDate, endDate, baseCat);
         return eAssignment.Id;
     }
 
@@ -161,6 +170,15 @@ public class TestDataFactory {
         review.Status__c = status;
         insert review;
         return review;
+    }
+
+    public static Review_Assignment__c createReviewAssignment(Id reviewId, Id evaluatorId){
+        Review_Assignment__c reviewAssignment = new Review_Assignment__c();
+        reviewAssignment.Evaluator__c = evaluatorId;
+        reviewAssignment.Review__c = reviewId;
+        reviewAssignment.Name = 'Review Assignment Test';
+        insert reviewAssignment;
+        return reviewAssignment;
     }
 
     public static Plan_Item__c createPlanItem(Id reviewId, String status, Date endDate){
