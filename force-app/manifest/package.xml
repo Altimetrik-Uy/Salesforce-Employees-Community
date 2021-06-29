@@ -3,9 +3,15 @@
     <types>
         <members>*</members>
         <members>PathAssistant</members>
-		<members>PathAssistantTest</members>
+        <members>PathAssistantTest</members>
         <members>SalesforcePathByRole</members>
-		<members>SalesforcePathByRoleTest</members>
+        <members>SalesforcePathByRoleTest</members>
+        <members>PathAssistantCallOutTest</members>
+        <members>PathAssistantCallOut</members>
+        <members>PathAssistantCertificationReqCallOut</members>
+        <members>PathAssistantCertificationReqCallOutTest</members>
+        <members>PathAssistantDetailsCallOut</members>
+        <members>PathAssistantDetailsCallOutTest</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -21,14 +27,10 @@
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
-        <members>Plan_Item__c-Plan Item Layout</members>
-        <members>Evaluated_KPI__c-Evaluated KPI Layout</members>
-        <members>KPI__c-KPI Layout</members>
-        <members>Review_Assignment__c-Review Assignment Layout</members>
-        <members>Review__c-Review Layout</members>
-		<members>Salesforce_Career_Path__c-Salesforce Career Path Layout</members>
-		<name>Layout</name>
-	</types>
+        <members>Salesforce_Career_Path__c-Salesforce Career Path Layout</members>
+        <members>Contact-Formato de contactos</members>
+        <name>Layout</name>
+    </types>
     <types>
         <members>*</members>
         <members>reviewComments</members>
@@ -41,11 +43,6 @@
     </types>
     <types>
         <members>*</members>
-        <members>Plan_Item__c</members>
-        <members>Evaluated_KPI__c</members>
-        <members>KPI__c</members>
-        <members>Review_Assignment__c</members>
-        <members>Review__c</members>
         <members>Account</members>
         <members>Contact</members>
         <members>Lead</members>
@@ -66,10 +63,10 @@
         <name>CustomLabel</name>
     </types>
     <types>
-		<members>Salesforce_Career_Path__c</members>
+        <members>Salesforce_Career_Path__c</members>
         <members>Bench_Report</members>
-		<name>CustomTab</name>
-	</types>
+        <name>CustomTab</name>
+    </types>
     <types>
         <members>*</members>
         <name>HomePageComponent</name>
@@ -83,7 +80,6 @@
         <name>ApexTrigger</name>
     </types>
     <types>
-        <members>Admin</members>
         <members>Community Employee Profile</members>
         <name>Profile</name>
     </types>
@@ -118,9 +114,9 @@
     <types>
         <members>Set_Review_Status_To_Submitted</members>
         <members>Update_User_Info_Record</members>
-		<members>User_Info_Object_Manage</members>
-		<name>Flow</name>
-	</types>
+        <members>User_Info_Object_Manage</members>
+        <name>Flow</name>
+    </types>
     <types>
         <members>*</members>
         <name>Network</name>
@@ -129,10 +125,10 @@
         <members>*</members>
         <name>NetworkBranding</name>
     </types>
-	<types>
-		<members>*</members>
-		<name>ContentAsset</name>
-	</types>
+    <types>
+        <members>*</members>
+        <name>ContentAsset</name>
+    </types>
     <types>
         <members>*</members>
         <name>CustomSite</name>
@@ -175,30 +171,26 @@
     </types>
     <types>
         <members>Opportunity_Project</members>
-		<members>Opportunity_Project/Project_Without_Manager</members>
-		<members>unfiled$public/Employee_assigned_notification</members>
+        <members>Opportunity_Project/Project_Without_Manager</members>
+        <members>unfiled$public/Employee_assigned_notification</members>
         <members>Opportunity_Project/Project_Without_Status_Update</members>
-		<name>EmailTemplate</name>
-	</types>
-	<types>
-		<members>Opportunity.Project_Without_Manager</members>
-		<members>Employee_Assignment__c.Employee_assigned_notification</members>
-		<members>Employee_Assignment__c.Employee_assigned_notification_2</members>
-        <members>Opportunity.Report_no_project_update</members>
-		<name>WorkflowAlert</name>
-	</types>
+        <name>EmailTemplate</name>
+    </types>
     <types>
-		<members>Employee_Assignment__c.SendEmployeeAssignedNotification</members>
-		<members>Employee_Assignment__c.SendEmployeeAssignedNotification2</members>
+        <members>Opportunity.Project_Without_Manager</members>
+        <members>Employee_Assignment__c.Employee_assigned_notification</members>
+        <members>Employee_Assignment__c.Employee_assigned_notification_2</members>
+        <members>Opportunity.Report_no_project_update</members>
+        <name>WorkflowAlert</name>
+    </types>
+    <types>
+        <members>Employee_Assignment__c.SendEmployeeAssignedNotification</members>
+        <members>Employee_Assignment__c.SendEmployeeAssignedNotification2</members>
         <members>Opportunity.Project Without Manager</members>
         <members>Opportunity.Last Project Update</members>
         <members>Project_Status__c.New Project Status</members>
-		<name>WorkflowRule</name>
-	</types>
-    <types>
-        <members>Project_Status__c.Update_Project_Last_Status_Date</members>
-		<name>WorkflowFieldUpdate</name>
-	</types>
+        <name>WorkflowRule</name>
+    </types>
     <types>
         <members>Bench_Report_App</members>
         <name>CustomApplication</name>
