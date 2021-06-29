@@ -1,9 +1,9 @@
 public without sharing class SalesforcePathByRole {
+
     @AuraEnabled
     public static Object getSalesforcePath(){
         return SalesforcePathByRole.getSalesforcePathFromSelectedRole(null);
     }
-
     @AuraEnabled(cacheable=true)
     public static Object getSalesforcePathFromSelectedRole(String selectedRole){
         string strRoleUser;

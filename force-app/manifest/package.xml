@@ -31,6 +31,8 @@
 	</types>
     <types>
         <members>*</members>
+        <members>reviewComments</members>
+        <members>performanceEvaluationWrapper</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>
@@ -114,6 +116,7 @@
         <name>FlexiPage</name>
     </types>
     <types>
+        <members>Set_Review_Status_To_Submitted</members>
         <members>Update_User_Info_Record</members>
 		<members>User_Info_Object_Manage</members>
 		<name>Flow</name>

@@ -17,6 +17,9 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
     @track paginationRange = [];
     @track totalRecords;
     valueFilter = 'Reviews about me';
+    isReviewSelected = false;
+    @api projectInformation;
+    @api reviewSelected;
 
     get optionsFilter() {
         return [
@@ -46,7 +49,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                             if (this.valueFilter == 'Reviews done' || this.valueFilter == 'Reviews to do'   ) {
                                 this.projectStatuses.forEach(asset => {
                                     let preparedAsset = {};
-                                    preparedAsset.Id = id++;
+                                    preparedAsset.Id = asset.Review__c;
                                     preparedAsset.Status = asset.Review__r.Status__c;
                                     preparedAsset.StatusDate = asset.Review__r.CreatedDate;
                                     preparedAsset.StatusComments = asset.Review__r.Comments__c;
@@ -65,7 +68,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                                     }
                                     else{
                                         let preparedAsset = {};
-                                        preparedAsset.Id = id++;
+                                        preparedAsset.Id = asset.Review__c;
                                         preparedAsset.Status = asset.Review__r.Status__c;
                                         preparedAsset.StatusDate = asset.Review__r.CreatedDate;
                                         preparedAsset.StatusComments = asset.Review__r.Comments__c;
@@ -75,7 +78,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                                     }                                    
                                 });
 
-                                this.projectStatuses = map.values();
+                                this.projectStatuses = Array.from(map.values());
                             }
                         } else if (error) {
                             this.error = error;
@@ -98,6 +101,24 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
         
             
 
+    }
+
+    handleWrapper(event){
+
+
+        if (this.isReviewSelected){
+            this.isReviewSelected = false;
+        }
+        else {
+            
+            let newSelection = event.currentTarget.dataset.id;
+            this.reviewSelected = newSelection;
+            this.isReviewSelected = true;                     
+        }
+    }
+
+    handleClick(event){
+       
     }
 
    
@@ -128,7 +149,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                                 }
                                 else{
                                     let preparedAsset = {};
-                                    preparedAsset.Id = id++;
+                                    preparedAsset.Id = asset.Review__c;
                                     preparedAsset.Status = asset.Review__r.Status__c;
                                     preparedAsset.StatusDate = asset.Review__r.CreatedDate;
                                     preparedAsset.StatusComments = asset.Review__r.Comments__c;
@@ -137,7 +158,8 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
 
                                 }         
                             });
-                            this.projectStatuses = map.values();
+                            this.projectStatuses = Array.from(map.values());
+
                         } else if (error) {
                             this.error = error;
                         }
@@ -186,7 +208,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                     if (this.valueFilter == 'Reviews done' || this.valueFilter == 'Reviews to do'   ) {
                         this.projectStatuses.forEach(asset => {
                             let preparedAsset = {};
-                            preparedAsset.Id = id++;
+                            preparedAsset.Id = asset.Review__c;
                             preparedAsset.Status = asset.Review__r.Status__c;
                             preparedAsset.StatusDate = asset.Review__r.CreatedDate;
                             preparedAsset.StatusComments = asset.Review__r.Comments__c;
@@ -205,7 +227,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                             }
                             else{
                                 let preparedAsset = {};
-                                preparedAsset.Id = id++;
+                                preparedAsset.Id = asset.Review__c;
                                 preparedAsset.Status = asset.Review__r.Status__c;
                                 preparedAsset.StatusDate = asset.Review__r.CreatedDate;
                                 preparedAsset.StatusComments = asset.Review__r.Comments__c;

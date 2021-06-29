@@ -130,12 +130,12 @@ public class TestDataFactory {
     }
 
     public static Employee_Assignment__c createDataForBenchReport(String name, Id accountId, Id conntactId, Date startDate, Date endDate, String baseCat){
-    	//Opportunity
+        //Opportunity
         Opportunity opp = createOpportunity(name, accountId);
         //Employee Assignment
         Employee_Assignment__c eAssignment = createEmployeeAssigment(conntactId, opp.Id, startDate, endDate, baseCat);
         //If status is null do not create Project Status
-       	return eAssignment;
+        return eAssignment;
     }
 
     public static Id createDataForTestProjectsTab(String name, Id accountId, Id conntactId, Date startDate, Date endDate, String baseCat){
@@ -161,6 +161,35 @@ public class TestDataFactory {
         mAssignment.User__c = managerId;
         insert mAssignment;
         return mAssignment;
+    }
+
+    public static Review__c createReview(Id contactId, Id opportunityId, String status){
+        Review__c review = new Review__c();
+        review.Evaluated__c = contactId;
+        review.Project__c = opportunityId;
+        review.Status__c = status;
+        insert review;
+        return review;
+    }
+
+    public static Review_Assignment__c createReviewAssignment(Id reviewId, Id evaluatorId){
+        Review_Assignment__c reviewAssignment = new Review_Assignment__c();
+        reviewAssignment.Evaluator__c = evaluatorId;
+        reviewAssignment.Review__c = reviewId;
+        reviewAssignment.Name = 'Review Assignment Test';
+        insert reviewAssignment;
+        return reviewAssignment;
+    }
+
+    public static Plan_Item__c createPlanItem(Id reviewId, String status, Date endDate){
+        Plan_Item__c planItem = new Plan_Item__c();
+        planItem.Review__c = reviewId;
+        planItem.State__c = status;
+        planItem.Name = 'Test Plan Item';
+        planItem.Plan__c = 'Test Plan Description';
+        planItem.End_Date__c = endDate;
+        insert planItem;
+        return planItem;
     }
 
 }

@@ -1,0 +1,8 @@
+<template>
+    <template if:true={isreviewopen}>
+        <lightning-icon icon-name="utility:date_input" size="small"></lightning-icon>
+    </template>
+    <template if:false={isreviewopen}>
+        <lightning-icon icon-name="utility:record" class={statusToDisplay}></lightning-icon>
+    </template>
+</template>
