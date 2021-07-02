@@ -242,7 +242,6 @@
         <excludeButtons>MassChangeOwner</excludeButtons>
         <fields>NAME</fields>
         <fields>Opportunity.NAME</fields>
-        <fields>CREATED_DATE</fields>
         <fields>Opportunity.OPP_STAGE_NAME</fields>
         <fields>Active__c</fields>
         <relatedList>Employee_Assignment__c.Employee__c</relatedList>
@@ -309,7 +308,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h3h000001u9kA</masterLabel>
+        <masterLabel>00h5e000004Xwk6</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
