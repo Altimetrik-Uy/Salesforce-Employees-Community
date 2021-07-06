@@ -1718,6 +1718,11 @@
         <field>ta_User_Trails__c.User_Info__c</field>
         <readable>false</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>KPI__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <layoutAssignments>
         <layout>Salesforce_Career_Path__c-Salesforce Career Path Layout</layout>
     </layoutAssignments>

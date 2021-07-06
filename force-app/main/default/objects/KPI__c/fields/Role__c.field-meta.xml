@@ -20,6 +20,11 @@
                 <default>false</default>
                 <label>val2</label>
             </value>
+            <value>
+                <fullName>General</fullName>
+                <default>false</default>
+                <label>General</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
     <visibleLines>4</visibleLines>

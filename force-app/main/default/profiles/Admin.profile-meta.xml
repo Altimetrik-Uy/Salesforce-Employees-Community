@@ -82,6 +82,11 @@
         <field>Review__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>KPI__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <layoutAssignments>
         <layout>Evaluated_KPI__c-Evaluated KPI Layout</layout>
     </layoutAssignments>
