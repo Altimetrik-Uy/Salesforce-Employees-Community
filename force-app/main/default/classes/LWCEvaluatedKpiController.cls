@@ -10,24 +10,7 @@ public with sharing class LWCEvaluatedKpiController {
                 ];
             return evaluatedKpiList;
     } 
-    
-    @AuraEnabled
-    public static void setEvaluatedKpi(String evaluatedKpis){
         
-        List<Evaluated_Kpi__c> evaluatedKpisToSet = new List<Evaluated_Kpi__c>();
-        List<List<EvaluatedKpisWrapper>> evaluatedKpiWrapper = parse(evaluatedKpis);
-        for( List<EvaluatedKpisWrapper> kpisList: evaluatedKpiWrapper ){
-            for( EvaluatedKpisWrapper kpi: kpisList ){
-                Evaluated_Kpi__c newEvaluatedKpi = new Evaluated_Kpi__c();
-                newEvaluatedKpi.Id = kpi.kpiId;
-                newEvaluatedKpi.Point__c = decimal.valueOf(kpi.point);
-                newEvaluatedKpi.Reason__c = kpi.reason;  
-                evaluatedKpisToSet.add(newEvaluatedKpi); 
-            }
-        }
-        update evaluatedKpisToSet;
-    }
-    
     @AuraEnabled
     public static void setEvaluatedKpi(String evaluatedKpis){
         
