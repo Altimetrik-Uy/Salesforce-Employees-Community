@@ -4,7 +4,7 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>User</label>
-    <referenceTo>User</referenceTo>
+    <referenceTo>Contact</referenceTo>
     <relationshipName>User_Certifcation_Inscriptions</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
