@@ -2,20 +2,29 @@ import { LightningElement, api, wire, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
 import getEvaluatedKpi from '@salesforce/apex/LWCEvaluatedKpiController.getEvaluatedKpi';
+import getEvaluatedKpiBySection from '@salesforce/apex/LWCEvaluatedKpiController.getEvaluatedKpiBySection';
 import setEvaluatedKpi from '@salesforce/apex/LWCEvaluatedKpiController.setEvaluatedKpi';
 
 export default class EvaluatedKpi extends LightningElement {
     @api reviewId;
     @api isReviewOpen;
-    @track evaluatedKpis;
+    @track evaluatedKpis= [];
 
     kpiValues;
+    activeSections= [];
     
-    @wire(getEvaluatedKpi,{reviewId: '$reviewId'}) wiredEvaluatedKpi(value){
-        this.kpiValues = value;
-        const {data, error} = value;
+    @wire(getEvaluatedKpiBySection,{reviewId: '$reviewId'}) wiredEvaluatedKpi(result){
+        this.kpiValues = result;
+        this.evaluatedKpis= [];
+        const {data, error} = result;
         if(data){
-            this.evaluatedKpis = data;
+            //this.evaluatedKpis = data;
+            for(let key in data) {
+                if (data.hasOwnProperty(key)) { 
+                    this.activeSections.push(key);
+                    this.evaluatedKpis.push({key: key, value: data[key]});
+                }
+            }
         }else if (error){
             console.log('error')
             this.error = error;

@@ -10,6 +10,23 @@ public with sharing class LWCEvaluatedKpiController {
                 ];
             return evaluatedKpiList;
     }
+
+    @AuraEnabled(cacheable=true)
+    public static Map<String, List<Evaluated_Kpi__c>> getEvaluatedKpiBySection(String reviewId){
+        Map<String, List<Evaluated_Kpi__c>> mapSectionKpi = new Map<String, List<Evaluated_Kpi__c>>(); 
+        for (Evaluated_Kpi__c evKpi: [SELECT Name, Point__c, KPI__c, Review__r.Status__c, KPI__r.Section__c
+                                        FROM Evaluated_Kpi__c
+                                        WHERE Review__r.Id = :reviewId]){
+                                            if (!mapSectionKpi.containsKey(evKpi.KPI__r.Section__c)){
+                                                mapSectionKpi.put(evKpi.KPI__r.Section__c, new List<Evaluated_Kpi__c>());
+                                            }
+                                            List<Evaluated_Kpi__c> listKPI= mapSectionKpi.get(evKpi.KPI__r.Section__c);
+                                            listKPI.add(evKpi);
+                                            mapSectionKpi.put(evKpi.KPI__r.Section__c, listKPI);
+
+                }
+        return mapSectionKpi;
+    }
     
     @AuraEnabled
     public static void setEvaluatedKpi(String evaluatedKpis){
