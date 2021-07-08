@@ -1,5 +1,6 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { refreshApex } from '@salesforce/apex';
 import getEvaluatedKpi from '@salesforce/apex/LWCEvaluatedKpiController.getEvaluatedKpi';
 import setEvaluatedKpi from '@salesforce/apex/LWCEvaluatedKpiController.setEvaluatedKpi';
 
@@ -7,8 +8,12 @@ export default class EvaluatedKpi extends LightningElement {
     @api reviewId;
     @api isReviewOpen;
     @track evaluatedKpis;
+
+    kpiValues;
     
-    @wire(getEvaluatedKpi,{reviewId: '$reviewId'}) wiredEvaluatedKpi({error,data}){
+    @wire(getEvaluatedKpi,{reviewId: '$reviewId'}) wiredEvaluatedKpi(value){
+        this.kpiValues = value;
+        const {data, error} = value;
         if(data){
             this.evaluatedKpis = data;
         }else if (error){
@@ -33,6 +38,7 @@ export default class EvaluatedKpi extends LightningElement {
                         variant: 'success'
                     })
                 );
+                refreshApex(this.kpiValues);
             }).catch(error => {
                 this.dispatchEvent(
                     new ShowToastEvent({
