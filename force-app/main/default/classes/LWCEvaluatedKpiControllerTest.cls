@@ -5,7 +5,8 @@ public class LWCEvaluatedKpiControllerTest {
         //System Admin
         User admin = TestDataFactory.createAdminUser();
         List<Evaluated_Kpi__c> evaluatedKpiList = new List<Evaluated_Kpi__c>();
-
+		Map<String, List<Evaluated_Kpi__c>> evaluatedKpiListBySection = new Map<String, List<Evaluated_Kpi__c>>();
+        
         System.runAs(admin){
             //Account
             Account acc = TestDataFactory.createAccount();
@@ -26,9 +27,11 @@ public class LWCEvaluatedKpiControllerTest {
             
             Test.startTest();
                 evaluatedKpiList = LWCEvaluatedKpiController.getEvaluatedKpi(review.Id);
+            	evaluatedKpiListBySection = LWCEvaluatedKpiController.getEvaluatedKpiBySection(review.Id);
             Test.stopTest();
             
             System.assertEquals(2, evaluatedKpiList.size(), 'Size of EvaluatedKpi do not match');
+            System.assertEquals(1, evaluatedKpiListBySection.size(), 'Size of EvaluatedKpiBySection do not match');
 
         }
     }
