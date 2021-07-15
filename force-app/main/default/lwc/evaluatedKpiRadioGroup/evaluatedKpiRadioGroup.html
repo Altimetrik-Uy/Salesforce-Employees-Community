@@ -18,7 +18,8 @@
                     ></lightning-radio-group> 
     </template>
     <template if:true={describeReason}>   
-        <lightning-textarea name="reason" 
+        <lightning-textarea id='description'
+                        name="reason" 
                         label="Reason" 
                         placeholder="Describe your reason..."
                         message-when-value-missing="Please include a reason of your review"
