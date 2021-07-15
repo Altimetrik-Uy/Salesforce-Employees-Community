@@ -33,7 +33,7 @@ export default class EvaluatedKpiRadioGroup extends LightningElement {
 
     @api getKpiValue() { 
         var mapKpi = []; 
-        let reasonDescription = this.template.querySelector('[data-id="description"]');
+        let reasonDescription = this.template.querySelector('[data-name="description"]');
         mapKpi.push({kpiId: this.kpiId, point: this.value, reason: reasonDescription.value});
         return mapKpi;
       }
