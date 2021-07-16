@@ -27,12 +27,11 @@
         <members>Review_Assignment__c-Review Assignment Layout</members>
         <members>Review__c-Review Layout</members>
 		<members>Salesforce_Career_Path__c-Salesforce Career Path Layout</members>
+        <members>Contact-Formato de contactos</members>
 		<name>Layout</name>
 	</types>
     <types>
         <members>*</members>
-        <members>reviewComments</members>
-        <members>performanceEvaluationWrapper</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>
@@ -116,7 +115,6 @@
         <name>FlexiPage</name>
     </types>
     <types>
-        <members>Set_Review_Status_To_Submitted</members>
         <members>Update_User_Info_Record</members>
 		<members>User_Info_Object_Manage</members>
 		<name>Flow</name>

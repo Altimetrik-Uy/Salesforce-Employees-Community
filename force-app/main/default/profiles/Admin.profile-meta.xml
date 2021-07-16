@@ -1,145 +1,156 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
-    <custom>false</custom>
-    <userLicense>Salesforce</userLicense>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluated_KPI__c.KPI__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluated_KPI__c.Point__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluated_KPI__c.Review__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>KPI__c.Role__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Plan_Item__c.End_Date__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Plan_Item__c.Plan__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Plan_Item__c.Review__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Plan_Item__c.State__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Review_Assignment__c.Evaluator__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Review_Assignment__c.Review__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Review_Assignment__c.Submitted_By_Evaluator__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Review__c.Comments__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Review__c.Evaluated__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Review__c.Project__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Review__c.Role__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Review__c.Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <layoutAssignments>
-        <layout>Evaluated_KPI__c-Evaluated KPI Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>KPI__c-KPI Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Plan_Item__c-Plan Item Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Review_Assignment__c-Review Assignment Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Review__c-Review Layout</layout>
-    </layoutAssignments>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Evaluated_KPI__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>KPI__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Plan_Item__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Review_Assignment__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Review__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
+<custom>false</custom>
+<userLicense>Salesforce</userLicense>
+<fieldPermissions>
+<editable>true</editable>
+<field>Evaluated_KPI__c.KPI__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Evaluated_KPI__c.Point__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Evaluated_KPI__c.Review__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>KPI__c.Role__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Plan_Item__c.End_Date__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Plan_Item__c.Plan__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Plan_Item__c.Review__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Plan_Item__c.State__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Review_Assignment__c.Evaluator__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Review_Assignment__c.Review__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Review_Assignment__c.Submitted_By_Evaluator__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Review__c.Comments__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Review__c.Evaluated__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Review__c.Project__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Review__c.Role__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<fieldPermissions>
+<editable>true</editable>
+<field>Review__c.Status__c</field>
+<readable>true</readable>
+</fieldPermissions>
+<layoutAssignments>
+<layout>Evaluated_KPI__c-Evaluated KPI Layout</layout>
+</layoutAssignments>
+<layoutAssignments>
+<layout>KPI__c-KPI Layout</layout>
+</layoutAssignments>
+<layoutAssignments>
+<layout>Plan_Item__c-Plan Item Layout</layout>
+</layoutAssignments>
+<layoutAssignments>
+<layout>Review_Assignment__c-Review Assignment Layout</layout>
+</layoutAssignments>
+<layoutAssignments>
+<layout>Review__c-Review Layout</layout>
+</layoutAssignments>
+<layoutAssignments>
+<layout>Contact-Formato de contactos</layout>
+</layoutAssignments>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>true</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>true</modifyAllRecords>
+<object>Evaluated_KPI__c</object>
+<viewAllRecords>true</viewAllRecords>
+</objectPermissions>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>true</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>true</modifyAllRecords>
+<object>KPI__c</object>
+<viewAllRecords>true</viewAllRecords>
+</objectPermissions>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>true</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>true</modifyAllRecords>
+<object>Plan_Item__c</object>
+<viewAllRecords>true</viewAllRecords>
+</objectPermissions>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>true</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>true</modifyAllRecords>
+<object>Review_Assignment__c</object>
+<viewAllRecords>true</viewAllRecords>
+</objectPermissions>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>true</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>true</modifyAllRecords>
+<object>Review__c</object>
+<viewAllRecords>true</viewAllRecords>
+</objectPermissions>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>true</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>true</modifyAllRecords>
+<object>User_Certification_Inscription__c</object>
+<viewAllRecords>true</viewAllRecords>
+</objectPermissions>
 </Profile>

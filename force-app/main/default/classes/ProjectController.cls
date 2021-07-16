@@ -43,7 +43,7 @@ public class ProjectController {
     }
     
     private static List<Managers_Assignment__c> getUserAssignments() {
-        return [SELECT Id, Project__c, Sub_Project__c FROM Managers_Assignment__c WHERE User__c = :UserInfo.getUserId()];
+        return [SELECT Id, Project__c, Sub_Project__c FROM Managers_Assignment__c WHERE User__c = :UserInfo.getUserId() AND Project__r.StageName NOT IN ('Closed/Won', 'Cancelled', 'Finished')];
     }
     
     private static List<Project_Status__c> getProjectStatusByProjectId(Map<Id, Set<Id>> projectIds) {

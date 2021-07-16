@@ -153,13 +153,12 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ReadWrite</externalSharingModel>
-    <gender>Feminine</gender>
-    <label>Evaluated KPI</label>
+    <label>User Certification Inscription</label>
     <nameField>
-        <label>Evaluated KPI Name</label>
+        <label>User Certification Inscription Name</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Evaluated KPIs</pluralLabel>
+    <pluralLabel>User Certifcation Inscriptions</pluralLabel>
     <searchLayouts></searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

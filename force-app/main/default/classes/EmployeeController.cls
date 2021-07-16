@@ -92,7 +92,7 @@ public class EmployeeController {
     }
     
     private static List<Contact> getEmployeesById(Set<Id> employeeIds) {
-        return [SELECT Id, Name FROM Contact WHERE Id IN :employeeIds];
+        return [SELECT Id, Name FROM Contact WHERE Id IN :employeeIds and Area__c = 'Salesforce'];
     }
     
     private static List<EmployeeWrapper> resolveEmployeeWrapper(
