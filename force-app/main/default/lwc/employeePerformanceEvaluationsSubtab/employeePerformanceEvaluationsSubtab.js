@@ -140,6 +140,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                                 message: 'Submitted successfully'
                             });
                             this.dispatchEvent(toast);
+                            this.template.querySelector("c-performance-evaluation-wrapper").saveComments();
                         } else {
                             console.log('Error - Not Submitted');
                         }

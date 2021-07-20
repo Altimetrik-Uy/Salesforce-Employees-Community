@@ -15,7 +15,7 @@ export default class PerformanceEvaluationWrapper extends LightningElement {
     handleClick() {
         this.dispatchEvent(new CustomEvent('back'));
     }
-    saveComments(){
+    @api saveComments(){
         this.template.querySelector("c-review-comments").saveForm();
     }
     openReviewComments(){
