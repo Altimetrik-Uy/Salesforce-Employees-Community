@@ -10,6 +10,7 @@ export default class PlanItemsModal extends LightningElement {
     
     
     @api openModal() {
+        this.isSaved = false;
         this.isModalOpen = true;
     }
 
