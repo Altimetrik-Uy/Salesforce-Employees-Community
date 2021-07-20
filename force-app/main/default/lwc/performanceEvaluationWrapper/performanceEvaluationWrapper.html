@@ -6,8 +6,9 @@
         <h3 slot="title">
         </h3>
         <c-evaluated-kpi review-id={recordId} is-review-open={reviewOpen}></c-evaluated-kpi>
-        <c-review-plan-items review-id={recordId} is-review-open={reviewOpen}></c-review-plan-items>
+        <c-review-plan-items review-id={recordId} isreviewopen={reviewOpen}></c-review-plan-items>
         <c-review-comments id-review={recordId} open={reviewOpen} ></c-review-comments>
+
         <div slot="footer">
             <lightning-button-group>
                 <template if:true={reviewOpen}>
@@ -18,9 +19,7 @@
                 <template if:false={reviewOpen}>
                     <lightning-button label="Back" onclick={handleClick}></lightning-button>
                 </template>
-                <lightning-button label="Create New Plan Item" onclick={openReviewComments}></lightning-button>
             </lightning-button-group>
         </div>
-        <c-plan-items-Modal id-review={recordId} is-open-review={reviewOpen} ></c-plan-items-Modal>       
     </lightning-card>
 </template>
