@@ -46,9 +46,10 @@ export default class EmployeeTrailBlazerId extends LightningElement {
                         window.location.reload();
                     }, 1500);
                 }).catch(error => {
+                    var errorMessage = error.body.pageErrors[0].message;
                     this.dispatchEvent(
                         new ShowToastEvent({
-                            title: 'Error creating the Trailblaizer Id.',
+                            title: errorMessage ? errorMessage :'Error creating the Trailblaizer Id.',
                             message: error.body.message,
                             variant: 'error'
                         })
