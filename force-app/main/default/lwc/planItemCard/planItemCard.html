@@ -2,8 +2,11 @@
     <div class="border">
         <lightning-card title={planitem.Name}>
             <template if:true={isreviewopen}>
-                <lightning-button label="Edit" onclick={openModal} slot="actions"></lightning-button>
-                <c-plan-items-Modal id-review={recordId} is-open-review={isreviewopen} plan-item-id={planitem.Id} plan-item-name={planitem.Name}></c-plan-items-Modal> 
+                <lightning-button-group slot="actions">                   
+                    <lightning-button label="Delete" variant="destructive-text" onclick={confirmDelete}></lightning-button>
+                    <lightning-button label="Edit" onclick={openModal}></lightning-button>
+                </lightning-button-group>
+                <c-plan-items-Modal id-review={recordId} is-open-review={isreviewopen} plan-item-id={planitem.Id} plan-item-name={planitem.Name} onvaluechanged={planItemUpdated}></c-plan-items-Modal> 
             </template>        
             <template if:false={isreviewopen}>
                 <lightning-button label="View" onclick={openModal} slot="actions"></lightning-button>
@@ -25,4 +28,14 @@
             </div>
         </lightning-card>
     </div>
+    <c-confirmation-dialog 
+        title={planitem.Name}
+        message='Delete Plan Item?'
+        confirm-label='Yes'
+        cancel-label='No'
+        visible={isDialogVisible}
+        original-message={originalMessage}
+        name="confirmModal"
+        onclick={handleDelete}>
+    </c-confirmation-dialog>
 </template>
