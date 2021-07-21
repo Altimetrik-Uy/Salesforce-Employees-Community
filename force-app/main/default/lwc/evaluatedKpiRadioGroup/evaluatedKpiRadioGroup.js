@@ -5,7 +5,8 @@ export default class EvaluatedKpiRadioGroup extends LightningElement {
     @api kpiName;
     @api kpiPoint;
     @api reviewStatus;
-    @api isReviewOpen;
+    @api isReviewOpen; 
+    @api reason;  
     describeReason; 
 
     value = '';
@@ -22,7 +23,8 @@ export default class EvaluatedKpiRadioGroup extends LightningElement {
 
     connectedCallback() {
         if(this.kpiPoint){
-            this.value = this.kpiPoint.toString();
+            this.value = this.kpiPoint.toString();  
+            this.describeReason = (this.kpiPoint== '1' || this.kpiPoint == '2');  
         }
     }
    
@@ -33,9 +35,9 @@ export default class EvaluatedKpiRadioGroup extends LightningElement {
 
     @api getKpiValue() { 
         var mapKpi = []; 
-        let reasonDescription = this.template.querySelector('[data-name="description"]');
-        mapKpi.push({kpiId: this.kpiId, point: this.value, reason: reasonDescription.value});
+        let reasonDescription = this.template.querySelector('[data-name="description"]') ? this.template.querySelector('[data-name="description"]').value : '';
+        mapKpi.push({kpiId: this.kpiId, point: this.value, reason: reasonDescription});  
         return mapKpi;
-      }
+      } 
       
 }

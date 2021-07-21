@@ -34,9 +34,9 @@ export default class EvaluatedKpi extends LightningElement {
                     message: 'Please provide the required reason for the review',
                     variant: 'error'
                 })
-            );
-          }
-          setEvaluatedKpi({evaluatedKpis: JSON.stringify(arrEvaluatedKpis)})
+            ); 
+          }else { 
+            setEvaluatedKpi({evaluatedKpis: JSON.stringify(arrEvaluatedKpis)})
             .then(() => {
                 this.dispatchEvent(
                     new ShowToastEvent({
@@ -54,6 +54,7 @@ export default class EvaluatedKpi extends LightningElement {
                     })
                 );
             });
+          }
       }
     
 }
