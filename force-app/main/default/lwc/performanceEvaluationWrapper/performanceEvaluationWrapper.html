@@ -5,6 +5,25 @@
     <lightning-card>
         <h3 slot="title">
         </h3>
+         <div>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_4-of-12 image-containter">
+                    <lightning-formatted-rich-text value={image}></lightning-formatted-rich-text>
+                </div>
+                <div class="slds-col slds-size_8-of-12 employee-data">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font18">                                                       
+                            <b class="employeeName">{evaluated}</b>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-grid slds-size_12-of-12 dataContainer font18">  
+                            <b class="employedata">Performance Evaluation</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <c-evaluated-kpi review-id={recordId} is-review-open={reviewOpen}></c-evaluated-kpi>
         <c-review-plan-items review-id={recordId} isreviewopen={reviewOpen}></c-review-plan-items>
         <c-review-comments id-review={recordId} open={reviewOpen} ></c-review-comments>
