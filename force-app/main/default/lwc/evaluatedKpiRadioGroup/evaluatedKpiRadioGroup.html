@@ -1,0 +1,30 @@
+<template>
+    <template if:true={isReviewOpen}>
+        <lightning-radio-group name={kpiName}
+                        label={kpiName}
+                        options={options}
+                        value={value}
+                        type="button"
+                        onchange={handleChange}
+                       ></lightning-radio-group> 
+    </template>
+    <template if:false={isReviewOpen}>
+        <lightning-radio-group name={kpiName}
+                        label={kpiName}
+                        options={options}
+                        value={value}
+                        type="button"
+                        disabled
+                    ></lightning-radio-group> 
+    </template>
+    <template if:true={describeReason}>   
+        <lightning-textarea data-name='description'  
+                        name="reason" 
+                        label="Reason" 
+                        value={reason} 
+                        placeholder="Describe your reason..."
+                        message-when-value-missing="Please include a reason of your review"
+                        required 
+        ></lightning-textarea>
+    </template>
+</template>
