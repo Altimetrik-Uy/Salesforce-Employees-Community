@@ -9,11 +9,13 @@
                    <template for:each={evaluatedKpi.value} for:item="evaluatedKpi">
                       <div class="slds-col slds-p-horizontal_large slds-p-vertical_large slds-size_1-of-3" key={evaluatedKpi.Id}>
                          <c-evaluated-kpi-radio-group 
+
                             kpi-id={evaluatedKpi.Id} 
                             kpi-name={evaluatedKpi.Name} 
                             kpi-point={evaluatedKpi.Point__c}
                             reason={evaluatedKpi.Reason__c}
                             is-review-open={isReviewOpen}>
+                            
                          </c-evaluated-kpi-radio-group>
                       </div>
                    </template>
