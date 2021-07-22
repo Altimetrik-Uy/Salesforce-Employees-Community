@@ -1723,6 +1723,10 @@
         <field>Evaluated_KPI__c.Reason__c</field>
         <readable>true</readable>
     </fieldPermissions> 
+    <fieldPermissions>
+        <field>KPI__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <layoutAssignments>
         <layout>Salesforce_Career_Path__c-Salesforce Career Path Layout</layout>
     </layoutAssignments>

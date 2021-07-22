@@ -7,6 +7,8 @@ export default class EvaluatedKpiRadioGroup extends LightningElement {
     @api reviewStatus;
     @api isReviewOpen; 
     @api reason;  
+    @api kpiDescription;
+    
     describeReason; 
 
     value = '';
