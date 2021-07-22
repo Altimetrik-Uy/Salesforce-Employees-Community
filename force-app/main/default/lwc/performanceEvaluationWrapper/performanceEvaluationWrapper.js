@@ -25,6 +25,7 @@ export default class PerformanceEvaluationWrapper extends LightningElement {
     }
     @api saveComments(){
         this.template.querySelector("c-review-comments").saveForm();
+        
         this.template.querySelector("c-evaluated-kpi").getEvaluatedKpi();
     }
     openReviewComments(){

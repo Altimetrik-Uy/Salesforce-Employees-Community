@@ -192,4 +192,22 @@ public class TestDataFactory {
         return planItem;
     }
 
+    public static Kpi__c createKpis(String name){
+        Kpi__c kpi = new Kpi__c();
+        kpi.Role__c = 'Developer';
+        kpi.Name = name;
+        insert kpi;
+        return kpi;
+    }
+    public static Evaluated_Kpi__c createEvaluatedKpi(Id reviewId, Id kpiId, Integer Point){
+        Evaluated_Kpi__c evaluatedKpi = new Evaluated_Kpi__c();
+        evaluatedKpi.Review__c = reviewId;
+        evaluatedKpi.Kpi__c = kpiId;
+        evaluatedKpi.Name = 'Test Evaluated Kpi';
+        evaluatedKpi.Point__c = 4;
+        insert evaluatedKpi;
+        return evaluatedKpi;
+    }
+
+
 }
