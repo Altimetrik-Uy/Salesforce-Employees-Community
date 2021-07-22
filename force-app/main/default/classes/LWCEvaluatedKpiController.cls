@@ -4,7 +4,7 @@ public with sharing class LWCEvaluatedKpiController {
     public static List<Evaluated_Kpi__c> getEvaluatedKpi(String reviewId){
         
         List<Evaluated_Kpi__c> evaluatedKpiList = [
-                SELECT Name, Point__c, KPI__c, Review__r.Status__c, Reason__c,KPI__r.Description__c
+                SELECT Name, Point__c, KPI__c, Review__r.Status__c, Reason__c, KPI__r.Description__c
                 FROM Evaluated_Kpi__c
                 WHERE Review__r.Id = :reviewId
                 ];
