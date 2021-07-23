@@ -17,5 +17,6 @@ export default class ReviewComments extends LightningElement {
             message: 'Saved successfully'
         });
         this.dispatchEvent(toast);
+        this.dispatchEvent(CustomEvent('needupdate')); 
     }
 }
