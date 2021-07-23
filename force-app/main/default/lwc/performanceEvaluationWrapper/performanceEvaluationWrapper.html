@@ -7,7 +7,7 @@
         </h3>
         <c-evaluated-kpi review-id={recordId} is-review-open={reviewOpen}></c-evaluated-kpi>
         <c-review-plan-items review-id={recordId} is-review-open={reviewOpen}></c-review-plan-items>
-        <c-review-comments id-review={recordId} open={reviewOpen} ></c-review-comments>
+        <c-review-comments id-review={recordId} open={reviewOpen} onneedupdate={saved}></c-review-comments>
         <div slot="footer">
             <lightning-button-group>
                 <template if:true={reviewOpen}>

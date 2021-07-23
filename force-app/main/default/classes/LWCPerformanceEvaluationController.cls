@@ -1,10 +1,7 @@
 
 public without sharing class LWCPerformanceEvaluationController {
 
-
-
-        @AuraEnabled(cacheable=true)
-    public static List<SObject> getEmployeeReview(String empId,string filterStatus, Integer offsetRange){
+    public static List<SObject> getEmployeeReviewQueries(String empId,string filterStatus, Integer offsetRange){
         set<String> statusFilter = new set<String>();
         if (filterStatus == 'Reviews about me'){
             statusFilter.add('Approved');
@@ -37,6 +34,16 @@ public without sharing class LWCPerformanceEvaluationController {
         }else {
             return null;
         }
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static List<SObject> getEmployeeReview(String empId,string filterStatus, Integer offsetRange){
+       return  getEmployeeReviewQueries(empId, filterStatus, offsetRange);
+    }
+
+    @AuraEnabled(cacheable=false)
+    public static List<SObject> getEmployeeReviewNonCacheable(String empId,string filterStatus, Integer offsetRange){
+        return  getEmployeeReviewQueries(empId, filterStatus, offsetRange);
     }
    
     @AuraEnabled(cacheable=true)

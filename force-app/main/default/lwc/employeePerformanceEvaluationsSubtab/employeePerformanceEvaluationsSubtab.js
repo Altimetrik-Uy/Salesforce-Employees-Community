@@ -1,6 +1,7 @@
 import {LightningElement, api, wire, track} from 'lwc';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent'
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getEmployeeReview from '@salesforce/apex/LWCPerformanceEvaluationController.getEmployeeReview';
+import getEmployeeReviewNonCacheable from '@salesforce/apex/LWCPerformanceEvaluationController.getEmployeeReviewNonCacheable';
 import getEmployeeReviewCount from '@salesforce/apex/LWCPerformanceEvaluationController.getEmployeeReviewCount';
 import updateSubmittedByEvaluator from '@salesforce/apex/LWCPerformanceEvaluationController.updateSubmittedByEvaluator';
 
@@ -8,22 +9,26 @@ let i = 0;
 
 export default class EmployeePerformanceEvaluationsSubtab extends LightningElement {
     @api employeeid;
+    @api projectInformation;
+    @api reviewSelected;
+    @api reviewAssignmnetSelected;
     @track error; 
     @track projectItem = [];
     @track comboBoxValue = '';
     @track lstManagerId = [];
-    managerList = false;
+    
     @track userName = '';
     @track allSelected = false;
     @track projectStatuses=[];
     @track paginationRange = [];
     @track totalRecords;
-    valueFilter = 'Reviews about me';
-    isReviewSelected = false;
-    @api projectInformation;
-    @api reviewSelected;
-    @api reviewAssignmnetSelected;
     @track isDialogVisible = false;
+
+    valueFilter = 'Reviews about me';
+    offsetNumber
+    lastPaginationEvent;
+    isReviewSelected = false;
+    managerList = false;
 
 
     get optionsFilter() {
@@ -37,7 +42,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
     handleChangeFilter(event) {
         this.valueFilter = event.detail.value;
         
-        getEmployeeReview({ empId:this.employeeid , filterStatus : this.valueFilter}).then(data => {
+        getEmployeeReviewNonCacheable({ empId:this.employeeid , filterStatus : this.valueFilter}).then(data => {
             
         
             if(this.employeeid != '' ){
@@ -153,6 +158,16 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
         }
     }
 
+    refreshList(){      
+        if (this.offsetNumber && this.offsetNumber>1){            
+            const eventFilter = new CustomEvent('refresh', { detail: { value: this.offsetNumber}});
+            this.handlePaginationClick(eventFilter);    
+        }
+        else {
+            const eventFilter = new CustomEvent('refresh', { detail: {value: this.valueFilter }});
+            this.handleChangeFilter(eventFilter);           
+        }        
+    }
    
     get projectOptions() {
         return this.projectItem;
@@ -216,11 +231,16 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
 
     
 
-    handlePaginationClick(event) {
-        let offsetNumber = event.target.dataset.targetNumber;
+    handlePaginationClick(event) {        
+        if (event.detail.value){
+            this.offsetNumber = event.detail.value;
+        }
+        else {
+            this.offsetNumber = event.target.dataset.targetNumber;
+        }
         //reduce 1 from the clciked number and multiply it with 4, 
         //since we are showing 4 records per page and pass the offset to apex class 
-        getEmployeeReview({empId: this.employeeid,filterStatus : this.valueFilter, offsetRange: 4 * (offsetNumber - 1) })
+        getEmployeeReviewNonCacheable({empId: this.employeeid,filterStatus : this.valueFilter, offsetRange: 4 * (this.offsetNumber - 1) })
             .then(data => {
                 if (data) {
                     this.projectStatuses = data;

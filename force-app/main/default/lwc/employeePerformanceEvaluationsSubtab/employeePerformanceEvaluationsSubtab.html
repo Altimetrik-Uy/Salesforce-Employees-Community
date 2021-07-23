@@ -86,7 +86,7 @@
         </div> 
     </div>
     <div if:true={isReviewSelected}>
-        <c-performance-evaluation-wrapper record-id={reviewSelected} filter-status={valueFilter} onback={handleWrapper} onsubmit={handleSubmit}></c-performance-evaluation-wrapper>
+        <c-performance-evaluation-wrapper record-id={reviewSelected} filter-status={valueFilter} onback={handleWrapper} onsubmit={handleSubmit} onupdate={refreshList}></c-performance-evaluation-wrapper>
     </div>
     <c-confirmation-dialog title='Confirm Submit Review'
     message='Do you want to proceed?'
