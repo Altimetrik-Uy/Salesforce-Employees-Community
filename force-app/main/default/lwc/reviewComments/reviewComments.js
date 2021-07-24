@@ -9,6 +9,12 @@ export default class ReviewComments extends LightningElement {
         this.isSaved = true;
         this.template.querySelector('lightning-record-edit-form').submit();
     }
+
+    @api
+    getComments() { 
+        return this.template.querySelector('lightning-input-field').value;
+    }
+
     handleSuccess(event){
         this.isSaved = false;
         const toast = new ShowToastEvent({
