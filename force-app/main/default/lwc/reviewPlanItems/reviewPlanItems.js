@@ -10,7 +10,7 @@ export default class ReviewPlanItems extends LightningElement {
     
     @api
     getPlantItems() {
-        return this.planItems;
+        return this.responsePlanItem;
     }
 
     @wire(getPlanItems,{reviewId: '$reviewId'}) wiredPlanItems(response) {
@@ -22,7 +22,7 @@ export default class ReviewPlanItems extends LightningElement {
             console.log(error);
         }
     }
-
+    
     openReviewComments() {
         this.template.querySelector("c-plan-items-Modal").openModal();
     }
