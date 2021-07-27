@@ -10,6 +10,7 @@ export default class PlanItemsModal extends LightningElement {
     
     
     @api openModal() {
+        this.isSaved = false;
         this.isModalOpen = true;
     }
 
@@ -25,11 +26,15 @@ export default class PlanItemsModal extends LightningElement {
     
     handleSuccess(event){
         this.isSaved = true;
-       
         const planItemSaved = new CustomEvent("valuechange", {
             detail: this.isSaved
         });
         this.dispatchEvent(planItemSaved); 
+
+        const planItemupdated = new CustomEvent("valuechanged", {
+            detail: this.isSaved
+        });
+        this.dispatchEvent(planItemupdated); 
        
         this.isModalOpen = false;
         const toast = new ShowToastEvent({
