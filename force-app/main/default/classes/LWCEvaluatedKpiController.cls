@@ -39,6 +39,7 @@ public with sharing class LWCEvaluatedKpiController {
                 Evaluated_Kpi__c newEvaluatedKpi = new Evaluated_Kpi__c();
                 newEvaluatedKpi.Id = kpi.kpiId;
                 newEvaluatedKpi.Point__c = decimal.valueOf(kpi.point);
+                newEvaluatedKpi.Reason__c = kpi.reason;
                 evaluatedKpisToSet.add(newEvaluatedKpi);
             }
         }
