@@ -75,6 +75,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                                     else{
                                         let preparedAsset = {};
                                         preparedAsset.Id = asset.Review__c;
+                                        preparedAsset.ReviewAssignmnetId = asset.Id;
                                         preparedAsset.Status = asset.Review__r.Status__c;
                                         preparedAsset.StatusDate = asset.Review__r.CreatedDate;
                                         preparedAsset.StatusComments = asset.Review__r.Comments__c;
@@ -182,6 +183,7 @@ export default class EmployeePerformanceEvaluationsSubtab extends LightningEleme
                                 else{
                                     let preparedAsset = {};
                                     preparedAsset.Id = asset.Review__c;
+                                    preparedAsset.ReviewAssignmnetId = asset.Id;
                                     preparedAsset.Status = asset.Review__r.Status__c;
                                     preparedAsset.StatusDate = asset.Review__r.CreatedDate;
                                     preparedAsset.StatusComments = asset.Review__r.Comments__c;

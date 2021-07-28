@@ -1,0 +1,26 @@
+.image-containter{
+    position: relative;
+    margin: 32px; 
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.dataContainer {
+    height: 50%;
+    margin-top: 5px;
+}
+
+.employedata {
+    color: gray;
+}
+
+.employee-data{
+    margin-top: 45px;
+}
+
+.employeeName {
+    font-size: 18px;
+    position: top;
+}
