@@ -83,4 +83,8 @@ export default class PerformanceEvaluationWrapper extends LightningElement {
         }
         return null;
     }
+    
+    saved(){
+        this.dispatchEvent(new CustomEvent('update'));
+    }
 }
