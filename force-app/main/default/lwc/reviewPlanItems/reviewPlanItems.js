@@ -5,9 +5,14 @@ import { refreshApex } from '@salesforce/apex';
 export default class ReviewPlanItems extends LightningElement {
     @api isreviewopen;
     @api reviewId;
-    @track planItems;
+    @api planItems;
     responsePlanItem;
     
+    @api
+    getPlantItems() {
+        return this.planItems;
+    }
+
     @wire(getPlanItems,{reviewId: '$reviewId'}) wiredPlanItems(response) {
         this.responsePlanItem = response;
         if (response.data) {

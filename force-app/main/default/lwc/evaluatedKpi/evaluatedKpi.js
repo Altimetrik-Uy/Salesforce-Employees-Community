@@ -71,5 +71,19 @@ export default class EvaluatedKpi extends LightningElement {
             });
           }
       }
+
+      @api
+      getMissingKPiValues() {
+        let missedKPIValues = [];
+        this.template
+        .querySelectorAll("c-evaluated-kpi-radio-group")
+        .forEach(element => {
+            let evalKpis = element.getKpiValue();
+            if(!evalKpis[0].point) {
+                missedKPIValues.push(evalKpis);
+            }
+        });
+        return missedKPIValues; 
+      }
     
 }
