@@ -79,7 +79,7 @@ export default class EvaluatedKpi extends LightningElement {
         .querySelectorAll("c-evaluated-kpi-radio-group")
         .forEach(element => {
             let evalKpis = element.getKpiValue();
-            if(!evalKpis[0].point) {
+            if(!evalKpis[0].point || (evalKpis[0].point<=2 && !evalKpis[0].reason)) {
                 missedKPIValues.push(evalKpis);
             }
         });

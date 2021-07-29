@@ -33,23 +33,33 @@ export default class PerformanceEvaluationWrapper extends LightningElement {
     }
 
     handleSubmit(){   
+        let pass = this.missingValues();
+        if (!pass){
+            this.dispatchEvent(new CustomEvent('submit'));
+        }
+        
+    }
+
+    missingValues(){
         let missedComment = this.template.querySelector("c-review-comments").getComments()
                             ? this.template.querySelector("c-review-comments").getComments().replaceAll('<p>','').replaceAll('</p>','').trim().length<=0 
                             : true;
         let missedKpiValues = this.template.querySelector("c-evaluated-kpi").getMissingKPiValues().length>0;
         let missedPlanItems = this.template.querySelector("c-review-plan-items").getPlantItems().data.length<=0;
         console.log('pass');
-        if(missedComment || missedKpiValues || missedPlanItems) {
+        if(missedComment || missedKpiValues || missedPlanItems) {    
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Error',
-                    message: 'Comments and KPIs evaluation are required',
+                    message: 'Comments and KPIs evaluation/reason are required',
                     variant: 'error'
                 })
-            );
-        }else {
-            this.dispatchEvent(new CustomEvent('submit'));
+            );        
+            return true;
         }
-        
-    } 
+        else {
+            return false
+        }
+    }
+
 }
