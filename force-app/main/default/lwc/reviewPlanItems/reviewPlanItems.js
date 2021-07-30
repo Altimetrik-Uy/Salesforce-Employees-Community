@@ -5,9 +5,14 @@ import { refreshApex } from '@salesforce/apex';
 export default class ReviewPlanItems extends LightningElement {
     @api isreviewopen;
     @api reviewId;
-    @track planItems;
+    @api planItems;
     responsePlanItem;
     
+    @api
+    getPlantItems() {
+        return this.responsePlanItem;
+    }
+
     @wire(getPlanItems,{reviewId: '$reviewId'}) wiredPlanItems(response) {
         this.responsePlanItem = response;
         if (response.data) {
@@ -17,7 +22,7 @@ export default class ReviewPlanItems extends LightningElement {
             console.log(error);
         }
     }
-
+    
     openReviewComments() {
         this.template.querySelector("c-plan-items-Modal").openModal();
     }
