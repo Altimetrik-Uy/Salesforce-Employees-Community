@@ -60,7 +60,7 @@ jobs:
 
         #Prettier formatting
         - name: 'Code formatting verification with Prettier'
-          run: node_modules/sfdx-cli/bin/run prettier:verify
+          run: npm run prettier:verify
 
         # Run Apex test
         #- name: Run Apex test
