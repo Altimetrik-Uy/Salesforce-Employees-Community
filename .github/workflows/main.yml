@@ -15,8 +15,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         # Checkout the source code
-        - name: 'Checkout source code'
-          uses: actions/checkout@v2
+        #- name: 'Checkout source code'
+        #  uses: actions/checkout@v2
         
         # Node setup
         - uses: actions/checkout@v2
@@ -27,7 +27,7 @@ jobs:
 
         # Store secret for dev hub             
         #- name: Write the token into a file
-          run: 'echo ${{ secrets.DEVHUB_TOKEN}} > token.txt'
+        #  run: 'echo ${{ secrets.DEVHUB_TOKEN}} > token.txt'
           
         # Install Salesforce CLI
         #- name: Install Salesforce CLI
@@ -58,7 +58,7 @@ jobs:
         - name: 'Install Prettier'
           run: npm install -g prettier
 
-         Prettier formatting
+        #Prettier formatting
         - name: 'Code formatting verification with Prettier'
           run: npm run prettier:verify
 
