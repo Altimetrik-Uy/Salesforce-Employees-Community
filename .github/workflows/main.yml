@@ -56,7 +56,7 @@ jobs:
 
         # Install Prettier 
         - name: 'Install Prettier'
-          run: node_modules/sfdx-cli/bin/run install -g prettier
+          run: npm install -g prettier
 
         #Prettier formatting
         - name: 'Code formatting verification with Prettier'
