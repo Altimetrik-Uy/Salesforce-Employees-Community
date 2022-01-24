@@ -1,7 +1,7 @@
 
 name: CI
 
-# Definition when the workflow should go
+# Definition when the workflow should run
 on:
     workflow_dispatch:
     push:
