@@ -1,7 +1,9 @@
 {
   "orgName": "Employee Community",
   "edition": "Developer",
-  "features": [],
+  "features": [
+    "Communities"
+  ],
   "settings": {
     "lightningExperienceSettings": {
         "enableS1DesktopEnabled": true
