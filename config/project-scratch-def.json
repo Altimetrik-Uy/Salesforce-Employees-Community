@@ -5,6 +5,9 @@
     "Communities"
   ],
   "settings": {
+    "orgPreferenceSettings": {
+      "networksEnabled": true
+    },
     "lightningExperienceSettings": {
         "enableS1DesktopEnabled": true
     },
