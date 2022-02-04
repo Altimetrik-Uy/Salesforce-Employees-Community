@@ -3,7 +3,6 @@
     <fullName>All</fullName>
     <columns>NAME</columns>
     <columns>Role__c</columns>
-    <columns>Certification__c</columns>
     <columns>Required__c</columns>
     <columns>Possible_Next_Role__c</columns>
     <filterScope>Everything</filterScope>

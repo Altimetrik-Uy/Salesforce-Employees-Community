@@ -4,7 +4,6 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>User Certification</label>
-    <referenceTo>ta_Certification__c</referenceTo>
     <relationshipLabel>User Certifcation Inscriptions</relationshipLabel>
     <relationshipName>User_Certifcation_Inscriptions</relationshipName>
     <required>false</required>

@@ -4,7 +4,6 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>Certification</label>
-    <referenceTo>ta_Certification__c</referenceTo>
     <relationshipLabel>Salesforce Career Path</relationshipLabel>
     <relationshipName>Salesforce_Career_Path</relationshipName>
     <required>false</required>
