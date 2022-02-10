@@ -33,7 +33,7 @@ jobs:
       env:
         CLIENT_ID: 3MVG9riCAn8HHkYU4DRo5N9UHF4OrLi_LoUhl2jVG8F1HtrsAFl.07DEu6W4b0CK4YDa7fG9b6ZTllkwRVjXh
         USERNAME: mgarcensec@altimetrik.com
-        INSTANCE_URL: amazing-astro-100626.my.salesforce.com
+        INSTANCE_URL: https://na213.salesforce.com
       run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile devops/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
 
     # Convert to Deploy Source
