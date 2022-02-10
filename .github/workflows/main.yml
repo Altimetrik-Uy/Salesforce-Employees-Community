@@ -1,64 +1,34 @@
-
-name: CI
+# Unique name for this workflow
+name: On push develop - Deploy to TI01
 
 # Definition when the workflow should run
 on:
-    workflow_dispatch:
     push:
-        paths-ignore:
-            - 'sfdx-project.json'
-            - 'README.md'
+        branches:
+            - develop
 
 # Jobs to be executed
 jobs:
-    checkout-auth-scatch-tests:
+    build-deploy:
         runs-on: ubuntu-latest
         steps:
-        # Checkout the source code
-        - name: 'Checkout source code'
-          uses: actions/checkout@v2
-        
-        # Node setup
-        - uses: actions/checkout@v2
-        - name: Setup Node.js
-          uses: actions/setup-node@v2
-          with:
-            node-version: '14'
 
-        # Store secret for dev hub             
-        - name: Write the token into a file
-          run: 'echo ${{ secrets.DEVHUB_TOKEN}} > token.txt'
-          
-        # Install Salesforce CLI
-        - name: Install Salesforce CLI
-          run: |
-            npm install sfdx-cli
-            node_modules/sfdx-cli/bin/run --version
-            node_modules/sfdx-cli/bin/run plugins --core
+            # Checkout the code in the pull request
+            - name: 'Checkout source code'
+              uses: actions/checkout@v2
 
-        - name: Auth with the DevHub
-          run: node_modules/sfdx-cli/bin/run force:auth:sfdxurl:store -f token.txt -a DevHub -d
-
-        - name: Create scratch org
-          run: node_modules/sfdx-cli/bin/run force:org:create -f config/project-scratch-def.json -a my-scratch
-
-        - name: Push source
-          run: node_modules/sfdx-cli/bin/run force:source:push -u my-scratch --forceoverwrite
-
-        - name: List orgs
-          run: node_modules/sfdx-cli/bin/run force:org:list
-
-        - name: Run tests
-          run: node_modules/sfdx-cli/bin/run force:apex:test:run -u my-scratch --resultformat human
-
-        - name: Delete scratch org
-          run: node_modules/sfdx-cli/bin/run force:org:delete -u my-scratch --noprompt
-
-        # Install Prettier 
-        #- name: 'Install Prettier'
-        #  run: npm install -g prettier
-
-        #Prettier formatting
-        #- name: 'Code formatting verification with Prettier'
-        #  run: npm run prettier:verify
-      
+            - name: 'Build and Deploy'
+              uses: tiagonnascimento/sfdx-orgdev-build-deploy@v2
+              with:
+                type: 'sandbox'
+                certificate_path: devops/server.key.enc
+                decryption_key: 54FB97CE64DD0B4D853E4A00B0687EC5E5E247398991819AF5E0B62D58DC7085
+                decryption_iv:  877B00F0AD903C1F614548F39A7E2DAF
+                client_id: 3MVG9riCAn8HHkYU4DRo5N9UHF4OrLi_LoUhl2jVG8F1HtrsAFl.07DEu6W4b0CK4YDa7fG9b6ZTllkwRVjXh
+                username: mgarcensec@altimetrik.com
+                checkonly: false
+                deploy_wait_time: '10'
+                manifest_path: manifest/package.xml-meta.xml,
+                destructive_path: 
+                data_factory:
+                default_source_path: force-app/main/default
