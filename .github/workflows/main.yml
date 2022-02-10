@@ -1,32 +1,49 @@
-# Unique name for this workflow
-name: On push develop - Deploy to TI01
+name: Deploy to Salesforce Pipeline
 
-# Definition when the workflow should run
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
 on:
-    push:
-       
-# Jobs to be executed
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-    build-deploy:
-        runs-on: ubuntu-latest
-        steps:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
 
-            # Checkout the code in the pull request
-            - name: 'Checkout source code'
-              uses: actions/checkout@v2
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
 
-            - name: 'Build and Deploy'
-              uses: tiagonnascimento/sfdx-orgdev-build-deploy@v2
-              with:
-                type: 'sandbox'
-                certificate_path: devops/server.key.enc
-                decryption_key: 54FB97CE64DD0B4D853E4A00B0687EC5E5E247398991819AF5E0B62D58DC7085
-                decryption_iv:  877B00F0AD903C1F614548F39A7E2DAF
-                client_id: 3MVG9riCAn8HHkYU4DRo5N9UHF4OrLi_LoUhl2jVG8F1HtrsAFl.07DEu6W4b0CK4YDa7fG9b6ZTllkwRVjXh
-                username: mgarcensec@altimetrik.com
-                checkonly: false
-                deploy_wait_time: '10'
-                manifest_path: manifest/package.xml-meta.xml,
-                destructive_path: 
-                data_factory:
-                default_source_path: force-app/main/default
+    # Setup Node
+    - name: Setup Node
+      uses: actions/setup-node@v1
+    
+    # Install SFDX CLI
+    - name: Install SFDX CLI
+      run: npm install sfdx-cli --global
+
+    # Authorize SF Org
+    - name: Authorize SF Org
+      env:
+        CLIENT_ID: 3MVG9riCAn8HHkYU4DRo5N9UHF4OrLi_LoUhl2jVG8F1HtrsAFl.07DEu6W4b0CK4YDa7fG9b6ZTllkwRVjXh
+        USERNAME: mgarcensec@altimetrik.com
+        INSTANCE_URL: amazing-astro-100626.my.salesforce.com
+      run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile devops/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
+
+    # Convert to Deploy Source
+    - name: Convert to Deploy Source
+      run: sfdx force:source:convert -r ./force-app -d ./toDeploy
+    
+    # Run Validation of Deploy Source
+    - name: Run Validation on Deploy Source
+      run: sfdx force:mdapi:deploy -l RunLocalTests -c -d ./toDeploy -u prod -w 10
+    
+    # Deploy
+    - name : Deploy to SF Org
+      run: sfdx force:mdapi:deploy -l RunLocalTests -d ./toDeploy -u prod -w 10
