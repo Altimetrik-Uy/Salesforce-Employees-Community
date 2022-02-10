@@ -1,3 +1,4 @@
+
 name: Deploy to Salesforce Pipeline
 
 # Controls when the action will run. Triggers the workflow on push or pull request
@@ -17,6 +18,10 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
+    - name: Set Environment Variables
+      uses: tw3lveparsecs/github-actions-setvars@v0.1
+      with:
+        envFilePath: .github/variables/vars.env
     # Node setup
     - uses: actions/checkout@v2
     - name: Setup Node.js
@@ -30,10 +35,6 @@ jobs:
 
     # Authorize SF Org
     - name: Authorize SF Org
-      env:
-        CLIENT_ID: 3MVG9riCAn8HHkYU4DRo5N9UHF4OrLi_LoUhl2jVG8F1HtrsAFl.07DEu6W4b0CK4YDa7fG9b6ZTllkwRVjXh
-        USERNAME: mgarcensec@altimetrik.com
-        INSTANCE_URL: https://na213.salesforce.com
       run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile devops/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
 
     # Convert to Deploy Source
@@ -47,3 +48,6 @@ jobs:
     # Deploy
     - name : Deploy to SF Org
       run: sfdx force:mdapi:deploy -l RunLocalTests -d ./toDeploy -u prod -w 10
+    
+    - name: Run tests
+      run: sfdx force:apex:test:run --testlevel RunLocalTests --resultformat human --codecoverage
