@@ -39,7 +39,7 @@ jobs:
 
     # Authorize SF Org
     - name: Authorize SF Org
-      run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile devops/server.key --username $USERNAME --instanceurl $INSTANCE_URL -a prod
+      run: sfdx force:auth:jwt:grant --clientid ${{ github.actor }}_CLIENT_ID --jwtkeyfile devops/server.key --username ${{ github.actor }}_USERNAME --instanceurl $INSTANCE_URL -a prod
 
     # Convert to Deploy Source
     - name: Convert to Deploy Source
